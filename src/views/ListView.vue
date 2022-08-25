@@ -1,27 +1,34 @@
 <template>
-  <!-- <TroisjsCom v-bind:countValue="this.count" v-if="this.count > 1" /> -->
-  <EmotionSpace v-bind:emotionArray="this.emotions" />
+  <div class="home">
+    <h2>Home</h2>
+    <div>
+      <ul>
+        <li v-for="emotion in emotions" :key="emotion.id">
+          {{ emotion.name }}
+          <router-link :to="{ path: `/emotions/${emotion.id}` }" class="editBtn"
+            >Edit</router-link
+          >
+          <a href="#" class="delBtn" @click="deleteEmotion(emotion.id)"
+            >Delete</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script>
-import EmotionSpace from "../components/homeview/EmotionSpace.vue";
 import emoColRef from "../firebase";
 import { getDocs, doc, deleteDoc } from "firebase/firestore";
 
 export default {
-  name: "HomeView",
-  components: {
-    EmotionSpace,
-  },
+  name: "ListView",
+  components: {},
   data() {
     return {
       emotions: [],
       seletedDoc: null,
-      // count: 0,
     };
-  },
-  created() {
-    this.fetchEmotions();
   },
   methods: {
     async fetchEmotions() {
@@ -33,9 +40,7 @@ export default {
         emotions.push(emotionData);
       });
       this.emotions = emotions;
-      // this.count = emotions.length;
     },
-
     async deleteEmotion(emotionId) {
       let emoRef = doc(emoColRef, emotionId);
       await deleteDoc(emoRef);
@@ -43,16 +48,29 @@ export default {
       this.$router.go();
     },
   },
+  created() {
+    this.fetchEmotions();
+  },
 };
 </script>
 
 <style lang="scss">
-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: -1;
-  // height: 100vh;
+li {
+  border: 1px solid #eee;
+  padding: 20px 0;
+  margin-bottom: 10px;
+  list-style: none;
+}
+.editBtn {
+  background: blue;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+}
+.delBtn {
+  background: red;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
 }
 </style>
