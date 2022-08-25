@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import AddEmotion from '../views/AddEmotion.vue';
+import AddEmotionOne from '../views/AddEmotion-onepage.vue';
 import EditEmotion from '../views/EditEmotion.vue';
+import CreateEmotion from '../views/CreateEmotion.vue';
 import ListView from '../views/ListView.vue';
+import PiniaTest from '../views/PiniaTest.vue';
 
 const routes = [
   {
@@ -19,9 +21,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
-    path: '/add',
-    name: 'addemotion',
-    component: AddEmotion
+    path: '/add1',
+    name: 'addemotion1',
+    component: AddEmotionOne
+  },
+  {
+    path: '/create',
+    name: 'createemotion',
+    component: CreateEmotion
   },
   {
     path: '/emotions/:emotionId',
@@ -32,6 +39,11 @@ const routes = [
     path: '/list',
     name: 'listview',
     component: ListView
+  },
+  {
+    path: '/test',
+    name: 'piniatest',
+    component: PiniaTest
   },
 ]
 
