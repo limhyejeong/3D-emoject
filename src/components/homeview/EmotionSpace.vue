@@ -21,10 +21,17 @@
       <Box
         v-for="emotion in emotionArray"
         :ref="setItemRef"
-        :rotation="{ y: Math.PI / emotion.num, z: Math.PI / 4 }"
+        :rotation="{
+          y: Math.PI / 4,
+          z: Math.PI / 4,
+        }"
         :key="emotion.id"
         :scale="{ x: 10, y: 10, z: 10 }"
-        :position="{ x: emotion.num * 20, y: 0, z: 0 }"
+        :position="{
+          x: Math.random() * 50,
+          y: Math.random() * 50,
+          z: Math.random() * 50,
+        }"
         @click="boxClick(emotion)"
       >
         <PhongMaterial />
@@ -85,10 +92,10 @@ export default {
 
     onMounted(() => {
       renderer?.value?.onBeforeRender(() => {
-        itemRefs.forEach((item) => {
+        itemRefs.forEach((item, index) => {
           item.mesh.rotation.x += 0.01;
         });
-        console.log("go");
+        // console.log("go");
       });
     });
 

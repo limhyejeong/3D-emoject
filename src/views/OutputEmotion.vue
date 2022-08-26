@@ -6,14 +6,38 @@
   <div>설명 : {{ content }}</div>
   <br />
   <div>활성도 : {{ activity }}</div>
-  <button @click="createEmotion(name, emoji, content, activity)">
+
+  <button @click="createEmotion(name, emoji, content, category, activity)">
     감정 등록
   </button>
+
+  <div>
+    <Renderer ref="renderer" antialias orbit-ctrl resize="true">
+      <Camera :position="{ x: 50, y: 50, z: 50 }" />
+
+      <Scene background="#fff">
+        <PointLight :position="{ z: 100, y: 100, z: 100 }" />
+
+        <Box
+          ref="box"
+          :scale="{ x: 20, y: 20, z: 20 }"
+          :rotation="{
+            y: Math.PI / 4,
+            z: Math.PI / 4,
+          }"
+        >
+          <PhongMaterial />
+        </Box>
+      </Scene>
+    </Renderer>
+  </div>
 </template>
 
 <script>
 import { useInputStore } from "@/stores/input";
 import { storeToRefs } from "pinia";
+import { ref } from "vue";
+
 // import emoColRef from "@/firebase";
 // import { addDoc } from "firebase/firestore";
 
@@ -21,45 +45,30 @@ export default {
   name: "OutputEmotion",
   setup() {
     const store = useInputStore();
-
-    const { name, emoji, content, activity } = storeToRefs(store);
-    // const inputData = storeToRefs(store);
+    const { name, emoji, content, category, activity } = storeToRefs(store);
     const { createEmotion } = store;
 
-    // function createEmotion() {
-    //   console.log(store.name);
-    //   const addedDoc = addDoc(emoColRef, store);
-    //   alert("Document created successfully!");
-    //   console.log(addedDoc);
-    //   // this.$router.push("/");
-    // }
+    const renderer = ref(null);
+    renderer?.value?.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
 
     return {
       store,
       name,
       emoji,
       content,
+      category,
       activity,
-      // inputData,
+      renderer,
       createEmotion,
     };
   },
-  // data() {
-  //   return {
-  //     store: store,
-  //     name: name,
-  //     emoji: emoji,
-  //     activity: activity,
-  //   };
-  // },
-  // methods: {
-  //   async createEmotion() {
-  //     console.log("creating");
-  //     const addedDoc = await addDoc(emoColRef, this.$data);
-  //     alert("Document created successfully!");
-  //     console.log(addedDoc);
-  //     this.$router.push("/");
-  //   },
-  // },
 };
 </script>
+
+<style lang="scss">
+canvas {
+  position: inherit;
+  // height: 500px;
+  border: 1px solid #999;
+}
+</style>
