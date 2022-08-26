@@ -30,10 +30,7 @@ export const useInputStore = defineStore('input', {
                 'time': new Date(),
             };
             console.log(array);
-
-            const addedDoc = addDoc(emoColRef, array);
-            // alert("Document created successfully!");
-            console.log(addedDoc);
+            addDoc(emoColRef, array);
             // this.$router.push("/");
         }
     },

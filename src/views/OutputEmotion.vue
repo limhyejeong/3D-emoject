@@ -12,7 +12,7 @@
   </button>
 
   <div>
-    <Renderer ref="renderer" antialias orbit-ctrl resize="true">
+    <Renderer ref="renderer" antialias orbit-ctrl resize="window">
       <Camera :position="{ x: 50, y: 50, z: 50 }" />
 
       <Scene background="#fff">
@@ -66,9 +66,8 @@ export default {
 </script>
 
 <style lang="scss">
-canvas {
-  position: inherit;
-  // height: 500px;
-  border: 1px solid #999;
-}
+// canvas {
+//   position: inherit;
+//   border: 1px solid #999;
+// }
 </style>

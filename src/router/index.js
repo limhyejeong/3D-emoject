@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import AddEmotionOne from '../views/AddEmotion-onepage.vue';
 import EditEmotion from '../views/EditEmotion.vue';
 import CreateEmotion from '../views/CreateEmotion.vue';
+import OutputEmotion from '../views/OutputEmotion.vue';
 import ListView from '../views/ListView.vue';
 import PiniaTest from '../views/PiniaTest.vue';
 
@@ -39,6 +40,11 @@ const routes = [
     path: '/list',
     name: 'listview',
     component: ListView
+  },
+  {
+    path: '/output',
+    name: 'outputemotion',
+    component: OutputEmotion
   },
   {
     path: '/test',
