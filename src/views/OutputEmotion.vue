@@ -1,8 +1,14 @@
 <template>
   <hr />
   <h3>Output</h3>
-  <p>{{ name }}, {{ emoji }}, {{ activity }}</p>
-  <button @click="createEmotion(name, emoji, activity)">감정 등록</button>
+  <div>선택한 이모지 : {{ emoji }}</div>
+  <div>이름 : {{ name }}</div>
+  <div>설명 : {{ content }}</div>
+  <br />
+  <div>활성도 : {{ activity }}</div>
+  <button @click="createEmotion(name, emoji, content, activity)">
+    감정 등록
+  </button>
 </template>
 
 <script>
@@ -16,7 +22,7 @@ export default {
   setup() {
     const store = useInputStore();
 
-    const { name, emoji, activity } = storeToRefs(store);
+    const { name, emoji, content, activity } = storeToRefs(store);
     // const inputData = storeToRefs(store);
     const { createEmotion } = store;
 
@@ -32,6 +38,7 @@ export default {
       store,
       name,
       emoji,
+      content,
       activity,
       // inputData,
       createEmotion,

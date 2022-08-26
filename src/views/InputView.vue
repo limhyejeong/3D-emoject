@@ -3,11 +3,13 @@
   <form @submit.prevent="createObject">
     <input type="text" v-if="step == 0" v-model="emoji" placeholder="이모지" />
     <input type="text" v-if="step == 1" v-model="name" placeholder="이름" />
-    <button v-if="step == 1">생성하기</button>
+    <!-- <input type="text" v-if="step == 2" v-model="content" placeholder="설명" /> -->
+    <textarea v-if="step == 2" v-model="content" placeholder="설명" />
+    <button v-if="step == 2">생성하기</button>
   </form>
 
   <button @click="prevStep" v-if="step !== 0">이전</button>
-  <button @click="nextStep" v-if="step !== 1">다음</button>
+  <button @click="nextStep" v-if="step !== 2">다음</button>
 </template>
 
 <script>
@@ -21,7 +23,7 @@ export default {
   components: {},
   setup() {
     const store = useInputStore();
-    const { name, emoji, activity, create } = storeToRefs(store);
+    const { name, emoji, content, activity, create } = storeToRefs(store);
 
     // 폼 전환
     let step = ref(0);
@@ -33,16 +35,9 @@ export default {
     }
 
     function createObject() {
-      // getActivity();
-      // 값 변경
-      // console.log(name, emoji);
-
-      // 입력된 이모지를 배열화 😀😃🥹
-      let emoArray = [...this.emoji];
-
-      let avgActivity,
-        sumActivity = 0;
-
+      // Actibity 구하기
+      let emoArray = [...this.emoji]; // 입력된 이모지를 배열화 😀😃🥹
+      let sumActivity = 0;
       // 인풋된 이모지를 등록된 이모지에서 찾아서 데이터 불러오기
       emoArray.forEach((element) => {
         for (let i = 0; i < emojiDoc.length; i++) {
@@ -52,12 +47,8 @@ export default {
           }
         }
       });
-
-      // 평균 활성도
-      avgActivity = Math.floor(sumActivity / emoArray.length);
-      this.activity = avgActivity;
-      // console.log(sumActivity, avgActivity);
-
+      // 평균 활성도 구하기
+      this.activity = Math.floor(sumActivity / emoArray.length);
       // store.$patch({
       //   name: this.name,
       //   emoji: this.emoji,
@@ -69,6 +60,7 @@ export default {
       store,
       name,
       emoji,
+      content,
       activity,
       create,
       step,

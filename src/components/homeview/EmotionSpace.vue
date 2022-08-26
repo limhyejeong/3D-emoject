@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { onMounted, ref, onBeforeUpdate, onUpdated } from "vue";
+import { onMounted, ref } from "vue";
 
 import Stats from "troisjs/src/components/misc/Stats";
 // import ViewInfo from "../components/ViewInfo.vue";

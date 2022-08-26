@@ -27,11 +27,13 @@ export default {
     async fetchEmotions() {
       let emotionsSnapshot = await getDocs(emoColRef);
       let emotions = [];
+
       emotionsSnapshot.forEach((emotion) => {
         let emotionData = emotion.data();
         emotionData.id = emotion.id;
         emotions.push(emotionData);
       });
+
       this.emotions = emotions;
       // this.count = emotions.length;
     },
