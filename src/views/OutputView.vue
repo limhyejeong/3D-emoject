@@ -19,7 +19,7 @@
         <PointLight :position="{ z: 100, y: 100, z: 100 }" />
 
         <Box
-          ref="box"
+          ref="obj"
           :scale="{ x: 20, y: 20, z: 20 }"
           :rotation="{
             y: Math.PI / 4,
@@ -36,13 +36,21 @@
 <script>
 import { useInputStore } from "@/stores/input";
 import { storeToRefs } from "pinia";
-import { ref } from "vue";
-
+import { ref, onMounted } from "vue";
+import {
+  Renderer,
+  Camera,
+  Scene,
+  PointLight,
+  Box,
+  PhongMaterial,
+} from "troisjs";
 // import emoColRef from "@/firebase";
 // import { addDoc } from "firebase/firestore";
 
 export default {
   name: "OutputView",
+  components: { Renderer, Camera, Scene, PointLight, Box, PhongMaterial },
   setup() {
     const store = useInputStore();
     const { name, emoji, content, category, activity } = storeToRefs(store);
@@ -51,6 +59,16 @@ export default {
     const renderer = ref(null);
     renderer?.value?.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
 
+    const obj = ref(null);
+
+    console.log(obj);
+
+    onMounted(() => {
+      renderer?.value?.onBeforeRender(() => {
+        obj.value.mesh.rotation.x += 0.01 * activity.value;
+      });
+    });
+
     return {
       store,
       name,
@@ -58,8 +76,9 @@ export default {
       content,
       category,
       activity,
-      renderer,
       createEmotion,
+      renderer,
+      obj,
     };
   },
 };

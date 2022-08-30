@@ -7,7 +7,7 @@ export const useInputStore = defineStore('input', {
         name: '헤정',
         emoji: '😀😃😆😂',
         content: '좋은 경험',
-        category: 'none',
+        category: '',
         activity: 0
     }),
     getters: {
@@ -31,6 +31,11 @@ export const useInputStore = defineStore('input', {
             };
             console.log(array);
             addDoc(emoColRef, array);
+            this.name = '';
+            this.emoji = '';
+            this.content = '';
+            this.category = '';
+            this.activity = 0;
             // this.$router.push("/");
         }
     },

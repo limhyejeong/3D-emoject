@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-// import AddEmotionOne from '../대기중/AddEmotion-onepage.vue';
 import EditEmotion from '../views/EditEmotion.vue';
 import CreateView from '../views/CreateView.vue';
 // import OutputView from '../views/OutputView.vue';
@@ -21,11 +20,6 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
-  // {
-  //   path: '/add1',
-  //   name: 'addemotion1',
-  //   component: AddEmotionOne
-  // },
   {
     path: '/create',
     name: 'createemotion',

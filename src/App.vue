@@ -3,7 +3,6 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
     <router-link to="/create">Create</router-link> |
-    <router-link to="/add1">Add(1)</router-link> |
     <router-link to="/list">List</router-link> |
     <router-link to="/test">Pinia Test</router-link>
   </nav>

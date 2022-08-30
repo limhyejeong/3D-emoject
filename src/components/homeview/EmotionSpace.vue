@@ -1,4 +1,5 @@
 <template>
+  <div class="test"></div>
   <h1 v-show="isClick">
     {{ seletedEmotion.content }}
     <button v-show="isClick" @click="closeInfo">close</button>
@@ -8,57 +9,86 @@
     <Stats />
     <Camera :position="{ x: 100, y: 100, z: 100 }" />
 
-    <!-- <Raycaster
-      @pointerEnter="onPointerEvent"
-      @pointerOver="onPointerOver"
-      @pointerLeave="onPointerLeave"
-      @click="onPointerClick"
-    /> -->
+    <Raycaster ref="" @click="boxClick" />
 
-    <Scene background="#fff">
+    <Scene ref="scene" background="#fff">
       <PointLight :position="{ z: 100, y: 100, z: 100 }" />
 
       <Box
-        v-for="emotion in emotionArray"
+        v-for="els in etc"
         :ref="setItemRef"
         :rotation="{
           y: Math.PI / 4,
           z: Math.PI / 4,
         }"
-        :key="emotion.id"
+        :key="els.id"
         :scale="{ x: 10, y: 10, z: 10 }"
         :position="{
           x: Math.random() * 50,
           y: Math.random() * 50,
           z: Math.random() * 50,
         }"
-        @click="boxClick(emotion)"
       >
         <PhongMaterial />
       </Box>
 
-      <!-- <Box
-        ref="emoBox"
-        :rotation="{ y: Math.PI / 4, z: Math.PI / 4 }"
+      <Sphere
+        v-for="joys in joy"
+        :ref="setItemRef"
+        :rotation="{
+          y: Math.PI / 4,
+          z: Math.PI / 4,
+        }"
+        :key="joys.id"
         :scale="{ x: 10, y: 10, z: 10 }"
-        :position="{ x: 0, y: 0, z: 0 }"
+        :position="{
+          x: Math.random() * 50,
+          y: Math.random() * 50,
+          z: Math.random() * 50,
+        }"
       >
         <PhongMaterial />
-      </Box> -->
+      </Sphere>
     </Scene>
   </Renderer>
 </template>
 
 <script>
-import { onMounted, ref } from "vue";
-
+import { useHomeStore } from "@/stores/home";
+import { storeToRefs } from "pinia";
+import { ref, onMounted, onUpdated } from "vue";
+import {
+  Renderer,
+  Camera,
+  Scene,
+  PointLight,
+  Box,
+  PhongMaterial,
+} from "troisjs";
 import Stats from "troisjs/src/components/misc/Stats";
 // import ViewInfo from "../components/ViewInfo.vue";
 
 export default {
   name: "EmotionSpace",
-  props: ["emotionArray"],
+  // props: ["emotionArray"],
+  components: {
+    Renderer,
+    Camera,
+    Scene,
+    PointLight,
+    Box,
+    PhongMaterial,
+    Stats,
+  },
   setup() {
+    const store = useHomeStore();
+    const { joy, etc } = storeToRefs(store);
+    const { fetchEmotions } = store;
+
+    fetchEmotions();
+
+    // console.log(joyEmotions, elseEmotions);
+
     const renderer = ref(null);
     renderer?.value?.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
 
@@ -71,18 +101,12 @@ export default {
       itemRefs.push(el);
     };
 
-    // onBeforeUpdate(() => {
-    //   itemRefs = [];
-    // });
-    // onUpdated(() => {
-    //   console.log(itemRefs);
-    // });
-
     // 오브제 클릭
-    function boxClick(data) {
-      isClick.value = true;
-      seletedEmotion.value = data;
-      console.log(this.seletedEmotion);
+    function boxClick(event) {
+      // console.log(event.component.mesh.);
+      // isClick.value = true;
+      // seletedEmotion.value = data;
+      // console.log(this.seletedEmotion);
     }
 
     // 설명 닫기
@@ -92,12 +116,14 @@ export default {
 
     onMounted(() => {
       renderer?.value?.onBeforeRender(() => {
-        itemRefs.forEach((item, index) => {
+        itemRefs.forEach((item) => {
           item.mesh.rotation.x += 0.01;
         });
         // console.log("go");
       });
     });
+
+    onUpdated(() => {});
 
     return {
       seletedEmotion,
@@ -107,16 +133,19 @@ export default {
       renderer,
       setItemRef,
       itemRefs,
+      // fetchEmotions,
+      joy,
+      etc,
     };
   },
   data() {
     return {
       hover: false,
+      // fetchEmotions : fetchEmotions,
     };
   },
-  components: { Stats },
+  created() {},
   mounted() {},
-
   methods: {},
 };
 </script>

@@ -46,8 +46,8 @@ export default {
         anticipation: 0,
         trust: 0,
         joy: 0,
-        activity: 0,
       }; // data 처리용 오브젝트
+      let sumActivity = 0; // 활성도 합계
 
       // 인풋된 이모지를 등록된 이모지에서 찾아서 데이터 불러오기
       inputEmoji.forEach((element) => {
@@ -65,12 +65,13 @@ export default {
             dataObject.anticipation += emojiDoc[i].anticipation;
             dataObject.trust += emojiDoc[i].trust;
             dataObject.joy += emojiDoc[i].joy;
-            dataObject.activity += emojiDoc[i].activity;
+
+            sumActivity += emojiDoc[i].activity;
           }
         }
       });
 
-      // Category 구하기
+      // Category 구하기 (카테고리 합계 오브젝트에서 가장 높은 수를 중복값을 대비하여 배열로 생성)
       const getMax = (dataObject) => {
         return Object.keys(dataObject).filter((x) => {
           return (
@@ -78,10 +79,10 @@ export default {
           );
         });
       };
-      this.category = getMax(dataObject)[0]; // (중복 값 대비) 배열의 가장 앞에 있는 감정을 선택
+      this.category = getMax(dataObject)[0]; // 배열의 가장 앞에 있는 감정을 선택
 
-      // Actibity 구하기
-      this.activity = Math.floor(dataObject.activity / inputEmoji.length);
+      // Actibity 구하기 (활성도 합계 / 이모지 수)
+      this.activity = Math.floor(sumActivity / inputEmoji.length);
     }
 
     return {
