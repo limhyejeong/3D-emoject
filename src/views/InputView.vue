@@ -56,6 +56,7 @@ export default {
             console.log(
               element + "는 " + emojiDoc[i].num + "번째 이모지입니다."
             );
+
             dataObject.anger += emojiDoc[i].anger;
             dataObject.fear += emojiDoc[i].fear;
             dataObject.sadness += emojiDoc[i].sadness;

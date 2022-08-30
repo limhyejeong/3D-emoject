@@ -42,7 +42,7 @@ import { ref } from "vue";
 // import { addDoc } from "firebase/firestore";
 
 export default {
-  name: "OutputEmotion",
+  name: "OutputView",
   setup() {
     const store = useInputStore();
     const { name, emoji, content, category, activity } = storeToRefs(store);

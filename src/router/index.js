@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import AddEmotionOne from '../views/AddEmotion-onepage.vue';
+// import AddEmotionOne from '../대기중/AddEmotion-onepage.vue';
 import EditEmotion from '../views/EditEmotion.vue';
-import CreateEmotion from '../views/CreateEmotion.vue';
-import OutputEmotion from '../views/OutputEmotion.vue';
+import CreateView from '../views/CreateView.vue';
+// import OutputView from '../views/OutputView.vue';
 import ListView from '../views/ListView.vue';
 import PiniaTest from '../views/PiniaTest.vue';
 
@@ -21,15 +21,15 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
-  {
-    path: '/add1',
-    name: 'addemotion1',
-    component: AddEmotionOne
-  },
+  // {
+  //   path: '/add1',
+  //   name: 'addemotion1',
+  //   component: AddEmotionOne
+  // },
   {
     path: '/create',
     name: 'createemotion',
-    component: CreateEmotion
+    component: CreateView
   },
   {
     path: '/emotions/:emotionId',
@@ -41,11 +41,11 @@ const routes = [
     name: 'listview',
     component: ListView
   },
-  {
-    path: '/output',
-    name: 'outputemotion',
-    component: OutputEmotion
-  },
+  // {
+  //   path: '/output',
+  //   name: 'outputview',
+  //   component: OutputView
+  // },
   {
     path: '/test',
     name: 'piniatest',

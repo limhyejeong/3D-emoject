@@ -1,16 +1,16 @@
 <template>
   <h3>Create Emotion</h3>
   <InputView />
-  <OutputEmotion />
+  <OutputView />
 </template>
 
 <script>
 import InputView from "./InputView.vue";
-import OutputEmotion from "./OutputEmotion.vue";
+import OutputView from "./OutputView.vue";
 
 export default {
-  name: "CreateEmotion",
-  components: { InputView, OutputEmotion },
+  name: "CreateView",
+  components: { InputView, OutputView },
   data() {
     return {};
   },
