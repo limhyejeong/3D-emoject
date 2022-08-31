@@ -57,11 +57,9 @@ export default {
     const { createEmotion } = store;
 
     const renderer = ref(null);
-    renderer?.value?.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
+    // renderer?.value?.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
 
     const obj = ref(null);
-
-    console.log(obj);
 
     onMounted(() => {
       renderer?.value?.onBeforeRender(() => {

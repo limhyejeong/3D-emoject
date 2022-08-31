@@ -7,8 +7,8 @@
     <button v-if="step == 2">생성하기</button>
   </form>
 
-  <button @click="prevStep" v-if="step !== 0">이전</button>
-  <button @click="nextStep" v-if="step !== 2">다음</button>
+  <button @click="prevStep" v-if="0 < step && step < 3">이전</button>
+  <button @click="nextStep" v-if="step < 2">다음</button>
 </template>
 
 <script>
@@ -27,15 +27,20 @@ export default {
 
     // 폼 전환
     let step = ref(0);
+    console.log(step.value);
+
     function prevStep() {
       step.value--;
+      console.log(step.value);
     }
     function nextStep() {
       step.value++;
+      console.log(step.value);
     }
 
     // Activity(활성도) & Category(감정 종류) 얻기
     function createObject() {
+      // nextStep();
       let inputEmoji = [...this.emoji]; // 입력된 이모지를 배열화
       let dataObject = {
         anger: 0,

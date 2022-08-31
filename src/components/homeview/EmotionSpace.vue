@@ -9,7 +9,7 @@
     <Stats />
     <Camera :position="{ x: 100, y: 100, z: 100 }" />
 
-    <Raycaster ref="" @click="boxClick" />
+    <!-- <Raycaster ref="" @click="boxClick" /> -->
 
     <Scene ref="scene" background="#fff">
       <PointLight :position="{ z: 100, y: 100, z: 100 }" />
@@ -28,6 +28,7 @@
           y: Math.random() * 50,
           z: Math.random() * 50,
         }"
+        @click="boxClick(els)"
       >
         <PhongMaterial />
       </Box>
@@ -46,6 +47,7 @@
           y: Math.random() * 50,
           z: Math.random() * 50,
         }"
+        @click="boxClick(joys)"
       >
         <PhongMaterial />
       </Sphere>
@@ -102,11 +104,11 @@ export default {
     };
 
     // 오브제 클릭
-    function boxClick(event) {
-      // console.log(event.component.mesh.);
-      // isClick.value = true;
-      // seletedEmotion.value = data;
-      // console.log(this.seletedEmotion);
+    function boxClick(data) {
+      if (isClick.value == false) {
+        isClick.value = true;
+        seletedEmotion.value = data;
+      }
     }
 
     // 설명 닫기
