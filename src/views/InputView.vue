@@ -27,15 +27,14 @@ export default {
 
     // 폼 전환
     let step = ref(0);
-    console.log(step.value);
 
     function prevStep() {
       step.value--;
-      console.log(step.value);
+      console.log("step: " + step.value);
     }
     function nextStep() {
       step.value++;
-      console.log(step.value);
+      console.log("step: " + step.value);
     }
 
     // Activity(활성도) & Category(감정 종류) 얻기

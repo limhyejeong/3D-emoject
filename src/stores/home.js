@@ -14,12 +14,13 @@ export const useHomeStore = defineStore('home', {
         fetchEmotions() {
             this.joy = []; // 비우기
             this.etc = [];
+
             let emotionsSnapshot = getDocs(emoColRef);
 
             emotionsSnapshot.then((emotionsSnap) => {
                 emotionsSnap.forEach((emotion) => {
                     let emotionData = emotion.data();
-                    emotionData.id = emotion.id;
+                    // emotionData.id = emotion.id;
                     if (emotionData.category == "joy") {
                         this.joy.push(emotionData);
                     } else {

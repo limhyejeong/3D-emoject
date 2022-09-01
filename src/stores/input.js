@@ -4,10 +4,11 @@ import { addDoc } from "firebase/firestore";
 
 export const useInputStore = defineStore('input', {
     state: () => ({
+        num: 0,
         name: '헤정',
         emoji: '😀😃😆😂',
         content: '좋은 경험',
-        category: '',
+        category: 'none',
         activity: 0
     }),
     getters: {
@@ -20,8 +21,9 @@ export const useInputStore = defineStore('input', {
     },
     actions: {
         // DB에 추가하기
-        createEmotion(name, emoji, content, category, activity) {
+        createEmotion(num, name, emoji, content, category, activity) {
             const array = {
+                'num': num,
                 'name': name,
                 'emoji': emoji,
                 'content': content,
@@ -29,7 +31,7 @@ export const useInputStore = defineStore('input', {
                 'activity': activity,
                 'time': new Date(),
             };
-            console.log(array);
+
             addDoc(emoColRef, array);
             this.name = '';
             this.emoji = '';

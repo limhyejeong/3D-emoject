@@ -44,7 +44,7 @@ export default {
     async deleteEmotion(emotionId) {
       let emoRef = doc(emoColRef, emotionId);
       await deleteDoc(emoRef);
-      alert("emotion deleted successully");
+      // alert("emotion deleted successully");
       this.$router.go();
     },
   },
