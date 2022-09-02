@@ -51,7 +51,7 @@
 <script>
 import { useInputStore } from "@/stores/input";
 import { storeToRefs } from "pinia";
-import { ref, onMounted, onUpdated } from "vue";
+import { ref, onMounted } from "vue";
 import {
   Renderer,
   Camera,
@@ -76,8 +76,8 @@ export default {
     // renderer?.value?.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
 
     // const obj = ref(null);
-    const box = ref(null);
-    const sphere = ref(null);
+    // const box = ref(null);
+    // const sphere = ref(null);
     // console.log(box, sphere);
 
     let mesh = "";
@@ -91,6 +91,9 @@ export default {
 
       console.log(category.value);
       console.log(mesh);
+
+      // 그냥 three js처럼 해보기!
+
       //   let meshObj = `
       //   <Renderer ref="renderer" antialias orbit-ctrl resize="window">
       //   <Camera :position="{ x: 50, y: 50, z: 50 }" />
