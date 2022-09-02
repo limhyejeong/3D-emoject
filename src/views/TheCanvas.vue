@@ -1,8 +1,25 @@
 <template>
+  <hr />
+  <h3>Output</h3>
+  <div>선택한 이모지 : {{ emoji }}</div>
+  <div>이름 : {{ name }}</div>
+  <div>설명 : {{ content }}</div>
+  <br />
+  <div>감정 : {{ category }}</div>
+  <div>활성도 : {{ activity }}</div>
+
+  <button @click="createObj">Hi</button>
+
+  <button @click="createEmotion(name, emoji, content, category, activity)">
+    감정 등록
+  </button>
+
   <div class="canvas"></div>
 </template>
 
 <script>
+import { useInputStore } from "@/stores/input";
+import { storeToRefs } from "pinia";
 // import { Clock, PerspectiveCamera, Scene, WebGLRenderer } from 'three'
 import * as THREE from "three";
 // import TrackballControls from "three-trackballcontrols";
@@ -21,6 +38,10 @@ export default {
   name: "TheCanvas",
 
   setup() {
+    const store = useInputStore();
+    const { name, emoji, content, category, activity } = storeToRefs(store);
+    const { createEmotion } = store;
+
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -30,20 +51,14 @@ export default {
     );
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     const light = new THREE.DirectionalLight("hsl(0, 100%, 100%)");
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshStandardMaterial({
-      side: THREE.FrontSide,
-      color: "hsl(0, 100%, 50%)",
-      wireframe: false,
-    });
-    const cube = new THREE.Mesh(geometry, material);
+    let geometry = null;
+    let material = null;
+    let cube = null;
     const axes = new THREE.AxesHelper(5);
     let controls = [];
     let speed = 0.01;
-
     scene.add(camera);
     scene.add(light);
-    scene.add(cube);
     scene.add(axes);
     renderer.setSize(window.innerWidth, window.innerHeight);
     light.position.set(0, 0, 10);
@@ -55,14 +70,30 @@ export default {
     // controls.panSpeed = 0.8;
     // controls.noZoom = false;
     // controls.noPan = false;
-    // controls.staticMoving = true;
     // controls.dynamicDampingFactor = 0.3;
+
+    function createObj() {
+      if (category.value == "joy") {
+        geometry = new THREE.BoxGeometry(1, 1, 1);
+      } else {
+        geometry = new THREE.SphereGeometry(1, 32, 16);
+        console.log(category.value);
+      }
+      material = new THREE.MeshStandardMaterial({
+        side: THREE.FrontSide,
+        color: "hsl(0, 100%, 50%)",
+        wireframe: false,
+      });
+      cube = new THREE.Mesh(geometry, material);
+
+      scene.add(cube);
+    }
 
     function animate() {
       requestAnimationFrame(animate);
       renderer.render(scene, camera);
-      cube.rotation.y += speed;
-      // this.controls.update();
+      if (cube !== null) cube.rotation.y += speed;
+      controls.update();
     }
 
     onMounted(() => {
@@ -81,16 +112,23 @@ export default {
     });
 
     return {
+      name,
+      emoji,
+      content,
+      category,
+      activity,
       scene,
       camera,
       controls,
-      animate,
       //   rotate,
       renderer,
       light,
       cube,
       axes,
       speed,
+      animate,
+      createObj,
+      createEmotion,
     };
   },
   data: function () {
@@ -102,3 +140,10 @@ export default {
   computed: {},
 };
 </script>
+
+<style lang="scss">
+canvas {
+  position: inherit;
+  border: 1px solid #999;
+}
+</style>

@@ -83,47 +83,25 @@ export default {
     let mesh = "";
 
     function createObj() {
-      if (category.value == "joy") {
-        mesh = "Box";
-      } else {
-        mesh = "Sphere";
-      }
-
-      console.log(category.value);
-      console.log(mesh);
-
-      // 그냥 three js처럼 해보기!
-
-      // let meshObj = `
-      //   <Renderer ref="renderer" antialias orbit-ctrl resize="window">
-      //   <Camera :position="{ x: 50, y: 50, z: 50 }" />
-      //   <Scene background="#fff">
-      //     <PointLight :position="{ z: 100, y: 100, z: 100 }" />
-      //      <${mesh}
-      //       ref="obj"
-      //       :scale="{ x: 20, y: 20, z: 20 }"
-      //       :rotation="{
-      //         y: Math.PI / 4,
-      //         z: Math.PI / 4,
-      //       }"
-      //     >
-      //       <PhongMaterial />
-      //     </${mesh}>
-      //     </Scene>
-      // </Renderer>`;
-      let ren = document.createElementNS("Renderer");
-      ren.setAttribute("ref", "renderer");
-      ren.setAttribute("resize", "window");
-      let cam = document.createElementNS("Camera");
-      cam.setAttribute(":position", "{ x: 50, y: 50, z: 50 }");
-      ren.append(cam);
-
+      // if (category.value == "joy") {
+      //   mesh = "Box";
+      // } else {
+      //   mesh = "Sphere";
+      // }
+      // console.log(category.value);
+      // console.log(mesh);
+      // let ren = document.createElementNS("Renderer");
+      // ren.setAttribute("ref", "renderer");
+      // ren.setAttribute("resize", "window");
+      // let cam = document.createElementNS("Camera");
+      // cam.setAttribute(":position", "{ x: 50, y: 50, z: 50 }");
+      // ren.append(cam);
       // let meshObj = document.createElement(mesh);
       // meshObj.setAttribute(":scale", "{ x: 20, y: 20, z: 20 }");
       // meshObj.setAttribute(":position", "{ z: 100, y: 100, z: 100 }");
       // console.log(meshObj);
-      let renderDiv = document.querySelector(".render");
-      renderDiv.append(ren);
+      // let renderDiv = document.querySelector(".render");
+      // renderDiv.append(ren);
       // scene.value.append(meshObj);
     }
 
