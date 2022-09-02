@@ -15,7 +15,7 @@
   </button>
 
   <div class="render">
-    <Renderer ref="renderer" antialias orbit-ctrl resize="window">
+    <!-- <Renderer ref="renderer" antialias orbit-ctrl resize="window">
       <Camera :position="{ x: 50, y: 50, z: 50 }" />
 
       <Scene ref="Scene" background="#fff">
@@ -44,7 +44,7 @@
           <PhongMaterial />
         </Sphere>
       </Scene>
-    </Renderer>
+    </Renderer> -->
   </div>
 </template>
 
@@ -94,7 +94,7 @@ export default {
 
       // 그냥 three js처럼 해보기!
 
-      //   let meshObj = `
+      // let meshObj = `
       //   <Renderer ref="renderer" antialias orbit-ctrl resize="window">
       //   <Camera :position="{ x: 50, y: 50, z: 50 }" />
       //   <Scene background="#fff">
@@ -111,11 +111,20 @@ export default {
       //     </${mesh}>
       //     </Scene>
       // </Renderer>`;
+      let ren = document.createElementNS("Renderer");
+      ren.setAttribute("ref", "renderer");
+      ren.setAttribute("resize", "window");
+      let cam = document.createElementNS("Camera");
+      cam.setAttribute(":position", "{ x: 50, y: 50, z: 50 }");
+      ren.append(cam);
+
       // let meshObj = document.createElement(mesh);
       // meshObj.setAttribute(":scale", "{ x: 20, y: 20, z: 20 }");
       // meshObj.setAttribute(":position", "{ z: 100, y: 100, z: 100 }");
       // console.log(meshObj);
-      // scene.value.appendChild(meshObj);
+      let renderDiv = document.querySelector(".render");
+      renderDiv.append(ren);
+      // scene.value.append(meshObj);
     }
 
     onMounted(() => {
@@ -142,8 +151,8 @@ export default {
 </script>
 
 <style lang="scss">
-// canvas {
-//   position: inherit;
-//   border: 1px solid #999;
-// }
+canvas {
+  position: inherit;
+  border: 1px solid #999;
+}
 </style>

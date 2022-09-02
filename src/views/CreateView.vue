@@ -6,14 +6,10 @@
 
 <script>
 import InputView from "./InputView.vue";
-import OutputView from "./OutputView.vue";
+import OutputView from "./OutputView three.vue";
 
 export default {
   name: "CreateView",
   components: { InputView, OutputView },
-  data() {
-    return {};
-  },
-  methods: {},
 };
 </script>

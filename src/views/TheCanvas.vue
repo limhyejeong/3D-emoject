@@ -1,13 +1,14 @@
 <template>
-  <div ref="canvas"></div>
+  <div class="canvas"></div>
 </template>
 
 <script>
 // import { Clock, PerspectiveCamera, Scene, WebGLRenderer } from 'three'
 import * as THREE from "three";
-import TrackballControls from "three-trackballcontrols";
+// import TrackballControls from "three-trackballcontrols";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { onMounted, onUpdated } from "@vue/runtime-core";
-import { ref } from "vue";
+// import { ref } from "vue";
 // import {
 //   BloomEffect,
 //   EffectComposer,
@@ -38,6 +39,7 @@ export default {
     const cube = new THREE.Mesh(geometry, material);
     const axes = new THREE.AxesHelper(5);
     let controls = [];
+    let speed = 0.01;
 
     scene.add(camera);
     scene.add(light);
@@ -47,7 +49,7 @@ export default {
     light.position.set(0, 0, 10);
     camera.position.z = 5;
     scene.background = new THREE.Color("hsl(0, 100%, 100%)");
-    // controls = new TrackballControls(camera);
+    controls = new OrbitControls(camera, renderer.domElement);
     // controls.rotateSpeed = 1.0;
     // controls.zoomSpeed = 5;
     // controls.panSpeed = 0.8;
@@ -57,15 +59,15 @@ export default {
     // controls.dynamicDampingFactor = 0.3;
 
     function animate() {
-      requestAnimationFrame(this.animate);
-      this.renderer.render(this.scene, this.camera);
-      this.cube.rotation.y += this.speed;
-      this.controls.update();
+      requestAnimationFrame(animate);
+      renderer.render(scene, camera);
+      cube.rotation.y += speed;
+      // this.controls.update();
     }
 
     onMounted(() => {
-      this.$refs.canvas.appendChild(this.renderer.domElement);
-      this.animate();
+      document.querySelector(".canvas").appendChild(renderer.domElement);
+      animate();
     });
 
     onUpdated(() => {
@@ -88,7 +90,7 @@ export default {
       light,
       cube,
       axes,
-      speed: 0.01,
+      speed,
     };
   },
   data: function () {
