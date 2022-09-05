@@ -6,8 +6,8 @@
 
 <script>
 import EmotionSpace from "../components/homeview/EmotionSpace.vue";
-import { useHomeStore } from "@/stores/home";
-import { storeToRefs } from "pinia";
+// import { useHomeStore } from "@/stores/home";
+// import { storeToRefs } from "pinia";
 // import emoColRef from "../firebase";
 // import { getDocs, doc, deleteDoc } from "firebase/firestore";
 

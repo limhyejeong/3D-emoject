@@ -17,43 +17,39 @@
       :lookAt="{ x: 0, y: 0, z: 0 }"
     />
 
-    <Raycaster ref="" @click="onClick" />
+    <Raycaster ref="raycaster" @click="onClick" />
 
     <Scene ref="scene" background="#000">
       <PointLight :position="{ z: 200, y: 200, z: 200 }" />
 
       <Box
-        v-for="els in etc"
+        v-for="joyBox in joy"
         :ref="setItemRef"
-        :key="els.id"
+        :key="joyBox.id"
         :scale="{ x: 10, y: 10, z: 10 }"
         :position="{
           x: 0,
           y: 0,
           z: 0,
         }"
-        @click="boxClick(els)"
+        @click="boxClick(joyBox)"
       >
-        <PhongMaterial />
+        <PhongMaterial color="#ffffff" />
       </Box>
 
       <Sphere
-        v-for="joys in joy"
+        v-for="sadnessBox in sadness"
         :ref="setItemRef"
-        :key="joys.id"
-        :rotation="{
-          y: Math.PI / 4,
-          z: Math.PI / 4,
-        }"
+        :key="sadnessBox.id"
         :scale="{ x: 10, y: 10, z: 10 }"
         :position="{
-          x: 20,
+          x: 30,
           y: 0,
           z: 0,
         }"
-        @click="boxClick(joys)"
+        @click="boxClick(sadnessBox)"
       >
-        <PhongMaterial />
+        <PhongMaterial color="#ffffff" />
       </Sphere>
     </Scene>
   </Renderer>
@@ -62,15 +58,17 @@
 <script>
 import { useHomeStore } from "@/stores/home";
 import { storeToRefs } from "pinia";
-import { THREE, Vector3 } from "three";
+// import { THREE, Vector3 } from "three";
 import { ref, onUpdated, onMounted } from "vue";
 import { gsap } from "gsap";
 import {
   Renderer,
   Camera,
+  Raycaster,
   Scene,
   PointLight,
   Box,
+  Sphere,
   PhongMaterial,
 } from "troisjs";
 import Stats from "troisjs/src/components/misc/Stats";
@@ -82,29 +80,34 @@ export default {
   components: {
     Renderer,
     Camera,
+    Raycaster,
     Scene,
     PointLight,
     Box,
+    Sphere,
     PhongMaterial,
     Stats,
   },
   setup() {
     const store = useHomeStore();
-    const { joy, etc } = storeToRefs(store);
+    // const { joy, sadness } = storeToRefs(store);
+    const { cate } = storeToRefs(store);
     const { fetchEmotions } = store;
     const renderer = ref(null);
     const camera = ref(null);
     let seletedData = ref("");
     let seletedMesh = {};
     let isClick = ref(false);
+    fetchEmotions();
+
+    const joy = cate.value.joy;
+    const sadness = cate.value.sadness;
 
     // emotionBox 배열
     let itemRefs = [];
     const setItemRef = (el) => {
       itemRefs.push(el);
     };
-
-    fetchEmotions();
 
     // 오브제 클릭
     function boxClick(data) {
@@ -156,7 +159,7 @@ export default {
       setItemRef,
       itemRefs,
       joy,
-      etc,
+      sadness,
     };
   },
   data() {
@@ -172,6 +175,7 @@ export default {
 
 <style lang="scss">
 .info {
+  position: absolute;
   padding: 30px;
   background: #171a1f;
   color: #fff;
