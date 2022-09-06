@@ -1,5 +1,6 @@
 <template>
   <aside v-show="isClick" class="info">
+    <!-- <div>{{ seletedData.num }}<div> -->
     <div class="infoNum">{{ seletedData.num }}th Emoject</div>
     <div class="infoName">{{ seletedData.name }}</div>
     <div class="infoEmoji">{{ seletedData.emoji }}</div>
@@ -23,12 +24,13 @@
 
       <Box
         v-for="joyBox in joy"
+        :ref="setItemRef"
         :key="joyBox.id"
         :scale="{ x: 10, y: 10, z: 10 }"
         :position="{
-          x: Math.floor(Math.random() * 60 - 30),
-          y: Math.floor(Math.random() * 60 - 30),
-          z: Math.floor(Math.random() * 60 - 30),
+          x: 0,
+          y: 0,
+          z: 0,
         }"
         @click="boxClick(joyBox)"
       >
@@ -37,12 +39,13 @@
 
       <Sphere
         v-for="sadnessBox in sadness"
+        :ref="setItemRef"
         :key="sadnessBox.id"
         :scale="{ x: 10, y: 10, z: 10 }"
         :position="{
-          x: Math.floor(Math.random() * 60 - 30),
-          y: Math.floor(Math.random() * 60 - 30),
-          z: Math.floor(Math.random() * 60 - 30),
+          x: 30,
+          y: 0,
+          z: 0,
         }"
         @click="boxClick(sadnessBox)"
       >
@@ -55,7 +58,9 @@
 <script>
 import { useHomeStore } from "@/stores/home";
 import { storeToRefs } from "pinia";
-import { ref, onMounted } from "vue";
+import { Object3D } from "three";
+// import { THREE, Vector3 } from "three";
+import { ref, onUpdated, onMounted } from "vue";
 import { gsap } from "gsap";
 import {
   Renderer,
@@ -68,9 +73,11 @@ import {
   PhongMaterial,
 } from "troisjs";
 import Stats from "troisjs/src/components/misc/Stats";
+// import ViewInfo from "../components/ViewInfo.vue";
 
 export default {
   name: "EmotionSpace",
+  // props: ["emotionArray"],
   components: {
     Renderer,
     Camera,
@@ -86,26 +93,29 @@ export default {
     const store = useHomeStore();
     const { cate } = storeToRefs(store);
     const { fetchEmotions } = store;
-
     const renderer = ref(null);
     const camera = ref(null);
-
     let seletedData = ref("");
     let seletedMesh = {};
     let isClick = ref(false);
-
     fetchEmotions();
 
     const joy = cate.value.joy;
     const sadness = cate.value.sadness;
 
-    // 오브젝트 배열
-    // let itemRefs = [];
-    // const setItemRef = (el) => {
-    //   itemRefs.push(el);
-    // };
+    // const camera1 = new Object3D();
+    // camera1.copy(camera);
+    // camera1.lookAt({ x: 100, y: 10, z: 10 });
+    // camera1.updateMatrix();
+    // console.log(camera1);
 
-    // 메쉬 클릭 시 정보 표시
+    // emotionBox 배열
+    let itemRefs = [];
+    const setItemRef = (el) => {
+      itemRefs.push(el);
+    };
+
+    // 오브제 클릭
     function boxClick(data) {
       if (isClick.value == false) {
         isClick.value = true;
@@ -118,21 +128,20 @@ export default {
       // });
     }
 
-    // 클릭한 메쉬의 정보 가져오기
     function onClick(event) {
       seletedMesh.pos = event.component.mesh.position;
       seletedMesh.scl = event.component.mesh.scale;
     }
 
-    // 정보 닫기
+    // 설명 닫기
     function closeInfo() {
       isClick.value = false;
-      // gsap.to(camera.value.camera.position, {
-      //   x: 0,
-      //   y: 0,
-      //   z: 100,
-      //   duration: 1,
-      // });
+      gsap.to(camera.value.camera.position, {
+        x: 0,
+        y: 0,
+        z: 100,
+        duration: 1,
+      });
     }
 
     onMounted(() => {
@@ -143,6 +152,8 @@ export default {
       });
     });
 
+    onUpdated(() => {});
+
     return {
       seletedData,
       boxClick,
@@ -151,12 +162,20 @@ export default {
       closeInfo,
       renderer,
       camera,
-      // setItemRef,
-      // itemRefs,
+      setItemRef,
+      itemRefs,
       joy,
       sadness,
     };
   },
+  data() {
+    return {
+      hover: false,
+    };
+  },
+  created() {},
+  mounted() {},
+  methods: {},
 };
 </script>
 

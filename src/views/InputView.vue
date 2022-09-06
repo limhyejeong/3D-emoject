@@ -1,14 +1,13 @@
 <template>
-  <h1>Input view</h1>
-  <form @submit.prevent="createObject">
-    <input type="text" v-if="step == 0" v-model="emoji" placeholder="이모지" />
-    <input type="text" v-if="step == 1" v-model="name" placeholder="이름" />
-    <textarea v-if="step == 2" v-model="content" placeholder="설명" />
-    <button v-if="step == 2">생성하기</button>
-  </form>
+  <h5>Input view</h5>
+  <input type="text" v-if="step == 0" v-model="emoji" placeholder="이모지" />
+  <input type="text" v-if="step == 1" v-model="name" placeholder="이름" />
+  <textarea v-if="step == 2" v-model="content" placeholder="설명" /><br />
 
   <button @click="prevStep" v-if="0 < step && step < 3">이전</button>
   <button @click="nextStep" v-if="step < 2">다음</button>
+
+  <button v-if="step == 2" @click="createObject">생성하기</button>
 </template>
 
 <script>

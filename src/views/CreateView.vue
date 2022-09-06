@@ -1,5 +1,5 @@
 <template>
-  <h3>Create Emotion</h3>
+  <!-- <h3>Create Emotion</h3> -->
   <InputView />
   <TheCanvas />
   <!-- <OutputView /> -->

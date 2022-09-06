@@ -1,18 +1,18 @@
 <template>
-  <hr />
-  <h3>Output</h3>
-  <div>선택한 이모지 : {{ emoji }}</div>
-  <div>이름 : {{ name }}</div>
-  <div>설명 : {{ content }}</div>
-  <br />
-  <div>감정 : {{ category }}</div>
-  <div>활성도 : {{ activity }}</div>
+  <div class="info">
+    <div>선택한 이모지 : {{ emoji }}</div>
+    <div>이름 : {{ name }}</div>
+    <div>설명 : {{ content }}</div>
+    <br />
+    <div>감정 : {{ category }}</div>
+    <div>활성도 : {{ activity }}</div>
 
-  <button @click="createObj">Hi</button>
+    <button @click="createObj">Hi</button>
 
-  <button @click="createEmotion(name, emoji, content, category, activity)">
-    감정 등록
-  </button>
+    <button @click="createEmotion(name, emoji, content, category, activity)">
+      감정 등록
+    </button>
+  </div>
 
   <div class="canvas"></div>
 </template>
@@ -73,6 +73,7 @@ export default {
     // controls.dynamicDampingFactor = 0.3;
 
     function createObj() {
+      cube = null;
       if (category.value == "joy") {
         geometry = new THREE.BoxGeometry(1, 1, 1);
       } else {
@@ -87,6 +88,7 @@ export default {
       cube = new THREE.Mesh(geometry, material);
 
       scene.add(cube);
+      console.log(cube);
     }
 
     function animate() {
@@ -102,6 +104,7 @@ export default {
     });
 
     onUpdated(() => {
+      createObj();
       //   rotate: () => {
       //     if (this.speed === "") {
       //       return 0;
