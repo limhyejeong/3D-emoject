@@ -19,9 +19,11 @@
     <Raycaster ref="raycaster" @click="onClick" />
 
     <Scene ref="scene" background="#000">
-      <PointLight :position="{ z: 200, y: 200, z: 200 }" />
+      <AmbientLight :position="{ x: 100, y: 100, z: 100 }" :intensity="0.5" />
+      <PointLight :position="{ x: 100, y: 100, z: 100 }" />
 
       <Box
+        :ref="setItemRef"
         v-for="joyBox in joy"
         :key="joyBox.id"
         :scale="{ x: 10, y: 10, z: 10 }"
@@ -32,10 +34,11 @@
         }"
         @click="boxClick(joyBox)"
       >
-        <PhongMaterial color="#ffffff" />
+        <PhongMaterial color="#42b983" />
       </Box>
 
       <Sphere
+        :ref="setItemRef"
         v-for="sadnessBox in sadness"
         :key="sadnessBox.id"
         :scale="{ x: 10, y: 10, z: 10 }"
@@ -46,8 +49,38 @@
         }"
         @click="boxClick(sadnessBox)"
       >
-        <PhongMaterial color="#ffffff" />
+        <PhongMaterial color="#42b983" />
       </Sphere>
+
+      <Torus
+        :ref="setItemRef"
+        v-for="surpriseBox in surprise"
+        :key="surpriseBox.id"
+        :scale="{ x: 10, y: 10, z: 10 }"
+        :position="{
+          x: Math.floor(Math.random() * 60 - 30),
+          y: Math.floor(Math.random() * 60 - 30),
+          z: Math.floor(Math.random() * 60 - 30),
+        }"
+        @click="boxClick(surpriseBox)"
+      >
+        <PhongMaterial color="#42b983" />
+      </Torus>
+
+      <Octahedron
+        :ref="setItemRef"
+        v-for="disgustBox in disgust"
+        :key="disgustBox.id"
+        :scale="{ x: 10, y: 10, z: 10 }"
+        :position="{
+          x: Math.floor(Math.random() * 60 - 30),
+          y: Math.floor(Math.random() * 60 - 30),
+          z: Math.floor(Math.random() * 60 - 30),
+        }"
+        @click="boxClick(disgustBox)"
+      >
+        <PhongMaterial color="#42b983" />
+      </Octahedron>
     </Scene>
   </Renderer>
 </template>
@@ -62,9 +95,12 @@ import {
   Camera,
   Raycaster,
   Scene,
+  AmbientLight,
   PointLight,
   Box,
   Sphere,
+  Torus,
+  Octahedron,
   PhongMaterial,
 } from "troisjs";
 import Stats from "troisjs/src/components/misc/Stats";
@@ -76,9 +112,12 @@ export default {
     Camera,
     Raycaster,
     Scene,
+    AmbientLight,
     PointLight,
     Box,
     Sphere,
+    Torus,
+    Octahedron,
     PhongMaterial,
     Stats,
   },
@@ -98,12 +137,14 @@ export default {
 
     const joy = cate.value.joy;
     const sadness = cate.value.sadness;
+    const surprise = cate.value.surprise;
+    const disgust = cate.value.disgust;
 
     // 오브젝트 배열
-    // let itemRefs = [];
-    // const setItemRef = (el) => {
-    //   itemRefs.push(el);
-    // };
+    let itemRefs = [];
+    const setItemRef = (el) => {
+      itemRefs.push(el);
+    };
 
     // 메쉬 클릭 시 정보 표시
     function boxClick(data) {
@@ -137,9 +178,9 @@ export default {
 
     onMounted(() => {
       renderer.value.onBeforeRender(() => {
-        // itemRefs.forEach((item) => {
-        //   item.mesh.rotation.x += 0.01;
-        // });
+        itemRefs.forEach((item) => {
+          item.mesh.rotation.y += 0.01;
+        });
       });
     });
 
@@ -151,10 +192,12 @@ export default {
       closeInfo,
       renderer,
       camera,
-      // setItemRef,
-      // itemRefs,
+      setItemRef,
+      itemRefs,
       joy,
       sadness,
+      surprise,
+      disgust,
     };
   },
 };

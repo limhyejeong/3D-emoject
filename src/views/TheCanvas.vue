@@ -25,6 +25,9 @@ import * as THREE from "three";
 // import TrackballControls from "three-trackballcontrols";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { onMounted, onUpdated } from "@vue/runtime-core";
+import { noise, perlin3 } from "perlin";
+// import perlinNoise3d from "perlin-noise-3d";
+
 // import { ref } from "vue";
 // import {
 //   BloomEffect,
@@ -88,14 +91,87 @@ export default {
       cube = new THREE.Mesh(geometry, material);
 
       scene.add(cube);
-      console.log(cube);
+      // console.log(cube);
     }
 
+    let k = 3;
+    // let p;
+
+    function perlin() {
+      let time = performance.now() * 0.003;
+
+      const position = cube.geometry.attributes.position;
+      const vector = new THREE.Vector3();
+
+      for (let i = 0; i < position.count; i++) {
+        vector.fromBufferAttribute(position, i);
+        vector.applyMatrix4(cube.matrixWorld);
+
+        vector
+          .normalize()
+          .multiplyScalar(
+            1 +
+              0.3 *
+                noise.perlin3(
+                  Math.floor(vector.x * k + time),
+                  Math.floor(vector.y * k),
+                  Math.floor(vector.z * k)
+                )
+          );
+      }
+
+      // for (let i = 0; i < cube.geometry.vertices.length; i++) {
+      // let vertices = cube.geometry.attributes.position.array;
+      // let p = {
+      //   x: cube.geometry.attributes.position.array[i],
+      //   y: cube.geometry.attributes.position.array[i + 1],
+      //   z: cube.geometry.attributes.position.array[i + 2],
+      // };
+      // console.log(pos);
+      // console.log(p);
+      // p = new THREE.Vector3(
+      //   cube.geometry.attributes.position.array[i],
+      //   cube.geometry.attributes.position.array[i + 1],
+      //   cube.geometry.attributes.position.array[i + 2]
+      // );
+
+      // var p = cube.geometry.vertices[i];
+      // p.normalize().multiplyScalar(
+      //   1 + 0.3 * noise.perlin3(p.x * k + time, p.y * k, p.z * k)
+      // );
+
+      geometry.computeVertexNormals();
+      geometry.normalsNeedUpdate = true;
+      geometry.verticesNeedUpdate = true;
+    }
+
+    // const noise = new perlinNoise3d();
+
+    // function per3d() {
+    //   for (
+    //     let i = 0;
+    //     i < cube.geometry.attributes.position.array.length;
+    //     i += 3
+    //   ) {
+    //     p = new THREE.Vector3(
+    //       cube.geometry.attributes.position.array[i],
+    //       cube.geometry.attributes.position.array[i + 1],
+    //       cube.geometry.attributes.position.array[i + 2]
+    //     );
+    //   }
+
+    //   noise.get(p.x, p.y, p.z);
+    //   console.log(noise.get(p.x, p.y, p.z));
+    // }
+
     function animate() {
-      requestAnimationFrame(animate);
-      renderer.render(scene, camera);
-      if (cube !== null) cube.rotation.y += speed;
+      if (cube !== null) {
+        cube.rotation.y += speed;
+        perlin();
+      }
       controls.update();
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
     }
 
     onMounted(() => {
@@ -104,7 +180,6 @@ export default {
     });
 
     onUpdated(() => {
-      createObj();
       //   rotate: () => {
       //     if (this.speed === "") {
       //       return 0;

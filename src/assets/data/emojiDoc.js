@@ -50,5 +50,32 @@ export const emojiDoc = [
         trust: 0,
         joy: 3,
         activity: 8,
+    },
+    {
+        emoji: '🤢',
+        num: 51,
+        anger: 0,
+        fear: 0,
+        sadness: 0,
+        disgust: 10,
+        surprise: 0,
+        anticipation: 0,
+        trust: 0,
+        joy: 0,
+        activity: 3,
+    },
+    {
+        emoji: '🤧',
+        num: 53,
+        anger: 0,
+        fear: 0,
+        sadness: 0,
+        disgust: 3,
+        surprise: 7,
+        anticipation: 0,
+        trust: 0,
+        joy: 0,
+        activity: 6,
     }
+
 ]

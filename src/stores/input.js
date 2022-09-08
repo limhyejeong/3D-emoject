@@ -5,9 +5,9 @@ import { addDoc } from "firebase/firestore";
 export const useInputStore = defineStore('input', {
     state: () => ({
         num: 0,
-        name: '헤정',
-        emoji: '😀😃😆😂',
-        content: '좋은 경험',
+        name: '사용자 이름',
+        emoji: '😂',
+        content: '경험 설명',
         category: 'none',
         activity: 0
     }),

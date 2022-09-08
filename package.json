@@ -12,6 +12,8 @@
     "firebase": "^9.9.2",
     "gsap": "^3.11.0",
     "jquery": "^3.6.1",
+    "perlin": "^1.0.0",
+    "perlin-noise-3d": "^0.5.4",
     "pinia": "^2.0.20",
     "stats.js": "^0.17.0",
     "three": "^0.134.0",
