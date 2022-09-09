@@ -7,7 +7,7 @@
     <div>감정 : {{ category }}</div>
     <div>활성도 : {{ activity }}</div>
 
-    <button @click="createObj">Hi</button>
+    <button @click="createObj">createObj</button>
 
     <button @click="createEmotion(name, emoji, content, category, activity)">
       감정 등록
@@ -27,6 +27,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { onMounted, onUpdated } from "@vue/runtime-core";
 import { noise, perlin3 } from "perlin";
 // import perlinNoise3d from "perlin-noise-3d";
+import { makeNoise4D } from "open-simplex-noise";
 
 // import { ref } from "vue";
 // import {
@@ -75,12 +76,14 @@ export default {
     // controls.noPan = false;
     // controls.dynamicDampingFactor = 0.3;
 
+    createObj();
+
     function createObj() {
       cube = null;
       if (category.value == "joy") {
         geometry = new THREE.BoxGeometry(1, 1, 1);
       } else {
-        geometry = new THREE.SphereGeometry(1, 32, 16);
+        geometry = new THREE.SphereGeometry(1, 32, 32);
         console.log(category.value);
       }
       material = new THREE.MeshStandardMaterial({
@@ -94,56 +97,65 @@ export default {
       // console.log(cube);
     }
 
+    geometry.positionData = [];
+
+    let v3 = new THREE.Vector3();
+    for (let i = 0; i < geometry.attributes.position.count; i++) {
+      v3.fromBufferAttribute(geometry.attributes.position, i);
+      geometry.positionData.push(v3.clone());
+    }
+
+    let noise = makeNoise4D(Date.now());
+    let clock = new THREE.Clock();
+
+    function animation() {
+      // Get the time
+      let t = clock.getElapsedTime();
+      geometry.positionData.forEach((p, idx) => {
+        // Create noise for each point in our sphere
+        let setNoise = noise(p.x, p.y, p.z, t * 1.05);
+        // Using our Vector3 function, copy the point data, and multiply it by the noise
+        // this looks confusing - but it's just multiplying noise by the position at each vertice
+        v3.copy(p).addScaledVector(p, setNoise);
+        // Update the positions
+        geometry.attributes.position.setXYZ(idx, v3.x, v3.y, v3.z);
+      });
+      // Some housekeeping so that the sphere looks "right"
+      geometry.computeVertexNormals();
+      geometry.attributes.position.needsUpdate = true;
+      // Render the sphere onto the page again.
+      renderer.render(scene, camera);
+    }
+
     let k = 3;
     // let p;
 
-    function perlin() {
-      let time = performance.now() * 0.003;
+    // function perlin() {
 
-      const position = cube.geometry.attributes.position;
-      const vector = new THREE.Vector3();
+    //   // for (let i = 0; i < cube.geometry.vertices.length; i++) {
+    //   // let vertices = cube.geometry.attributes.position.array;
+    //   // let p = {
+    //   //   x: cube.geometry.attributes.position.array[i],
+    //   //   y: cube.geometry.attributes.position.array[i + 1],
+    //   //   z: cube.geometry.attributes.position.array[i + 2],
+    //   // };
+    //   // console.log(pos);
+    //   // console.log(p);
+    //   // p = new THREE.Vector3(
+    //   //   cube.geometry.attributes.position.array[i],
+    //   //   cube.geometry.attributes.position.array[i + 1],
+    //   //   cube.geometry.attributes.position.array[i + 2]
+    //   // );
 
-      for (let i = 0; i < position.count; i++) {
-        vector.fromBufferAttribute(position, i);
-        vector.applyMatrix4(cube.matrixWorld);
+    //   // var p = cube.geometry.vertices[i];
+    //   // p.normalize().multiplyScalar(
+    //   //   1 + 0.3 * noise.perlin3(p.x * k + time, p.y * k, p.z * k)
+    //   // );
 
-        vector
-          .normalize()
-          .multiplyScalar(
-            1 +
-              0.3 *
-                noise.perlin3(
-                  Math.floor(vector.x * k + time),
-                  Math.floor(vector.y * k),
-                  Math.floor(vector.z * k)
-                )
-          );
-      }
-
-      // for (let i = 0; i < cube.geometry.vertices.length; i++) {
-      // let vertices = cube.geometry.attributes.position.array;
-      // let p = {
-      //   x: cube.geometry.attributes.position.array[i],
-      //   y: cube.geometry.attributes.position.array[i + 1],
-      //   z: cube.geometry.attributes.position.array[i + 2],
-      // };
-      // console.log(pos);
-      // console.log(p);
-      // p = new THREE.Vector3(
-      //   cube.geometry.attributes.position.array[i],
-      //   cube.geometry.attributes.position.array[i + 1],
-      //   cube.geometry.attributes.position.array[i + 2]
-      // );
-
-      // var p = cube.geometry.vertices[i];
-      // p.normalize().multiplyScalar(
-      //   1 + 0.3 * noise.perlin3(p.x * k + time, p.y * k, p.z * k)
-      // );
-
-      geometry.computeVertexNormals();
-      geometry.normalsNeedUpdate = true;
-      geometry.verticesNeedUpdate = true;
-    }
+    //   geometry.computeVertexNormals();
+    //   geometry.normalsNeedUpdate = true;
+    //   geometry.verticesNeedUpdate = true;
+    // }
 
     // const noise = new perlinNoise3d();
 
@@ -167,7 +179,7 @@ export default {
     function animate() {
       if (cube !== null) {
         cube.rotation.y += speed;
-        perlin();
+        animation();
       }
       controls.update();
       renderer.render(scene, camera);
