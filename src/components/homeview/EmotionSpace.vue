@@ -12,75 +12,65 @@
     <Stats />
     <Camera
       ref="camera"
-      :position="{ x: 0, y: 0, z: 100 }"
-      :look-at="{ x: 0, y: 0, z: 100 }"
+      :position="{ x: 0, y: 0, z: 15 }"
+      :look-at="{ x: 0, y: 0, z: 0 }"
     />
 
     <Raycaster ref="raycaster" @click="onClick" />
 
     <Scene ref="scene" background="#000">
-      <AmbientLight :position="{ x: 100, y: 100, z: 100 }" :intensity="0.5" />
-      <PointLight :position="{ x: 100, y: 100, z: 100 }" />
-
-      <Box
-        :ref="setItemRef"
-        v-for="joyBox in joy"
-        :key="joyBox.id"
-        :scale="{ x: 10, y: 10, z: 10 }"
-        :position="{
-          x: Math.floor(Math.random() * 60 - 30),
-          y: Math.floor(Math.random() * 60 - 30),
-          z: Math.floor(Math.random() * 60 - 30),
-        }"
-        @click="boxClick(joyBox)"
-      >
-        <PhongMaterial color="#42b983" />
-      </Box>
+      <AmbientLight :position="{ x: 10, y: 10, z: 10 }" :intensity="0.5" />
+      <PointLight :position="{ x: 10, y: 10, z: 10 }" :intensity="0.5" />
 
       <Sphere
         :ref="setItemRef"
         v-for="sadnessBox in sadness"
         :key="sadnessBox.id"
-        :scale="{ x: 10, y: 10, z: 10 }"
+        :scale="{ x: 1, y: 1, z: 1 }"
+        :radius="1"
+        :width-segments="16"
+        :height-segments="16"
         :position="{
-          x: Math.floor(Math.random() * 60 - 30),
-          y: Math.floor(Math.random() * 60 - 30),
-          z: Math.floor(Math.random() * 60 - 30),
+          x: Math.floor(Math.random() * 10 - 5),
+          y: Math.floor(Math.random() * 10 - 5),
+          z: Math.floor(Math.random() * 10 - 5),
         }"
         @click="boxClick(sadnessBox)"
       >
-        <PhongMaterial color="#42b983" />
+        <PhongMaterial color="#d88993" />
       </Sphere>
 
-      <Torus
+      <Sphere
         :ref="setItemRef"
-        v-for="surpriseBox in surprise"
-        :key="surpriseBox.id"
-        :scale="{ x: 10, y: 10, z: 10 }"
+        v-for="joyBox in joy"
+        :key="joyBox.id"
+        :scale="{ x: 1, y: 1, z: 1 }"
+        :radius="1"
+        :width-segments="16"
+        :height-segments="16"
         :position="{
-          x: Math.floor(Math.random() * 60 - 30),
-          y: Math.floor(Math.random() * 60 - 30),
-          z: Math.floor(Math.random() * 60 - 30),
+          x: Math.floor(Math.random() * 10 - 5),
+          y: Math.floor(Math.random() * 10 - 5),
+          z: Math.floor(Math.random() * 10 - 5),
         }"
-        @click="boxClick(surpriseBox)"
+        @click="boxClick(joyBox)"
       >
-        <PhongMaterial color="#42b983" />
-      </Torus>
-
-      <Octahedron
-        :ref="setItemRef"
-        v-for="disgustBox in disgust"
-        :key="disgustBox.id"
-        :scale="{ x: 10, y: 10, z: 10 }"
-        :position="{
-          x: Math.floor(Math.random() * 60 - 30),
-          y: Math.floor(Math.random() * 60 - 30),
-          z: Math.floor(Math.random() * 60 - 30),
-        }"
-        @click="boxClick(disgustBox)"
-      >
-        <PhongMaterial color="#42b983" />
-      </Octahedron>
+        <ShaderMaterial
+          :props="{
+            uniforms: {
+              uTime: { value: 0 },
+              uSpeed: { value: settings.speed },
+              uNoiseDensity: { value: settings.density },
+              uNoiseStrength: { value: settings.strength },
+              uFrequency: { value: settings.frequency },
+              uAmplitude: { value: settings.amplitude },
+              uIntensity: { value: settings.intensity },
+            },
+            vertexShader: vertexShader,
+            fragmentShader: fragmentShader,
+          }"
+        />
+      </Sphere>
     </Scene>
   </Renderer>
 </template>
@@ -97,13 +87,13 @@ import {
   Scene,
   AmbientLight,
   PointLight,
-  Box,
   Sphere,
-  Torus,
-  Octahedron,
   PhongMaterial,
 } from "troisjs";
 import Stats from "troisjs/src/components/misc/Stats";
+import * as THREE from "three";
+import { makeNoise4D } from "open-simplex-noise";
+import { vertexShader, fragmentShader } from "@/assets/js/tornado";
 
 export default {
   name: "EmotionSpace",
@@ -114,10 +104,7 @@ export default {
     Scene,
     AmbientLight,
     PointLight,
-    Box,
     Sphere,
-    Torus,
-    Octahedron,
     PhongMaterial,
     Stats,
   },
@@ -126,11 +113,12 @@ export default {
     const { cate } = storeToRefs(store);
     const { fetchEmotions } = store;
 
-    const renderer = ref(null);
-    const camera = ref(null);
+    let renderer = ref(null);
+    let camera = ref(null);
+    let scene = ref(null);
 
     let seletedData = ref("");
-    let seletedMesh = {};
+    let seletedMesh = null;
     let isClick = ref(false);
 
     fetchEmotions();
@@ -139,6 +127,15 @@ export default {
     const sadness = cate.value.sadness;
     const surprise = cate.value.surprise;
     const disgust = cate.value.disgust;
+
+    const settings = {
+      speed: 0.5,
+      density: 1,
+      strength: 0.8,
+      frequency: 2.0,
+      amplitude: 10.0,
+      intensity: 1,
+    };
 
     // 오브젝트 배열
     let itemRefs = [];
@@ -154,15 +151,37 @@ export default {
       }
 
       // gsap.to(camera.value.camera.position, {
-      //   z: seletedMesh.pos.z + seletedMesh.scl.z * 5,
+      //   z: seletedMesh.position.z + seletedMesh.scale.z * 5,
       //   duration: 0.75,
       // });
     }
 
+    let v3 = new THREE.Vector3();
     // 클릭한 메쉬의 정보 가져오기
     function onClick(event) {
-      seletedMesh.pos = event.component.mesh.position;
-      seletedMesh.scl = event.component.mesh.scale;
+      if (isClick.value == false) {
+        seletedMesh = event.component.mesh;
+        seletedMesh.geometry.positionData = [];
+        for (
+          let i = 0;
+          i < seletedMesh.geometry.attributes.position.count;
+          i++
+        ) {
+          v3.fromBufferAttribute(seletedMesh.geometry.attributes.position, i);
+          seletedMesh.geometry.positionData.push(v3.clone());
+        }
+      }
+    }
+
+    function twist() {
+      // Update uniforms
+      seletedMesh.material.uniforms.uTime.value = clock.getElapsedTime();
+      seletedMesh.material.uniforms.uSpeed.value = settings.speed;
+      seletedMesh.material.uniforms.uNoiseDensity.value = settings.density;
+      seletedMesh.material.uniforms.uNoiseStrength.value = settings.strength;
+      seletedMesh.material.uniforms.uFrequency.value = settings.frequency;
+      seletedMesh.material.uniforms.uAmplitude.value = settings.amplitude;
+      seletedMesh.material.uniforms.uIntensity.value = settings.intensity;
     }
 
     // 정보 닫기
@@ -176,11 +195,36 @@ export default {
       // });
     }
 
+    let noise4D = makeNoise4D(Date.now());
+    let clock = new THREE.Clock();
+    let 진폭 = 6;
+    let 반경 = 0.2;
+    let 속도 = 0.6;
+
+    function animation() {
+      let t = clock.getElapsedTime();
+
+      seletedMesh.geometry.positionData.forEach((p, idx) => {
+        let setNoise = noise4D(p.x * 진폭, p.y * 진폭, p.z * 진폭, t * 속도);
+        v3.copy(p).addScaledVector(p, setNoise * 반경);
+        seletedMesh.geometry.attributes.position.setXYZ(idx, v3.x, v3.y, v3.z);
+      });
+
+      seletedMesh.rotation.y += 0.01;
+      seletedMesh.geometry.computeVertexNormals();
+      seletedMesh.geometry.attributes.position.needsUpdate = true;
+    }
+
     onMounted(() => {
       renderer.value.onBeforeRender(() => {
-        itemRefs.forEach((item) => {
-          item.mesh.rotation.y += 0.01;
-        });
+        // itemRefs.forEach((item) => {
+        //   item.mesh.rotation.y += 0.01;
+        // });
+        if (seletedMesh != null) {
+          animation();
+          console.log(seletedMesh.material);
+          twist();
+        }
       });
     });
 
@@ -192,12 +236,16 @@ export default {
       closeInfo,
       renderer,
       camera,
+      scene,
       setItemRef,
       itemRefs,
       joy,
       sadness,
       surprise,
       disgust,
+      vertexShader,
+      fragmentShader,
+      settings,
     };
   },
 };

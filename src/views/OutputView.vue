@@ -15,27 +15,17 @@
   </button>
 
   <div class="render">
-    <!-- <Renderer ref="renderer" antialias orbit-ctrl resize="window">
-      <Camera :position="{ x: 50, y: 50, z: 50 }" />
+    <Renderer ref="renderer" antialias orbit-ctrl resize="window">
+      <Camera :position="{ x: 5, y: 5, z: 5 }" />
 
       <Scene ref="Scene" background="#fff">
+        <!-- <AmbientLight :position="{ z: 100, y: 1000, z: 100 }" /> -->
         <PointLight :position="{ z: 100, y: 100, z: 100 }" />
 
-        <Box
-          ref="Box"
-          :scale="{ x: 20, y: 20, z: 20 }"
-          :rotation="{
-            y: Math.PI / 4,
-            z: Math.PI / 4,
-          }"
-        >
-          <PhongMaterial />
-        </Box>
-
         <Sphere
-          ref="Sphere"
-          :position="{ z: 10, y: 10, z: 10 }"
-          :scale="{ x: 10, y: 10, z: 10 }"
+          ref="sphereRef"
+          :position="{ z: 0, y: 0, z: 0 }"
+          :scale="{ x: 1, y: 1, z: 1 }"
           :rotation="{
             y: Math.PI / 4,
             z: Math.PI / 4,
@@ -44,7 +34,7 @@
           <PhongMaterial />
         </Sphere>
       </Scene>
-    </Renderer> -->
+    </Renderer>
   </div>
 </template>
 
@@ -56,16 +46,18 @@ import {
   Renderer,
   Camera,
   Scene,
+  Sphere,
   PointLight,
-  Box,
   PhongMaterial,
 } from "troisjs";
+import { makeNoise4D } from "open-simplex-noise";
+
 // import emoColRef from "@/firebase";
 // import { addDoc } from "firebase/firestore";
 
 export default {
   name: "OutputView",
-  components: { Renderer, Camera, Scene, PointLight, Box, PhongMaterial },
+  components: { Renderer, Camera, Scene, Sphere, PointLight, PhongMaterial },
   setup() {
     const store = useInputStore();
     const { name, emoji, content, category, activity } = storeToRefs(store);
@@ -75,40 +67,26 @@ export default {
     const scene = ref(null);
     // renderer?.value?.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
 
-    // const obj = ref(null);
-    // const box = ref(null);
-    // const sphere = ref(null);
-    // console.log(box, sphere);
+    // const sphereRef = ref(null).sphere.mesh;
+    const sphereRef = ref(null);
 
-    let mesh = "";
+    console.log(renderer);
 
-    function createObj() {
-      // if (category.value == "joy") {
-      //   mesh = "Box";
-      // } else {
-      //   mesh = "Sphere";
-      // }
-      // console.log(category.value);
-      // console.log(mesh);
-      // let ren = document.createElementNS("Renderer");
-      // ren.setAttribute("ref", "renderer");
-      // ren.setAttribute("resize", "window");
-      // let cam = document.createElementNS("Camera");
-      // cam.setAttribute(":position", "{ x: 50, y: 50, z: 50 }");
-      // ren.append(cam);
-      // let meshObj = document.createElement(mesh);
-      // meshObj.setAttribute(":scale", "{ x: 20, y: 20, z: 20 }");
-      // meshObj.setAttribute(":position", "{ z: 100, y: 100, z: 100 }");
-      // console.log(meshObj);
-      // let renderDiv = document.querySelector(".render");
-      // renderDiv.append(ren);
-      // scene.value.append(meshObj);
-    }
+    // 오브젝트 배열
+    // let spheres;
+    // const sphereRef = (el) => {
+    //   console.log(el.value);
+    //   // spheres = el;
+    // };
+
+    console.log(sphereRef.value._value);
 
     onMounted(() => {
-      renderer?.value?.onBeforeRender(() => {
-        // obj.value.mesh.rotation.x += 0.01 * activity.value;
-      });
+      // renderer?.value?.onBeforeRender(() => {
+      //   spheres.forEach((sphere) => {
+      //     sphere.mesh.rotation.y += 0.01;
+      //   });
+      // });
     });
 
     return {
@@ -121,8 +99,7 @@ export default {
       createEmotion,
       renderer,
       scene,
-      createObj,
-      // obj,
+      sphereRef,
     };
   },
 };

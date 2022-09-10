@@ -7,7 +7,7 @@
 
 <script>
 import InputView from "./InputView.vue";
-import OutputView from "./OutputView three.vue";
+import OutputView from "./OutputView.vue";
 import TheCanvas from "./TheCanvas.vue";
 
 export default {
