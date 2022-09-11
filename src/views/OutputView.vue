@@ -18,9 +18,16 @@
     <Renderer ref="renderer" antialias orbit-ctrl resize="window">
       <Camera :position="{ x: 5, y: 5, z: 5 }" />
 
-      <Scene ref="Scene" background="#fff">
+      <Scene ref="Scene" background="#000">
         <!-- <AmbientLight :position="{ z: 100, y: 1000, z: 100 }" /> -->
-        <PointLight :position="{ z: 100, y: 100, z: 100 }" />
+        <!-- <PointLight :position="{ z: 100, y: 100, z: 100 }" /> -->
+        <AmbientLight :intensity="0.5" />
+        <PointLight :position="{ y: 50, z: 0 }" />
+        <PointLight
+          color="#ff6000"
+          :intensity="0.75"
+          :position="{ y: -50, z: 0 }"
+        />
 
         <Sphere
           ref="sphereRef"
@@ -44,12 +51,16 @@
                 uFrequency: { value: settings.frequency },
                 uAmplitude: { value: settings.amplitude },
                 uIntensity: { value: settings.intensity },
-                matcaptexture: { value: settings.matcaptexture },
               },
               vertexShader: vertexShader,
               fragmentShader: fragmentShader,
             }"
-          />
+          >
+            <Texture
+              src="/assets/textures/stone_alabaster.jpg"
+              uniform="myCustomTexture"
+            />
+          </ShaderMaterial>
         </Sphere>
       </Scene>
     </Renderer>
@@ -65,21 +76,30 @@ import {
   Camera,
   Scene,
   Sphere,
+  AmbientLight,
   PointLight,
   ShaderMaterial,
+  Texture,
 } from "troisjs";
 // import { makeNoise4D } from "open-simplex-noise";
 import { vertexShader, fragmentShader, twist } from "@/assets/js/twist";
 import * as THREE from "three";
 import { noise } from "@/assets/js/noise";
-import matcapObsidian from "@/assets/img/stone_obsidian_dull.jpg";
-
 // import emoColRef from "@/firebase";
 // import { addDoc } from "firebase/firestore";
 
 export default {
   name: "OutputView",
-  components: { Renderer, Camera, Scene, Sphere, PointLight, ShaderMaterial },
+  components: {
+    Renderer,
+    Camera,
+    Scene,
+    Sphere,
+    AmbientLight,
+    PointLight,
+    ShaderMaterial,
+    Texture,
+  },
   setup() {
     const store = useInputStore();
     const { name, emoji, content, category, activity } = storeToRefs(store);
@@ -96,8 +116,6 @@ export default {
     let 반경 = 0.2;
     let 속도 = 0.6;
 
-    const obsidian = new THREE.TextureLoader().load(matcapObsidian);
-
     const settings = {
       speed: 0.5,
       distortion: 1, //왜곡
@@ -105,8 +123,7 @@ export default {
       strength: 0.2, //힘
       frequency: 1.0, //빈도
       amplitude: 10, //진폭
-      intensity: 1, //대비
-      matcaptexture: obsidian,
+      intensity: 4, //대비
     };
 
     // renderer?.value?.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
