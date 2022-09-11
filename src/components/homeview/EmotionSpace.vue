@@ -88,6 +88,7 @@ import {
   AmbientLight,
   PointLight,
   Sphere,
+  ShaderMaterial,
   PhongMaterial,
 } from "troisjs";
 import Stats from "troisjs/src/components/misc/Stats";
@@ -106,6 +107,7 @@ export default {
     PointLight,
     Sphere,
     PhongMaterial,
+    ShaderMaterial,
     Stats,
   },
   setup() {
@@ -161,6 +163,7 @@ export default {
     function onClick(event) {
       if (isClick.value == false) {
         seletedMesh = event.component.mesh;
+
         seletedMesh.geometry.positionData = [];
         for (
           let i = 0;
@@ -221,8 +224,8 @@ export default {
         //   item.mesh.rotation.y += 0.01;
         // });
         if (seletedMesh != null) {
-          animation();
-          console.log(seletedMesh.material);
+          // animation();
+          // console.log(seletedMesh);
           twist();
         }
       });
