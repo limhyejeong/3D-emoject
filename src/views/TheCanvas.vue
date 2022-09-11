@@ -25,7 +25,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { onMounted, onUpdated } from "@vue/runtime-core";
 import { makeNoise4D } from "open-simplex-noise";
 import * as dat from "dat.gui";
-import { vertexShader, fragmentShader } from "@/assets/js/tornado";
+import { vertexShader, fragmentShader } from "@/assets/js/twist";
 // import { asd } from "@/assets/js/perlin";
 import { noise, perlin3 } from "perlin";
 
@@ -146,23 +146,16 @@ export default {
     let 속도 = 1;
 
     function animation() {
-      // Get the time
       let t = clock.getElapsedTime();
 
       geometry.positionData.forEach((p, idx) => {
-        // Create noise for each point in our sphere
         let setNoise = noise4D(p.x * 진폭, p.y * 진폭, p.z * 진폭, t * 속도);
-        // Using our Vector3 function, copy the point data, and multiply it by the noise
-        // this looks confusing - but it's just multiplying noise by the position at each vertice
         v3.copy(p).addScaledVector(p, setNoise * 반경);
-        // Update the positions
         geometry.attributes.position.setXYZ(idx, v3.x, v3.y, v3.z);
       });
 
-      // Some housekeeping so that the sphere looks "right"
       geometry.computeVertexNormals();
       geometry.attributes.position.needsUpdate = true;
-      // Render the sphere onto the page again.
     }
 
     function twist() {

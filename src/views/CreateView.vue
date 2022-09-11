@@ -1,8 +1,8 @@
 <template>
   <!-- <h3>Create Emotion</h3> -->
   <InputView />
-  <TheCanvas />
-  <!-- <OutputView /> -->
+  <!-- <TheCanvas /> -->
+  <OutputView />
 </template>
 
 <script>

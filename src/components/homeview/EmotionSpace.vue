@@ -93,8 +93,9 @@ import {
 } from "troisjs";
 import Stats from "troisjs/src/components/misc/Stats";
 import * as THREE from "three";
-import { makeNoise4D } from "open-simplex-noise";
-import { vertexShader, fragmentShader } from "@/assets/js/tornado";
+// import { makeNoise4D } from "open-simplex-noise";
+import { vertexShader, fragmentShader, twist } from "@/assets/js/twist";
+import { noise } from "@/assets/js/noise";
 
 export default {
   name: "EmotionSpace",
@@ -122,6 +123,7 @@ export default {
     let seletedData = ref("");
     let seletedMesh = null;
     let isClick = ref(false);
+    let clock = new THREE.Clock();
 
     fetchEmotions();
 
@@ -176,17 +178,6 @@ export default {
       }
     }
 
-    function twist() {
-      // Update uniforms
-      seletedMesh.material.uniforms.uTime.value = clock.getElapsedTime();
-      seletedMesh.material.uniforms.uSpeed.value = settings.speed;
-      seletedMesh.material.uniforms.uNoiseDensity.value = settings.density;
-      seletedMesh.material.uniforms.uNoiseStrength.value = settings.strength;
-      seletedMesh.material.uniforms.uFrequency.value = settings.frequency;
-      seletedMesh.material.uniforms.uAmplitude.value = settings.amplitude;
-      seletedMesh.material.uniforms.uIntensity.value = settings.intensity;
-    }
-
     // 정보 닫기
     function closeInfo() {
       isClick.value = false;
@@ -198,25 +189,9 @@ export default {
       // });
     }
 
-    let noise4D = makeNoise4D(Date.now());
-    let clock = new THREE.Clock();
     let 진폭 = 6;
     let 반경 = 0.2;
     let 속도 = 0.6;
-
-    function animation() {
-      let t = clock.getElapsedTime();
-
-      seletedMesh.geometry.positionData.forEach((p, idx) => {
-        let setNoise = noise4D(p.x * 진폭, p.y * 진폭, p.z * 진폭, t * 속도);
-        v3.copy(p).addScaledVector(p, setNoise * 반경);
-        seletedMesh.geometry.attributes.position.setXYZ(idx, v3.x, v3.y, v3.z);
-      });
-
-      seletedMesh.rotation.y += 0.01;
-      seletedMesh.geometry.computeVertexNormals();
-      seletedMesh.geometry.attributes.position.needsUpdate = true;
-    }
 
     onMounted(() => {
       renderer.value.onBeforeRender(() => {
@@ -224,9 +199,10 @@ export default {
         //   item.mesh.rotation.y += 0.01;
         // });
         if (seletedMesh != null) {
-          // animation();
           // console.log(seletedMesh);
-          twist();
+          // twist();
+          twist(seletedMesh, clock, settings);
+          // noise(seletedMesh, clock, 진폭, 반경, 속도, v3);
         }
       });
     });

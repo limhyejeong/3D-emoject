@@ -180,4 +180,16 @@ const fragmentShader = `
   }  
 `;
 
-export { noise, rotation, vertexShader, fragmentShader };
+function twist(seletedMesh, clock, settings) {
+  // Update uniforms
+  seletedMesh.material.uniforms.uTime.value = clock.getElapsedTime();
+  seletedMesh.material.uniforms.uSpeed.value = settings.speed;
+  seletedMesh.material.uniforms.uDistortion.value = settings.distortion;
+  seletedMesh.material.uniforms.uNoiseDensity.value = settings.density;
+  seletedMesh.material.uniforms.uNoiseStrength.value = settings.strength;
+  seletedMesh.material.uniforms.uFrequency.value = settings.frequency;
+  seletedMesh.material.uniforms.uAmplitude.value = settings.amplitude;
+  seletedMesh.material.uniforms.uIntensity.value = settings.intensity;
+}
+
+export { vertexShader, fragmentShader, twist };

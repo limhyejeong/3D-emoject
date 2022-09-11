@@ -25,13 +25,31 @@
         <Sphere
           ref="sphereRef"
           :position="{ z: 0, y: 0, z: 0 }"
+          :width-segments="64"
+          :height-segments="64"
           :scale="{ x: 1, y: 1, z: 1 }"
           :rotation="{
             y: Math.PI / 4,
             z: Math.PI / 4,
           }"
         >
-          <PhongMaterial />
+          <ShaderMaterial
+            :props="{
+              uniforms: {
+                uTime: { value: 0 },
+                uSpeed: { value: settings.speed },
+                uDistortion: { value: 0 },
+                uNoiseDensity: { value: settings.density },
+                uNoiseStrength: { value: settings.strength },
+                uFrequency: { value: settings.frequency },
+                uAmplitude: { value: settings.amplitude },
+                uIntensity: { value: settings.intensity },
+                matcaptexture: { value: settings.matcaptexture },
+              },
+              vertexShader: vertexShader,
+              fragmentShader: fragmentShader,
+            }"
+          />
         </Sphere>
       </Scene>
     </Renderer>
@@ -48,16 +66,20 @@ import {
   Scene,
   Sphere,
   PointLight,
-  PhongMaterial,
+  ShaderMaterial,
 } from "troisjs";
-import { makeNoise4D } from "open-simplex-noise";
+// import { makeNoise4D } from "open-simplex-noise";
+import { vertexShader, fragmentShader, twist } from "@/assets/js/twist";
+import * as THREE from "three";
+import { noise } from "@/assets/js/noise";
+import matcapObsidian from "@/assets/img/stone_obsidian_dull.jpg";
 
 // import emoColRef from "@/firebase";
 // import { addDoc } from "firebase/firestore";
 
 export default {
   name: "OutputView",
-  components: { Renderer, Camera, Scene, Sphere, PointLight, PhongMaterial },
+  components: { Renderer, Camera, Scene, Sphere, PointLight, ShaderMaterial },
   setup() {
     const store = useInputStore();
     const { name, emoji, content, category, activity } = storeToRefs(store);
@@ -65,28 +87,46 @@ export default {
 
     const renderer = ref(null);
     const scene = ref(null);
+
+    let sphereRef = ref(null);
+    let sphereMesh = null;
+    let v3 = new THREE.Vector3();
+    let clock = new THREE.Clock();
+    let 진폭 = 6;
+    let 반경 = 0.2;
+    let 속도 = 0.6;
+
+    const obsidian = new THREE.TextureLoader().load(matcapObsidian);
+
+    const settings = {
+      speed: 0.5,
+      distortion: 1, //왜곡
+      density: 1, //밀도
+      strength: 0.2, //힘
+      frequency: 1.0, //빈도
+      amplitude: 10, //진폭
+      intensity: 1, //대비
+      matcaptexture: obsidian,
+    };
+
     // renderer?.value?.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
 
-    // const sphereRef = ref(null).sphere.mesh;
-    const sphereRef = ref(null);
-
-    console.log(renderer);
-
-    // 오브젝트 배열
-    // let spheres;
-    // const sphereRef = (el) => {
-    //   console.log(el.value);
-    //   // spheres = el;
-    // };
-
-    console.log(sphereRef.value._value);
+    function init() {
+      sphereMesh = sphereRef.value.mesh;
+      sphereMesh.geometry.positionData = [];
+      for (let i = 0; i < sphereMesh.geometry.attributes.position.count; i++) {
+        v3.fromBufferAttribute(sphereMesh.geometry.attributes.position, i);
+        sphereMesh.geometry.positionData.push(v3.clone());
+      }
+    }
 
     onMounted(() => {
-      // renderer?.value?.onBeforeRender(() => {
-      //   spheres.forEach((sphere) => {
-      //     sphere.mesh.rotation.y += 0.01;
-      //   });
-      // });
+      init();
+      renderer?.value?.onBeforeRender(() => {
+        // noise(sphereMesh, clock, 진폭, 반경, 속도, v3);
+        twist(sphereMesh, clock, settings);
+        // sphereRef.value.mesh.rotation.y += 0.01;
+      });
     });
 
     return {
@@ -98,8 +138,10 @@ export default {
       activity,
       createEmotion,
       renderer,
-      scene,
       sphereRef,
+      vertexShader,
+      fragmentShader,
+      settings,
     };
   },
 };
