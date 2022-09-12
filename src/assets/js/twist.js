@@ -159,14 +159,15 @@ const vertexShader = `
 const fragmentShader = `
   varying vec2 vUv;
   varying float vDistort;
+  varying float n_yz;
   
   uniform float uTime;
   uniform float uIntensity;
-  uniform sampler2D myCustomTexture;
-  uniform sampler2D myCustomTexture2;
-  uniform sampler2D myCustomTexture3;
-  uniform sampler2D myCustomTexture4;
-  uniform sampler2D myCustomTexture5;
+  
+  uniform sampler2D map;
+  // uniform sampler2D displacementMap;
+  // uniform sampler2D normalMap;
+  // uniform sampler2D aoMap;
   
   vec3 cosPalette(float t, vec3 a, vec3 b, vec3 c, vec3 d) {
     return a + b * cos(6.28318 * (c * t + d));
@@ -179,14 +180,15 @@ const fragmentShader = `
     vec3 contrast = vec3(0.3, 0.3, 0.3);
     vec3 oscilation = vec3(1.0, 1.0, 1.0);
     vec3 phase = vec3(0.7, 0.7, 0.7);
-  
+
     vec3 color = cosPalette(distort, brightness, contrast, oscilation, phase);
     
-    // gl_FragColor = vec4(color, 1);
+    gl_FragColor = vec4(color, 1);
     // gl_FragColor = texture2D(myCustomTexture, vUv);
     // gl_FragColor = vec4(color, 1) * texture2D(myCustomTexture, vUv);
-    gl_FragColor = vec4(color, 1) * texture2D(myCustomTexture, vUv) * texture2D(myCustomTexture2, vUv) * texture2D(myCustomTexture3, vUv) * texture2D(myCustomTexture4, vUv) * texture2D(myCustomTexture5, vUv);
     // gl_FragColor = vec4(color, 0.1) * texture3D(myCustomTexture, gl_PointCoord);
+
+    // gl_FragColor = (vec4(color, 1) * texture(map, vUv)) * texture(map, vUv);
   }  
 `;
 

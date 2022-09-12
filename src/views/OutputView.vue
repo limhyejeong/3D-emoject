@@ -20,19 +20,14 @@
       <Camera :position="{ x: 5, y: 5, z: 5 }" />
 
       <Scene ref="Scene" background="#000">
-        <!-- <AmbientLight :position="{ z: 100, y: 1000, z: 100 }" /> -->
         <!-- <PointLight :position="{ z: 100, y: 100, z: 100 }" /> -->
-        <AmbientLight :intensity="0.5" />
-        <PointLight :position="{ x: 5 }" color="#00BCFF" />
-        <PointLight :position="{ y: 5 }" color="#AD0EFF" />
-        <PointLight :position="{ z: 5 }" color="#FF0004" />
-        <PointLight
-          color="#ff6000"
-          :intensity="0.75"
-          :position="{ y: -5, z: 0 }"
-        />
+        <AmbientLight :intensity="0.8" />
+        <PointLight :position="{ x: 30 }" color="#00BCFF" />
+        <PointLight :position="{ x: -30, y: 30 }" color="#AD0EFF" />
+        <PointLight :position="{ x: 0, z: 30 }" color="#FF0004" />
 
-        <Sphere
+        <!-- ShaderMaterial -->
+        <!-- <Sphere
           ref="sphereRef"
           :position="{ z: 0, y: 0, z: 0 }"
           :width-segments="128"
@@ -42,6 +37,8 @@
             y: Math.PI / 4,
             z: Math.PI / 4,
           }"
+          :cast-shadow="true"
+          :receive-shadow="true"
         >
           <ShaderMaterial
             :props="{
@@ -59,28 +56,74 @@
               fragmentShader: fragmentShader,
             }"
           >
+            <Texture src="/assets/textures/water/water001.jpg" uniform="map" />
+          </ShaderMaterial>
+        </Sphere> -->
+
+        <Sphere
+          ref="sphereRef"
+          :position="{ z: 0, y: 0, z: 0 }"
+          :width-segments="128"
+          :height-segments="128"
+          :scale="{ x: 1, y: 1, z: 1 }"
+          :rotation="{
+            y: Math.PI / 4,
+            z: Math.PI / 4,
+          }"
+          :cast-shadow="true"
+          :receive-shadow="true"
+        >
+          <PhongMaterial color="#ffffff">
+            <Texture src="/assets/textures/water/Water_COLOR.jpg" name="map" />
             <Texture
-              src="/assets/textures/water/Water_COLOR.jpg"
-              uniform="myCustomTexture"
+              src="/assets/textures/water/Water_NORM.jpg"
+              name="normalMap"
             />
             <Texture
               src="/assets/textures/water/Water_DISP.png"
-              uniform="myCustomTexture2"
-            />
-            <Texture
-              src="/assets/textures/water/Water_NORM.jpg"
-              uniform="myCustomTexture3"
+              name="displacementMap"
             />
             <Texture
               src="/assets/textures/water/Water_OCC.jpg"
-              uniform="myCustomTexture4"
+              name="occlusionMap"
             />
             <Texture
               src="/assets/textures/water/Water_SPEC.jpg"
-              uniform="myCustomTexture5"
+              name="specularMap"
             />
-          </ShaderMaterial>
+          </PhongMaterial>
         </Sphere>
+
+        <!-- <Sphere
+          ref="sphereRef"
+          :position="{ z: 0, y: 0, z: 0 }"
+          :width-segments="128"
+          :height-segments="128"
+          :scale="{ x: 1, y: 1, z: 1 }"
+        >
+          <PhongMaterial color="#ffffff">
+            <Texture
+              src="/assets/textures/water2/Water_002_COLOR.jpg"
+              name="map"
+            />
+            <Texture
+              src="/assets/textures/water2/Water_002_NORM.jpg"
+              name="normalMap"
+            />
+            <Texture
+              src="/assets/textures/water2/Water_002_DISP.png"
+              name="displacementMap"
+            />
+            <Texture
+              src="/assets/textures/water2/Water_002_OCC.jpg"
+              name="occlusionMap"
+            />
+            <Texture
+              src="/assets/textures/water2/Water_002_ROUGH.jpg"
+              name="roughnessMap"
+            />
+          </PhongMaterial>
+        </Sphere> -->
       </Scene>
     </Renderer>
   </div>
@@ -99,6 +142,9 @@ import {
   PointLight,
   ShaderMaterial,
   Texture,
+  Icosahedron,
+  PhongMaterial,
+  StandardMaterial,
 } from "troisjs";
 // import { makeNoise4D } from "open-simplex-noise";
 import { vertexShader, fragmentShader, twist } from "@/assets/js/twist";
@@ -117,6 +163,9 @@ export default {
     AmbientLight,
     PointLight,
     ShaderMaterial,
+    StandardMaterial,
+    Icosahedron,
+    PhongMaterial,
     Texture,
   },
   setup() {
@@ -165,11 +214,11 @@ export default {
     onMounted(() => {
       createObj();
       renderer?.value?.onBeforeRender(() => {
-        // if (sphereMesh != null) {
-        noise(sphereMesh, clock, noiseSettings, v3);
-        twist(sphereMesh, clock, settings);
-        sphereMesh.rotation.y += 0.01;
-        // }
+        if (sphereMesh != null) {
+          noise(sphereMesh, clock, noiseSettings, v3);
+          // twist(sphereMesh, clock, settings);
+          sphereMesh.rotation.y += 0.01;
+        }
       });
     });
 
