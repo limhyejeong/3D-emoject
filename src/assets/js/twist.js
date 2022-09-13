@@ -129,7 +129,6 @@ const vertexShader = `
   varying float vDistort;
   //light
   attribute vec3 aColor;
-  varying vec3 vColor; 
   varying vec3 vNormal;
   
   uniform float uTime;
@@ -145,7 +144,6 @@ const vertexShader = `
 
   
   void main() {
-    vColor = aColor; //light
     vNormal = normal; //light
 
     vUv = uv;
@@ -168,7 +166,6 @@ const fragmentShader = `
   varying vec2 vUv;
   varying float vDistort;
   varying float n_yz;
-
   
   uniform float uTime;
   uniform float uIntensity;
@@ -176,43 +173,43 @@ const fragmentShader = `
   uniform sampler2D map;
   // uniform sampler2D displacementMap;
   // uniform sampler2D normalMap;
-  // uniform sampler2D aoMap;
 
   // light
-  uniform vec3 color;
-  uniform vec3 lightDirection;
-  varying vec3 vColor;
+  uniform vec3 uLightColor;
+  uniform vec3 uLightDirection;
   vec3 lightColor = vec3(1,1,1);
   varying vec3 vNormal;
 
-  
+  uniform vec3 uColor;
+
+
   vec3 cosPalette(float t, vec3 a, vec3 b, vec3 c, vec3 d) {
     return a + b * cos(6.28318 * (c * t + d));
   }     
-
 
   
   void main() {
     float distort = vDistort * uIntensity;
     
-    vec3 brightness = vec3(1, 1, 1);
-    vec3 contrast = vec3(0.3, 0.3, 0.3);
-    vec3 oscilation = vec3(1.0, 1.0, 1.0);
-    vec3 phase = vec3(0.7, 0.7, 0.7);
+    vec3 brightness = vec3(2, 2, 2); // 밝기
+    vec3 contrast = vec3(4, 4, 4); // 대비
+    vec3 oscilation = vec3(0.5, 0.5, 2.0); // 진동
+    vec3 phase = vec3(0.1, 0.1, 0.1); // 단계
 
     vec3 color = cosPalette(distort, brightness, contrast, oscilation, phase);
 
     // light
     vec3 norm = normalize(vNormal);
-    float nDotL = clamp(dot(lightDirection, norm), 0.0, 1.0);
-    vec3 diffuseColor = lightColor * nDotL * color;
+    float nDotL = clamp(dot(uLightDirection, norm), 0.25, 0.75);
+    vec3 diffuseColor = uLightColor * nDotL;
     
     // gl_FragColor = vec4(color, 1);
     // gl_FragColor = texture2D(myCustomTexture, vUv);
     // gl_FragColor = vec4(color, 1) * texture2D(myCustomTexture, vUv);
     // gl_FragColor = vec4(color, 0.1) * texture3D(myCustomTexture, gl_PointCoord);
+    // gl_FragColor = vec4(color, 1) * vec4(uColor, 1) * vec4(diffuseColor, vUv) * (texture(map, vUv) * 1.0);
+    gl_FragColor = vec4(color, 1) * vec4(uColor, 1) * vec4(diffuseColor, vUv);
 
-    gl_FragColor = vec4(color, 1) * vec4(diffuseColor, 1) * texture(map, vUv);
   }  
 `;
 

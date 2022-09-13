@@ -19,7 +19,7 @@
     <Renderer ref="renderer" antialias orbit-ctrl resize="window">
       <Camera :position="{ x: 5, y: 5, z: 5 }" />
 
-      <Scene ref="Scene" background="#eee">
+      <Scene ref="Scene" background="#000">
         <!-- <PointLight :position="{ z: 100, y: 100, z: 100 }" /> -->
         <AmbientLight :intensity="0.8" />
         <PointLight :position="{ x: 30 }" color="#00BCFF" />
@@ -52,31 +52,15 @@
                 uIntensity: { value: settings.intensity },
                 uColor: { value: settings.color },
                 uLightColor: { value: settings.lightColor },
-                lightDirection: { value: settings.lightDirection },
+                uLightDirection: { value: settings.lightDirection },
               },
               vertexShader: vertexShader,
               fragmentShader: fragmentShader,
             }"
           >
             <Texture
-              src="/assets/textures/water/Water_COLOR.jpg"
+              src="/assets/textures/snow/Snow_001_COLOR.jpg"
               uniform="map"
-            />
-            <Texture
-              src="/assets/textures/water/Water_DISP.png"
-              uniform="displacementMap"
-            />
-            <Texture
-              src="/assets/textures/water/Water_NORM.jpg"
-              uniform="normalMap"
-            />
-            <!-- <Texture
-              src="/assets/textures/water/Water_OCC.jpg"
-              uniform="aoMap"
-            /> -->
-            <Texture
-              src="/assets/textures/water/Water_SPEC.jpg"
-              uniform="specularMap"
             />
           </ShaderMaterial>
         </Sphere>
@@ -131,21 +115,21 @@ export default {
     let noiseSettings = {
       진폭: 1,
       반경: 0.1,
-      속도: 2,
+      속도: 0.5,
     };
     // let isCreated = ref(false);
 
     const settings = {
-      speed: 1,
-      distortion: 1, //왜곡
-      density: 1, //밀도
-      strength: 0.3, //힘
-      frequency: 10, //빈도
-      amplitude: 1, //진폭
+      speed: 0.1,
+      distortion: 2, //왜곡
+      density: 3, //밀도
+      strength: 0.4, //힘
+      frequency: 1, //빈도 (회전)
+      amplitude: 1, //진폭 (회전)
       intensity: 1, //대비
-      color: new THREE.Color(0x42b983),
+      color: new THREE.Color(0xccdee9),
       lightColor: new THREE.Color(0xffffff),
-      lightDirection: new THREE.Vector3(1.0, 1.0, 1.0),
+      lightDirection: new THREE.Vector3(0.0, 1.0, 0.0),
     };
 
     function createShapes() {
@@ -169,7 +153,7 @@ export default {
       createObj();
       renderer?.value?.onBeforeRender(() => {
         if (sphereMesh != null) {
-          noise(sphereMesh, clock, noiseSettings, v3);
+          // noise(sphereMesh, clock, noiseSettings, v3);
           twist(sphereMesh, clock, settings);
           sphereMesh.rotation.y += 0.01;
         }

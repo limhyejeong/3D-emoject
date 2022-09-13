@@ -11,6 +11,6 @@ export const noise = (seletedMesh, clock, noiseSettings, v3) => {
         seletedMesh.geometry.attributes.position.setXYZ(idx, v3.x, v3.y, v3.z);
     });
 
-    seletedMesh.geometry.computeVertexNormals();
     seletedMesh.geometry.attributes.position.needsUpdate = true;
+    seletedMesh.geometry.computeVertexNormals();
 }

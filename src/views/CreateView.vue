@@ -2,16 +2,20 @@
   <!-- <h3>Create Emotion</h3> -->
   <InputView />
   <!-- <TheCanvas /> -->
-  <OutputView />
+  <!-- <OutputView /> -->
+  <Anger />
+  <!-- <Anticipation /> -->
 </template>
 
 <script>
 import InputView from "./InputView.vue";
 import OutputView from "./OutputView.vue";
 import TheCanvas from "./TheCanvas.vue";
+import Anger from "@/components/homeview/Anger.vue";
+import Anticipation from "@/components/homeview/Anticipation.vue";
 
 export default {
   name: "CreateView",
-  components: { InputView, OutputView, TheCanvas },
+  components: { InputView, OutputView, TheCanvas, Anger, Anticipation },
 };
 </script>
