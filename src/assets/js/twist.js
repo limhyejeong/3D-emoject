@@ -127,6 +127,10 @@ const rotation = `
 const vertexShader = `  
   varying vec2 vUv;
   varying float vDistort;
+  //light
+  attribute vec3 aColor;
+  varying vec3 vColor; 
+  varying vec3 vNormal;
   
   uniform float uTime;
   uniform float uSpeed;
@@ -138,8 +142,12 @@ const vertexShader = `
   ${noise}
   
   ${rotation}
+
   
   void main() {
+    vColor = aColor; //light
+    vNormal = normal; //light
+
     vUv = uv;
     
     float t = uTime * uSpeed;
@@ -160,6 +168,7 @@ const fragmentShader = `
   varying vec2 vUv;
   varying float vDistort;
   varying float n_yz;
+
   
   uniform float uTime;
   uniform float uIntensity;
@@ -168,10 +177,20 @@ const fragmentShader = `
   // uniform sampler2D displacementMap;
   // uniform sampler2D normalMap;
   // uniform sampler2D aoMap;
+
+  // light
+  uniform vec3 color;
+  uniform vec3 lightDirection;
+  varying vec3 vColor;
+  vec3 lightColor = vec3(1,1,1);
+  varying vec3 vNormal;
+
   
   vec3 cosPalette(float t, vec3 a, vec3 b, vec3 c, vec3 d) {
     return a + b * cos(6.28318 * (c * t + d));
   }     
+
+
   
   void main() {
     float distort = vDistort * uIntensity;
@@ -182,13 +201,18 @@ const fragmentShader = `
     vec3 phase = vec3(0.7, 0.7, 0.7);
 
     vec3 color = cosPalette(distort, brightness, contrast, oscilation, phase);
+
+    // light
+    vec3 norm = normalize(vNormal);
+    float nDotL = clamp(dot(lightDirection, norm), 0.0, 1.0);
+    vec3 diffuseColor = lightColor * nDotL * color;
     
-    gl_FragColor = vec4(color, 1);
+    // gl_FragColor = vec4(color, 1);
     // gl_FragColor = texture2D(myCustomTexture, vUv);
     // gl_FragColor = vec4(color, 1) * texture2D(myCustomTexture, vUv);
     // gl_FragColor = vec4(color, 0.1) * texture3D(myCustomTexture, gl_PointCoord);
 
-    // gl_FragColor = (vec4(color, 1) * texture(map, vUv)) * texture(map, vUv);
+    gl_FragColor = vec4(color, 1) * vec4(diffuseColor, 1) * texture(map, vUv);
   }  
 `;
 
