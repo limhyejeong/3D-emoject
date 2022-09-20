@@ -3,9 +3,10 @@
   <InputView />
   <!-- <TheCanvas /> -->
   <!-- <OutputView /> -->
-  <Anger />
+  <!-- <Anger /> -->
   <!-- <Anticipation /> -->
   <!-- <Sadness /> -->
+  <Disgust />
 </template>
 
 <script>
@@ -15,6 +16,7 @@ import TheCanvas from "./TheCanvas.vue";
 import Anger from "@/components/homeview/Anger.vue";
 import Anticipation from "@/components/homeview/Anticipation.vue";
 import Sadness from "@/components/homeview/Sadness.vue";
+import Disgust from "@/components/homeview/Disgust.vue";
 
 export default {
   name: "CreateView",
@@ -25,6 +27,7 @@ export default {
     Anger,
     Anticipation,
     Sadness,
+    Disgust,
   },
 };
 </script>
