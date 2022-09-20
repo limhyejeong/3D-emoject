@@ -6,7 +6,8 @@
   <!-- <Anger /> -->
   <!-- <Anticipation /> -->
   <!-- <Sadness /> -->
-  <Disgust />
+  <!-- <Disgust /> -->
+  <Joy />
 </template>
 
 <script>
@@ -17,6 +18,7 @@ import Anger from "@/components/homeview/Anger.vue";
 import Anticipation from "@/components/homeview/Anticipation.vue";
 import Sadness from "@/components/homeview/Sadness.vue";
 import Disgust from "@/components/homeview/Disgust.vue";
+import Joy from "@/components/homeview/Joy.vue";
 
 export default {
   name: "CreateView",
@@ -28,6 +30,7 @@ export default {
     Anticipation,
     Sadness,
     Disgust,
+    Joy,
   },
 };
 </script>

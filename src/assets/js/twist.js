@@ -191,10 +191,10 @@ const fragmentShader = `
   void main() {
     float distort = vDistort * uIntensity;
     
-    vec3 brightness = vec3(2,2,2); // 밝기
-    vec3 contrast = vec3(0.3, 0.4, 0.3); // 대비
-    vec3 oscilation = vec3(4,4,4); // 진동
-    vec3 phase = vec3(4, 4, 4); // 단계
+    vec3 brightness = vec3(1,1,1); // 밝기
+    vec3 contrast = vec3(2,2,2); // 대비
+    vec3 oscilation = vec3(0.1, 0.1, 0.1); // 진동
+    vec3 phase = vec3(1,1,1); // 단계
 
     vec3 color = cosPalette(distort, brightness, contrast, oscilation, phase);
 
