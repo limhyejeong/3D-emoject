@@ -144,7 +144,7 @@ const vertexShader = `
 
   
   void main() {
-    vNormal = normal; //light
+    vNormal = normal;
 
     vUv = uv;
     
@@ -191,9 +191,9 @@ const fragmentShader = `
   void main() {
     float distort = vDistort * uIntensity;
     
-    vec3 brightness = vec3(1, 1, 1); // 밝기
-    vec3 contrast = vec3(1, 1, 1); // 대비
-    vec3 oscilation = vec3(0.1, 0.2, 0.1); // 진동
+    vec3 brightness = vec3(2, 2, 2); // 밝기
+    vec3 contrast = vec3(4, 4, 4); // 대비
+    vec3 oscilation = vec3(0.5, 0.5, 2.0); // 진동
     vec3 phase = vec3(0.1, 0.1, 0.1); // 단계
 
     vec3 color = cosPalette(distort, brightness, contrast, oscilation, phase);
@@ -204,11 +204,13 @@ const fragmentShader = `
     vec3 diffuseColor = uLightColor * nDotL;
     
     // gl_FragColor = vec4(color, 1);
-    // gl_FragColor = texture2D(myCustomTexture, vUv);
-    // gl_FragColor = vec4(color, 1) * texture2D(myCustomTexture, vUv);
     // gl_FragColor = vec4(color, 0.1) * texture3D(myCustomTexture, gl_PointCoord);
-    gl_FragColor = vec4(color, 1) * vec4(uColor, 1) * vec4(diffuseColor, vUv) * (texture(map, vUv) * 1.0);
-    // gl_FragColor = vec4(color, 1) * vec4(uColor, 1) * vec4(diffuseColor, vUv);
+    // 텍스쳐만
+    // gl_FragColor = vec4(color, 1) * vec4(uColor, 1) * (texture(map, vUv) * 1.0);
+    // 빛만
+    gl_FragColor = vec4(color, 1) * vec4(uColor, 1) * vec4(diffuseColor, 1);
+    // 텍스쳐 + 빛
+    // gl_FragColor = vec4(color, 1) * vec4(uColor, 1) * texture(map, vUv) * vec4(diffuseColor, 1);
 
   }  
 `;

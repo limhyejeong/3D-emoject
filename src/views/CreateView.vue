@@ -3,9 +3,9 @@
   <InputView />
   <!-- <TheCanvas /> -->
   <!-- <OutputView /> -->
-  <!-- <Anger /> -->
+  <Anger />
   <!-- <Anticipation /> -->
-  <Sadness />
+  <!-- <Sadness /> -->
 </template>
 
 <script>

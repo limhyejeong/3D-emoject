@@ -21,10 +21,10 @@
 
       <Scene ref="Scene" background="#000">
         <!-- <PointLight :position="{ z: 100, y: 100, z: 100 }" /> -->
-        <AmbientLight :intensity="0.8" />
-        <PointLight :position="{ x: 30 }" color="#00BCFF" />
-        <PointLight :position="{ x: -30, y: 30 }" color="#AD0EFF" />
-        <PointLight :position="{ x: 0, z: 30 }" color="#FF0004" />
+        <!-- <AmbientLight :intensity="0.8" /> -->
+        <!-- <PointLight :position="{ x: 30 }" color="#00BCFF" /> -->
+        <!-- <PointLight :position="{ x: -30, y: 30 }" color="#AD0EFF" /> -->
+        <!-- <PointLight :position="{ x: 0, z: 30 }" color="#FF0004" /> -->
 
         <Sphere
           ref="sphereRef"
@@ -52,32 +52,13 @@
                 uIntensity: { value: settings.intensity },
                 uColor: { value: settings.color },
                 uLightColor: { value: settings.lightColor },
-                lightDirection: { value: settings.lightDirection },
+                uLightDirection: { value: settings.lightDirection },
               },
               vertexShader: vertexShader,
               fragmentShader: fragmentShader,
             }"
           >
-            <Texture
-              src="/assets/textures/water/Water_COLOR.jpg"
-              uniform="map"
-            />
-            <Texture
-              src="/assets/textures/water/Water_DISP.png"
-              uniform="displacementMap"
-            />
-            <Texture
-              src="/assets/textures/water/Water_NORM.jpg"
-              uniform="normalMap"
-            />
-            <!-- <Texture
-              src="/assets/textures/water/Water_OCC.jpg"
-              uniform="aoMap"
-            /> -->
-            <Texture
-              src="/assets/textures/water/Water_SPEC.jpg"
-              uniform="specularMap"
-            />
+            <Texture src="/assets/textures/water/water001.jpg" uniform="map" />
           </ShaderMaterial>
         </Sphere>
       </Scene>
@@ -138,14 +119,14 @@ export default {
     const settings = {
       speed: 0.5,
       distortion: 1, //왜곡
-      density: 1.5, //밀도
-      strength: 0.1, //힘
+      density: 5, //밀도
+      strength: 0.05, //힘
       frequency: 1, //빈도 (회전)
       amplitude: 1, //진폭 (회전)
       intensity: 1, //대비
       color: new THREE.Color(0x2196f3),
-      lightColor: new THREE.Color(0x2196f3),
-      lightDirection: new THREE.Vector3(1, 1, 1),
+      lightColor: new THREE.Color(0xffffff),
+      lightDirection: new THREE.Vector3(0.0, 1.0, 0.0),
     };
 
     function createShapes() {

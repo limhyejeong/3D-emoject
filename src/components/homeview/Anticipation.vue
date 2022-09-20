@@ -21,10 +21,10 @@
 
       <Scene ref="Scene" background="#000">
         <!-- <PointLight :position="{ z: 100, y: 100, z: 100 }" /> -->
-        <AmbientLight :intensity="0.8" />
+        <!-- <AmbientLight :intensity="0.8" />
         <PointLight :position="{ x: 30 }" color="#00BCFF" />
         <PointLight :position="{ x: -30, y: 30 }" color="#AD0EFF" />
-        <PointLight :position="{ x: 0, z: 30 }" color="#FF0004" />
+        <PointLight :position="{ x: 0, z: 30 }" color="#FF0004" /> -->
 
         <Sphere
           ref="sphereRef"
