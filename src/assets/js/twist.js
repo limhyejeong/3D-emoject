@@ -191,10 +191,10 @@ const fragmentShader = `
   void main() {
     float distort = vDistort * uIntensity;
     
-    vec3 brightness = vec3(1,1,1); // 밝기
-    vec3 contrast = vec3(2,2,2); // 대비
-    vec3 oscilation = vec3(0.1, 0.1, 0.1); // 진동
-    vec3 phase = vec3(1,1,1); // 단계
+    vec3 brightness = vec3(3,3,3); // 밝기
+    vec3 contrast = vec3(0.1, 0.1, 0.1); // 대비
+    vec3 oscilation = vec3(0.2, 0.2, 0.2); // 진동
+    vec3 phase = vec3(0.1, 0.1, 0.1); // 단계
 
     vec3 color = cosPalette(distort, brightness, contrast, oscilation, phase);
 
@@ -208,9 +208,9 @@ const fragmentShader = `
     // 텍스쳐만
     // gl_FragColor = vec4(color, 1) * vec4(uColor, 1) * (texture(map, vUv) * 1.0);
     // 빛만
-    gl_FragColor = vec4(color, 1) * vec4(uColor, 1) * vec4(diffuseColor, 1);
+    // gl_FragColor = vec4(color, 1) * vec4(uColor, 1) * vec4(diffuseColor, 1);
     // 텍스쳐 + 빛
-    // gl_FragColor = vec4(color, 1) * vec4(uColor, 1) * texture(map, vUv) * vec4(diffuseColor, 1);
+    gl_FragColor = vec4(color, 1) * vec4(uColor, 1) * texture(map, vUv*0.1) * vec4(diffuseColor, 1);
 
   }  
 `;

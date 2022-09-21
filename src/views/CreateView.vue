@@ -7,7 +7,10 @@
   <!-- <Anticipation /> -->
   <!-- <Sadness /> -->
   <!-- <Disgust /> -->
-  <Joy />
+  <!-- <Joy /> -->
+  <!-- <Fear /> -->
+  <!-- <Surprise /> -->
+  <Trust />
 </template>
 
 <script>
@@ -19,6 +22,9 @@ import Anticipation from "@/components/homeview/Anticipation.vue";
 import Sadness from "@/components/homeview/Sadness.vue";
 import Disgust from "@/components/homeview/Disgust.vue";
 import Joy from "@/components/homeview/Joy.vue";
+import Fear from "@/components/homeview/Fear.vue";
+import Surprise from "@/components/homeview/Surprise.vue";
+import Trust from "@/components/homeview/Trust.vue";
 
 export default {
   name: "CreateView",
@@ -31,6 +37,9 @@ export default {
     Sadness,
     Disgust,
     Joy,
+    Fear,
+    Surprise,
+    Trust,
   },
 };
 </script>
