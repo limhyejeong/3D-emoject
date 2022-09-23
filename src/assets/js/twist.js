@@ -127,8 +127,7 @@ const rotation = `
 const vertexShader = `  
   varying vec2 vUv;
   varying float vDistort;
-  //light
-  attribute vec3 aColor;
+
   varying vec3 vNormal;
   
   uniform float uTime;
@@ -169,18 +168,19 @@ const fragmentShader = `
   
   uniform float uTime;
   uniform float uIntensity;
+
+  uniform float uBright;
+  uniform float uContrast;
+  uniform float uOscilation;
+  uniform float uPhase;
   
   uniform sampler2D map;
-  // uniform sampler2D displacementMap;
-  // uniform sampler2D normalMap;
 
   // light
+  uniform vec3 uColor;
   uniform vec3 uLightColor;
   uniform vec3 uLightDirection;
-  vec3 lightColor = vec3(1,1,1);
   varying vec3 vNormal;
-
-  uniform vec3 uColor;
 
 
   vec3 cosPalette(float t, vec3 a, vec3 b, vec3 c, vec3 d) {
@@ -190,11 +190,11 @@ const fragmentShader = `
   
   void main() {
     float distort = vDistort * uIntensity;
-    
-    vec3 brightness = vec3(3,3,3); // 밝기
-    vec3 contrast = vec3(0.1, 0.1, 0.1); // 대비
-    vec3 oscilation = vec3(0.2, 0.2, 0.2); // 진동
-    vec3 phase = vec3(0.1, 0.1, 0.1); // 단계
+
+    vec3 brightness = vec3(uBright, uBright, uBright); // 밝기
+    vec3 contrast = vec3(uContrast, uContrast, uContrast); // 대비
+    vec3 oscilation = vec3(uOscilation, uOscilation, uOscilation); // 진동
+    vec3 phase = vec3(uPhase, uPhase, uPhase); // 단계
 
     vec3 color = cosPalette(distort, brightness, contrast, oscilation, phase);
 
@@ -211,7 +211,6 @@ const fragmentShader = `
     // gl_FragColor = vec4(color, 1) * vec4(uColor, 1) * vec4(diffuseColor, 1);
     // 텍스쳐 + 빛
     gl_FragColor = vec4(color, 1) * vec4(uColor, 1) * texture(map, vUv*0.1) * vec4(diffuseColor, 1);
-
   }  
 `;
 
@@ -225,6 +224,14 @@ function twist(seletedMesh, clock, settings) {
   seletedMesh.material.uniforms.uFrequency.value = settings.frequency;
   seletedMesh.material.uniforms.uAmplitude.value = settings.amplitude;
   seletedMesh.material.uniforms.uIntensity.value = settings.intensity;
+  seletedMesh.material.uniforms.uColor.value = settings.color;
+  seletedMesh.material.uniforms.uLightColor.value = settings.lightColor;
+  seletedMesh.material.uniforms.uLightDirection.value = settings.lightDirection;
+  seletedMesh.material.uniforms.uBright.value = settings.bright;
+  seletedMesh.material.uniforms.uContrast.value = settings.contrast;
+  seletedMesh.material.uniforms.uOscilation.value = settings.oscilation;
+  seletedMesh.material.uniforms.uPhase.value = settings.phase;
+
   // seletedMesh.material.uniforms.matcaptexture.value = settings.matcaptexture;
 }
 

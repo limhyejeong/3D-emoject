@@ -104,10 +104,10 @@ export default {
     // let isCreated = ref(false);
 
     const settings = {
-      speed: 0.5,
+      speed: 0.1,
       distortion: 1, //왜곡
-      density: 1, //밀도
-      strength: 2, //힘
+      density: 10, //밀도
+      strength: 1, //힘
       frequency: 0, //빈도 (회전)
       amplitude: 0, //진폭 (회전)
       intensity: 1, //대비

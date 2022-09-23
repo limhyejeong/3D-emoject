@@ -2,29 +2,29 @@
   <!-- <h3>Create Emotion</h3> -->
   <InputView />
   <!-- <TheCanvas /> -->
-  <!-- <OutputView /> -->
+  <OutputView />
   <!-- <Anger /> -->
+  <!-- <Fear /> -->
   <!-- <Anticipation /> -->
   <!-- <Sadness /> -->
   <!-- <Disgust /> -->
   <!-- <Joy /> -->
-  <!-- <Fear /> -->
   <!-- <Surprise /> -->
-  <Trust />
+  <!-- <Trust /> -->
 </template>
 
 <script>
 import InputView from "./InputView.vue";
 import OutputView from "./OutputView.vue";
 import TheCanvas from "./TheCanvas.vue";
-import Anger from "@/components/homeview/Anger.vue";
-import Anticipation from "@/components/homeview/Anticipation.vue";
-import Sadness from "@/components/homeview/Sadness.vue";
-import Disgust from "@/components/homeview/Disgust.vue";
-import Joy from "@/components/homeview/Joy.vue";
-import Fear from "@/components/homeview/Fear.vue";
-import Surprise from "@/components/homeview/Surprise.vue";
-import Trust from "@/components/homeview/Trust.vue";
+import Anger from "@/components/homeview/sample/Anger.vue";
+import Fear from "@/components/homeview/sample/Fear.vue";
+import Anticipation from "@/components/homeview/sample/Anticipation.vue";
+import Sadness from "@/components/homeview/sample/Sadness.vue";
+import Disgust from "@/components/homeview/sample/Disgust.vue";
+import Joy from "@/components/homeview/sample/Joy.vue";
+import Surprise from "@/components/homeview/sample/Surprise.vue";
+import Trust from "@/components/homeview/sample/Trust.vue";
 
 export default {
   name: "CreateView",
@@ -33,11 +33,11 @@ export default {
     OutputView,
     TheCanvas,
     Anger,
+    Fear,
     Anticipation,
     Sadness,
     Disgust,
     Joy,
-    Fear,
     Surprise,
     Trust,
   },
