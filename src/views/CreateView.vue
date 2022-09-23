@@ -2,9 +2,9 @@
   <!-- <h3>Create Emotion</h3> -->
   <InputView />
   <!-- <TheCanvas /> -->
-  <OutputView />
+  <!-- <OutputView /> -->
   <!-- <Anger /> -->
-  <!-- <Fear /> -->
+  <Fear />
   <!-- <Anticipation /> -->
   <!-- <Sadness /> -->
   <!-- <Disgust /> -->

@@ -169,10 +169,10 @@ const fragmentShader = `
   uniform float uTime;
   uniform float uIntensity;
 
-  uniform float uBright;
-  uniform float uContrast;
-  uniform float uOscilation;
-  uniform float uPhase;
+  uniform vec3 uBrightness;
+  uniform vec3 uContrast;
+  uniform vec3 uOscilation;
+  uniform vec3 uPhase;
   
   uniform sampler2D map;
 
@@ -191,10 +191,10 @@ const fragmentShader = `
   void main() {
     float distort = vDistort * uIntensity;
 
-    vec3 brightness = vec3(uBright, uBright, uBright); // 밝기
-    vec3 contrast = vec3(uContrast, uContrast, uContrast); // 대비
-    vec3 oscilation = vec3(uOscilation, uOscilation, uOscilation); // 진동
-    vec3 phase = vec3(uPhase, uPhase, uPhase); // 단계
+    vec3 brightness = uBrightness; // 밝기
+    vec3 contrast = uContrast; // 대비
+    vec3 oscilation = uOscilation; // 진동
+    vec3 phase = uPhase; // 단계
 
     vec3 color = cosPalette(distort, brightness, contrast, oscilation, phase);
 
@@ -226,8 +226,8 @@ function twist(seletedMesh, clock, settings) {
   seletedMesh.material.uniforms.uIntensity.value = settings.intensity;
   seletedMesh.material.uniforms.uColor.value = settings.color;
   seletedMesh.material.uniforms.uLightColor.value = settings.lightColor;
-  seletedMesh.material.uniforms.uLightDirection.value = settings.lightDirection;
-  seletedMesh.material.uniforms.uBright.value = settings.bright;
+  // seletedMesh.material.uniforms.uLightDirection.value = settings.lightDirection;
+  seletedMesh.material.uniforms.uBrightness.value = settings.brightness;
   seletedMesh.material.uniforms.uContrast.value = settings.contrast;
   seletedMesh.material.uniforms.uOscilation.value = settings.oscilation;
   seletedMesh.material.uniforms.uPhase.value = settings.phase;

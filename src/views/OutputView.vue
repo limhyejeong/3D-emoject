@@ -10,7 +10,7 @@
 
     <button @click="meshCreate">Hi</button>
 
-    <button @click="createEmotion(name, emoji, content, category, activity)">
+    <button @click="addEmotion(name, emoji, content, category, activity)">
       감정 등록
     </button>
   </div>
@@ -47,7 +47,7 @@
                 uColor: { value: settings.color },
                 uLightColor: { value: settings.lightColor },
                 uLightDirection: { value: settings.lightDirection },
-                uBright: { value: settings.brightness },
+                uBrightness: { value: settings.brightness },
                 uContrast: { value: settings.contrast },
                 uOscilation: { value: settings.oscilation },
                 uPhase: { value: settings.phase },
@@ -99,7 +99,7 @@ export default {
   setup() {
     const store = useInputStore();
     const { name, emoji, content, category, activity } = storeToRefs(store);
-    const { createEmotion } = store;
+    const { addEmotion } = store;
     const renderer = ref(null);
 
     let sphereRef = ref(null);
@@ -113,6 +113,7 @@ export default {
     };
     // let isCreated = ref(false);
 
+    // 기본 Mesh 세팅
     let settings = {
       speed: 0.5,
       distortion: 0, //왜곡
@@ -124,29 +125,109 @@ export default {
       color: new THREE.Color(0xf5a69b),
       lightColor: new THREE.Color(0xffffff),
       lightDirection: new THREE.Vector3(0.0, 1.0, 0.0),
-      bright: 1.0,
-      contrast: 1.0,
-      oscilation: 0.1,
-      phase: 0.1,
+      brightness: new THREE.Vector3(1.0, 1.0, 1.0),
+      contrast: new THREE.Vector3(1.0, 1.0, 1.0),
+      oscilation: new THREE.Vector3(0.1, 0.1, 0.1),
+      phase: new THREE.Vector3(0.1, 0.1, 0.1),
     };
 
-    function meshTransform() {
-      if (category.value == "sadness") {
+    // 감정에 따른 Mesh 변화
+    function transform() {
+      if (category.value == "anger") {
+        settings = {
+          speed: 0.3,
+          distortion: 1, //왜곡
+          density: 5, //밀도
+          strength: 0.5, //힘
+          frequency: 5, //빈도 (회전)
+          amplitude: 1, //진폭 (회전)
+          intensity: 1, //대비
+          color: new THREE.Color(0xf93e3a),
+          lightColor: new THREE.Color(0xf9c53a),
+          brightness: new THREE.Vector3(2, 2, 2),
+          contrast: new THREE.Vector3(4, 4, 4),
+          oscilation: new THREE.Vector3(0.5, 0.5, 2.0),
+          phase: new THREE.Vector3(0.1, 0.1, 0.1),
+        };
+      } else if (category.value == "fear") {
+        settings = {
+          speed: 0.3,
+          distortion: 1, //왜곡
+          density: 10, //밀도
+          strength: 1, //힘
+          frequency: 1, //빈도 (회전)
+          amplitude: 3, //진폭 (회전)
+          intensity: 1, //대비
+          color: new THREE.Color(0xffc107),
+          lightColor: new THREE.Color(0xffffff),
+          brightness: new THREE.Vector3(1.0, 1.0, 2.0),
+          contrast: new THREE.Vector3(2.0, 1.0, 3.0),
+          oscilation: new THREE.Vector3(0.1, 0.1, 0.2),
+          phase: new THREE.Vector3(0.1, 0.1, 0.1),
+        };
+      } else if (category.value == "disgust") {
         settings = {
           speed: 0.5,
           distortion: 1, //왜곡
-          density: 5, //밀도
-          strength: 0.05, //힘
+          density: 3, //밀도
+          strength: 0.2, //힘
+          frequency: 1, //빈도 (회전)
+          amplitude: 1, //진폭 (회전)
+          intensity: 2, //대비
+          color: new THREE.Color(0x009688),
+          lightColor: new THREE.Color(0xa7fa1d),
+          brightness: new THREE.Vector3(2, 2, 2),
+          contrast: new THREE.Vector3(0.3, 0.4, 0.3),
+          oscilation: new THREE.Vector3(4, 4, 4),
+          phase: new THREE.Vector3(4, 4, 4),
+        };
+      } else if (category.value == "surprise") {
+        settings = {
+          speed: 0.1,
+          distortion: 1, //왜곡
+          density: 10, //밀도
+          strength: 0.3, //힘
           frequency: 1, //빈도 (회전)
           amplitude: 1, //진폭 (회전)
           intensity: 1, //대비
-          color: new THREE.Color(0x2196f3),
+          color: new THREE.Color(0x90ceff),
           lightColor: new THREE.Color(0xffffff),
-          lightDirection: new THREE.Vector3(0.0, 1.0, 0.0),
-          brightness: 3.0,
-          contrast: 1.0,
-          oscilation: 0.1,
-          phase: 0.1,
+          brightness: new THREE.Vector3(1, 1, 1),
+          contrast: new THREE.Vector3(1.5, 1.5, 2),
+          oscilation: new THREE.Vector3(0.1, 0.1, 0.1),
+          phase: new THREE.Vector3(1, 1, 1),
+        };
+      } else if (category.value == "anticipation") {
+        settings = {
+          speed: 0.1,
+          distortion: 2, //왜곡
+          density: 3, //밀도
+          strength: 0.4, //힘
+          frequency: 1, //빈도 (회전)
+          amplitude: 1, //진폭 (회전)
+          intensity: 1, //대비
+          color: new THREE.Color(0xccdee9),
+          lightColor: new THREE.Color(0xffffff),
+          brightness: new THREE.Vector3(1, 1, 1),
+          contrast: new THREE.Vector3(1, 1, 1),
+          oscilation: new THREE.Vector3(0.1, 0.2, 0.1),
+          phase: new THREE.Vector3(0.1, 0.1, 0.1),
+        };
+      } else if (category.value == "trust") {
+        settings = {
+          speed: 0.2,
+          distortion: 1, //왜곡
+          density: 2, //밀도
+          strength: 1.5, //힘
+          frequency: 1, //빈도 (회전)
+          amplitude: 1, //진폭 (회전)
+          intensity: 3, //대비
+          color: new THREE.Color(0x4caf50),
+          lightColor: new THREE.Color(0xcddc39),
+          brightness: new THREE.Vector3(3, 3, 3),
+          contrast: new THREE.Vector3(0.1, 0.1, 0.1),
+          oscilation: new THREE.Vector3(0.2, 0.2, 0.2),
+          phase: new THREE.Vector3(0.1, 0.1, 0.1),
         };
       } else if (category.value == "joy") {
         settings = {
@@ -159,17 +240,16 @@ export default {
           intensity: 3, //대비
           color: new THREE.Color(0xf5a69b),
           lightColor: new THREE.Color(0xcc719c),
-          lightDirection: new THREE.Vector3(0.0, 1.0, 0.0),
-          brightness: 1.0,
-          contrast: 2.0,
-          oscilation: 0.1,
-          phase: 1.0,
+          brightness: new THREE.Vector3(1, 1, 1),
+          contrast: new THREE.Vector3(2, 2, 2),
+          oscilation: new THREE.Vector3(0.1, 0.1, 0.1),
+          phase: new THREE.Vector3(1, 1, 1),
         };
       }
     }
 
     function meshCreate() {
-      meshTransform();
+      transform();
       // isCreated.value = true;
       sphereMesh = sphereRef.value.mesh;
       sphereMesh.geometry.positionData = [];
@@ -197,7 +277,7 @@ export default {
       content,
       category,
       activity,
-      createEmotion,
+      addEmotion,
       renderer,
       sphereRef,
       vertexShader,

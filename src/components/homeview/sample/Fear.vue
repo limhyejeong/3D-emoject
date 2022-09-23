@@ -4,12 +4,6 @@
       <Camera :position="{ x: 5, y: 5, z: 5 }" />
 
       <Scene ref="Scene" background="#000">
-        <!-- <PointLight :position="{ z: 100, y: 100, z: 100 }" /> -->
-        <!-- <AmbientLight :intensity="0.8" />
-        <PointLight :position="{ x: 30 }" color="#00BCFF" />
-        <PointLight :position="{ x: -30, y: 30 }" color="#AD0EFF" />
-        <PointLight :position="{ x: 0, z: 30 }" color="#FF0004" /> -->
-
         <Sphere
           ref="sphereRef"
           :position="{ z: 0, y: 0, z: 0 }"
@@ -37,6 +31,10 @@
                 uColor: { value: settings.color },
                 uLightColor: { value: settings.lightColor },
                 uLightDirection: { value: settings.lightDirection },
+                uBrightness: { value: settings.brightness },
+                uContrast: { value: settings.contrast },
+                uOscilation: { value: settings.oscilation },
+                uPhase: { value: settings.phase },
               },
               vertexShader: vertexShader,
               fragmentShader: fragmentShader,
@@ -81,8 +79,6 @@ export default {
     Camera,
     Scene,
     Sphere,
-    AmbientLight,
-    PointLight,
     ShaderMaterial,
     Texture,
   },
@@ -104,16 +100,20 @@ export default {
     // let isCreated = ref(false);
 
     const settings = {
-      speed: 0.1,
+      speed: 0.3,
       distortion: 1, //왜곡
       density: 10, //밀도
       strength: 1, //힘
-      frequency: 0, //빈도 (회전)
-      amplitude: 0, //진폭 (회전)
+      frequency: 1, //빈도 (회전)
+      amplitude: 3, //진폭 (회전)
       intensity: 1, //대비
       color: new THREE.Color(0xffc107),
       lightColor: new THREE.Color(0xffffff),
       lightDirection: new THREE.Vector3(0.0, 1.0, 0.0),
+      brightness: new THREE.Vector3(1.0, 1.0, 2.0),
+      contrast: new THREE.Vector3(2.0, 1.0, 3.0),
+      oscilation: new THREE.Vector3(0.1, 0.1, 0.2),
+      phase: new THREE.Vector3(0.1, 0.1, 0.1),
     };
 
     function createShapes() {
