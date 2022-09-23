@@ -8,8 +8,6 @@
     <div>감정 : {{ category }}</div>
     <div>활성도 : {{ activity }}</div>
 
-    <button @click="meshCreate">Hi</button>
-
     <button @click="addEmotion(name, emoji, content, category, activity)">
       감정 등록
     </button>
@@ -102,6 +100,8 @@ export default {
     const { addEmotion } = store;
     const renderer = ref(null);
 
+    console.log(emoji.value, category.value);
+
     let sphereRef = ref(null);
     let sphereMesh = null;
     let v3 = new THREE.Vector3();
@@ -111,7 +111,6 @@ export default {
       반경: 0.1,
       속도: 2,
     };
-    // let isCreated = ref(false);
 
     // 기본 Mesh 세팅
     let settings = {
@@ -163,6 +162,22 @@ export default {
           brightness: new THREE.Vector3(1.0, 1.0, 2.0),
           contrast: new THREE.Vector3(2.0, 1.0, 3.0),
           oscilation: new THREE.Vector3(0.1, 0.1, 0.2),
+          phase: new THREE.Vector3(0.1, 0.1, 0.1),
+        };
+      } else if (category.value == "sadness") {
+        settings = {
+          speed: 0.5,
+          distortion: 1, //왜곡
+          density: 5, //밀도
+          strength: 0.05, //힘
+          frequency: 1, //빈도 (회전)
+          amplitude: 1, //진폭 (회전)
+          intensity: 25, //대비
+          color: new THREE.Color(0x2196f3),
+          lightColor: new THREE.Color(0xffffff),
+          brightness: new THREE.Vector3(1, 1, 1),
+          contrast: new THREE.Vector3(1, 1, 1),
+          oscilation: new THREE.Vector3(0.1, 0.1, 0.1),
           phase: new THREE.Vector3(0.1, 0.1, 0.1),
         };
       } else if (category.value == "disgust") {
@@ -248,9 +263,8 @@ export default {
       }
     }
 
-    function meshCreate() {
+    function createMesh() {
       transform();
-      // isCreated.value = true;
       sphereMesh = sphereRef.value.mesh;
       sphereMesh.geometry.positionData = [];
       for (let i = 0; i < sphereMesh.geometry.attributes.position.count; i++) {
@@ -260,7 +274,7 @@ export default {
     }
 
     onMounted(() => {
-      // meshCreate();
+      createMesh();
       renderer?.value?.onBeforeRender(() => {
         if (sphereMesh != null) {
           // noise(sphereMesh, clock, noiseSettings, v3);
@@ -283,7 +297,6 @@ export default {
       vertexShader,
       fragmentShader,
       settings,
-      meshCreate,
       noiseSettings,
     };
   },
@@ -294,5 +307,10 @@ export default {
 canvas {
   position: inherit;
   border: 1px solid #999;
+}
+
+.creating {
+  width: 100%;
+  height: 100%;
 }
 </style>

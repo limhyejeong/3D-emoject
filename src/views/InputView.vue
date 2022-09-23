@@ -7,7 +7,7 @@
   <button @click="prevStep" v-if="0 < step && step < 3">이전</button>
   <button @click="nextStep" v-if="step < 2">다음</button>
 
-  <button v-if="step == 2" @click="createObject">생성하기</button>
+  <button v-if="step == 2" @click="getEmotionData">감정 데이터 계산하기</button>
 </template>
 
 <script>
@@ -35,10 +35,11 @@ export default {
     }
 
     // Activity(활성도) & Category(감정 종류) 얻기
-    function createObject() {
+    function getEmotionData() {
       // nextStep();
       let inputEmoji = [...this.emoji]; // 입력된 이모지를 배열화
       let dataObject = {
+        // data 처리용 오브젝트
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -47,7 +48,7 @@ export default {
         anticipation: 0,
         trust: 0,
         joy: 0,
-      }; // data 처리용 오브젝트
+      };
       let sumActivity = 0; // 활성도 합계
 
       // 인풋된 이모지를 등록된 이모지에서 찾아서 데이터 불러오기
@@ -57,7 +58,6 @@ export default {
             console.log(
               element + "는 " + emojiDoc[i].num + "번째 이모지입니다."
             );
-
             dataObject.anger += emojiDoc[i].anger;
             dataObject.fear += emojiDoc[i].fear;
             dataObject.sadness += emojiDoc[i].sadness;
@@ -66,7 +66,6 @@ export default {
             dataObject.anticipation += emojiDoc[i].anticipation;
             dataObject.trust += emojiDoc[i].trust;
             dataObject.joy += emojiDoc[i].joy;
-
             sumActivity += emojiDoc[i].activity;
           }
         }
@@ -80,10 +79,8 @@ export default {
           );
         });
       };
-      this.category = getMax(dataObject)[0]; // 배열의 가장 앞에 있는 감정을 선택
-
-      // Actibity 구하기 (활성도 합계 / 이모지 수)
-      this.activity = Math.floor(sumActivity / inputEmoji.length);
+      category.value = getMax(dataObject)[0]; // 최대값 구하기
+      activity.value = Math.floor(sumActivity / inputEmoji.length); // Actibity 구하기 (활성도 합계 / 이모지 수)
     }
 
     return {
@@ -97,7 +94,7 @@ export default {
       step,
       prevStep,
       nextStep,
-      createObject,
+      getEmotionData,
     };
   },
 };

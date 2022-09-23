@@ -2,9 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import EditEmotion from '../views/EditEmotion.vue';
 import CreateView from '../views/CreateView.vue';
-// import OutputView from '../views/OutputView.vue';
 import ListView from '../views/ListView.vue';
-import PiniaTest from '../views/PiniaTest.vue';
 
 const routes = [
   {
@@ -34,16 +32,6 @@ const routes = [
     path: '/list',
     name: 'listview',
     component: ListView
-  },
-  // {
-  //   path: '/output',
-  //   name: 'outputview',
-  //   component: OutputView
-  // },
-  {
-    path: '/test',
-    name: 'piniatest',
-    component: PiniaTest
   },
 ]
 

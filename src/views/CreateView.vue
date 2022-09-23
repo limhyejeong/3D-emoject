@@ -1,10 +1,11 @@
 <template>
   <!-- <h3>Create Emotion</h3> -->
-  <InputView />
+  <InputView v-if="category == 'none'" />
   <!-- <TheCanvas /> -->
-  <!-- <OutputView /> -->
+  <OutputView v-if="category !== 'none'" />
+
   <!-- <Anger /> -->
-  <Fear />
+  <!-- <Fear /> -->
   <!-- <Anticipation /> -->
   <!-- <Sadness /> -->
   <!-- <Disgust /> -->
@@ -25,6 +26,8 @@ import Disgust from "@/components/homeview/sample/Disgust.vue";
 import Joy from "@/components/homeview/sample/Joy.vue";
 import Surprise from "@/components/homeview/sample/Surprise.vue";
 import Trust from "@/components/homeview/sample/Trust.vue";
+import { useInputStore } from "@/stores/input";
+import { storeToRefs } from "pinia";
 
 export default {
   name: "CreateView",
@@ -40,6 +43,21 @@ export default {
     Joy,
     Surprise,
     Trust,
+  },
+  setup() {
+    const store = useInputStore();
+    const { name, emoji, content, category, activity, create } =
+      storeToRefs(store);
+
+    return {
+      store,
+      name,
+      emoji,
+      content,
+      category,
+      activity,
+      create,
+    };
   },
 };
 </script>
