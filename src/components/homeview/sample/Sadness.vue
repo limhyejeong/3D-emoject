@@ -176,10 +176,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-canvas {
-  position: inherit;
-  border: 1px solid #999;
-}
-</style>

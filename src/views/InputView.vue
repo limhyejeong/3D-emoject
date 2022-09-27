@@ -1,13 +1,44 @@
 <template>
-  <h5>Input view</h5>
-  <input type="text" v-if="step == 0" v-model="emoji" placeholder="이모지" />
-  <input type="text" v-if="step == 1" v-model="name" placeholder="이름" />
-  <textarea v-if="step == 2" v-model="content" placeholder="설명" /><br />
+  <section class="inputSection">
+    <section v-if="step == 0" class="emojiInputSection">
+      <h3 class="title">My Emotion is</h3>
+      <input type="text" v-model="emoji" class="emojiInput" />
 
-  <button @click="prevStep" v-if="0 < step && step < 3">이전</button>
-  <button @click="nextStep" v-if="step < 2">다음</button>
+      <div class="emojiList">
+        <span @click="emojiKeyboard">😃</span>
+        <span @click="emojiKeyboard">😄</span>
+        <span @click="emojiKeyboard">😁</span>
+        <span @click="emojiKeyboard">😆</span>
+        <span @click="emojiKeyboard">😅</span>
+        <span @click="emojiKeyboard">🤣</span>
+        <span @click="emojiKeyboard">😂</span>
+        <span @click="emojiKeyboard">🙂</span>
+        <span @click="emojiKeyboard">🙃</span>
+        <span @click="emojiKeyboard">🤢</span>
+        <span @click="emojiKeyboard">🤧</span>
+      </div>
+    </section>
 
-  <button v-if="step == 2" @click="getEmotionData">감정 데이터 계산하기</button>
+    <section v-if="step == 1" class="nameInputSection">
+      <h3 class="title">My Name is</h3>
+      <input type="text" v-model="name" class="nameInput" placeholder="name" />
+    </section>
+
+    <section v-if="step == 2" class="contentInputSection">
+      <h3 class="title">Comment about your Emotion</h3>
+      <textarea
+        v-model="content"
+        class="contentsInput"
+        placeholder="contents"
+      /><br />
+    </section>
+  </section>
+
+  <aside class="stepBtns">
+    <button @click="prevStep" v-if="step !== 0" class="prevStep">Prev</button>
+    <button @click="nextStep" v-if="step !== 2" class="nextStep">next</button>
+    <button v-if="step == 2" @click="getEmotionData">Create</button>
+  </aside>
 </template>
 
 <script>
@@ -24,9 +55,8 @@ export default {
     const { name, emoji, content, category, activity, create } =
       storeToRefs(store);
 
-    // 폼 전환
+    // 폼 전환 변수(step) 및 함수
     let step = ref(0);
-
     function prevStep() {
       step.value--;
     }
@@ -34,7 +64,15 @@ export default {
       step.value++;
     }
 
-    // Activity(활성도) & Category(감정 종류) 얻기
+    // 이모지 클릭시 인풋란에 추가되는 함수
+    function emojiKeyboard(event) {
+      const emojiInput = document.querySelector(".emojiInput");
+      let selectedEmoji = event.target.textContent;
+      emojiInput.value += selectedEmoji;
+      emoji.value += selectedEmoji;
+    }
+
+    // Activity(활성도) & Category(감정 종류) 얻는 함수
     function getEmotionData() {
       // nextStep();
       let inputEmoji = [...this.emoji]; // 입력된 이모지를 배열화
@@ -95,7 +133,90 @@ export default {
       prevStep,
       nextStep,
       getEmotionData,
+      emojiKeyboard,
     };
   },
 };
 </script>
+
+<style lang="scss">
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+}
+.inputSection {
+  // display: flex;
+  // width: 300vw;
+  height: 100%;
+
+  section {
+    width: 100vw;
+    // height: 100%;
+
+    input {
+      width: 300px;
+      height: 50px;
+      border: none;
+      border-radius: 50px;
+      padding: 20px;
+      // background: #383d46;
+      // color: #fff;
+      // box-shadow: inset -8px -8px 10px #171922;
+    }
+
+    .emojiInput {
+      font-size: 2rem;
+      width: 100%;
+    }
+
+    .emojiList {
+      width: 100%;
+      height: 50vh;
+      background: #666;
+      font-size: 3rem;
+
+      span {
+        cursor: pointer;
+      }
+    }
+
+    .nameInput {
+      font-size: 1.5rem;
+    }
+    .contentsInput {
+      width: 500px;
+      height: 300px;
+      border: none;
+      border-radius: 20px;
+      padding: 20px;
+    }
+  }
+}
+.stepBtns {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  // border-top: 1px solid #eee;
+
+  button {
+    background: #363c46;
+    // background: #8476f0;
+    color: #fff;
+    width: 80px;
+    height: 80px;
+    padding: 20px;
+    border: none;
+    border-radius: 50%;
+    font-weight: 600;
+    box-shadow: inset -8px -8px 10px #1c1a24;
+    // box-shadow: inset -8px -8px 10px #1c2ab5;
+    cursor: pointer;
+    transition: 0.25s;
+  }
+
+  :hover {
+    background: #1c1a24;
+    box-shadow: inset 8px 8px 10px #363c46;
+  }
+}
+</style>

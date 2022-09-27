@@ -228,6 +228,5 @@ export default {
 canvas {
   display: inherit;
   position: inherit;
-  border: 1px solid #999;
 }
 </style>

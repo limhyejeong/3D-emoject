@@ -1,11 +1,15 @@
 <template>
-  <!-- <TroisjsCom v-bind:countValue="this.count" v-if="this.count > 1" /> -->
   <EmotionSpace />
-  <!-- <EmotionSpace v-bind:emotionArray="this.emotions" /> -->
+
+  <aside class="moveCreateBtn">
+    <router-link to="/create">+ Create Emotion</router-link>
+  </aside>
 </template>
 
 <script>
 import EmotionSpace from "../components/homeview/EmotionSpace.vue";
+import { useInputStore } from "@/stores/input";
+
 // import { useHomeStore } from "@/stores/home";
 // import { storeToRefs } from "pinia";
 // import emoColRef from "../firebase";
@@ -16,24 +20,39 @@ export default {
   components: {
     EmotionSpace,
   },
-  methods: {
-    // async deleteEmotion(emotionId) {
-    //   let emoRef = doc(emoColRef, emotionId);
-    //   await deleteDoc(emoRef);
-    //   alert("emotion deleted successully");
-    //   this.$router.go();
-    // },
+  setup() {
+    const store = useInputStore();
+    const { clearInput } = store;
+
+    clearInput();
+
+    return {
+      clearInput,
+    };
   },
 };
 </script>
 
 <style lang="scss">
-canvas {
+.moveCreateBtn {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  z-index: -1;
-  // height: 100vh;
+  display: flex;
+  justify-content: center;
+  bottom: 0;
+
+  a {
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    padding: 15px 30px;
+    margin-bottom: 30px;
+    transition: 0.25s;
+    font-weight: 700;
+  }
+  :hover {
+    background: #aaa;
+  }
 }
 </style>

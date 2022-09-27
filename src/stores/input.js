@@ -4,10 +4,9 @@ import { addDoc } from "firebase/firestore";
 
 export const useInputStore = defineStore('input', {
     state: () => ({
-        num: 0,
-        name: '사용자 이름',
-        emoji: '😂',
-        content: '경험 설명',
+        name: '',
+        emoji: '',
+        content: '',
         category: 'none',
         activity: 0
     }),
@@ -23,7 +22,6 @@ export const useInputStore = defineStore('input', {
         // DB에 추가하기
         addEmotion(name, emoji, content, category, activity) {
             const array = {
-                'num': 0,
                 'name': name,
                 'emoji': emoji,
                 'content': content,
@@ -33,10 +31,13 @@ export const useInputStore = defineStore('input', {
             };
 
             addDoc(emoColRef, array);
+            this.clearInput();
+        },
+        clearInput() {
             this.name = '';
             this.emoji = '';
             this.content = '';
-            this.category = '';
+            this.category = 'none';
             this.activity = 0;
             // this.$router.push("/");
         }

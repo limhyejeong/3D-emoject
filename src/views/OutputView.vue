@@ -8,6 +8,7 @@
     <div>감정 : {{ category }}</div>
     <div>활성도 : {{ activity }}</div>
 
+    <button @click="clearInput">다시하기</button>
     <button @click="addEmotion(name, emoji, content, category, activity)">
       감정 등록
     </button>
@@ -97,7 +98,7 @@ export default {
   setup() {
     const store = useInputStore();
     const { name, emoji, content, category, activity } = storeToRefs(store);
-    const { addEmotion } = store;
+    const { addEmotion, clearInput } = store;
     const renderer = ref(null);
 
     console.log(emoji.value, category.value);
@@ -292,6 +293,7 @@ export default {
       category,
       activity,
       addEmotion,
+      clearInput,
       renderer,
       sphereRef,
       vertexShader,
@@ -304,11 +306,6 @@ export default {
 </script>
 
 <style lang="scss">
-canvas {
-  position: inherit;
-  border: 1px solid #999;
-}
-
 .creating {
   width: 100%;
   height: 100%;
