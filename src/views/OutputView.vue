@@ -1,69 +1,72 @@
 <template>
-  <div class="info">
-    <h3>Output</h3>
-    <div>선택한 이모지 : {{ emoji }}</div>
-    <div>이름 : {{ name }}</div>
-    <div>설명 : {{ content }}</div>
-    <br />
-    <div>감정 : {{ category }}</div>
-    <div>활성도 : {{ activity }}</div>
+  <section class="outputView">
+    <div class="render">
+      <Renderer ref="renderer" antialias orbit-ctrl resize="true">
+        <Camera :position="{ x: 0, y: 0, z: 5 }" />
 
-    <button @click="clearInput">다시하기</button>
-    <button @click="addEmotion(name, emoji, content, category, activity)">
-      감정 등록
-    </button>
-  </div>
-
-  <div class="render">
-    <Renderer ref="renderer" antialias orbit-ctrl resize="window">
-      <Camera :position="{ x: 5, y: 5, z: 5 }" />
-
-      <Scene ref="Scene" background="#eee">
-        <Sphere
-          ref="sphereRef"
-          :position="{ z: 0, y: 0, z: 0 }"
-          :width-segments="128"
-          :height-segments="128"
-          :scale="{ x: 1, y: 1, z: 1 }"
-          :rotation="{
-            y: Math.PI / 4,
-            z: Math.PI / 4,
-          }"
-          :cast-shadow="true"
-          :receive-shadow="true"
-        >
-          <ShaderMaterial
-            :props="{
-              uniforms: {
-                uTime: { value: 0 },
-                uSpeed: { value: settings.speed },
-                uDistortion: { value: 0 },
-                uNoiseDensity: { value: settings.density },
-                uNoiseStrength: { value: settings.strength },
-                uFrequency: { value: settings.frequency },
-                uAmplitude: { value: settings.amplitude },
-                uIntensity: { value: settings.intensity },
-                uColor: { value: settings.color },
-                uLightColor: { value: settings.lightColor },
-                uLightDirection: { value: settings.lightDirection },
-                uBrightness: { value: settings.brightness },
-                uContrast: { value: settings.contrast },
-                uOscilation: { value: settings.oscilation },
-                uPhase: { value: settings.phase },
-              },
-              vertexShader: vertexShader,
-              fragmentShader: fragmentShader,
+        <Scene ref="Scene" background="#000">
+          <Sphere
+            ref="sphereRef"
+            :position="{ z: 0, y: 0, z: 0 }"
+            :width-segments="128"
+            :height-segments="128"
+            :scale="{ x: 1, y: 1, z: 1 }"
+            :rotation="{
+              y: Math.PI / 4,
+              z: Math.PI / 4,
             }"
+            :cast-shadow="true"
+            :receive-shadow="true"
           >
-            <Texture
-              src="/assets/textures/water/Water_COLOR.jpg"
-              uniform="map"
-            />
-          </ShaderMaterial>
-        </Sphere>
-      </Scene>
-    </Renderer>
-  </div>
+            <ShaderMaterial
+              :props="{
+                uniforms: {
+                  uTime: { value: 0 },
+                  uSpeed: { value: settings.speed },
+                  uDistortion: { value: 0 },
+                  uNoiseDensity: { value: settings.density },
+                  uNoiseStrength: { value: settings.strength },
+                  uFrequency: { value: settings.frequency },
+                  uAmplitude: { value: settings.amplitude },
+                  uIntensity: { value: settings.intensity },
+                  uColor: { value: settings.color },
+                  uLightColor: { value: settings.lightColor },
+                  uLightDirection: { value: settings.lightDirection },
+                  uBrightness: { value: settings.brightness },
+                  uContrast: { value: settings.contrast },
+                  uOscilation: { value: settings.oscilation },
+                  uPhase: { value: settings.phase },
+                },
+                vertexShader: vertexShader,
+                fragmentShader: fragmentShader,
+              }"
+            >
+              <Texture
+                src="/assets/textures/water/Water_COLOR.jpg"
+                uniform="map"
+              />
+            </ShaderMaterial>
+          </Sphere>
+        </Scene>
+      </Renderer>
+    </div>
+
+    <div class="outputInfo">
+      <h3>입력 정보</h3>
+      <hr />
+      <div>Emoji 이모지 : {{ emoji }}</div>
+      <div>Name 이름 : {{ name }}</div>
+      <div>Content 설명 : {{ content }}</div>
+      <br />
+      <div>Category 대표 감정 : {{ category }}</div>
+      <div>Activity 활발함 : {{ activity }}</div>
+
+      <button @click="clearInput">다시하기</button>
+      <button @click="addEmotion(name, emoji, content, category, activity)">
+        감정 등록
+      </button>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -306,8 +309,21 @@ export default {
 </script>
 
 <style lang="scss">
-.creating {
+.outputView {
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  display: flex;
+}
+.outputInfo {
+  // background: ;
+  // border: 1px solid #eee;
+  width: 40%;
+
+  button {
+    padding: 0 10px;
+  }
+}
+.render {
+  width: 60%;
 }
 </style>

@@ -1,9 +1,10 @@
 <template>
   <nav>
-    <router-link class="logo" to="/">Indescribable Emotion</router-link>
+    <router-link class="logo" to="/">🪐 Indescribable Emotion</router-link>
     <!-- <router-link to="/about">About</router-link> |
     <router-link to="/create">Create</router-link> |
     <router-link to="/list">List</router-link> -->
+    <!-- <router-link class="list" to="/list">🍕</router-link> -->
   </nav>
   <router-view />
 </template>
@@ -91,9 +92,21 @@ nav {
   text-align: center;
 
   .logo {
-    text-decoration: underline;
-    color: #7b4eff;
-    font-weight: 700;
+    // text-decoration: underline;
+    // color: #7b4eff;
+    font-weight: 500;
+    transition: 0.25s;
+
+    &:hover {
+      text-decoration: underline;
+      opacity: 0.5;
+    }
+  }
+
+  .list {
+    position: absolute;
+    right: 0;
+    color: #aaa;
   }
 
   a {

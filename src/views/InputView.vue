@@ -152,7 +152,7 @@ export default {
     width: 100%;
 
     input {
-      width: 300px;
+      width: 100%;
       height: 50px;
       border: none;
       border-radius: 50px;
@@ -165,8 +165,7 @@ export default {
 
     .emojiInput {
       font-size: 2rem;
-      width: 100%;
-      max-width: 700px;
+      // max-width: 700px;
       text-align: center;
     }
 
@@ -195,7 +194,7 @@ export default {
       font-size: 1.5rem;
     }
     .contentsInput {
-      width: 500px;
+      width: 100%;
       height: 300px;
       border: none;
       border-radius: 20px;

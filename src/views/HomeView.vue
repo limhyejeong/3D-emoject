@@ -2,7 +2,7 @@
   <EmotionSpace />
 
   <aside class="moveCreateBtn">
-    <router-link to="/create">+ Create Emotion</router-link>
+    <router-link to="/create">Add +</router-link>
   </aside>
 </template>
 
@@ -43,23 +43,27 @@ export default {
 
   a {
     // background: #fff;
-    // color: #000;
-    border: none;
+    color: #fff;
     border-radius: 50px;
-    padding: 20px 50px;
+    // padding: 20px 50px;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 30px;
     transition: 0.25s;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 500;
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
     box-shadow: inset 0px 0px 25px #aaa;
-    color: #eee;
 
     &:hover {
+      background: #000;
       box-shadow: none;
-      border: 1px solid #363c46;
-      color: #363c46;
+      border: 1px solid #555;
+      color: #555;
     }
   }
 }

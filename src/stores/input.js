@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import emoColRef from "@/firebase";
 import { addDoc } from "firebase/firestore";
+import router from "@/router/index"
 
 export const useInputStore = defineStore('input', {
     state: () => ({
@@ -31,7 +32,9 @@ export const useInputStore = defineStore('input', {
             };
 
             addDoc(emoColRef, array);
-            this.clearInput();
+            alert("등록 완료");
+
+            router.push("/");
         },
         clearInput() {
             this.name = '';
@@ -39,7 +42,6 @@ export const useInputStore = defineStore('input', {
             this.content = '';
             this.category = 'none';
             this.activity = 0;
-            // this.$router.push("/");
         }
     },
 })
