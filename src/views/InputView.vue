@@ -35,7 +35,7 @@
   </section>
 
   <aside class="stepBtns">
-    <button @click="prevStep" v-if="step !== 0" class="prevStep">Prev</button>
+    <button @click="prevStep" v-if="step !== 0" class="prevStep">prev</button>
     <button @click="nextStep" v-if="step !== 2" class="nextStep">next</button>
     <button v-if="step == 2" @click="getEmotionData">Create</button>
   </aside>
@@ -141,17 +141,15 @@ export default {
 
 <style lang="scss">
 .title {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
 }
 .inputSection {
-  // display: flex;
-  // width: 300vw;
   height: 100%;
+  margin: 30px;
 
   section {
-    width: 100vw;
-    // height: 100%;
+    width: 100%;
 
     input {
       width: 300px;
@@ -162,21 +160,34 @@ export default {
       // background: #383d46;
       // color: #fff;
       // box-shadow: inset -8px -8px 10px #171922;
+      margin: 15px 0;
     }
 
     .emojiInput {
       font-size: 2rem;
       width: 100%;
+      max-width: 700px;
+      text-align: center;
     }
 
     .emojiList {
       width: 100%;
-      height: 50vh;
-      background: #666;
+      // height: 50vh;
+      background: #111;
       font-size: 3rem;
+      border-radius: 20px;
+      border: 1px solid #363c46;
+      // box-shadow: inset -8px -8px 10px #171922;
+      // box-shadow: inset -8px -8px 20px #1c1a24;
 
       span {
         cursor: pointer;
+        transition: 0.2s;
+        margin: 10px;
+
+        &:hover {
+          opacity: 0.3;
+        }
       }
     }
 
@@ -196,11 +207,16 @@ export default {
   position: absolute;
   width: 100%;
   bottom: 0;
+  margin-bottom: 30px;
+  text-align: right;
+  display: flex;
+  justify-content: space-evenly;
+  background: #000;
   // border-top: 1px solid #eee;
 
   button {
-    background: #363c46;
-    // background: #8476f0;
+    background: #000;
+    // background: #7b4eff;
     color: #fff;
     width: 80px;
     height: 80px;
@@ -208,15 +224,16 @@ export default {
     border: none;
     border-radius: 50%;
     font-weight: 600;
-    box-shadow: inset -8px -8px 10px #1c1a24;
-    // box-shadow: inset -8px -8px 10px #1c2ab5;
-    cursor: pointer;
     transition: 0.25s;
-  }
+    box-shadow: inset 4px 4px 10px #aaa;
+    cursor: pointer;
 
-  :hover {
-    background: #1c1a24;
-    box-shadow: inset 8px 8px 10px #363c46;
+    &:hover {
+      // background: #1c1a24;
+      box-shadow: none;
+      border: 1px solid #363c46;
+      color: #363c46;
+    }
   }
 }
 </style>

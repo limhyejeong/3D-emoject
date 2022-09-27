@@ -78,7 +78,6 @@ body {
 }
 #app {
   // font-family: Avenir, Helvetica, Arial, sans-serif;
-  text-align: center;
   background: #000;
   color: #fff;
 }
@@ -89,14 +88,16 @@ a {
 nav {
   padding: 30px;
   font-weight: 500;
+  text-align: center;
 
   .logo {
     text-decoration: underline;
+    color: #7b4eff;
+    font-weight: 700;
   }
 
   a {
     &.router-link-exact-active {
-      color: #42b983;
     }
   }
 }

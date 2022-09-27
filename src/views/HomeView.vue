@@ -42,17 +42,25 @@ export default {
   bottom: 0;
 
   a {
-    background: #fff;
-    color: #000;
+    // background: #fff;
+    // color: #000;
     border: none;
-    border-radius: 50%;
-    padding: 15px 30px;
+    border-radius: 50px;
+    padding: 20px 50px;
     margin-bottom: 30px;
     transition: 0.25s;
-    font-weight: 700;
-  }
-  :hover {
-    background: #aaa;
+    font-size: 1.5rem;
+    font-weight: 500;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    box-shadow: inset 0px 0px 25px #aaa;
+    color: #eee;
+
+    &:hover {
+      box-shadow: none;
+      border: 1px solid #363c46;
+      color: #363c46;
+    }
   }
 }
 </style>
