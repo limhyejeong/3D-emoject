@@ -89,7 +89,7 @@ a {
 nav {
   padding: 30px;
   font-weight: 500;
-  text-align: center;
+  // text-align: center;
 
   .logo {
     // text-decoration: underline;

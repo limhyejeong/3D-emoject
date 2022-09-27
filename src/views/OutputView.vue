@@ -54,6 +54,7 @@
     <div class="outputInfo">
       <h3>입력 정보</h3>
       <hr />
+      <br />
       <div>Emoji 이모지 : {{ emoji }}</div>
       <div>Name 이름 : {{ name }}</div>
       <div>Content 설명 : {{ content }}</div>
@@ -318,6 +319,7 @@ export default {
   // background: ;
   // border: 1px solid #eee;
   width: 40%;
+  padding: 0 50px;
 
   button {
     padding: 0 10px;

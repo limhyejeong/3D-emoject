@@ -4,6 +4,10 @@
   <aside class="moveCreateBtn">
     <router-link to="/create">Add +</router-link>
   </aside>
+
+  <aside class="moveAboutBtn">
+    <router-link to="/about">About</router-link>
+  </aside>
 </template>
 
 <script>
@@ -66,5 +70,13 @@ export default {
       color: #555;
     }
   }
+}
+
+.moveAboutBtn {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: 0 0 50px 30px;
+  text-decoration: underline;
 }
 </style>

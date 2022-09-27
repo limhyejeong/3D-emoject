@@ -5,6 +5,7 @@ import router from "@/router/index"
 
 export const useInputStore = defineStore('input', {
     state: () => ({
+        num: 0,
         name: '',
         emoji: '',
         content: '',
@@ -23,6 +24,7 @@ export const useInputStore = defineStore('input', {
         // DB에 추가하기
         addEmotion(name, emoji, content, category, activity) {
             const array = {
+                'num': 4,
                 'name': name,
                 'emoji': emoji,
                 'content': content,

@@ -3,13 +3,13 @@
     <div class="infoNum">{{ seletedData.num }}th Emoject</div>
     <div class="infoName">{{ seletedData.name }}</div>
     <div class="infoEmoji">{{ seletedData.emoji }}</div>
-    <p class="infoContent">{{ seletedData.content }}</p>
+    <p class="infoContents">{{ seletedData.content }}</p>
 
-    <button @click="closeInfo">close</button>
+    <button @click="closeInfo">X</button>
   </aside>
 
   <Renderer ref="renderer" antialias orbitCtrl resize="window">
-    <Stats />
+    <!-- <Stats /> -->
     <Camera
       ref="camera"
       :position="{ x: 0, y: 0, z: 15 }"
@@ -24,8 +24,8 @@
 
       <Sphere
         :ref="setItemRef"
-        v-for="sadnessBox in sadness"
-        :key="sadnessBox.id"
+        v-for="item in emotions"
+        :key="item.id"
         :scale="{ x: 1, y: 1, z: 1 }"
         :radius="1"
         :width-segments="16"
@@ -35,12 +35,12 @@
           y: Math.floor(Math.random() * 10 - 5),
           z: Math.floor(Math.random() * 10 - 5),
         }"
-        @click="boxClick(sadnessBox)"
+        @click="boxClick(item)"
       >
-        <PhongMaterial color="#d88993" />
+        <PhongMaterial color="pink" />
       </Sphere>
 
-      <Sphere
+      <!-- <Sphere
         :ref="setItemRef"
         v-for="joyBox in joy"
         :key="joyBox.id"
@@ -70,7 +70,7 @@
             fragmentShader: fragmentShader,
           }"
         />
-      </Sphere>
+      </Sphere> -->
     </Scene>
   </Renderer>
 </template>
@@ -89,6 +89,7 @@ import {
   PointLight,
   Sphere,
   ShaderMaterial,
+  StandardMaterial,
   PhongMaterial,
 } from "troisjs";
 import Stats from "troisjs/src/components/misc/Stats";
@@ -108,12 +109,13 @@ export default {
     PointLight,
     Sphere,
     PhongMaterial,
+    StandardMaterial,
     ShaderMaterial,
     Stats,
   },
   setup() {
     const store = useHomeStore();
-    const { cate } = storeToRefs(store);
+    const { cate, emotions } = storeToRefs(store);
     const { fetchEmotions } = store;
 
     let renderer = ref(null);
@@ -127,10 +129,10 @@ export default {
 
     fetchEmotions();
 
-    const joy = cate.value.joy;
-    const sadness = cate.value.sadness;
-    const surprise = cate.value.surprise;
-    const disgust = cate.value.disgust;
+    // const joy = cate.value.joy;
+    // const sadness = cate.value.sadness;
+    // const surprise = cate.value.surprise;
+    // const disgust = cate.value.disgust;
 
     const settings = {
       speed: 0.5,
@@ -201,7 +203,7 @@ export default {
         if (seletedMesh != null) {
           // console.log(seletedMesh);
           // twist();
-          twist(seletedMesh, clock, settings);
+          // twist(seletedMesh, clock, settings);
           // noise(seletedMesh, clock, 진폭, 반경, 속도, v3);
         }
       });
@@ -218,13 +220,10 @@ export default {
       scene,
       setItemRef,
       itemRefs,
-      joy,
-      sadness,
-      surprise,
-      disgust,
       vertexShader,
       fragmentShader,
       settings,
+      emotions,
     };
   },
 };
@@ -233,21 +232,51 @@ export default {
 <style lang="scss">
 .info {
   position: absolute;
-  padding: 30px;
-  background: #171a1f;
+  right: 0;
+  padding: 50px;
+  margin-right: 25px;
+  background: #27292e;
   color: #fff;
   border-radius: 10px;
-  box-shadow: inset -12px -8px 20px #000;
+  // border: 1px solid #eee;
+  // box-shadow: inset -12px -8px 20px #000;
   // box-shadow: inset 6px 4px 16px #888;
-  z-index: 10000;
+  z-index: 100;
+
+  div {
+    margin-bottom: 10px;
+  }
+
+  button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: none;
+    color: #aaa;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin: 5px 5px 0 0;
+    border: none;
+    cursor: pointer;
+  }
 
   .infoNum {
-    font-size: 2rem;
-    font-weight: 900;
+    font-size: 2.5rem;
+    font-weight: 700;
   }
 
   .infoName {
     font-size: 0.9rem;
+    font-weight: 700;
+    color: #aaa;
+  }
+
+  .infoEmoji {
+    font-size: 1.3rem;
+  }
+
+  .infoContents {
+    font-size: 0.85rem;
   }
 }
 </style>
