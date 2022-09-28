@@ -20,9 +20,9 @@
 
     <Scene ref="scene" background="#000">
       <AmbientLight :position="{ x: 10, y: 10, z: 10 }" :intensity="0.5" />
-      <PointLight :position="{ x: 10, y: 10, z: 10 }" :intensity="0.5" />
+      <PointLight :position="{ x: 10, y: 10, z: 10 }" :intensity="1" />
 
-      <Sphere
+      <Box
         :ref="setItemRef"
         v-for="item in emotions"
         :key="item.id"
@@ -37,8 +37,8 @@
         }"
         @click="boxClick(item)"
       >
-        <PhongMaterial color="pink" />
-      </Sphere>
+        <PhongMaterial color="hotpink" />
+      </Box>
 
       <!-- <Sphere
         :ref="setItemRef"
@@ -88,6 +88,7 @@ import {
   AmbientLight,
   PointLight,
   Sphere,
+  Box,
   ShaderMaterial,
   StandardMaterial,
   PhongMaterial,
@@ -108,6 +109,7 @@ export default {
     AmbientLight,
     PointLight,
     Sphere,
+    Box,
     PhongMaterial,
     StandardMaterial,
     ShaderMaterial,

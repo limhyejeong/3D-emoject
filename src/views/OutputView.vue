@@ -53,7 +53,7 @@
 
     <div class="outputInfo">
       <h3>입력 정보</h3>
-      <hr />
+      <!-- <hr /> -->
       <br />
       <div>Emoji 이모지 : {{ emoji }}</div>
       <div>Name 이름 : {{ name }}</div>
@@ -194,10 +194,10 @@ export default {
           frequency: 1, //빈도 (회전)
           amplitude: 1, //진폭 (회전)
           intensity: 2, //대비
-          color: new THREE.Color(0x009688),
-          lightColor: new THREE.Color(0xa7fa1d),
-          brightness: new THREE.Vector3(2, 2, 2),
-          contrast: new THREE.Vector3(0.3, 0.4, 0.3),
+          color: new THREE.Color(0xf44336),
+          lightColor: new THREE.Color(0xc745fc),
+          brightness: new THREE.Vector3(5, 3, 4),
+          contrast: new THREE.Vector3(0.3, 0.5, 0.3),
           oscilation: new THREE.Vector3(4, 4, 4),
           phase: new THREE.Vector3(4, 4, 4),
         };

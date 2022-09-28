@@ -16,6 +16,12 @@
         <span @click="emojiKeyboard">🙃</span>
         <span @click="emojiKeyboard">🤢</span>
         <span @click="emojiKeyboard">🤧</span>
+        <span @click="emojiKeyboard">🥺</span>
+        <span @click="emojiKeyboard">😢</span>
+        <span @click="emojiKeyboard">😭</span>
+        <span @click="emojiKeyboard">😱</span>
+        <span @click="emojiKeyboard">😡</span>
+        <span @click="emojiKeyboard">🤬</span>
       </div>
     </section>
 

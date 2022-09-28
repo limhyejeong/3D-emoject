@@ -24,7 +24,7 @@ export const useInputStore = defineStore('input', {
         // DB에 추가하기
         addEmotion(name, emoji, content, category, activity) {
             const array = {
-                'num': 4,
+                'num': 0,
                 'name': name,
                 'emoji': emoji,
                 'content': content,
