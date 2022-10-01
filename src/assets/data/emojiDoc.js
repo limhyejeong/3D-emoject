@@ -1,6 +1,6 @@
 export const emojiDoc = [
     {
-        emoji: '😀', num: 1,
+        emoji: '😀', num: 1, category: 'joy',
         anger: 0,
         fear: 0,
         sadness: 0,

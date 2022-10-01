@@ -1,8 +1,8 @@
 <template>
   <aside v-show="isClick" class="info">
-    <div class="infoNum">{{ seletedData.num }}th Emoject</div>
+    <div class="infoNum">{{ seletedData.emoji }}</div>
     <div class="infoName">{{ seletedData.name }}</div>
-    <div class="infoEmoji">{{ seletedData.emoji }}</div>
+    <!-- <div class="infoEmoji">{{ seletedData.emoji }}</div> -->
     <p class="infoContents">{{ seletedData.content }}</p>
 
     <button @click="closeInfo">X</button>
@@ -22,11 +22,11 @@
       <AmbientLight :position="{ x: 10, y: 10, z: 10 }" :intensity="0.5" />
       <PointLight :position="{ x: 10, y: 10, z: 10 }" :intensity="1" />
 
-      <Box
+      <Icosahedron
         :ref="setItemRef"
         v-for="item in emotions"
         :key="item.id"
-        :scale="{ x: 1, y: 1, z: 1 }"
+        :scale="{ x: 2, y: 2, z: 2 }"
         :radius="1"
         :width-segments="16"
         :height-segments="16"
@@ -37,8 +37,8 @@
         }"
         @click="boxClick(item)"
       >
-        <PhongMaterial color="hotpink" />
-      </Box>
+        <PhongMaterial color="#eee" />
+      </Icosahedron>
 
       <!-- <Sphere
         :ref="setItemRef"
@@ -89,6 +89,7 @@ import {
   PointLight,
   Sphere,
   Box,
+  Icosahedron,
   ShaderMaterial,
   StandardMaterial,
   PhongMaterial,
@@ -110,6 +111,7 @@ export default {
     PointLight,
     Sphere,
     Box,
+    Icosahedron,
     PhongMaterial,
     StandardMaterial,
     ShaderMaterial,

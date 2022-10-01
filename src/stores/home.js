@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import emoColRef from "@/firebase";
-import { getDocs } from "firebase/firestore";
+import { getDocs, doc, deleteDoc } from "firebase/firestore";
+
 
 export const useHomeStore = defineStore('home', {
     state: () => ({
@@ -64,11 +65,18 @@ export const useHomeStore = defineStore('home', {
             emotionsSnapshot.then((emotionsSnap) => {
                 emotionsSnap.forEach((emotion) => {
                     let emotionData = emotion.data();
-                    // emotionData.id = emotion.id;
+                    emotionData.id = emotion.id;
                     emotions.push(emotionData);
                 });
                 this.emotions = emotions;
             });
         },
+
+        // deleteEmotion(emotionId) {
+        //     let emoRef = doc(emoColRef, emotionId);
+        //     deleteDoc(emoRef);
+        //     alert("emotion deleted successully");
+        //     this.$router.go();
+        //   },
     },
 })

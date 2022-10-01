@@ -2,26 +2,18 @@
   <section class="inputSection">
     <section v-if="step == 0" class="emojiInputSection">
       <h3 class="title">My Emotion is</h3>
-      <input type="text" v-model="emoji" class="emojiInput" />
+      <div class="emojiInputBox">
+        <input type="text" v-model="emoji" class="emojiInput" readonly />
+        <button class="clearEmojiInput" @click="clearEmojiInput">clear</button>
+      </div>
 
       <div class="emojiList">
-        <span @click="emojiKeyboard">😃</span>
-        <span @click="emojiKeyboard">😄</span>
-        <span @click="emojiKeyboard">😁</span>
-        <span @click="emojiKeyboard">😆</span>
-        <span @click="emojiKeyboard">😅</span>
-        <span @click="emojiKeyboard">🤣</span>
-        <span @click="emojiKeyboard">😂</span>
-        <span @click="emojiKeyboard">🙂</span>
-        <span @click="emojiKeyboard">🙃</span>
-        <span @click="emojiKeyboard">🤢</span>
-        <span @click="emojiKeyboard">🤧</span>
-        <span @click="emojiKeyboard">🥺</span>
-        <span @click="emojiKeyboard">😢</span>
-        <span @click="emojiKeyboard">😭</span>
-        <span @click="emojiKeyboard">😱</span>
-        <span @click="emojiKeyboard">😡</span>
-        <span @click="emojiKeyboard">🤬</span>
+        <span
+          v-for="emoji in emojiDoc"
+          :key="emoji.num"
+          @click="emojiKeyboard"
+          >{{ emoji.emoji }}</span
+        >
       </div>
     </section>
 
@@ -76,6 +68,13 @@ export default {
       let selectedEmoji = event.target.textContent;
       emojiInput.value += selectedEmoji;
       emoji.value += selectedEmoji;
+    }
+
+    // 이모지 인풋 비우기 함수
+    function clearEmojiInput() {
+      const emojiInput = document.querySelector(".emojiInput");
+      emojiInput.value = "";
+      emoji.value = "";
     }
 
     // Activity(활성도) & Category(감정 종류) 얻는 함수
@@ -136,10 +135,12 @@ export default {
       activity,
       create,
       step,
+      emojiDoc,
       prevStep,
       nextStep,
       getEmotionData,
       emojiKeyboard,
+      clearEmojiInput,
     };
   },
 };
@@ -161,11 +162,14 @@ export default {
       width: 100%;
       height: 50px;
       border: none;
-      border-radius: 50px;
       padding: 20px;
       // background: #383d46;
       // color: #fff;
       // box-shadow: inset -8px -8px 10px #171922;
+    }
+
+    .emojiInputBox {
+      display: flex;
       margin: 15px 0;
     }
 
@@ -173,6 +177,24 @@ export default {
       font-size: 2rem;
       // max-width: 700px;
       text-align: center;
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 50px;
+    }
+
+    .clearEmojiInput {
+      width: 100px;
+      border: none;
+      border-left: 1px solid #aaa;
+      background: #eee;
+      border-top-right-radius: 50px;
+      border-bottom-right-radius: 50px;
+      cursor: pointer;
+      transition: 0.25s;
+      font-size: 1rem;
+
+      &:hover {
+        background: #ccc;
+      }
     }
 
     .emojiList {
@@ -198,7 +220,10 @@ export default {
 
     .nameInput {
       font-size: 1.5rem;
+      border-radius: 50px;
+      margin: 15px 0;
     }
+
     .contentsInput {
       width: 100%;
       height: 300px;
