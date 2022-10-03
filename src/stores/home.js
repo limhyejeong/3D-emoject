@@ -72,11 +72,11 @@ export const useHomeStore = defineStore('home', {
             });
         },
 
-        // deleteEmotion(emotionId) {
-        //     let emoRef = doc(emoColRef, emotionId);
-        //     deleteDoc(emoRef);
-        //     alert("emotion deleted successully");
-        //     this.$router.go();
-        //   },
+        deleteEmotion(emotionId) {
+            let emoRef = doc(emoColRef, emotionId);
+            deleteDoc(emoRef);
+            alert("emotion deleted successully");
+            location.reload();
+        },
     },
 })

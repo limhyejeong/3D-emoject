@@ -10,8 +10,7 @@ export const emojiDoc = [
         trust: 2,
         joy: 8,
         activity: 2,
-    },
-    {
+    },{
         emoji: '😃', num: 2,
         anger: 0,
         fear: 0,
@@ -22,8 +21,7 @@ export const emojiDoc = [
         trust: 2,
         joy: 8,
         activity: 2,
-    },
-    {
+    },{
         emoji: '😄', num: 3,
         anger: 0,
         fear: 0,
@@ -34,8 +32,7 @@ export const emojiDoc = [
         trust: 2,
         joy: 8,
         activity: 3,
-    },
-    {
+    },{
         emoji: '😁', num: 4,
         anger: 0,
         fear: 0,
@@ -46,8 +43,7 @@ export const emojiDoc = [
         trust: 2,
         joy: 8,
         activity: 3,
-    },
-    {
+    },{
         emoji: '😆', num: 5,
         anger: 0,
         fear: 0,
@@ -58,8 +54,7 @@ export const emojiDoc = [
         trust: 1,
         joy: 9,
         activity: 6,
-    },
-    {
+    },{
         emoji: '😅', num: 6,
         anger: 0,
         fear: 1,
@@ -70,8 +65,7 @@ export const emojiDoc = [
         trust: 0,
         joy: 2,
         activity: 3,
-    },
-    {
+    },{
         emoji: '🤣', num: 7,
         anger: 0,
         fear: 0,
@@ -82,8 +76,7 @@ export const emojiDoc = [
         trust: 0,
         joy: 5,
         activity: 7,
-    },
-    {
+    },{
         emoji: '😂', num: 8,
         anger: 0,
         fear: 0,
@@ -94,8 +87,7 @@ export const emojiDoc = [
         trust: 0,
         joy: 3,
         activity: 8,
-    },
-    {
+    },{
         emoji: '🙂', num: 9,
         anger: 1,
         fear: 1,
@@ -106,8 +98,7 @@ export const emojiDoc = [
         trust: 1,
         joy: 3,
         activity: 1,
-    },
-    {
+    },{
         emoji: '🙃', num: 10,
         anger: 2,
         fear: 1,
@@ -118,8 +109,73 @@ export const emojiDoc = [
         trust: 1,
         joy: 2,
         activity: 5,
-    },
-    {
+    },{
+        emoji: '😉', num: 11,
+        anger: 0,
+        fear: 0,
+        sadness: 0,
+        disgust: 0,
+        surprise: 0,
+        anticipation: 1,
+        trust: 8,
+        joy: 1,
+        activity: 3,
+    },{
+        emoji: '😊', num: 12,
+        anger: 0,
+        fear: 0,
+        sadness: 0,
+        disgust: 0,
+        surprise: 0,
+        anticipation: 0,
+        trust: 5,
+        joy: 5,
+        activity: 4,
+    },{
+        emoji: '😇', num: 13,
+        anger: 2,
+        fear: 0,
+        sadness: 6,
+        disgust: 0,
+        surprise: 0,
+        anticipation: 0,
+        trust: 0,
+        joy: 2,
+        activity: 8,
+    },{
+        emoji: '🥰', num: 14,
+        anger: 0,
+        fear: 0,
+        sadness: 0,
+        disgust: 0,
+        surprise: 0,
+        anticipation: 0,
+        trust: 2,
+        joy: 8,
+        activity: 8,
+    },{
+        emoji: '😍', num: 15,
+        anger: 0,
+        fear: 0,
+        sadness: 0,
+        disgust: 0,
+        surprise: 0,
+        anticipation: 0,
+        trust: 0,
+        joy: 10,
+        activity: 8,
+    },{
+        emoji: '🤩', num: 16,
+        anger: 0,
+        fear: 0,
+        sadness: 0,
+        disgust: 0,
+        surprise: 0,
+        anticipation: 5,
+        trust: 5,
+        joy: 0,
+        activity: 9,
+    },{
         emoji: '🤢', num: 51,
         anger: 0,
         fear: 0,
@@ -130,8 +186,7 @@ export const emojiDoc = [
         trust: 0,
         joy: 0,
         activity: 3,
-    },
-    {
+    },{
         emoji: '🤧', num: 53,
         anger: 0,
         fear: 0,

@@ -5,7 +5,8 @@
     <!-- <div class="infoEmoji">{{ seletedData.emoji }}</div> -->
     <p class="infoContents">{{ seletedData.content }}</p>
 
-    <button @click="closeInfo">X</button>
+    <button @click="closeInfo" class="closeInfo">X</button>
+    <button @click="deleteEmotion(seletedData.id)">삭제</button>
   </aside>
 
   <Renderer ref="renderer" antialias orbitCtrl resize="window">
@@ -120,7 +121,7 @@ export default {
   setup() {
     const store = useHomeStore();
     const { cate, emotions } = storeToRefs(store);
-    const { fetchEmotions } = store;
+    const { fetchEmotions, deleteEmotion } = store;
 
     let renderer = ref(null);
     let camera = ref(null);
@@ -228,6 +229,7 @@ export default {
       fragmentShader,
       settings,
       emotions,
+      deleteEmotion,
     };
   },
 };
@@ -251,7 +253,7 @@ export default {
     margin-bottom: 10px;
   }
 
-  button {
+  .closeInfo {
     position: absolute;
     right: 0;
     top: 0;
