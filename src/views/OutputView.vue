@@ -110,7 +110,7 @@ export default {
   setup() {
     setTimeout(
       () => (document.querySelector(".creating").style.display = "none"),
-      2500
+      2000
     );
 
     const store = useInputStore();
@@ -335,14 +335,15 @@ export default {
 }
 .outputView {
   width: 100%;
-  // height: 100vh;
   display: flex;
+  // align-items: center;
 }
 .outputInfo {
-  // background: ;
+  position: absolute;
+  right: 0;
   // border: 1px solid #eee;
   width: 40%;
-  padding: 0 50px;
+  padding-left: 50px;
 
   button {
     padding: 0 10px;
@@ -350,5 +351,6 @@ export default {
 }
 .render {
   width: 60%;
+  height: 90vh;
 }
 </style>

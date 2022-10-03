@@ -113,6 +113,6 @@ nav {
 }
 
 .page {
-  padding-top: 70px;
+  padding: 70px 30px 0 30px;
 }
 </style>

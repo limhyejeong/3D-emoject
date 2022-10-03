@@ -6,7 +6,9 @@
     <p class="infoContents">{{ seletedData.content }}</p>
 
     <button @click="closeInfo" class="closeInfo">X</button>
-    <button @click="deleteEmotion(seletedData.id)">삭제</button>
+    <button @click="deleteEmotion(seletedData.id)" class="deleteInfo">
+      Delete Emotion
+    </button>
   </aside>
 
   <Renderer ref="renderer" antialias orbitCtrl resize="window">
@@ -14,7 +16,7 @@
     <Camera
       ref="camera"
       :position="{ x: 0, y: 0, z: 15 }"
-      :look-at="{ x: 0, y: 0, z: 0 }"
+      :lookAt="{ x: 0, y: 0, z: 0 }"
     />
 
     <Raycaster ref="raycaster" @click="onClick" />
@@ -27,7 +29,7 @@
         :ref="setItemRef"
         v-for="item in emotions"
         :key="item.id"
-        :scale="{ x: 2, y: 2, z: 2 }"
+        :scale="{ x: 1, y: 1, z: 1 }"
         :radius="1"
         :width-segments="16"
         :height-segments="16"
@@ -161,10 +163,21 @@ export default {
         seletedData.value = data;
       }
 
-      // gsap.to(camera.value.camera.position, {
-      //   z: seletedMesh.position.z + seletedMesh.scale.z * 5,
-      //   duration: 0.75,
-      // });
+      gsap.to(camera.value.camera.position, {
+        x: seletedMesh.position.x,
+        y: seletedMesh.position.y,
+        z: seletedMesh.position.z + 5,
+        duration: 0.75,
+      });
+
+      //   console.log(seletedMesh.position);
+
+      //   gsap.to(camera.value.lookAt, {
+      //     x: seletedMesh.position.x,
+      //     y: seletedMesh.position.y,
+      //     z: seletedMesh.position.z,
+      //   });
+      //   console.log(camera.value.lookAt);
     }
 
     let v3 = new THREE.Vector3();
@@ -188,12 +201,12 @@ export default {
     // 정보 닫기
     function closeInfo() {
       isClick.value = false;
-      // gsap.to(camera.value.camera.position, {
-      //   x: 0,
-      //   y: 0,
-      //   z: 100,
-      //   duration: 1,
-      // });
+      gsap.to(camera.value.camera.position, {
+        x: 0,
+        y: 0,
+        z: 15,
+        duration: 1,
+      });
     }
 
     let 진폭 = 6;
@@ -239,15 +252,19 @@ export default {
 .info {
   position: absolute;
   right: 0;
+  margin: 50px 50px 0 0;
   padding: 50px;
-  margin-right: 25px;
-  background: #27292e;
+  // background: #27292e;
   color: #fff;
   border-radius: 10px;
-  // border: 1px solid #eee;
+  border: 1px solid #222;
   // box-shadow: inset -12px -8px 20px #000;
   // box-shadow: inset 6px 4px 16px #888;
   z-index: 100;
+  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(30px);
+  // box-shadow: inset 0px 0px 25px #aaa;
+  max-width: 500px;
 
   div {
     margin-bottom: 10px;
@@ -257,13 +274,24 @@ export default {
     position: absolute;
     right: 0;
     top: 0;
-    background: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    right: -25px;
+    top: -25px;
+    background: #111;
     color: #aaa;
-    font-weight: 600;
     font-size: 1.2rem;
     margin: 5px 5px 0 0;
-    border: none;
+    border: 1px solid #555;
     cursor: pointer;
+  }
+
+  .deleteInfo {
+    width: 100%;
+    background: #e91e51;
+    border: none;
+    color: #fff;
   }
 
   .infoNum {
@@ -283,6 +311,7 @@ export default {
 
   .infoContents {
     font-size: 0.85rem;
+    margin-bottom: 10px;
   }
 }
 </style>
