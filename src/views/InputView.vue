@@ -1,42 +1,51 @@
 <template>
-  <section class="inputSection">
-    <section v-if="step == 0" class="emojiInputSection">
-      <h3 class="title">My Emotion is</h3>
-      <div class="emojiInputBox">
-        <input type="text" v-model="emoji" class="emojiInput" readonly />
-        <button class="clearEmojiInput" @click="clearEmojiInput">clear</button>
-      </div>
+  <div class="page">
+    <section class="inputSection">
+      <section v-if="step == 0" class="emojiInputSection">
+        <h3 class="title">My Emotion is</h3>
+        <div class="emojiInputBox">
+          <input type="text" v-model="emoji" class="emojiInput" readonly />
+          <button class="clearEmojiInput" @click="clearEmojiInput">
+            clear
+          </button>
+        </div>
 
-      <div class="emojiList">
-        <span
-          v-for="emoji in emojiDoc"
-          :key="emoji.num"
-          @click="emojiKeyboard"
-          >{{ emoji.emoji }}</span
-        >
-      </div>
+        <div class="emojiList">
+          <span
+            v-for="emoji in emojiDoc"
+            :key="emoji.num"
+            @click="emojiKeyboard"
+            >{{ emoji.emoji }}</span
+          >
+        </div>
+      </section>
+
+      <section v-if="step == 1" class="nameInputSection">
+        <h3 class="title">My Name is</h3>
+        <input
+          type="text"
+          v-model="name"
+          class="nameInput"
+          placeholder="name"
+        />
+      </section>
+
+      <section v-if="step == 2" class="contentInputSection">
+        <h3 class="title">Comment about your Emotion</h3>
+        <textarea
+          v-model="content"
+          class="contentsInput"
+          placeholder="contents"
+        /><br />
+      </section>
     </section>
 
-    <section v-if="step == 1" class="nameInputSection">
-      <h3 class="title">My Name is</h3>
-      <input type="text" v-model="name" class="nameInput" placeholder="name" />
-    </section>
-
-    <section v-if="step == 2" class="contentInputSection">
-      <h3 class="title">Comment about your Emotion</h3>
-      <textarea
-        v-model="content"
-        class="contentsInput"
-        placeholder="contents"
-      /><br />
-    </section>
-  </section>
-
-  <aside class="stepBtns">
-    <button @click="prevStep" v-if="step !== 0" class="prevStep">prev</button>
-    <button @click="nextStep" v-if="step !== 2" class="nextStep">next</button>
-    <button v-if="step == 2" @click="getEmotionData">Create</button>
-  </aside>
+    <aside class="stepBtns">
+      <button @click="prevStep" v-if="step !== 0" class="prevStep">prev</button>
+      <button @click="nextStep" v-if="step !== 2" class="nextStep">next</button>
+      <button v-if="step == 2" @click="getEmotionData">Create</button>
+    </aside>
+  </div>
 </template>
 
 <script>
@@ -153,7 +162,7 @@ export default {
 }
 .inputSection {
   height: 100%;
-  margin: 30px;
+  // margin: 30px;
 
   section {
     width: 100%;

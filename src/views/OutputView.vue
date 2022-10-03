@@ -1,73 +1,79 @@
 <template>
-  <section class="outputView">
-    <div class="render">
-      <Renderer ref="renderer" antialias orbit-ctrl resize="true">
-        <Camera :position="{ x: 0, y: 0, z: 5 }" />
+  <aside class="creating">
+    <h1>Creating ...</h1>
+  </aside>
 
-        <Scene ref="Scene" background="#000">
-          <Sphere
-            ref="sphereRef"
-            :position="{ z: 0, y: 0, z: 0 }"
-            :width-segments="128"
-            :height-segments="128"
-            :scale="{ x: 1, y: 1, z: 1 }"
-            :rotation="{
-              y: Math.PI / 4,
-              z: Math.PI / 4,
-            }"
-            :cast-shadow="true"
-            :receive-shadow="true"
-          >
-            <ShaderMaterial
-              :props="{
-                uniforms: {
-                  uTime: { value: 0 },
-                  uSpeed: { value: settings.speed },
-                  uDistortion: { value: 0 },
-                  uNoiseDensity: { value: settings.density },
-                  uNoiseStrength: { value: settings.strength },
-                  uFrequency: { value: settings.frequency },
-                  uAmplitude: { value: settings.amplitude },
-                  uIntensity: { value: settings.intensity },
-                  uColor: { value: settings.color },
-                  uLightColor: { value: settings.lightColor },
-                  uLightDirection: { value: settings.lightDirection },
-                  uBrightness: { value: settings.brightness },
-                  uContrast: { value: settings.contrast },
-                  uOscilation: { value: settings.oscilation },
-                  uPhase: { value: settings.phase },
-                },
-                vertexShader: vertexShader,
-                fragmentShader: fragmentShader,
+  <div class="page">
+    <section class="outputView">
+      <div class="render">
+        <Renderer ref="renderer" antialias orbit-ctrl resize="true">
+          <Camera :position="{ x: 0, y: 0, z: 5 }" />
+
+          <Scene ref="Scene" background="#000">
+            <Sphere
+              ref="sphereRef"
+              :position="{ z: 0, y: 0, z: 0 }"
+              :width-segments="128"
+              :height-segments="128"
+              :scale="{ x: 1, y: 1, z: 1 }"
+              :rotation="{
+                y: Math.PI / 4,
+                z: Math.PI / 4,
               }"
+              :cast-shadow="true"
+              :receive-shadow="true"
             >
-              <Texture
-                src="/assets/textures/water/Water_COLOR.jpg"
-                uniform="map"
-              />
-            </ShaderMaterial>
-          </Sphere>
-        </Scene>
-      </Renderer>
-    </div>
+              <ShaderMaterial
+                :props="{
+                  uniforms: {
+                    uTime: { value: 0 },
+                    uSpeed: { value: settings.speed },
+                    uDistortion: { value: 0 },
+                    uNoiseDensity: { value: settings.density },
+                    uNoiseStrength: { value: settings.strength },
+                    uFrequency: { value: settings.frequency },
+                    uAmplitude: { value: settings.amplitude },
+                    uIntensity: { value: settings.intensity },
+                    uColor: { value: settings.color },
+                    uLightColor: { value: settings.lightColor },
+                    uLightDirection: { value: settings.lightDirection },
+                    uBrightness: { value: settings.brightness },
+                    uContrast: { value: settings.contrast },
+                    uOscilation: { value: settings.oscilation },
+                    uPhase: { value: settings.phase },
+                  },
+                  vertexShader: vertexShader,
+                  fragmentShader: fragmentShader,
+                }"
+              >
+                <Texture
+                  src="/assets/textures/water/Water_COLOR.jpg"
+                  uniform="map"
+                />
+              </ShaderMaterial>
+            </Sphere>
+          </Scene>
+        </Renderer>
+      </div>
 
-    <div class="outputInfo">
-      <h3>입력 정보</h3>
-      <!-- <hr /> -->
-      <br />
-      <div>Emoji 이모지 : {{ emoji }}</div>
-      <div>Name 이름 : {{ name }}</div>
-      <div>Content 설명 : {{ content }}</div>
-      <br />
-      <div>Category 대표 감정 : {{ category }}</div>
-      <div>Activity 활발함 : {{ activity }}</div>
+      <div class="outputInfo">
+        <h3>입력 정보</h3>
+        <!-- <hr /> -->
+        <br />
+        <div>Emoji 이모지 : {{ emoji }}</div>
+        <div>Name 이름 : {{ name }}</div>
+        <div>Content 설명 : {{ content }}</div>
+        <br />
+        <div>Category 대표 감정 : {{ category }}</div>
+        <div>Activity 활발함 : {{ activity }}</div>
 
-      <button @click="clearInput">다시하기</button>
-      <button @click="addEmotion(name, emoji, content, category, activity)">
-        감정 등록
-      </button>
-    </div>
-  </section>
+        <button @click="clearInput">다시하기</button>
+        <button @click="addEmotion(name, emoji, content, category, activity)">
+          감정 등록
+        </button>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script>
@@ -86,6 +92,8 @@ import {
 import { vertexShader, fragmentShader, twist } from "@/assets/js/twist";
 import * as THREE from "three";
 import { noise } from "@/assets/js/noise";
+import router from "@/router/index";
+
 // import emoColRef from "@/firebase";
 // import { addDoc } from "firebase/firestore";
 
@@ -100,6 +108,11 @@ export default {
     Texture,
   },
   setup() {
+    setTimeout(
+      () => (document.querySelector(".creating").style.display = "none"),
+      2500
+    );
+
     const store = useInputStore();
     const { name, emoji, content, category, activity } = storeToRefs(store);
     const { addEmotion, clearInput } = store;
@@ -310,9 +323,19 @@ export default {
 </script>
 
 <style lang="scss">
-.outputView {
+.creating {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100vh;
+  background: #000;
+  z-index: 10000;
+}
+.outputView {
+  width: 100%;
+  // height: 100vh;
   display: flex;
 }
 .outputInfo {

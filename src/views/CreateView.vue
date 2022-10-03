@@ -1,9 +1,8 @@
 <template>
   <!-- <h3>Create Emotion</h3> -->
   <InputView v-if="category == 'none'" />
-  <!-- <TheCanvas /> -->
+  <!-- <Creating v-if="category !== 'none'" /> -->
   <OutputView v-if="category !== 'none'" />
-
   <!-- <Anger /> -->
   <!-- <Fear /> -->
   <!-- <Anticipation /> -->
@@ -17,6 +16,7 @@
 <script>
 import InputView from "./InputView.vue";
 import OutputView from "./OutputView.vue";
+import Creating from "./Creating.vue";
 import TheCanvas from "./TheCanvas.vue";
 import Anger from "@/components/homeview/sample/Anger.vue";
 import Fear from "@/components/homeview/sample/Fear.vue";
@@ -34,6 +34,7 @@ export default {
   components: {
     InputView,
     OutputView,
+    Creating,
     TheCanvas,
     Anger,
     Fear,

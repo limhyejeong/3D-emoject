@@ -1,5 +1,5 @@
 <template>
-  <div class="info">
+  <!-- <div class="info">
     <h3>Output</h3>
     <div>선택한 이모지 : {{ emoji }}</div>
     <div>이름 : {{ name }}</div>
@@ -13,20 +13,14 @@
     <button @click="createEmotion(name, emoji, content, category, activity)">
       감정 등록
     </button>
-  </div>
+  </div> -->
 
   <div class="render">
     <Renderer ref="renderer" antialias orbit-ctrl resize="window">
       <Camera :position="{ x: 5, y: 5, z: 5 }" />
 
       <Scene ref="Scene" background="#000">
-        <!-- <PointLight :position="{ z: 100, y: 100, z: 100 }" /> -->
-        <!-- <AmbientLight :intensity="0.8" />
-        <PointLight :position="{ x: 30 }" color="#00BCFF" />
-        <PointLight :position="{ x: -30, y: 30 }" color="#AD0EFF" />
-        <PointLight :position="{ x: 0, z: 30 }" color="#FF0004" /> -->
-
-        <Sphere
+        <Cone
           ref="sphereRef"
           :position="{ z: 0, y: 0, z: 0 }"
           :width-segments="128"
@@ -67,7 +61,7 @@
               uniform="map"
             />
           </ShaderMaterial>
-        </Sphere>
+        </Cone>
       </Scene>
     </Renderer>
   </div>
@@ -82,6 +76,7 @@ import {
   Camera,
   Scene,
   Sphere,
+  Cone,
   AmbientLight,
   PointLight,
   ShaderMaterial,
@@ -101,6 +96,7 @@ export default {
     Camera,
     Scene,
     Sphere,
+    Cone,
     AmbientLight,
     PointLight,
     ShaderMaterial,
@@ -124,14 +120,14 @@ export default {
     // let isCreated = ref(false);
 
     const settings = {
-      speed: 0.3,
+      speed: 0.5,
       distortion: 1, //왜곡
-      density: 5, //밀도
+      density: 1, //밀도
       strength: 0.5, //힘
-      frequency: 5, //빈도 (회전)
+      frequency: 1, //빈도 (회전)
       amplitude: 1, //진폭 (회전)
       intensity: 1, //대비
-      color: new THREE.Color(0xf93e3a),
+      color: new THREE.Color(0xffffff),
       lightColor: new THREE.Color(0xf9c53a),
       lightDirection: new THREE.Vector3(0.0, 1.0, 0.0),
       brightness: new THREE.Vector3(1.0, 1.0, 1.0),

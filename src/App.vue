@@ -87,31 +87,32 @@ a {
   color: #fff;
 }
 nav {
+  position: absolute;
   padding: 30px;
   font-weight: 500;
   // text-align: center;
-
   .logo {
     // text-decoration: underline;
     // color: #7b4eff;
     font-weight: 500;
     transition: 0.25s;
-
     &:hover {
       text-decoration: underline;
       opacity: 0.5;
     }
   }
-
   .list {
     position: absolute;
     right: 0;
     color: #aaa;
   }
-
   a {
     &.router-link-exact-active {
     }
   }
+}
+
+.page {
+  padding-top: 70px;
 }
 </style>
