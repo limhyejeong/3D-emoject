@@ -46,8 +46,6 @@ export default {
   bottom: 0;
 
   a {
-    // background: #fff;
-    color: #fff;
     border-radius: 50px;
     // padding: 20px 50px;
     width: 100px;
@@ -59,15 +57,24 @@ export default {
     transition: 0.25s;
     font-size: 1rem;
     font-weight: 500;
-    -webkit-backdrop-filter: blur(20px);
-    backdrop-filter: blur(20px);
-    box-shadow: inset 0px 0px 25px #aaa;
+    // -webkit-backdrop-filter: blur(20px);
+    // backdrop-filter: blur(20px);
+    // box-shadow: inset 0px 0px 25px #aaa;
+    color: var(--text-color);
+    background: linear-gradient(var(--main-color), var(--shadow-color));
+    box-shadow: inset 0px 5px 5px var(--highlight-color),
+      inset 0px -5px 5px var(--background-color);
+    border: 1px solid var(--main-color);
 
     &:hover {
-      background: #000;
-      box-shadow: none;
-      border: 1px solid #555;
-      color: #555;
+      // background: #000;
+      // box-shadow: none;
+      // border: 1px solid #555;
+      // color: #555;
+      background: linear-gradient(var(--shadow-color), var(--main-color));
+      box-shadow: inset 0px 5px 5px var(--background-color),
+        inset 0px -5px 5px var(--highlight-color);
+      opacity: 0.5;
     }
   }
 }

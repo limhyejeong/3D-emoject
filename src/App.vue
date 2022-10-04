@@ -74,12 +74,22 @@ export default {
 body {
   width: 100%;
   height: 100vh;
-  background: #000;
+  background: var(--background-color);
   letter-spacing: -0.03rem;
+}
+:root {
+  --background-color: #1a1a23;
+  --section-color: #232332;
+  --article-color: #2c2e40;
+  --inactive-color: #747c95;
+  --highlight-color: #a99df4;
+  --main-color: #725ded;
+  --shadow-color: #5c47eb;
+  --text-color: #e2dcff;
 }
 #app {
   // font-family: Avenir, Helvetica, Arial, sans-serif;
-  background: #000;
+  background: var(--background-color);
   color: #fff;
 }
 a {
@@ -92,10 +102,10 @@ nav {
   font-weight: 500;
   // text-align: center;
   .logo {
-    // text-decoration: underline;
-    // color: #7b4eff;
     font-weight: 500;
-    transition: 0.25s;
+    font-size: 0.85rem;
+    color: var(--inactive-color);
+
     &:hover {
       text-decoration: underline;
       opacity: 0.5;
@@ -104,7 +114,6 @@ nav {
   .list {
     position: absolute;
     right: 0;
-    color: #aaa;
   }
   a {
     &.router-link-exact-active {
@@ -112,7 +121,17 @@ nav {
   }
 }
 
+button {
+  cursor: pointer;
+  transition: 0.25s;
+}
+
 .page {
-  padding: 70px 30px 0 30px;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // padding: 70px 30px 0 30px;
 }
 </style>

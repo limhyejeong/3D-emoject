@@ -9,7 +9,7 @@
         <Renderer ref="renderer" antialias orbit-ctrl resize="true">
           <Camera :position="{ x: 0, y: 0, z: 5 }" />
 
-          <Scene ref="Scene" background="#000">
+          <Scene ref="Scene" background="#1A1A23">
             <Sphere
               ref="sphereRef"
               :position="{ z: 0, y: 0, z: 0 }"
@@ -57,19 +57,20 @@
       </div>
 
       <div class="outputInfo">
-        <h3>입력 정보</h3>
-        <!-- <hr /> -->
         <br />
-        <div>Emoji 이모지 : {{ emoji }}</div>
-        <div>Name 이름 : {{ name }}</div>
-        <div>Content 설명 : {{ content }}</div>
+        <div class="outputInfoEmoji">{{ emoji }}</div>
+        <div class="outputInfoName">{{ name }}</div>
+        <div class="outputInfoContent">{{ content }}</div>
         <br />
-        <div>Category 대표 감정 : {{ category }}</div>
-        <div>Activity 활발함 : {{ activity }}</div>
+        <div class="outputInfoCategory">{{ category }}</div>
+        <div class="outputInfoActivity">{{ activity }}</div>
 
-        <button @click="clearInput">다시하기</button>
-        <button @click="addEmotion(name, emoji, content, category, activity)">
-          감정 등록
+        <button @click="clearInput" class="againBtn">Replay</button>
+        <button
+          @click="addEmotion(name, emoji, content, category, activity)"
+          class="addBtn"
+        >
+          Upload
         </button>
       </div>
     </section>
@@ -330,7 +331,7 @@ export default {
   align-items: center;
   width: 100%;
   height: 100vh;
-  background: #000;
+  background: #1a1a23;
   z-index: 10000;
 }
 .outputView {
@@ -345,8 +346,47 @@ export default {
   width: 40%;
   padding-left: 50px;
 
+  .outputInfoName {
+    font-weight: 800;
+  }
+  .outputInfoEmoji {
+    font-size: 3rem;
+  }
+  .outputInfoContent {
+    font-size: 0.85rem;
+    color: #aaa;
+  }
+
   button {
-    padding: 0 10px;
+    padding: 10px 0;
+    width: 100%;
+    border-radius: 20px;
+    color: var(--text-color);
+    border: none;
+    font-weight: 500;
+  }
+
+  .againBtn {
+    background: linear-gradient(var(--article-color), var(--section-color));
+    border: 1px solid var(--inactive-color);
+
+    &:hover {
+      background: linear-gradient(var(--section-color), var(--article-color));
+      opacity: 0.5;
+    }
+  }
+  .addBtn {
+    background: linear-gradient(var(--main-color), var(--shadow-color));
+    box-shadow: inset 0px 5px 5px var(--highlight-color),
+      inset 0px -5px 5px var(--background-color);
+    border: 1px solid var(--main-color);
+
+    &:hover {
+      background: linear-gradient(var(--shadow-color), var(--main-color));
+      box-shadow: inset 0px 5px 5px var(--background-color),
+        inset 0px -5px 5px var(--highlight-color);
+      opacity: 0.5;
+    }
   }
 }
 .render {

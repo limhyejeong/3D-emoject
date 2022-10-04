@@ -21,17 +21,18 @@
       </section>
 
       <section v-if="step == 1" class="nameInputSection">
-        <h3 class="title">My Name is</h3>
+        <h3 class="title">Name</h3>
         <input
           type="text"
           v-model="name"
           class="nameInput"
           placeholder="name"
+          autofocus
         />
       </section>
 
-      <section v-if="step == 2" class="contentInputSection">
-        <h3 class="title">Comment about your Emotion</h3>
+      <section v-if="step == 1" class="contentsInputSection">
+        <h3 class="title">Comment</h3>
         <textarea
           v-model="content"
           class="contentsInput"
@@ -41,9 +42,15 @@
     </section>
 
     <aside class="stepBtns">
-      <button @click="prevStep" v-if="step !== 0" class="prevStep">prev</button>
-      <button @click="nextStep" v-if="step !== 2" class="nextStep">next</button>
-      <button v-if="step == 2" @click="getEmotionData">Create</button>
+      <button @click="prevStep" v-if="step !== 0" class="prevBtn">
+        <div></div>
+      </button>
+      <button @click="nextStep" v-if="step !== 1" class="nextBtn">
+        <div></div>
+      </button>
+      <button v-if="step == 1" @click="getEmotionData" class="createBtn">
+        Create
+      </button>
     </aside>
   </div>
 </template>
@@ -157,30 +164,37 @@ export default {
 
 <style lang="scss">
 .title {
-  font-size: 2.5rem;
+  width: 100%;
+  font-size: 2rem;
   font-weight: 700;
 }
+
 .inputSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: 100%;
-  // margin: 30px;
+  width: 100%;
+  max-width: 1000px;
 
   section {
     width: 100%;
 
     input {
       width: 100%;
-      height: 50px;
       border: none;
       padding: 20px;
-      // background: #383d46;
-      // color: #fff;
-      // box-shadow: inset -8px -8px 10px #171922;
     }
+  }
+}
 
-    .emojiInputBox {
-      display: flex;
-      margin: 15px 0;
-    }
+.emojiInputSection {
+  max-width: 1000px;
+
+  .emojiInputBox {
+    display: flex;
+    margin: 15px 0 30px;
 
     .emojiInput {
       font-size: 2rem;
@@ -188,6 +202,7 @@ export default {
       text-align: center;
       border-top-left-radius: 50px;
       border-bottom-left-radius: 50px;
+      height: 50px;
     }
 
     .clearEmojiInput {
@@ -205,43 +220,54 @@ export default {
         background: #ccc;
       }
     }
+  }
+}
 
-    .emojiList {
-      width: 100%;
-      // height: 50vh;
-      background: #111;
-      font-size: 3rem;
-      border-radius: 20px;
-      border: 1px solid #363c46;
-      // box-shadow: inset -8px -8px 10px #171922;
-      // box-shadow: inset -8px -8px 20px #1c1a24;
+.emojiList {
+  width: 100%;
+  // height: 50vh;
+  background: var(--section-color);
+  font-size: 3rem;
+  border-radius: 20px;
+  border: 1px solid var(--article-color);
+  // box-shadow: inset -8px -8px 10px #171922;
+  // box-shadow: inset -8px -8px 20px #1c1a24;
 
-      span {
-        cursor: pointer;
-        transition: 0.2s;
-        margin: 10px;
+  span {
+    cursor: pointer;
+    transition: 0.2s;
+    margin: 10px;
 
-        &:hover {
-          opacity: 0.3;
-        }
-      }
-    }
-
-    .nameInput {
-      font-size: 1.5rem;
-      border-radius: 50px;
-      margin: 15px 0;
-    }
-
-    .contentsInput {
-      width: 100%;
-      height: 300px;
-      border: none;
-      border-radius: 20px;
-      padding: 20px;
+    &:hover {
+      opacity: 0.3;
     }
   }
 }
+
+.nameInputSection {
+  max-width: 500px;
+
+  .nameInput {
+    font-size: 1rem;
+    border-radius: 50px;
+    margin: 15px 0;
+    height: 50px;
+  }
+}
+
+.contentsInputSection {
+  max-width: 500px;
+
+  .contentsInput {
+    width: 100%;
+    height: 200px;
+    border: none;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 15px 0;
+  }
+}
+
 .stepBtns {
   position: absolute;
   width: 100%;
@@ -250,28 +276,56 @@ export default {
   text-align: right;
   display: flex;
   justify-content: space-evenly;
-  background: #000;
+  // background: #000;
   // border-top: 1px solid #eee;
 
   button {
-    background: #000;
-    // background: #7b4eff;
-    color: #fff;
     width: 80px;
     height: 80px;
     padding: 20px;
-    border: none;
+    border: 1px solid var(--main-color);
     border-radius: 50%;
-    font-weight: 600;
-    transition: 0.25s;
-    box-shadow: inset 4px 4px 10px #aaa;
-    cursor: pointer;
+    color: var(--text-color);
+    background: linear-gradient(var(--main-color), var(--shadow-color));
+    box-shadow: inset 0px 5px 5px var(--highlight-color),
+      inset 0px -5px 5px var(--background-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    div {
+      // opacity: 0.75;
+      width: 18px;
+      height: 18px;
+      background-image: url(../assets/arrow.svg);
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    &.nextBtn {
+      div {
+        transform: translateX(2px);
+      }
+    }
+
+    &.prevBtn {
+      div {
+        transform: rotate(180deg) translateX(2px);
+      }
+    }
+
+    &.createBtn {
+      width: 150px;
+      font-weight: 500;
+      font-size: 1rem;
+      border-radius: 50px;
+    }
 
     &:hover {
-      // background: #1c1a24;
-      box-shadow: none;
-      border: 1px solid #363c46;
-      color: #363c46;
+      background: linear-gradient(var(--shadow-color), var(--main-color));
+      box-shadow: inset 0px 5px 5px var(--background-color),
+        inset 0px -5px 5px var(--highlight-color);
+      opacity: 0.5;
     }
   }
 }
