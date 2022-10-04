@@ -1,58 +1,54 @@
 <template>
-  <div class="page">
-    <section class="inputSection">
-      <section v-if="step == 0" class="emojiInputSection">
-        <h3 class="title">My Emotion is</h3>
-        <div class="emojiInputBox">
-          <input type="text" v-model="emoji" class="emojiInput" readonly />
-          <button class="clearEmojiInput" @click="clearEmojiInput">
-            clear
-          </button>
-        </div>
+  <section class="inputSection">
+    <section v-if="step == 0" class="emojiInputSection">
+      <h3 class="title">My Emotion is</h3>
+      <div class="emojiInputBox">
+        <input type="text" v-model="emoji" class="emojiInput" readonly />
+        <button class="clearEmojiInput" @click="clearEmojiInput">clear</button>
+      </div>
 
-        <div class="emojiList">
-          <span
-            v-for="emoji in emojiDoc"
-            :key="emoji.num"
-            @click="emojiKeyboard"
-            >{{ emoji.emoji }}</span
-          >
-        </div>
-      </section>
-
-      <section v-if="step == 1" class="nameInputSection">
-        <h3 class="title">Name</h3>
-        <input
-          type="text"
-          v-model="name"
-          class="nameInput"
-          placeholder="name"
-          autofocus
-        />
-      </section>
-
-      <section v-if="step == 1" class="contentsInputSection">
-        <h3 class="title">Comment</h3>
-        <textarea
-          v-model="content"
-          class="contentsInput"
-          placeholder="contents"
-        /><br />
-      </section>
+      <div class="emojiList">
+        <span
+          v-for="emoji in emojiDoc"
+          :key="emoji.num"
+          @click="emojiKeyboard"
+          >{{ emoji.emoji }}</span
+        >
+      </div>
     </section>
 
-    <aside class="stepBtns">
-      <button @click="prevStep" v-if="step !== 0" class="prevBtn">
-        <div></div>
-      </button>
-      <button @click="nextStep" v-if="step !== 1" class="nextBtn">
-        <div></div>
-      </button>
-      <button v-if="step == 1" @click="getEmotionData" class="createBtn">
-        Create
-      </button>
-    </aside>
-  </div>
+    <section v-if="step == 1" class="nameInputSection">
+      <h3 class="title">Name</h3>
+      <input
+        type="text"
+        v-model="name"
+        class="nameInput"
+        placeholder="name"
+        autofocus
+      />
+    </section>
+
+    <section v-if="step == 1" class="contentsInputSection">
+      <h3 class="title">Comment</h3>
+      <textarea
+        v-model="content"
+        class="contentsInput"
+        placeholder="contents"
+      /><br />
+    </section>
+  </section>
+
+  <aside class="stepBtns">
+    <button @click="nextStep" v-if="step !== 1" class="nextBtn">
+      <div></div>
+    </button>
+    <button v-if="step == 1" @click="getEmotionData" class="createBtn">
+      Create
+    </button>
+    <button @click="prevStep" v-if="step !== 0" class="prevBtn">
+      <div></div>
+    </button>
+  </aside>
 </template>
 
 <script>
@@ -180,17 +176,22 @@ export default {
 
   section {
     width: 100%;
+    border-radius: 10px;
+    background: var(--section-color);
+    box-shadow: 5px 5px 30px #000, inset 5px 5px 20px var(--article-color);
 
     input {
       width: 100%;
       border: none;
       padding: 20px;
+      box-shadow: 5px 5px 10px #000, -5px -5px 10px var(--article-color);
     }
   }
 }
 
 .emojiInputSection {
   max-width: 1000px;
+  padding: 50px;
 
   .emojiInputBox {
     display: flex;
@@ -226,10 +227,10 @@ export default {
 .emojiList {
   width: 100%;
   // height: 50vh;
-  background: var(--section-color);
+  background: var(--article-color);
   font-size: 3rem;
   border-radius: 20px;
-  border: 1px solid var(--article-color);
+  // border: 1px solid #111;
   // box-shadow: inset -8px -8px 10px #171922;
   // box-shadow: inset -8px -8px 20px #1c1a24;
 
@@ -246,6 +247,8 @@ export default {
 
 .nameInputSection {
   max-width: 500px;
+  margin-bottom: 20px;
+  padding: 30px;
 
   .nameInput {
     font-size: 1rem;
@@ -257,6 +260,7 @@ export default {
 
 .contentsInputSection {
   max-width: 500px;
+  padding: 30px;
 
   .contentsInput {
     width: 100%;
@@ -265,6 +269,7 @@ export default {
     border-radius: 20px;
     padding: 20px;
     margin: 15px 0;
+    box-shadow: 5px 5px 10px #000, -5px -5px 10px var(--article-color);
   }
 }
 
@@ -275,9 +280,9 @@ export default {
   margin-bottom: 30px;
   text-align: right;
   display: flex;
-  justify-content: space-evenly;
-  // background: #000;
-  // border-top: 1px solid #eee;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  padding: 0 50px;
 
   button {
     width: 80px;
@@ -287,8 +292,8 @@ export default {
     border-radius: 50%;
     color: var(--text-color);
     background: linear-gradient(var(--main-color), var(--shadow-color));
-    box-shadow: inset 0px 5px 5px var(--highlight-color),
-      inset 0px -5px 5px var(--background-color);
+    // box-shadow: inset 0px 5px 5px var(--highlight-color),
+    //   inset 0px -5px 5px var(--background-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -322,10 +327,14 @@ export default {
     }
 
     &:hover {
-      background: linear-gradient(var(--shadow-color), var(--main-color));
-      box-shadow: inset 0px 5px 5px var(--background-color),
-        inset 0px -5px 5px var(--highlight-color);
-      opacity: 0.5;
+      // background: linear-gradient(var(--shadow-color), var(--main-color));
+      // box-shadow: inset 0px 5px 5px var(--background-color),
+      //   inset 0px -5px 5px var(--highlight-color);
+      background: none;
+      box-shadow: none;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      // opacity: 0.5;
     }
   }
 }

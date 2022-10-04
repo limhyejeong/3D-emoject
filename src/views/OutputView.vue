@@ -3,78 +3,76 @@
     <h1>Creating ...</h1>
   </aside>
 
-  <div class="page">
-    <section class="outputView">
-      <div class="render">
-        <Renderer ref="renderer" antialias orbit-ctrl resize="true">
-          <Camera :position="{ x: 0, y: 0, z: 5 }" />
+  <section class="outputView">
+    <div class="render">
+      <Renderer ref="renderer" antialias orbit-ctrl resize="true">
+        <Camera :position="{ x: 0, y: 0, z: 5 }" />
 
-          <Scene ref="Scene" background="#1A1A23">
-            <Sphere
-              ref="sphereRef"
-              :position="{ z: 0, y: 0, z: 0 }"
-              :width-segments="128"
-              :height-segments="128"
-              :scale="{ x: 1, y: 1, z: 1 }"
-              :rotation="{
-                y: Math.PI / 4,
-                z: Math.PI / 4,
+        <Scene ref="Scene" background="#1A1A23">
+          <Sphere
+            ref="sphereRef"
+            :position="{ z: 0, y: 0, z: 0 }"
+            :width-segments="128"
+            :height-segments="128"
+            :scale="{ x: 1, y: 1, z: 1 }"
+            :rotation="{
+              y: Math.PI / 4,
+              z: Math.PI / 4,
+            }"
+            :cast-shadow="true"
+            :receive-shadow="true"
+          >
+            <ShaderMaterial
+              :props="{
+                uniforms: {
+                  uTime: { value: 0 },
+                  uSpeed: { value: settings.speed },
+                  uDistortion: { value: 0 },
+                  uNoiseDensity: { value: settings.density },
+                  uNoiseStrength: { value: settings.strength },
+                  uFrequency: { value: settings.frequency },
+                  uAmplitude: { value: settings.amplitude },
+                  uIntensity: { value: settings.intensity },
+                  uColor: { value: settings.color },
+                  uLightColor: { value: settings.lightColor },
+                  uLightDirection: { value: settings.lightDirection },
+                  uBrightness: { value: settings.brightness },
+                  uContrast: { value: settings.contrast },
+                  uOscilation: { value: settings.oscilation },
+                  uPhase: { value: settings.phase },
+                },
+                vertexShader: vertexShader,
+                fragmentShader: fragmentShader,
               }"
-              :cast-shadow="true"
-              :receive-shadow="true"
             >
-              <ShaderMaterial
-                :props="{
-                  uniforms: {
-                    uTime: { value: 0 },
-                    uSpeed: { value: settings.speed },
-                    uDistortion: { value: 0 },
-                    uNoiseDensity: { value: settings.density },
-                    uNoiseStrength: { value: settings.strength },
-                    uFrequency: { value: settings.frequency },
-                    uAmplitude: { value: settings.amplitude },
-                    uIntensity: { value: settings.intensity },
-                    uColor: { value: settings.color },
-                    uLightColor: { value: settings.lightColor },
-                    uLightDirection: { value: settings.lightDirection },
-                    uBrightness: { value: settings.brightness },
-                    uContrast: { value: settings.contrast },
-                    uOscilation: { value: settings.oscilation },
-                    uPhase: { value: settings.phase },
-                  },
-                  vertexShader: vertexShader,
-                  fragmentShader: fragmentShader,
-                }"
-              >
-                <Texture
-                  src="/assets/textures/water/Water_COLOR.jpg"
-                  uniform="map"
-                />
-              </ShaderMaterial>
-            </Sphere>
-          </Scene>
-        </Renderer>
-      </div>
+              <Texture
+                src="/assets/textures/water/Water_COLOR.jpg"
+                uniform="map"
+              />
+            </ShaderMaterial>
+          </Sphere>
+        </Scene>
+      </Renderer>
+    </div>
 
-      <div class="outputInfo">
-        <br />
-        <div class="outputInfoEmoji">{{ emoji }}</div>
-        <div class="outputInfoName">{{ name }}</div>
-        <div class="outputInfoContent">{{ content }}</div>
-        <br />
-        <div class="outputInfoCategory">{{ category }}</div>
-        <div class="outputInfoActivity">{{ activity }}</div>
+    <div class="outputInfo">
+      <br />
+      <div class="outputInfoEmoji">{{ emoji }}</div>
+      <div class="outputInfoName">{{ name }}</div>
+      <div class="outputInfoContent">{{ content }}</div>
+      <br />
+      <div class="outputInfoCategory">{{ category }}</div>
+      <div class="outputInfoActivity">{{ activity }}</div>
 
-        <button @click="clearInput" class="againBtn">Replay</button>
-        <button
-          @click="addEmotion(name, emoji, content, category, activity)"
-          class="addBtn"
-        >
-          Upload
-        </button>
-      </div>
-    </section>
-  </div>
+      <button @click="clearInput" class="againBtn">Replay</button>
+      <button
+        @click="addEmotion(name, emoji, content, category, activity)"
+        class="addBtn"
+      >
+        Upload
+      </button>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -337,14 +335,14 @@ export default {
 .outputView {
   width: 100%;
   display: flex;
-  // align-items: center;
+  align-items: center;
 }
 .outputInfo {
   position: absolute;
   right: 0;
   // border: 1px solid #eee;
   width: 40%;
-  padding-left: 50px;
+  padding: 0 50px;
 
   .outputInfoName {
     font-weight: 800;
@@ -364,28 +362,35 @@ export default {
     color: var(--text-color);
     border: none;
     font-weight: 500;
+
+    &:hover {
+      background: none;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
   }
 
   .againBtn {
     background: linear-gradient(var(--article-color), var(--section-color));
     border: 1px solid var(--inactive-color);
+    margin: 10px 0;
 
     &:hover {
-      background: linear-gradient(var(--section-color), var(--article-color));
-      opacity: 0.5;
+      // background: linear-gradient(var(--section-color), var(--article-color));
+      // opacity: 0.5;
     }
   }
   .addBtn {
     background: linear-gradient(var(--main-color), var(--shadow-color));
-    box-shadow: inset 0px 5px 5px var(--highlight-color),
-      inset 0px -5px 5px var(--background-color);
+    // box-shadow: inset 0px 5px 5px var(--highlight-color),
+    //   inset 0px -5px 5px var(--background-color);
     border: 1px solid var(--main-color);
 
     &:hover {
-      background: linear-gradient(var(--shadow-color), var(--main-color));
-      box-shadow: inset 0px 5px 5px var(--background-color),
-        inset 0px -5px 5px var(--highlight-color);
-      opacity: 0.5;
+      // background: linear-gradient(var(--shadow-color), var(--main-color));
+      // box-shadow: inset 0px 5px 5px var(--background-color),
+      //   inset 0px -5px 5px var(--highlight-color);
+      // opacity: 0.5;
     }
   }
 }

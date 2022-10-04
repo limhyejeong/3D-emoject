@@ -1,12 +1,16 @@
 <template>
   <nav>
-    <router-link class="logo" to="/">🪐 Indescribable Emotion</router-link>
+    <router-link class="logo" to="/"
+      >🪐 About Indescribable Emotions</router-link
+    >
     <!-- <router-link to="/about">About</router-link> |
     <router-link to="/create">Create</router-link> |
     <router-link to="/list">List</router-link> -->
     <!-- <router-link class="list" to="/list">🍕</router-link> -->
   </nav>
-  <router-view />
+  <div class="page">
+    <router-view />
+  </div>
 </template>
 
 <script>

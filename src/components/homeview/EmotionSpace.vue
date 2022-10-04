@@ -1,13 +1,14 @@
 <template>
+  <div class="meshInfo">{{ seletedData.emoji }}</div>
   <aside v-show="isClick" class="info">
     <div class="infoNum">{{ seletedData.emoji }}</div>
     <div class="infoName">{{ seletedData.name }}</div>
     <!-- <div class="infoEmoji">{{ seletedData.emoji }}</div> -->
     <p class="infoContents">{{ seletedData.content }}</p>
 
-    <button @click="closeInfo" class="closeInfo">X</button>
+    <button @click="closeInfo" class="closeInfo">x</button>
     <button @click="deleteEmotion(seletedData.id)" class="deleteInfo">
-      Delete Emotion
+      Delete
     </button>
   </aside>
 
@@ -39,6 +40,8 @@
           z: Math.floor(Math.random() * 10 - 5),
         }"
         @click="boxClick(item)"
+        @pointerEnter="boxHover(item)"
+        @pointerLeave="boxHoverOut"
       >
         <PhongMaterial color="#eee" />
       </Icosahedron>
@@ -156,6 +159,15 @@ export default {
       itemRefs.push(el);
     };
 
+    function boxHover(data) {
+      console.log(data);
+      seletedData.value = data;
+    }
+    function boxHoverOut() {
+      // const meshInfo = document.querySelector(".meshInfo");
+      seletedData.value = "";
+    }
+
     // 메쉬 클릭 시 정보 표시
     function boxClick(data) {
       if (isClick.value == false) {
@@ -214,10 +226,11 @@ export default {
     let 속도 = 0.6;
 
     onMounted(() => {
-      renderer.value.onBeforeRender(() => {
-        // itemRefs.forEach((item) => {
-        //   item.mesh.rotation.y += 0.01;
-        // });
+      renderer.value.onBeforeRender((event) => {
+        console.log(event);
+        itemRefs.forEach((item) => {
+          item.mesh.rotation.y += 0.01;
+        });
         if (seletedMesh != null) {
           // console.log(seletedMesh);
           // twist();
@@ -230,6 +243,8 @@ export default {
     return {
       seletedData,
       boxClick,
+      boxHover,
+      boxHoverOut,
       isClick,
       onClick,
       closeInfo,
@@ -249,6 +264,11 @@ export default {
 </script>
 
 <style lang="scss">
+.meshInfo {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
 .info {
   position: absolute;
   right: 0;
@@ -257,13 +277,13 @@ export default {
   // background: #27292e;
   color: #fff;
   border-radius: 10px;
-  border: 1px solid #222;
+  border: 1px solid var(--section-color);
   // box-shadow: inset -12px -8px 20px #000;
   // box-shadow: inset 6px 4px 16px #888;
   z-index: 100;
   -webkit-backdrop-filter: blur(30px);
   backdrop-filter: blur(30px);
-  // box-shadow: inset 0px 0px 25px #aaa;
+  box-shadow: 5px 5px 20px #000;
   max-width: 500px;
 
   div {
@@ -292,6 +312,8 @@ export default {
     background: #e91e51;
     border: none;
     color: #fff;
+    border-radius: 10px;
+    padding: 10px;
   }
 
   .infoNum {

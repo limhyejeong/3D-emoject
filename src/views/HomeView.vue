@@ -62,8 +62,8 @@ export default {
     // box-shadow: inset 0px 0px 25px #aaa;
     color: var(--text-color);
     background: linear-gradient(var(--main-color), var(--shadow-color));
-    box-shadow: inset 0px 5px 5px var(--highlight-color),
-      inset 0px -5px 5px var(--background-color);
+    // box-shadow: inset 0px 5px 5px var(--highlight-color),
+    //   inset 0px -5px 5px var(--background-color);
     border: 1px solid var(--main-color);
 
     &:hover {
@@ -71,10 +71,14 @@ export default {
       // box-shadow: none;
       // border: 1px solid #555;
       // color: #555;
-      background: linear-gradient(var(--shadow-color), var(--main-color));
-      box-shadow: inset 0px 5px 5px var(--background-color),
-        inset 0px -5px 5px var(--highlight-color);
-      opacity: 0.5;
+      // background: linear-gradient(var(--shadow-color), var(--main-color));
+      // box-shadow: inset 0px 5px 5px var(--background-color),
+      // inset 0px -5px 5px var(--highlight-color);
+      // opacity: 0.5;
+      background: none;
+      box-shadow: none;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
     }
   }
 }
