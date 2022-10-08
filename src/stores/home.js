@@ -73,10 +73,12 @@ export const useHomeStore = defineStore('home', {
         },
 
         deleteEmotion(emotionId) {
-            let emoRef = doc(emoColRef, emotionId);
-            deleteDoc(emoRef);
-            alert("emotion deleted successully");
-            location.reload();
+            if (confirm("감정을 삭제하시겠습니까?")) {
+                let emoRef = doc(emoColRef, emotionId);
+                deleteDoc(emoRef);
+                alert("감정이 삭제되었습니다");
+                location.reload();
+            }
         },
     },
 })

@@ -35,7 +35,7 @@ export const useInputStore = defineStore('input', {
             };
 
             addDoc(emoColRef, array);
-            alert("등록 완료");
+            alert("A emotion have been uploaded!");
 
             router.push("/");
         },

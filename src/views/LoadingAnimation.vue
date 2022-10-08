@@ -1,5 +1,5 @@
 <template>
-  <span class="loadingText">Creating..🍳</span>
+  <span class="loadingText">Creating..</span>
   <Renderer ref="renderer" antialias resize="window">
     <Camera ref="camera" :position="{ x: 0, y: 0, z: 15 }" />
 
@@ -64,7 +64,7 @@ export default {
     const store = useInputStore();
     const { step } = storeToRefs(store);
 
-    // setTimeout(() => router.go(step.value++), 3000);
+    setTimeout(() => router.go(step.value++), 2500);
 
     let renderer = ref(null);
     let torus = ref(null);
