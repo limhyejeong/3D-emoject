@@ -1,7 +1,7 @@
 <template>
   <!-- <h3>Create Emotion</h3> -->
   <InputView v-if="category == 'none'" />
-  <!-- <Creating v-if="category !== 'none'" /> -->
+  <!-- <LoadingAnimation /> -->
   <OutputView v-if="category !== 'none'" />
   <!-- <Anger /> -->
   <!-- <Fear /> -->
@@ -16,9 +16,9 @@
 <script>
 import InputView from "./InputView.vue";
 import OutputView from "./OutputView.vue";
-import Creating from "./Creating.vue";
+import LoadingAnimation from "./LoadingAnimation.vue";
 import TheCanvas from "./TheCanvas.vue";
-import Anger from "@/components/homeview/sample/Anger.vue";
+import Anger from "@/components/homeview/sample/Anger-Cone.vue";
 import Fear from "@/components/homeview/sample/Fear.vue";
 import Anticipation from "@/components/homeview/sample/Anticipation.vue";
 import Sadness from "@/components/homeview/sample/Sadness.vue";
@@ -34,7 +34,7 @@ export default {
   components: {
     InputView,
     OutputView,
-    Creating,
+    LoadingAnimation,
     TheCanvas,
     Anger,
     Fear,
@@ -47,8 +47,9 @@ export default {
   },
   setup() {
     const store = useInputStore();
-    const { name, emoji, content, category, activity, create } =
+    const { name, emoji, content, category, activity, create, step } =
       storeToRefs(store);
+    const { prevStep, nextStep } = store;
 
     return {
       store,
@@ -58,6 +59,9 @@ export default {
       category,
       activity,
       create,
+      prevStep,
+      nextStep,
+      step,
     };
   },
 };

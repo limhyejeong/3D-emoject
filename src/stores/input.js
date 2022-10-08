@@ -10,7 +10,8 @@ export const useInputStore = defineStore('input', {
         emoji: '',
         content: '',
         category: 'none',
-        activity: 0
+        activity: 0,
+        step: 0,
     }),
     getters: {
         // doubleCount(state) {
@@ -44,6 +45,13 @@ export const useInputStore = defineStore('input', {
             this.content = '';
             this.category = 'none';
             this.activity = 0;
+            this.step = 0;
+        },
+        prevStep() {
+            this.step.value--;
+        },
+        nextStep() {
+            this.step.value++;
         }
     },
 })

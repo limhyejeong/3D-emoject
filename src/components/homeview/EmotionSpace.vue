@@ -160,12 +160,11 @@ export default {
     };
 
     function boxHover(data) {
-      console.log(data);
       seletedData.value = data;
     }
     function boxHoverOut() {
       // const meshInfo = document.querySelector(".meshInfo");
-      seletedData.value = "";
+      // seletedData.value = "";
     }
 
     // 메쉬 클릭 시 정보 표시
@@ -227,7 +226,6 @@ export default {
 
     onMounted(() => {
       renderer.value.onBeforeRender((event) => {
-        console.log(event);
         itemRefs.forEach((item) => {
           item.mesh.rotation.y += 0.01;
         });

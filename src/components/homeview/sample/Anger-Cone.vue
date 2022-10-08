@@ -34,6 +34,7 @@
           :receive-shadow="true"
         >
           <ShaderMaterial
+            flatShading="true"
             :props="{
               uniforms: {
                 uTime: { value: 0 },
