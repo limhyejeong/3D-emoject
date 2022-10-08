@@ -1,8 +1,7 @@
 <template>
-  <!-- <h3>Create Emotion</h3> -->
-  <InputView v-if="category == 'none'" />
-  <!-- <LoadingAnimation /> -->
-  <OutputView v-if="category !== 'none'" />
+  <InputView v-if="step <= 1" />
+  <LoadingAnimation v-if="step == 2" />
+  <OutputView v-if="step == 3" />
   <!-- <Anger /> -->
   <!-- <Fear /> -->
   <!-- <Anticipation /> -->
@@ -47,18 +46,11 @@ export default {
   },
   setup() {
     const store = useInputStore();
-    const { name, emoji, content, category, activity, create, step } =
-      storeToRefs(store);
+    const { step } = storeToRefs(store);
     const { prevStep, nextStep } = store;
 
     return {
       store,
-      name,
-      emoji,
-      content,
-      category,
-      activity,
-      create,
       prevStep,
       nextStep,
       step,

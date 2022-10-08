@@ -1,6 +1,6 @@
 <template>
   <span class="loadingText">Creating..🍳</span>
-  <Renderer ref="renderer" antialias orbitCtrl resize="window">
+  <Renderer ref="renderer" antialias resize="window">
     <Camera ref="camera" :position="{ x: 0, y: 0, z: 15 }" />
 
     <Scene ref="scene" background="#1a1a23">
@@ -10,21 +10,22 @@
         :intensity="1"
       />
       <PointLight
-        color="#ffffff"
+        color="hotpink"
         :position="{ x: 2, y: 2, z: 2 }"
         :intensity="1"
       />
 
       <TorusKnot
         ref="torus"
-        :tube="0.2"
-        :tubularSegments="100"
-        :p="3"
+        :tube="0.25"
+        :tubularSegments="300"
+        :radialSegments="50"
+        :p="2"
         :q="5"
         :position="{ x: 0, y: 0, z: 0 }"
         :rotation="{ x: 0, y: 0, z: 0 }"
       >
-        <PhongMaterial color="#747c95" />
+        <LambertMaterial color="#5c47eb" />
       </TorusKnot>
     </Scene>
   </Renderer>
@@ -32,7 +33,9 @@
 
 <script>
 import { ref, onMounted } from "vue";
-// import { gsap } from "gsap";
+import { useInputStore } from "@/stores/input";
+import { storeToRefs } from "pinia";
+import router from "@/router/index";
 
 import {
   Renderer,
@@ -42,7 +45,7 @@ import {
   PointLight,
   Box,
   TorusKnot,
-  PhongMaterial,
+  LambertMaterial,
 } from "troisjs";
 
 export default {
@@ -55,26 +58,20 @@ export default {
     PointLight,
     Box,
     TorusKnot,
-    PhongMaterial,
+    LambertMaterial,
   },
   setup() {
-    // setTimeout(() => router.go("/output"), 2000);
+    const store = useInputStore();
+    const { step } = storeToRefs(store);
+
+    // setTimeout(() => router.go(step.value++), 3000);
 
     let renderer = ref(null);
     let torus = ref(null);
 
     onMounted(() => {
       renderer.value.onBeforeRender(() => {
-        // torus.value.mesh.rotation.x += 0.1;
-        // torus.value.mesh.rotation.y += 0.1;
-        torus.value.mesh.rotation.z += 0.05;
-
-        // gsap.to(torus.value.mesh.rotation, {
-        //   // x: 6.5,
-        //   // y: 6.5,
-        //   z: 3.7,
-        //   duration: 2,
-        // });
+        torus.value.mesh.rotation.z += 0.03;
       });
     });
     return {

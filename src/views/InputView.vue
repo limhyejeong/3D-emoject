@@ -1,6 +1,6 @@
 <template>
   <section class="inputSection">
-    <section v-if="step.value == 0" class="emojiInputSection">
+    <section v-if="step == 0" class="emojiInputSection">
       <h3 class="title">My Emotion is</h3>
       <div class="emojiInputBox">
         <input type="text" v-model="emoji" class="emojiInput" readonly />
@@ -17,7 +17,7 @@
       </div>
     </section>
 
-    <section v-if="step.value == 1" class="nameInputSection">
+    <section v-if="step == 1" class="nameInputSection">
       <h3 class="title">Name</h3>
       <input
         type="text"
@@ -28,7 +28,7 @@
       />
     </section>
 
-    <section v-if="step.value == 1" class="contentsInputSection">
+    <section v-if="step == 1" class="contentsInputSection">
       <h3 class="title">Comment</h3>
       <textarea
         v-model="content"
@@ -39,13 +39,13 @@
   </section>
 
   <aside class="stepBtns">
-    <button @click="nextStep" v-if="step.value !== 1" class="nextBtn">
+    <button @click="nextStep" v-if="step !== 1" class="nextBtn">
       <div></div>
     </button>
-    <button v-if="step.value == 1" @click="getEmotionData" class="createBtn">
+    <button v-if="step == 1" @click="getEmotionData" class="createBtn">
       Create
     </button>
-    <button @click="prevStep" v-if="step.value !== 0" class="prevBtn">
+    <button @click="prevStep" v-if="step !== 0" class="prevBtn">
       <div></div>
     </button>
   </aside>
@@ -64,8 +64,6 @@ export default {
     const { name, emoji, content, category, activity, create, step } =
       storeToRefs(store);
     const { prevStep, nextStep } = store;
-
-    console.log(step.value);
 
     // 이모지 클릭시 인풋란에 추가되는 함수
     function emojiKeyboard(event) {
@@ -129,6 +127,7 @@ export default {
       };
       category.value = getMax(dataObject)[0]; // 최대값 구하기
       activity.value = Math.floor(sumActivity / inputEmoji.length); // Actibity 구하기 (활성도 합계 / 이모지 수)
+      nextStep();
     }
 
     return {

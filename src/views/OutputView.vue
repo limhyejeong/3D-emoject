@@ -1,8 +1,4 @@
 <template>
-  <aside class="creating">
-    <h1>Creating ...</h1>
-  </aside>
-
   <section class="outputView">
     <div class="render">
       <Renderer ref="renderer" antialias orbit-ctrl resize="true">
@@ -107,11 +103,6 @@ export default {
     Texture,
   },
   setup() {
-    setTimeout(
-      () => (document.querySelector(".creating").style.display = "none"),
-      2000
-    );
-
     const store = useInputStore();
     const { name, emoji, content, category, activity } = storeToRefs(store);
     const { addEmotion, clearInput } = store;

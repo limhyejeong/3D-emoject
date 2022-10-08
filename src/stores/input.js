@@ -48,10 +48,13 @@ export const useInputStore = defineStore('input', {
             this.step = 0;
         },
         prevStep() {
-            this.step.value--;
+            this.step--;
+            console.log(this.step)
         },
         nextStep() {
-            this.step.value++;
+            this.step++;
+            console.log(this.step)
+
         }
     },
 })
