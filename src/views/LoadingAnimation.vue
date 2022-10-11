@@ -45,9 +45,7 @@ import {
   Scene,
   AmbientLight,
   PointLight,
-  Box,
   TorusKnot,
-  LambertMaterial,
   MatcapMaterial,
 } from "troisjs";
 
@@ -59,16 +57,14 @@ export default {
     Scene,
     AmbientLight,
     PointLight,
-    Box,
     TorusKnot,
-    LambertMaterial,
     MatcapMaterial,
   },
   setup() {
     const store = useInputStore();
     const { step } = storeToRefs(store);
 
-    // setTimeout(() => router.go(step.value++), 2500);
+    setTimeout(() => router.go(step.value++), 2500);
 
     let renderer = ref(null);
     let torus = ref(null);
