@@ -1,5 +1,5 @@
 <template>
-  <span class="loadingText">Creating..</span>
+  <span class="loadingText">Loading...</span>
   <Renderer ref="renderer" antialias resize="window">
     <Camera ref="camera" :position="{ x: 0, y: 0, z: 15 }" />
 
@@ -17,7 +17,8 @@
 
       <TorusKnot
         ref="torus"
-        :tube="0.25"
+        :scale="{ x: 2, y: 2, z: 2 }"
+        :tube="0.2"
         :tubularSegments="300"
         :radialSegments="50"
         :p="2"
@@ -25,7 +26,8 @@
         :position="{ x: 0, y: 0, z: 0 }"
         :rotation="{ x: 0, y: 0, z: 0 }"
       >
-        <LambertMaterial color="#5c47eb" />
+        <!-- <LambertMaterial color="#5c47eb" /> -->
+        <MatcapMaterial name="312C34_A2AAB3_61656A_808494" />
       </TorusKnot>
     </Scene>
   </Renderer>
@@ -46,6 +48,7 @@ import {
   Box,
   TorusKnot,
   LambertMaterial,
+  MatcapMaterial,
 } from "troisjs";
 
 export default {
@@ -59,12 +62,13 @@ export default {
     Box,
     TorusKnot,
     LambertMaterial,
+    MatcapMaterial,
   },
   setup() {
     const store = useInputStore();
     const { step } = storeToRefs(store);
 
-    setTimeout(() => router.go(step.value++), 2500);
+    // setTimeout(() => router.go(step.value++), 2500);
 
     let renderer = ref(null);
     let torus = ref(null);
@@ -84,9 +88,10 @@ export default {
 
 <style lang="scss">
 .loadingText {
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 2rem;
+  // color: var(--inactive-color);
+  font-weight: 500;
   position: absolute;
-  top: 65vh;
+  // top: 64vh;
 }
 </style>

@@ -104,7 +104,6 @@ import Stats from "troisjs/src/components/misc/Stats";
 import * as THREE from "three";
 // import { makeNoise4D } from "open-simplex-noise";
 import { vertexShader, fragmentShader, twist } from "@/assets/js/twist";
-import { noise } from "@/assets/js/noise";
 
 export default {
   name: "EmotionSpace",
@@ -125,7 +124,7 @@ export default {
   },
   setup() {
     const store = useHomeStore();
-    const { cate, emotions } = storeToRefs(store);
+    const { emotions } = storeToRefs(store);
     const { fetchEmotions, deleteEmotion } = store;
 
     let renderer = ref(null);

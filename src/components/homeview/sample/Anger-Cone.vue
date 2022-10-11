@@ -50,7 +50,6 @@
                 uLightDirection: { value: settings.lightDirection },
                 uBrightness: { value: settings.brightness },
                 uContrast: { value: settings.contrast },
-                uOscilation: { value: settings.oscilation },
                 uPhase: { value: settings.phase },
               },
               vertexShader: vertexShader,
@@ -137,14 +136,8 @@ export default {
       phase: new THREE.Vector3(0.1, 0.1, 0.1),
     };
 
-    function createShapes() {
-      if (category.value == "sadness") {
-        noiseSettings.진폭 = 1;
-      }
-    }
-
     function createObj() {
-      createShapes();
+      // createShapes();
       // isCreated.value = true;
       sphereMesh = sphereRef.value.mesh;
       sphereMesh.geometry.positionData = [];
@@ -159,7 +152,7 @@ export default {
       renderer?.value?.onBeforeRender(() => {
         if (sphereMesh != null) {
           // noise(sphereMesh, clock, noiseSettings, v3);
-          twist(sphereMesh, clock, settings);
+          // twist(sphereMesh, clock, settings);
           // sphereMesh.rotation.y += 0.01;
         }
       });
