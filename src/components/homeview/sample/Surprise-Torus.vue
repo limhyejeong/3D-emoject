@@ -1,40 +1,37 @@
 <template>
-  <!-- <div class="info">
-    <h3>Output</h3>
-    <div>선택한 이모지 : {{ emoji }}</div>
-    <div>이름 : {{ name }}</div>
-    <div>설명 : {{ content }}</div>
-    <br />
-    <div>감정 : {{ category }}</div>
-    <div>활성도 : {{ activity }}</div>
-
-    <button @click="createObj">Hi</button>
-
-    <button @click="createEmotion(name, emoji, content, category, activity)">
-      감정 등록
-    </button>
-  </div> -->
-
   <div class="render">
     <Renderer ref="renderer" antialias orbit-ctrl resize="window">
       <Camera :position="{ x: 5, y: 5, z: 5 }" />
 
       <Scene ref="Scene" background="#000">
-        <Cone
+        <!-- <PointLight :position="{ z: 100, y: 100, z: 100 }" /> -->
+        <!-- <AmbientLight :intensity="0.8" />
+        <PointLight :position="{ x: 30 }" color="#00BCFF" />
+        <PointLight :position="{ x: -30, y: 30 }" color="#AD0EFF" />
+        <PointLight :position="{ x: 0, z: 30 }" color="#FF0004" /> -->
+
+        <!-- :width-segments="128"
+          :height-segments="128" -->
+
+        <Torus
           ref="sphereRef"
-          :position="{ z: 0, y: 0, z: 0 }"
           :radialSegments="128"
-          :heightSegments="128"
+          :tubularSegments="128"
+          :position="{ z: 0, y: 0, z: 0 }"
           :scale="{ x: 1, y: 1, z: 1 }"
-          :rotation="{
-            y: Math.PI / 4,
-            z: Math.PI / 4,
-          }"
+          :rotation="{ y: Math.PI / 4, z: Math.PI / 4 }"
           :cast-shadow="true"
           :receive-shadow="true"
         >
-          <MatcapMaterial name="4A6442_D0AB75_81CD94_181B12" />
-        </Cone>
+          <MatcapMaterial
+            name="495CA6_CCD2E6_A5B1D8_1E2852
+"
+          />
+
+          <!-- <ShaderMaterial>
+            <Texture src="/assets/textures/Ice_001_COLOR.jpg" uniform="map" />
+          </ShaderMaterial> -->
+        </Torus>
       </Scene>
     </Renderer>
   </div>
@@ -49,11 +46,11 @@ import {
   Camera,
   Scene,
   Sphere,
-  Cone,
   AmbientLight,
   PointLight,
   ShaderMaterial,
   Texture,
+  Torus,
   MatcapMaterial,
 } from "troisjs";
 // import { makeNoise4D } from "open-simplex-noise";
@@ -70,11 +67,11 @@ export default {
     Camera,
     Scene,
     Sphere,
-    Cone,
     AmbientLight,
     PointLight,
     ShaderMaterial,
     Texture,
+    Torus,
     MatcapMaterial,
   },
   setup() {
@@ -88,8 +85,8 @@ export default {
     let v3 = new THREE.Vector3();
     let clock = new THREE.Clock();
     let noiseSettings = {
-      진폭: 2,
-      반경: 0.5,
+      진폭: 1,
+      반경: 1,
       속도: 2,
     };
     // let isCreated = ref(false);
@@ -98,12 +95,12 @@ export default {
       speed: 0.5,
       distortion: 1, //왜곡
       density: 1, //밀도
-      strength: 0.5, //힘
-      frequency: 1, //빈도 (회전)
-      amplitude: 1, //진폭 (회전)
+      strength: 0.4, //힘
+      frequency: 2, //빈도 (회전)
+      amplitude: 2, //진폭 (회전)
       intensity: 1, //대비
-      color: new THREE.Color(0xffffff),
-      lightColor: new THREE.Color(0xf9c53a),
+      color: new THREE.Color(0x90ceff),
+      lightColor: new THREE.Color(0xffffff),
       lightDirection: new THREE.Vector3(0.0, 1.0, 0.0),
       brightness: new THREE.Vector3(1.0, 1.0, 1.0),
       contrast: new THREE.Vector3(1.0, 1.0, 1.0),
@@ -111,8 +108,14 @@ export default {
       phase: new THREE.Vector3(0.1, 0.1, 0.1),
     };
 
+    function createShapes() {
+      if (category.value == "sadness") {
+        noiseSettings.진폭 = 1;
+      }
+    }
+
     function createObj() {
-      // createShapes();
+      createShapes();
       // isCreated.value = true;
       sphereMesh = sphereRef.value.mesh;
       sphereMesh.geometry.positionData = [];

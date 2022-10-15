@@ -2,8 +2,8 @@
   <!-- <InputView v-if="step <= 1" /> -->
   <!-- <LoadingAnimation v-if="step == 2" /> -->
   <!-- <OutputView v-if="step == 3" /> -->
-  <GltfSample />
-  <!-- <Anger /> -->
+  <!-- <GltfSample /> -->
+  <Anger />
   <!-- <Fear /> -->
   <!-- <Anticipation /> -->
   <!-- <Sadness /> -->
@@ -24,7 +24,7 @@ import Anticipation from "@/components/homeview/sample/Anticipation.vue";
 import Sadness from "@/components/homeview/sample/Sadness.vue";
 import Disgust from "@/components/homeview/sample/Disgust.vue";
 import Joy from "@/components/homeview/sample/Joy.vue";
-import Surprise from "@/components/homeview/sample/Surprise.vue";
+import Surprise from "@/components/homeview/sample/Surprise-Torus.vue";
 import Trust from "@/components/homeview/sample/Trust.vue";
 import GltfSample from "@/components/homeview/sample/GltfSample.vue";
 import { useInputStore } from "@/stores/input";

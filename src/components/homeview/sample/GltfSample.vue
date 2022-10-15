@@ -70,12 +70,12 @@ export default {
     const gltfLoader = new GLTFLoader();
     const textureLoader = new THREE.TextureLoader();
     const matcapTex = textureLoader.load(
-      "https://raw.githubusercontent.com/nidorx/matcaps/master/64/3B3C3F_DAD9D5_929290_ABACA8-64px.png"
+      "https://raw.githubusercontent.com/nidorx/matcaps/master/64/463F37_ACCFBB_818B78_91A494-64px.png"
     );
     let sample;
 
     gltfLoader.load("./../../../assets/models/sample.gltf", (gltf) => {
-      sample = gltf.scene.children[2];
+      sample = gltf.scene.children[3];
       sample.material = new THREE.MeshMatcapMaterial({
         matcap: matcapTex,
       });
