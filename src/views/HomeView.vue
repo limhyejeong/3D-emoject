@@ -14,25 +14,14 @@
 import EmotionSpace from "../components/homeview/EmotionSpace.vue";
 import { useInputStore } from "@/stores/input";
 
-// import { useHomeStore } from "@/stores/home";
-// import { storeToRefs } from "pinia";
-// import emoColRef from "../firebase";
-// import { getDocs, doc, deleteDoc } from "firebase/firestore";
-
 export default {
   name: "HomeView",
   components: {
     EmotionSpace,
   },
   setup() {
-    const store = useInputStore();
-    const { clearInput } = store;
-
+    const { clearInput } = useInputStore();
     clearInput();
-
-    return {
-      clearInput,
-    };
   },
 };
 </script>

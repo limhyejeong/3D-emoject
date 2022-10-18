@@ -4,34 +4,20 @@
       <Camera :position="{ x: 5, y: 5, z: 5 }" />
 
       <Scene ref="Scene" background="#000">
-        <!-- <PointLight :position="{ z: 100, y: 100, z: 100 }" /> -->
-        <!-- <AmbientLight :intensity="0.8" />
-        <PointLight :position="{ x: 30 }" color="#00BCFF" />
-        <PointLight :position="{ x: -30, y: 30 }" color="#AD0EFF" />
-        <PointLight :position="{ x: 0, z: 30 }" color="#FF0004" /> -->
-
-        <!-- :width-segments="128"
-          :height-segments="128" -->
-
-        <Torus
+        <Tetrahedron
           ref="sphereRef"
-          :radialSegments="128"
-          :tubularSegments="128"
+          :detail="5"
           :position="{ z: 0, y: 0, z: 0 }"
           :scale="{ x: 1, y: 1, z: 1 }"
-          :rotation="{ y: Math.PI / 4, z: Math.PI / 4 }"
+          :rotation="{
+            y: Math.PI / 4,
+            z: Math.PI / 4,
+          }"
           :cast-shadow="true"
           :receive-shadow="true"
         >
-          <MatcapMaterial
-            name="495CA6_CCD2E6_A5B1D8_1E2852
-"
-          />
-
-          <!-- <ShaderMaterial>
-            <Texture src="/assets/textures/Ice_001_COLOR.jpg" uniform="map" />
-          </ShaderMaterial> -->
-        </Torus>
+          <MatcapMaterial name="4B4A3A_94A3A4_68766F_988475" />
+        </Tetrahedron>
       </Scene>
     </Renderer>
   </div>
@@ -45,12 +31,11 @@ import {
   Renderer,
   Camera,
   Scene,
-  Sphere,
+  Tetrahedron,
   AmbientLight,
   PointLight,
   ShaderMaterial,
   Texture,
-  Torus,
   MatcapMaterial,
 } from "troisjs";
 // import { makeNoise4D } from "open-simplex-noise";
@@ -66,12 +51,9 @@ export default {
     Renderer,
     Camera,
     Scene,
-    Sphere,
-    AmbientLight,
-    PointLight,
+    Tetrahedron,
     ShaderMaterial,
     Texture,
-    Torus,
     MatcapMaterial,
   },
   setup() {
@@ -87,24 +69,24 @@ export default {
     let noiseSettings = {
       진폭: 1,
       반경: 1,
-      속도: 2,
+      속도: 1,
     };
     // let isCreated = ref(false);
 
     const settings = {
-      speed: 0.5,
+      speed: 0.3,
       distortion: 1, //왜곡
-      density: 1, //밀도
-      strength: 0.4, //힘
-      frequency: 2, //빈도 (회전)
-      amplitude: 2, //진폭 (회전)
+      density: 10, //밀도
+      strength: 1, //힘
+      frequency: 1, //빈도 (회전)
+      amplitude: 3, //진폭 (회전)
       intensity: 1, //대비
-      color: new THREE.Color(0x90ceff),
+      color: new THREE.Color(0xffc107),
       lightColor: new THREE.Color(0xffffff),
       lightDirection: new THREE.Vector3(0.0, 1.0, 0.0),
-      brightness: new THREE.Vector3(1.0, 1.0, 1.0),
-      contrast: new THREE.Vector3(1.0, 1.0, 1.0),
-      oscilation: new THREE.Vector3(0.1, 0.1, 0.1),
+      brightness: new THREE.Vector3(1.0, 1.0, 2.0),
+      contrast: new THREE.Vector3(2.0, 1.0, 3.0),
+      oscilation: new THREE.Vector3(0.1, 0.1, 0.2),
       phase: new THREE.Vector3(0.1, 0.1, 0.1),
     };
 

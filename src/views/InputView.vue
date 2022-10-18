@@ -220,7 +220,7 @@ export default {
   width: 100%;
   // height: 50vh;
   background: var(--article-color);
-  font-size: 3rem;
+  font-size: 2.2rem;
   border-radius: 20px;
   // border: 1px solid #111;
   // box-shadow: inset -8px -8px 10px #171922;

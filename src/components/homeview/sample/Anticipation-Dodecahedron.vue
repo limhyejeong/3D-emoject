@@ -4,14 +4,18 @@
       <Camera :position="{ x: 5, y: 5, z: 5 }" />
 
       <Scene ref="Scene" background="#000">
-        <AmbientLight :position="{ x: 10, y: 10, z: 10 }" :intensity="0.5" />
-        <PointLight :position="{ x: 10, y: 10, z: 10 }" :intensity="1" />
+        <!-- <PointLight :position="{ z: 100, y: 100, z: 100 }" /> -->
+        <!-- <AmbientLight :intensity="0.8" />
+        <PointLight :position="{ x: 30 }" color="#00BCFF" />
+        <PointLight :position="{ x: -30, y: 30 }" color="#AD0EFF" />
+        <PointLight :position="{ x: 0, z: 30 }" color="#FF0004" /> -->
 
-        <Cone
+        <Dodecahedron
           ref="sphereRef"
+          :detail="5"
           :position="{ z: 0, y: 0, z: 0 }"
-          :radialSegments="100"
-          :heightSegments="1"
+          :width-segments="128"
+          :height-segments="128"
           :scale="{ x: 1, y: 1, z: 1 }"
           :rotation="{
             y: Math.PI / 4,
@@ -20,34 +24,8 @@
           :cast-shadow="true"
           :receive-shadow="true"
         >
-          <!-- <PhongMaterial color="#dd00dd" /> -->
-          <MatcapMaterial src="./assets/textures/soul2.jpg" />
-          <!-- <ShaderMaterial
-            :props="{
-              uniforms: {
-                uTime: { value: 0 },
-                uSpeed: { value: settings.speed },
-                uDistortion: { value: 0 },
-                uNoiseDensity: { value: settings.density },
-                uNoiseStrength: { value: settings.strength },
-                uFrequency: { value: settings.frequency },
-                uAmplitude: { value: settings.amplitude },
-                uIntensity: { value: settings.intensity },
-                uColor: { value: settings.color },
-                uLightColor: { value: settings.lightColor },
-                uLightDirection: { value: settings.lightDirection },
-                uBrightness: { value: settings.brightness },
-                uContrast: { value: settings.contrast },
-                uOscilation: { value: settings.oscilation },
-                uPhase: { value: settings.phase },
-              },
-              vertexShader: vertexShader,
-              fragmentShader: fragmentShader,
-            }"
-          >
-            <Texture src="/assets/textures/water/water001.jpg" uniform="map" />
-          </ShaderMaterial> -->
-        </Cone>
+          <MatcapMaterial name="17395A_7EBCC7_4D8B9F_65A1B5" />
+        </Dodecahedron>
       </Scene>
     </Renderer>
   </div>
@@ -61,14 +39,11 @@ import {
   Renderer,
   Camera,
   Scene,
-  Sphere,
-  Cone,
+  Dodecahedron,
   AmbientLight,
   PointLight,
-  ShaderMaterial,
-  PhongMaterial,
-  Texture,
   MatcapMaterial,
+  Texture,
 } from "troisjs";
 // import { makeNoise4D } from "open-simplex-noise";
 import { vertexShader, fragmentShader, twist } from "@/assets/js/twist";
@@ -83,14 +58,11 @@ export default {
     Renderer,
     Camera,
     Scene,
-    Sphere,
-    Cone,
+    Dodecahedron,
     AmbientLight,
     PointLight,
-    ShaderMaterial,
-    PhongMaterial,
-    Texture,
     MatcapMaterial,
+    Texture,
   },
   setup() {
     const store = useInputStore();
@@ -103,31 +75,33 @@ export default {
     let v3 = new THREE.Vector3();
     let clock = new THREE.Clock();
     let noiseSettings = {
-      진폭: 2,
-      반경: 1,
+      진폭: 1,
+      반경: 0.5,
       속도: 1,
     };
     // let isCreated = ref(false);
 
     const settings = {
-      speed: 1,
-      distortion: 1, //왜곡
-      density: 1, //밀도
-      strength: 0.1, //힘
+      speed: 0.1,
+      distortion: 2, //왜곡
+      density: 3, //밀도
+      strength: 0.4, //힘
       frequency: 1, //빈도 (회전)
       amplitude: 1, //진폭 (회전)
       intensity: 1, //대비
-      color: new THREE.Color(0xffffff),
-      lightColor: new THREE.Color(0xf9c53a),
+      color: new THREE.Color(0xccdee9),
+      lightColor: new THREE.Color(0xffffff),
       lightDirection: new THREE.Vector3(0.0, 1.0, 0.0),
-      brightness: new THREE.Vector3(1.0, 1.0, 1.0),
-      contrast: new THREE.Vector3(1.0, 1.0, 1.0),
-      oscilation: new THREE.Vector3(0.1, 0.1, 0.1),
-      phase: new THREE.Vector3(0.1, 0.1, 0.1),
     };
 
+    function createShapes() {
+      if (category.value == "sadness") {
+        noiseSettings.진폭 = 1;
+      }
+    }
+
     function createObj() {
-      // createShapes();
+      createShapes();
       // isCreated.value = true;
       sphereMesh = sphereRef.value.mesh;
       sphereMesh.geometry.positionData = [];

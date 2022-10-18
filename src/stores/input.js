@@ -49,12 +49,9 @@ export const useInputStore = defineStore('input', {
         },
         prevStep() {
             this.step--;
-            console.log(this.step)
         },
         nextStep() {
             this.step++;
-            console.log(this.step)
-
         }
     },
 })

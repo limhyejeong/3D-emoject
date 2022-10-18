@@ -1,7 +1,7 @@
 <template>
   <nav>
     <router-link class="logo" to="/"
-      >🪐 About Indescribable Emotions</router-link
+      >🪐 형용할 수 없는 감정에 대하여</router-link
     >
     <!-- <router-link to="/about">About</router-link> |
     <router-link to="/create">Create</router-link> |
@@ -83,6 +83,7 @@ body {
 }
 :root {
   --background-color: #1a1a23;
+  // --background-color: #000;
   --section-color: #232332;
   --article-color: #2c2e40;
   --inactive-color: #747c95;

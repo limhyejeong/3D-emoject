@@ -1,9 +1,9 @@
 <template>
-  <!-- <InputView v-if="step <= 1" /> -->
-  <!-- <LoadingAnimation v-if="step == 2" /> -->
-  <!-- <OutputView v-if="step == 3" /> -->
+  <InputView v-if="step <= 1" />
+  <LoadingAnimation v-if="step == 2" />
+  <OutputView v-if="step == 3" />
   <!-- <GltfSample /> -->
-  <Anger />
+  <!-- <Anger /> -->
   <!-- <Fear /> -->
   <!-- <Anticipation /> -->
   <!-- <Sadness /> -->
@@ -15,17 +15,17 @@
 
 <script>
 import InputView from "./InputView.vue";
-import OutputView from "./OutputView.vue";
+import OutputView from "./OutputView-Three.vue";
 import LoadingAnimation from "./LoadingAnimation.vue";
 import TheCanvas from "./TheCanvas.vue";
 import Anger from "@/components/homeview/sample/Anger-Cone.vue";
-import Fear from "@/components/homeview/sample/Fear.vue";
-import Anticipation from "@/components/homeview/sample/Anticipation.vue";
-import Sadness from "@/components/homeview/sample/Sadness.vue";
-import Disgust from "@/components/homeview/sample/Disgust.vue";
-import Joy from "@/components/homeview/sample/Joy.vue";
-import Surprise from "@/components/homeview/sample/Surprise-Torus.vue";
-import Trust from "@/components/homeview/sample/Trust.vue";
+import Fear from "@/components/homeview/sample/Fear-Tetrahedron.vue";
+import Anticipation from "@/components/homeview/sample/Anticipation-Dodecahedron.vue";
+import Sadness from "@/components/homeview/sample/Sadness-Torus.vue";
+import Disgust from "@/components/homeview/sample/Disgust-Octahedron.vue";
+import Joy from "@/components/homeview/sample/Joy-Sphere.vue";
+import Surprise from "@/components/homeview/sample/Surprise-Octahedron.vue";
+import Trust from "@/components/homeview/sample/Trust-TorusKnot.vue";
 import GltfSample from "@/components/homeview/sample/GltfSample.vue";
 import { useInputStore } from "@/stores/input";
 import { storeToRefs } from "pinia";

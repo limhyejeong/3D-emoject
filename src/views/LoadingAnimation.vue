@@ -17,7 +17,7 @@
 
       <TorusKnot
         ref="torus"
-        :scale="{ x: 2, y: 2, z: 2 }"
+        :scale="{ x: 1, y: 1, z: 1 }"
         :tube="0.2"
         :tubularSegments="300"
         :radialSegments="50"
@@ -27,7 +27,7 @@
         :rotation="{ x: 0, y: 0, z: 0 }"
       >
         <!-- <LambertMaterial color="#5c47eb" /> -->
-        <MatcapMaterial name="312C34_A2AAB3_61656A_808494" />
+        <MatcapMaterial name="635D52_A9BCC0_B1AEA0_819598" />
       </TorusKnot>
     </Scene>
   </Renderer>
@@ -64,7 +64,7 @@ export default {
     const store = useInputStore();
     const { step } = storeToRefs(store);
 
-    setTimeout(() => router.go(step.value++), 2500);
+    setTimeout(() => step.value++, 2000);
 
     let renderer = ref(null);
     let torus = ref(null);
@@ -84,10 +84,10 @@ export default {
 
 <style lang="scss">
 .loadingText {
-  font-size: 2rem;
-  // color: var(--inactive-color);
-  font-weight: 500;
+  font-size: 1.5rem;
+  color: var(--inactive-color);
+  font-weight: 300;
   position: absolute;
-  // top: 64vh;
+  top: 64vh;
 }
 </style>

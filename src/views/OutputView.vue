@@ -385,8 +385,8 @@ export default {
     }
   }
 }
-.render {
-  width: 60%;
-  height: 90vh;
-}
+// .render {
+//   width: 60%;
+//   height: 90vh;
+// }
 </style>
