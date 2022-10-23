@@ -22,7 +22,7 @@
 
     <Raycaster ref="raycaster" @click="onClick" />
 
-    <Scene ref="scene" background="#1a1a23">
+    <Scene ref="scene" background="#fff">
       <AmbientLight :position="{ x: 10, y: 10, z: 10 }" :intensity="0.5" />
       <PointLight :position="{ x: 10, y: 10, z: 10 }" :intensity="1" />
 

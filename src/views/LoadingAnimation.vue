@@ -3,7 +3,7 @@
   <Renderer ref="renderer" antialias resize="window">
     <Camera ref="camera" :position="{ x: 0, y: 0, z: 15 }" />
 
-    <Scene ref="scene" background="#1a1a23">
+    <Scene ref="scene" background="#fff">
       <AmbientLight
         color="#ffffff"
         :position="{ x: 10, y: 10, z: 10 }"
@@ -17,17 +17,17 @@
 
       <TorusKnot
         ref="torus"
-        :scale="{ x: 1, y: 1, z: 1 }"
+        :scale="{ x: 0.7, y: 0.7, z: 0.7 }"
         :tube="0.2"
         :tubularSegments="300"
         :radialSegments="50"
         :p="2"
-        :q="5"
+        :q="7"
         :position="{ x: 0, y: 0, z: 0 }"
         :rotation="{ x: 0, y: 0, z: 0 }"
       >
         <!-- <LambertMaterial color="#5c47eb" /> -->
-        <MatcapMaterial name="635D52_A9BCC0_B1AEA0_819598" />
+        <MatcapMaterial src="./assets/textures/matcap/은은.png" />
       </TorusKnot>
     </Scene>
   </Renderer>
@@ -64,7 +64,7 @@ export default {
     const store = useInputStore();
     const { step } = storeToRefs(store);
 
-    setTimeout(() => step.value++, 2000);
+    setTimeout(() => step.value++, 1500);
 
     let renderer = ref(null);
     let torus = ref(null);
@@ -88,6 +88,6 @@ export default {
   color: var(--inactive-color);
   font-weight: 300;
   position: absolute;
-  top: 64vh;
+  top: 60vh;
 }
 </style>

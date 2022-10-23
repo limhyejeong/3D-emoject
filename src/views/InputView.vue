@@ -61,7 +61,7 @@ export default {
   name: "InputView",
   setup() {
     const store = useInputStore();
-    const { name, emoji, content, category, activity, create, step } =
+    const { name, emoji, content, category, activity, create, step, color } =
       storeToRefs(store);
     const { prevStep, nextStep } = store;
 
@@ -97,6 +97,8 @@ export default {
       };
       let sumActivity = 0; // 활성도 합계
 
+      // let colorArr = [];
+
       // 인풋된 이모지를 등록된 이모지에서 찾아서 데이터 불러오기
       inputEmoji.forEach((element) => {
         for (let i = 0; i < emojiDoc.length; i++) {
@@ -113,8 +115,15 @@ export default {
             dataObject.trust += emojiDoc[i].trust;
             dataObject.joy += emojiDoc[i].joy;
             sumActivity += emojiDoc[i].activity;
+
+            // Color 구하기
+            // colorArr.push(emojiDoc[i].color);
+            // let sPick = Math.floor(Math.random() * colorArr.length);
+            // color.value = colorArr[sPick];
+            // console.log(color.value);
           }
         }
+        console.log(dataObject);
       });
 
       // Category 구하기 (카테고리 합계 오브젝트에서 가장 높은 수를 중복값을 대비하여 배열로 생성)
@@ -140,6 +149,7 @@ export default {
       create,
       step,
       emojiDoc,
+      color,
       prevStep,
       nextStep,
       getEmotionData,

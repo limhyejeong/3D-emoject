@@ -6,7 +6,7 @@
   </aside>
 
   <aside class="moveAboutBtn">
-    <router-link to="/about">About</router-link>
+    <router-link to="/about">이 프로젝트에 관하여</router-link>
   </aside>
 </template>
 
@@ -73,6 +73,7 @@ export default {
 }
 
 .moveAboutBtn {
+  font-size: 0.9rem;
   position: absolute;
   left: 0;
   bottom: 0;

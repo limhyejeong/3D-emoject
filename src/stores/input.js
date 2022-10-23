@@ -12,6 +12,7 @@ export const useInputStore = defineStore('input', {
         category: 'none',
         activity: 0,
         step: 0,
+        color: '',
     }),
     getters: {
         // doubleCount(state) {
@@ -33,10 +34,8 @@ export const useInputStore = defineStore('input', {
                 'activity': activity,
                 'time': new Date(),
             };
-
             addDoc(emoColRef, array);
             alert("A emotion have been uploaded!");
-
             router.push("/");
         },
         clearInput() {
@@ -46,6 +45,7 @@ export const useInputStore = defineStore('input', {
             this.category = 'none';
             this.activity = 0;
             this.step = 0;
+            this.color = '';
         },
         prevStep() {
             this.step--;

@@ -1,5 +1,6 @@
 <template>
   <nav>
+    <!-- <router-link class="logo" to="/">🪐 About Indescribable Emotion</router-link> -->
     <router-link class="logo" to="/"
       >🪐 형용할 수 없는 감정에 대하여</router-link
     >
@@ -82,10 +83,12 @@ body {
   letter-spacing: -0.03rem;
 }
 :root {
-  --background-color: #1a1a23;
+  --background-color: #fff;
   // --background-color: #000;
-  --section-color: #232332;
-  --article-color: #2c2e40;
+  --section-color: #eee;
+  // --section-color: #232332;
+  --article-color: #ccc;
+  // --article-color: #2c2e40;
   --inactive-color: #747c95;
   --highlight-color: #a99df4;
   --main-color: #725ded;
@@ -95,11 +98,11 @@ body {
 #app {
   // font-family: Avenir, Helvetica, Arial, sans-serif;
   background: var(--background-color);
-  color: #fff;
+  // color: #fff;
 }
 a {
+  color: var(--inactive-color);
   text-decoration: none;
-  color: #fff;
 }
 nav {
   position: absolute;
@@ -108,7 +111,7 @@ nav {
   // text-align: center;
   .logo {
     font-weight: 500;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: var(--inactive-color);
 
     &:hover {
