@@ -56,30 +56,22 @@ export default {
     transition: 0.25s;
     font-size: 1rem;
     font-weight: 500;
-    // -webkit-backdrop-filter: blur(20px);
-    backdrop-filter: blur(20px);
-    // box-shadow: inset 0px 0px 25px #aaa;
-    color: #999;
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
+    color: var(--text-color);
     // color: var(--main-color);
-    background: #000;
+    // background: var(--main-color);
     // background: linear-gradient(#ccc, #111);
     // background: linear-gradient(var(--main-color), var(--shadow-color));
-    box-shadow: inset 0px -5px 10px #555, inset 0px 5px 5px #aaa;
+    box-shadow: -3px -3px 10px var(--highlight-color),
+      10px 10px 20px var(--shadow-color);
     // border: 1px solid var(--main-color);
 
     &:hover {
-      // background: #000;
-      // box-shadow: none;
-      // border: 1px solid #555;
-      // color: #555;
-      // background: linear-gradient(var(--shadow-color), var(--main-color));
-      // box-shadow: inset 0px 5px 5px var(--background-color),
-      // inset 0px -5px 5px var(--highlight-color);
-      // opacity: 0.5;
-      background: none;
-      box-shadow: none;
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
+      box-shadow: 0px 0px 0px var(--highlight-color),
+        0px 0px 0px var(--shadow-color),
+        inset -5px -5px 5px var(--highlight-color),
+        inset 5px 5px 10px var(--shadow-color);
     }
   }
 }
@@ -89,7 +81,7 @@ export default {
   position: absolute;
   left: 0;
   bottom: 0;
-  margin: 0 0 50px 30px;
+  margin: 0 0 50px 50px;
   text-decoration: underline;
 }
 

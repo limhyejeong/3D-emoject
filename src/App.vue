@@ -1,9 +1,7 @@
 <template>
   <nav>
     <!-- <router-link class="logo" to="/">🪐 About Indescribable Emotion</router-link> -->
-    <router-link to="/" class="logo"
-      >🪐 형용할 수 없는 감정에 대하여</router-link
-    >
+    <router-link to="/" class="logo">형용할 수 없는 감정에 대하여</router-link>
     <!-- <router-link to="/about">About</router-link> |
     <router-link to="/create">Create</router-link> |
     <router-link to="/list">List</router-link> -->
@@ -91,17 +89,17 @@ body {
   letter-spacing: -0.07rem;
 }
 :root {
-  --background-color: #fff;
+  --background-color: #f2f3f7;
   // --background-color: #000;
   --section-color: #eee;
   // --section-color: #232332;
   --article-color: #aaa;
   // --article-color: #2c2e40;
   --inactive-color: #747c95;
-  --highlight-color: #a99df4;
-  --main-color: #725ded;
-  --shadow-color: #5c47eb;
-  --text-color: #e2dcff;
+  --highlight-color: #ffffff;
+  --main-color: #f2f3f7;
+  --shadow-color: #c6cde1;
+  --text-color: #444;
 }
 #app {
   // font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -117,7 +115,7 @@ p {
 }
 .logo {
   position: absolute;
-  padding: 50px 50px;
+  margin: 50px 0 0 50px;
   // font-size: 0.9rem;
   color: #000;
   &:hover {

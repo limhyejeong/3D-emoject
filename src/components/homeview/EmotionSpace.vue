@@ -1,6 +1,6 @@
 <template>
-  <div class="meshInfo">{{ seletedData.emoji }}</div>
-  <aside v-show="isClick" class="info">
+  <!-- <div class="meshInfo">{{ seletedData.emoji }}</div> -->
+  <!-- <aside v-show="isClick" class="info">
     <div class="infoNum">{{ seletedData.emoji }}</div>
     <div class="infoName">{{ seletedData.name }}</div>
     <p class="infoContents">{{ seletedData.content }}</p>
@@ -9,7 +9,7 @@
     <button @click="deleteEmotion(seletedData.id)" class="deleteInfo">
       Delete
     </button>
-  </aside>
+  </aside> -->
 
   <canvas id="homeCanvas" />
 </template>
@@ -35,8 +35,6 @@ export default {
     // let camera = ref(null);
     // let scene = ref(null);
 
-    let seletedData = ref("");
-    let seletedMesh = null;
     let isClick = ref(false);
     let clock = new THREE.Clock();
 
@@ -74,30 +72,67 @@ export default {
       controls = new OrbitControls(camera, renderer.domElement);
     }
 
+    const group = new THREE.Group();
+
     // emotions에 데이터가 들어오면 감정 오브젝트를 뿌려줌
     watch(emotions, () => {
       for (let i = 0; i < emotions._object.emotions.length; i++) {
         importEmoject(emotions._object.emotions[i]);
       }
+      scene.add(group);
     });
 
     // 감정 오브젝트 만드는 함수
     let emoject;
     const importEmoject = (data) => {
       emoject = createEmoject(emoject, data.category, data.activity);
+      // 이모젝트에 데이터 추가해야함
       let range = 5; // 위치 범위
       emoject.position.x = Math.floor(Math.random() * (range * 2) - range);
       emoject.position.y = Math.floor(Math.random() * (range * 2) - range);
       emoject.position.z = Math.floor(Math.random() * (range * 2) - range);
-      emoject.rotation.x = 0;
-      scene.add(emoject);
+      emoject.rotation.x = Math.random() * 360;
+      emoject.rotation.y = Math.random() * 360;
+      // scene.add(emoject);
+      group.add(emoject);
     };
+
+    // 레이캐스터
+    const raycaster = new THREE.Raycaster();
+    const pointer = new THREE.Vector2();
+    let selectedMesh;
+
+    function onPointerClick(event) {
+      pointer.x = (event.clientX / width) * 2 - 1;
+      pointer.y = -(event.clientY / height) * 2 + 1;
+      raycaster.setFromCamera(pointer, camera);
+      const intersects = raycaster.intersectObjects(scene.children);
+      for (let i = 0; i < intersects.length; i++) {
+        selectedMesh = intersects[i].object;
+        // intersects[i].object.material.color.set(0xff0000);
+        console.log(selectedMesh);
+        break;
+      }
+    }
+
+    // function meshClickData() {
+    //   console.log(camera.position);
+    //   gsap.to(camera, {
+    //     x: seletedMesh.position.x,
+    //     y: seletedMesh.position.y,
+    //     z: seletedMesh.position.z + 5,
+    //     duration: 0.75,
+    //   });
+    // }
+
+    window.addEventListener("click", onPointerClick);
 
     // 애니메이션
     function animate() {
       requestAnimationFrame(animate);
-      if (emoject) emoject.rotation.x += 0.01;
+      if (group) group.rotation.y += 0.002;
       controls.update();
+
       renderer.render(scene, camera);
     }
 
@@ -109,62 +144,6 @@ export default {
       amplitude: 10.0,
       intensity: 1,
     };
-
-    // 오브젝트 배열
-    let itemRefs = [];
-    const setItemRef = (el) => {
-      itemRefs.push(el);
-    };
-
-    function boxHover(data) {
-      seletedData.value = data;
-    }
-    function boxHoverOut() {
-      // const meshInfo = document.querySelector(".meshInfo");
-      // seletedData.value = "";
-    }
-
-    // 메쉬 클릭 시 정보 표시
-    function boxClick(data) {
-      if (isClick.value == false) {
-        isClick.value = true;
-        seletedData.value = data;
-      }
-
-      gsap.to(camera.value.camera.position, {
-        x: seletedMesh.position.x,
-        y: seletedMesh.position.y,
-        z: seletedMesh.position.z + 5,
-        duration: 0.75,
-      });
-
-      //   console.log(seletedMesh.position);
-
-      //   gsap.to(camera.value.lookAt, {
-      //     x: seletedMesh.position.x,
-      //     y: seletedMesh.position.y,
-      //     z: seletedMesh.position.z,
-      //   });
-      //   console.log(camera.value.lookAt);
-    }
-
-    let v3 = new THREE.Vector3();
-    // 클릭한 메쉬의 정보 가져오기
-    function onClick(event) {
-      if (isClick.value == false) {
-        seletedMesh = event.component.mesh;
-
-        seletedMesh.geometry.positionData = [];
-        for (
-          let i = 0;
-          i < seletedMesh.geometry.attributes.position.count;
-          i++
-        ) {
-          v3.fromBufferAttribute(seletedMesh.geometry.attributes.position, i);
-          seletedMesh.geometry.positionData.push(v3.clone());
-        }
-      }
-    }
 
     // 정보 닫기
     function closeInfo() {
@@ -187,19 +166,12 @@ export default {
     });
 
     return {
-      seletedData,
-      boxClick,
-      boxHover,
-      boxHoverOut,
       isClick,
-      onClick,
       importEmoject,
       closeInfo,
       renderer,
       camera,
       scene,
-      setItemRef,
-      itemRefs,
       vertexShader,
       fragmentShader,
       settings,
