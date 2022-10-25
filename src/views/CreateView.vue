@@ -17,7 +17,7 @@
 
 <script>
 import InputView from "./InputView.vue";
-import OutputView from "./OutputView-Three.vue";
+import OutputView from "./OutputView.vue";
 import LoadingAnimation from "./LoadingAnimation.vue";
 import TheCanvas from "./TheCanvas.vue";
 import Anger from "@/components/homeview/sample/Anger-Cone.vue";

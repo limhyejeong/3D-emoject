@@ -3,6 +3,7 @@
   <aside v-show="isClick" class="info">
     <div class="infoNum">{{ seletedData.emoji }}</div>
     <div class="infoName">{{ seletedData.name }}</div>
+    <!-- <div class="infoEmoji">{{ seletedData.emoji }}</div> -->
     <p class="infoContents">{{ seletedData.content }}</p>
 
     <button @click="closeInfo" class="closeInfo">x</button>
@@ -11,95 +12,136 @@
     </button>
   </aside>
 
-  <canvas id="homeCanvas" />
+  <Renderer ref="renderer" antialias orbitCtrl resize="window">
+    <!-- <Stats /> -->
+    <Camera
+      ref="camera"
+      :position="{ x: 0, y: 0, z: 15 }"
+      :lookAt="{ x: 0, y: 0, z: 0 }"
+    />
+
+    <Raycaster ref="raycaster" @click="onClick" />
+
+    <Scene ref="scene" background="#fff">
+      <AmbientLight :position="{ x: 10, y: 10, z: 10 }" :intensity="0.5" />
+      <PointLight :position="{ x: 10, y: 10, z: 10 }" :intensity="1" />
+
+      <Icosahedron
+        :ref="setItemRef"
+        v-for="item in emotions"
+        :key="item.id"
+        :scale="{ x: 1, y: 1, z: 1 }"
+        :radius="1"
+        :width-segments="16"
+        :height-segments="16"
+        :position="{
+          x: Math.floor(Math.random() * 10 - 5),
+          y: Math.floor(Math.random() * 10 - 5),
+          z: Math.floor(Math.random() * 10 - 5),
+        }"
+        @click="boxClick(item)"
+        @pointerEnter="boxHover(item)"
+        @pointerLeave="boxHoverOut"
+      >
+        <PhongMaterial color="#eee" />
+      </Icosahedron>
+
+      <!-- <Sphere
+        :ref="setItemRef"
+        v-for="joyBox in joy"
+        :key="joyBox.id"
+        :scale="{ x: 1, y: 1, z: 1 }"
+        :radius="1"
+        :width-segments="16"
+        :height-segments="16"
+        :position="{
+          x: Math.floor(Math.random() * 10 - 5),
+          y: Math.floor(Math.random() * 10 - 5),
+          z: Math.floor(Math.random() * 10 - 5),
+        }"
+        @click="boxClick(joyBox)"
+      >
+        <ShaderMaterial
+          :props="{
+            uniforms: {
+              uTime: { value: 0 },
+              uSpeed: { value: settings.speed },
+              uNoiseDensity: { value: settings.density },
+              uNoiseStrength: { value: settings.strength },
+              uFrequency: { value: settings.frequency },
+              uAmplitude: { value: settings.amplitude },
+              uIntensity: { value: settings.intensity },
+            },
+            vertexShader: vertexShader,
+            fragmentShader: fragmentShader,
+          }"
+        />
+      </Sphere> -->
+    </Scene>
+  </Renderer>
 </template>
 
 <script>
 import { useHomeStore } from "@/stores/home";
 import { storeToRefs } from "pinia";
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted } from "vue";
 import { gsap } from "gsap";
+import {
+  Renderer,
+  Camera,
+  Raycaster,
+  Scene,
+  AmbientLight,
+  PointLight,
+  Sphere,
+  Box,
+  Icosahedron,
+  ShaderMaterial,
+  StandardMaterial,
+  PhongMaterial,
+} from "troisjs";
+import Stats from "troisjs/src/components/misc/Stats";
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { createEmoject } from "@/assets/js/createEmoject";
+// import { makeNoise4D } from "open-simplex-noise";
 import { vertexShader, fragmentShader, twist } from "@/assets/js/twist";
 
 export default {
   name: "EmotionSpace",
+  components: {
+    Renderer,
+    Camera,
+    Raycaster,
+    Scene,
+    AmbientLight,
+    PointLight,
+    Sphere,
+    Box,
+    Icosahedron,
+    PhongMaterial,
+    StandardMaterial,
+    ShaderMaterial,
+    Stats,
+  },
   setup() {
     const store = useHomeStore();
     const { emotions } = storeToRefs(store);
     const { fetchEmotions, deleteEmotion } = store;
 
-    // let renderer = ref(null);
-    // let camera = ref(null);
-    // let scene = ref(null);
+    let renderer = ref(null);
+    let camera = ref(null);
+    let scene = ref(null);
 
     let seletedData = ref("");
     let seletedMesh = null;
     let isClick = ref(false);
     let clock = new THREE.Clock();
 
-    fetchEmotions(); // home.js pinia에서 데이터 불러오기
+    fetchEmotions();
 
-    // threejs 추가하기
-    let scene, renderer, camera, controls;
-    let width = window.innerWidth,
-      height = window.innerHeight;
-
-    // 기본적인 Sence 제작 함수
-    function initThreejs() {
-      scene = new THREE.Scene();
-      const homeCanvas = document.querySelector("#homeCanvas");
-
-      renderer = new THREE.WebGLRenderer({
-        canvas: homeCanvas,
-        antialias: true,
-        alpha: true,
-      });
-      renderer.setSize(width, height);
-      renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
-
-      camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
-      camera.position.x = 0;
-      camera.position.y = 0;
-      camera.position.z = 20;
-      scene.add(camera);
-
-      const light = new THREE.AmbientLight(0xffffff, 1); // soft white light
-      const pointLight = new THREE.PointLight(0xff0000, 2, 100);
-      pointLight.position.set(10, 10, 10);
-      scene.add(light, pointLight);
-
-      controls = new OrbitControls(camera, renderer.domElement);
-    }
-
-    // emotions에 데이터가 들어오면 감정 오브젝트를 뿌려줌
-    watch(emotions, () => {
-      for (let i = 0; i < emotions._object.emotions.length; i++) {
-        importEmoject(emotions._object.emotions[i]);
-      }
-    });
-
-    // 감정 오브젝트 만드는 함수
-    let emoject;
-    const importEmoject = (data) => {
-      emoject = createEmoject(emoject, data.category, data.activity);
-      let range = 5; // 위치 범위
-      emoject.position.x = Math.floor(Math.random() * (range * 2) - range);
-      emoject.position.y = Math.floor(Math.random() * (range * 2) - range);
-      emoject.position.z = Math.floor(Math.random() * (range * 2) - range);
-      emoject.rotation.x = 0;
-      scene.add(emoject);
-    };
-
-    // 애니메이션
-    function animate() {
-      requestAnimationFrame(animate);
-      if (emoject) emoject.rotation.x += 0.01;
-      controls.update();
-      renderer.render(scene, camera);
-    }
+    // const joy = cate.value.joy;
+    // const sadness = cate.value.sadness;
+    // const surprise = cate.value.surprise;
+    // const disgust = cate.value.disgust;
 
     const settings = {
       speed: 0.5,
@@ -182,8 +224,17 @@ export default {
     let 속도 = 0.6;
 
     onMounted(() => {
-      initThreejs();
-      animate();
+      renderer.value.onBeforeRender((event) => {
+        itemRefs.forEach((item) => {
+          item.mesh.rotation.y += 0.01;
+        });
+        if (seletedMesh != null) {
+          // console.log(seletedMesh);
+          // twist();
+          // twist(seletedMesh, clock, settings);
+          // noise(seletedMesh, clock, 진폭, 반경, 속도, v3);
+        }
+      });
     });
 
     return {
@@ -193,7 +244,6 @@ export default {
       boxHoverOut,
       isClick,
       onClick,
-      importEmoject,
       closeInfo,
       renderer,
       camera,
@@ -204,7 +254,6 @@ export default {
       fragmentShader,
       settings,
       emotions,
-      controls,
       deleteEmotion,
     };
   },

@@ -58,6 +58,8 @@ export const useHomeStore = defineStore('home', {
         //     this.cate.disgust = [];
         // },
 
+
+        // 데이터 불러오기
         fetchEmotions() {
             let emotionsSnapshot = getDocs(emoColRef);
             let emotions = [];
@@ -72,6 +74,7 @@ export const useHomeStore = defineStore('home', {
             });
         },
 
+        // 데이터 삭제
         deleteEmotion(emotionId) {
             if (confirm("감정을 삭제하시겠습니까?")) {
                 let emoRef = doc(emoColRef, emotionId);
