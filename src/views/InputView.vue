@@ -1,10 +1,13 @@
 <template>
+  <!-- <div class="inputview"> -->
   <section class="inputSection">
     <section v-if="step == 0" class="emojiInputSection">
-      <h3 class="title">My Emotion is</h3>
+      <h3 class="title">지금 제가 느끼는 감정은</h3>
       <div class="emojiInputBox">
         <input type="text" v-model="emoji" class="emojiInput" readonly />
-        <button class="clearEmojiInput" @click="clearEmojiInput">clear</button>
+        <button class="clearEmojiInput" @click="clearEmojiInput">
+          모두 지우기
+        </button>
       </div>
 
       <div class="emojiList">
@@ -18,7 +21,7 @@
     </section>
 
     <section v-if="step == 1" class="nameInputSection">
-      <h3 class="title">Name</h3>
+      <h3 class="title">이름을 알려주세요</h3>
       <input
         type="text"
         v-model="name"
@@ -29,7 +32,7 @@
     </section>
 
     <section v-if="step == 1" class="contentsInputSection">
-      <h3 class="title">Comment</h3>
+      <h3 class="title">입력한 감정을 설명해주세요</h3>
       <textarea
         v-model="content"
         class="contentsInput"
@@ -49,6 +52,7 @@
       <div></div>
     </button>
   </aside>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -163,8 +167,8 @@ export default {
 <style lang="scss">
 .title {
   width: 100%;
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 300;
 }
 
 .inputSection {
@@ -180,13 +184,13 @@ export default {
     width: 100%;
     border-radius: 10px;
     background: var(--section-color);
-    box-shadow: 5px 5px 30px #000, inset 5px 5px 20px var(--article-color);
+    // box-shadow: 5px 5px 30px #000, inset 5px 5px 20px var(--article-color);
 
     input {
       width: 100%;
       border: none;
       padding: 20px;
-      box-shadow: 5px 5px 10px #000, -5px -5px 10px var(--article-color);
+      // box-shadow: 5px 5px 10px #000, -5px -5px 10px var(--article-color);
     }
   }
 }
@@ -206,6 +210,7 @@ export default {
       border-top-left-radius: 50px;
       border-bottom-left-radius: 50px;
       height: 50px;
+      outline: none;
     }
 
     .clearEmojiInput {
@@ -228,18 +233,27 @@ export default {
 
 .emojiList {
   width: 100%;
-  // height: 50vh;
-  background: var(--article-color);
+  height: 500px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  column-gap: 20px;
+  // background: var(--article-color);
   font-size: 2.2rem;
   border-radius: 20px;
-  // border: 1px solid #111;
+  overflow: scroll;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #ccc;
   // box-shadow: inset -8px -8px 10px #171922;
   // box-shadow: inset -8px -8px 20px #1c1a24;
 
   span {
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
     cursor: pointer;
     transition: 0.2s;
-    margin: 10px;
+    // margin: 20px;
 
     &:hover {
       opacity: 0.3;

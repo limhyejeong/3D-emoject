@@ -1,16 +1,18 @@
 <template>
-  <InputView v-if="step <= 1" />
-  <LoadingAnimation v-if="step == 2" />
-  <OutputView v-if="step == 3" />
-  <!-- <GltfSample /> -->
-  <!-- <Anger /> -->
-  <!-- <Fear /> -->
-  <!-- <Anticipation /> -->
-  <!-- <Sadness /> -->
-  <!-- <Disgust /> -->
-  <!-- <Joy /> -->
-  <!-- <Surprise /> -->
-  <!-- <Trust /> -->
+  <div class="createview">
+    <InputView v-if="step <= 1" />
+    <LoadingAnimation v-if="step == 2" />
+    <OutputView v-if="step == 3" />
+    <!-- <GltfSample /> -->
+    <!-- <Anger /> -->
+    <!-- <Fear /> -->
+    <!-- <Anticipation /> -->
+    <!-- <Sadness /> -->
+    <!-- <Disgust /> -->
+    <!-- <Joy /> -->
+    <!-- <Surprise /> -->
+    <!-- <Trust /> -->
+  </div>
 </template>
 
 <script>

@@ -53,19 +53,22 @@
 
     <div class="outputInfo">
       <br />
+      <h3>n번째 감정</h3>
       <div class="outputInfoEmoji">{{ emoji }}</div>
-      <div class="outputInfoName">{{ name }}</div>
+      <div class="outputInfoName">{{ name }} 님</div>
       <div class="outputInfoContent">{{ content }}</div>
       <br />
-      <div class="outputInfoCategory">{{ category }}</div>
-      <div class="outputInfoActivity">{{ activity }}</div>
+      <div class="outputInfoCategory">감정 : {{ category }}</div>
+      <div class="outputInfoActivity">
+        활성도(다른 방법으로 표현) : {{ activity }}
+      </div>
 
-      <button @click="clearInput" class="againBtn">Replay</button>
+      <button @click="clearInput" class="againBtn">다시 하기</button>
       <button
         @click="addEmotion(name, emoji, content, category, activity)"
         class="addBtn"
       >
-        Upload
+        등록하기
       </button>
     </div>
   </section>

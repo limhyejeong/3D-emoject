@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div>
     <p>
       사람은 누구나 표현할 수 없는 감정이 있습니다. <br />
       특정한 기억이나 상황, 대상에 대한 감정, 기억이 아니더라도 무언가에 대한
@@ -10,7 +10,12 @@
   </div>
 </template>
 
-<style lang="scss">
-.about {
-}
-</style>
+<script>
+export default {
+  name: "AboutView",
+  components: {},
+  setup() {},
+};
+</script>
+
+<style lang="scss"></style>

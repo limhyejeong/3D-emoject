@@ -1,13 +1,19 @@
 <template>
-  <EmotionSpace />
+  <div class="homeview">
+    <EmotionSpace />
 
-  <aside class="moveCreateBtn">
-    <router-link to="/create">Add +</router-link>
-  </aside>
+    <aside class="moveCreateBtn">
+      <router-link to="/create">감정 생성</router-link>
+    </aside>
 
-  <aside class="moveAboutBtn">
-    <router-link to="/about">이 프로젝트에 관하여</router-link>
-  </aside>
+    <aside class="moveAboutBtn">
+      <router-link to="/about">이 프로젝트에 관하여</router-link>
+    </aside>
+
+    <aside class="moveSearchBtn">
+      <!-- <router-link to="/search">검색</router-link> -->
+    </aside>
+  </div>
 </template>
 
 <script>
@@ -27,6 +33,10 @@ export default {
 </script>
 
 <style lang="scss">
+.homeview {
+  width: 100%;
+  height: 100%;
+}
 .moveCreateBtn {
   position: absolute;
   width: 100%;
@@ -47,13 +57,15 @@ export default {
     font-size: 1rem;
     font-weight: 500;
     // -webkit-backdrop-filter: blur(20px);
-    // backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
     // box-shadow: inset 0px 0px 25px #aaa;
-    color: var(--text-color);
-    background: linear-gradient(var(--main-color), var(--shadow-color));
-    // box-shadow: inset 0px 5px 5px var(--highlight-color),
-    //   inset 0px -5px 5px var(--background-color);
-    border: 1px solid var(--main-color);
+    color: #999;
+    // color: var(--main-color);
+    background: #000;
+    // background: linear-gradient(#ccc, #111);
+    // background: linear-gradient(var(--main-color), var(--shadow-color));
+    box-shadow: inset 0px -5px 10px #555, inset 0px 5px 5px #aaa;
+    // border: 1px solid var(--main-color);
 
     &:hover {
       // background: #000;
@@ -78,6 +90,15 @@ export default {
   left: 0;
   bottom: 0;
   margin: 0 0 50px 30px;
+  text-decoration: underline;
+}
+
+.moveSearchBtn {
+  font-size: 0.9rem;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 0 30px 50px 0;
   text-decoration: underline;
 }
 </style>

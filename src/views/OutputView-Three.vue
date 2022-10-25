@@ -16,12 +16,12 @@
       <!-- <div class="outputInfoCategory">{{ category }}</div> -->
       <!-- <div class="outputInfoActivity">{{ activity }}</div> -->
 
-      <button @click="clearInput" class="againBtn">Replay</button>
+      <button @click="clearInput" class="againBtn">다시 하기</button>
       <button
         @click="addEmotion(name, emoji, content, category, activity)"
         class="addBtn"
       >
-        Upload
+        감정 등록
       </button>
     </div>
   </section>
