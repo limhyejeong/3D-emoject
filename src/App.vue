@@ -48,29 +48,34 @@ export default {
 
 <style lang="scss">
 @font-face {
-  font-family: "nanumsquareneo";
-  src: url("@/assets/font/nanumsquareneo/NanumSquareNeoTTF-aLt.woff");
+  font-family: "notosanskr";
+  src: url("@/assets/font/notosanskr/NotoSansKR-Thin.woff");
   font-weight: 100;
 }
 @font-face {
-  font-family: "nanumsquareneo";
-  src: url("@/assets/font/nanumsquareneo/NanumSquareNeoTTF-bRg.woff");
+  font-family: "notosanskr";
+  src: url("@/assets/font/notosanskr/NotoSansKR-Light.woff");
+  font-weight: 200;
+}
+@font-face {
+  font-family: "notosanskr";
+  src: url("@/assets/font/notosanskr/NotoSansKR-Regular.woff");
   font-weight: 300;
 }
 @font-face {
-  font-family: "nanumsquareneo";
-  src: url("@/assets/font/nanumsquareneo/NanumSquareNeoTTF-cBd.woff");
+  font-family: "notosanskr";
+  src: url("@/assets/font/notosanskr/NotoSansKR-Medium.woff");
   font-weight: 500;
 }
 @font-face {
-  font-family: "nanumsquareneo";
-  src: url("@/assets/font/nanumsquareneo/NanumSquareNeoTTF-dEb.woff");
+  font-family: "notosanskr";
+  src: url("@/assets/font/notosanskr/NotoSansKR-Bold.woff");
   font-weight: 700;
 }
 @font-face {
-  font-family: "nanumsquareneo";
-  src: url("@/assets/font/nanumsquareneo/NanumSquareNeoTTF-eHv.woff");
-  font-weight: 900;
+  font-family: "notosanskr";
+  src: url("@/assets/font/notosanskr/NotoSansKR-Black.woff");
+  font-weight: 800;
 }
 
 * {
@@ -78,7 +83,7 @@ export default {
   margin: 0;
   box-sizing: border-box;
   font-family: "nanumsquareneo";
-  font-weight: 300;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -116,7 +121,8 @@ p {
 .logo {
   position: absolute;
   margin: 50px 0 0 50px;
-  // font-size: 0.9rem;
+  font-size: 0.9rem;
+  font-weight: 700;
   color: #000;
   &:hover {
     text-decoration: underline;

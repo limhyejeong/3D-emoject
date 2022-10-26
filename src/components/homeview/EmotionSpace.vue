@@ -1,15 +1,16 @@
 <template>
-  <!-- <div class="meshInfo">{{ seletedData.emoji }}</div> -->
-  <!-- <aside v-show="isClick" class="info">
-    <div class="infoNum">{{ seletedData.emoji }}</div>
-    <div class="infoName">{{ seletedData.name }}</div>
-    <p class="infoContents">{{ seletedData.content }}</p>
+  <!-- <div class="meshInfo">{{ selectedData.emoji }}</div> -->
+  <!-- <aside v-show="isClick" class="info"> -->
+  <aside class="info">
+    <div class="infoNum">{{ selectedData.emoji }}</div>
+    <div class="infoName">{{ selectedData.name }}</div>
+    <p class="infoContents">{{ selectedData.contents }}</p>
 
     <button @click="closeInfo" class="closeInfo">x</button>
-    <button @click="deleteEmotion(seletedData.id)" class="deleteInfo">
+    <button @click="deleteEmotion(selectedData.id)" class="deleteInfo">
       Delete
     </button>
-  </aside> -->
+  </aside>
 
   <canvas id="homeCanvas" />
 </template>
@@ -31,11 +32,7 @@ export default {
     const { emotions } = storeToRefs(store);
     const { fetchEmotions, deleteEmotion } = store;
 
-    // let renderer = ref(null);
-    // let camera = ref(null);
-    // let scene = ref(null);
-
-    let isClick = ref(false);
+    // let isClick = ref(true);
     let clock = new THREE.Clock();
 
     fetchEmotions(); // home.js pinia에서 데이터 불러오기
@@ -86,7 +83,7 @@ export default {
     let emoject;
     const importEmoject = (data) => {
       emoject = createEmoject(emoject, data.category, data.activity);
-      // 이모젝트에 데이터 추가해야함
+      emoject.userData = data; // 이모젝트에 데이터 추가
       let range = 5; // 위치 범위
       emoject.position.x = Math.floor(Math.random() * (range * 2) - range);
       emoject.position.y = Math.floor(Math.random() * (range * 2) - range);
@@ -97,11 +94,13 @@ export default {
       group.add(emoject);
     };
 
-    // 레이캐스터
+    // 레이캐스터 (클릭 감지)
     const raycaster = new THREE.Raycaster();
     const pointer = new THREE.Vector2();
-    let selectedMesh;
 
+    // 클릭하면 selectedMesh 활성화, selectedData 값 변경
+    let selectedData = ref({});
+    let selectedMesh;
     function onPointerClick(event) {
       pointer.x = (event.clientX / width) * 2 - 1;
       pointer.y = -(event.clientY / height) * 2 + 1;
@@ -109,22 +108,11 @@ export default {
       const intersects = raycaster.intersectObjects(scene.children);
       for (let i = 0; i < intersects.length; i++) {
         selectedMesh = intersects[i].object;
-        // intersects[i].object.material.color.set(0xff0000);
-        console.log(selectedMesh);
         break;
       }
+      selectedData.value = selectedMesh.userData;
+      console.log(selectedData.value);
     }
-
-    // function meshClickData() {
-    //   console.log(camera.position);
-    //   gsap.to(camera, {
-    //     x: seletedMesh.position.x,
-    //     y: seletedMesh.position.y,
-    //     z: seletedMesh.position.z + 5,
-    //     duration: 0.75,
-    //   });
-    // }
-
     window.addEventListener("click", onPointerClick);
 
     // 애니메이션
@@ -146,15 +134,15 @@ export default {
     };
 
     // 정보 닫기
-    function closeInfo() {
-      isClick.value = false;
-      gsap.to(camera.value.camera.position, {
-        x: 0,
-        y: 0,
-        z: 15,
-        duration: 1,
-      });
-    }
+    // function closeInfo() {
+    //   isClick.value = false;
+    //   gsap.to(camera.value.camera.position, {
+    //     x: 0,
+    //     y: 0,
+    //     z: 15,
+    //     duration: 1,
+    //   });
+    // }
 
     let 진폭 = 6;
     let 반경 = 0.2;
@@ -166,9 +154,8 @@ export default {
     });
 
     return {
-      isClick,
+      // isClick,
       importEmoject,
-      closeInfo,
       renderer,
       camera,
       scene,
@@ -178,6 +165,7 @@ export default {
       emotions,
       controls,
       deleteEmotion,
+      selectedData,
     };
   },
 };
