@@ -1,12 +1,11 @@
 <template>
   <!-- <div class="meshInfo">{{ selectedData.emoji }}</div> -->
-  <!-- <aside v-show="isClick" class="info"> -->
-  <aside class="info">
+  <aside v-show="isClick" class="info">
     <div class="infoNum">{{ selectedData.emoji }}</div>
     <div class="infoName">{{ selectedData.name }}</div>
     <p class="infoContents">{{ selectedData.contents }}</p>
 
-    <button @click="closeInfo" class="closeInfo">x</button>
+    <button @click="closeModal" class="closeModal">x</button>
     <button @click="deleteEmotion(selectedData.id)" class="deleteInfo">
       Delete
     </button>
@@ -19,11 +18,12 @@
 import { useHomeStore } from "@/stores/home";
 import { storeToRefs } from "pinia";
 import { ref, onMounted, watch } from "vue";
-import { gsap } from "gsap";
+import * as TWEEN from "@tweenjs/tween.js";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { createEmoject } from "@/assets/js/createEmoject";
 import { vertexShader, fragmentShader, twist } from "@/assets/js/twist";
+import { logEvent } from "@firebase/analytics";
 
 export default {
   name: "EmotionSpace",
@@ -31,9 +31,7 @@ export default {
     const store = useHomeStore();
     const { emotions } = storeToRefs(store);
     const { fetchEmotions, deleteEmotion } = store;
-
-    // let isClick = ref(true);
-    let clock = new THREE.Clock();
+    let isClick = ref(false);
 
     fetchEmotions(); // home.js pinia에서 데이터 불러오기
 
@@ -41,11 +39,12 @@ export default {
     let scene, renderer, camera, controls;
     let width = window.innerWidth,
       height = window.innerHeight;
+    let homeCanvas;
 
     // 기본적인 Sence 제작 함수
     function initThreejs() {
       scene = new THREE.Scene();
-      const homeCanvas = document.querySelector("#homeCanvas");
+      homeCanvas = document.querySelector("#homeCanvas");
 
       renderer = new THREE.WebGLRenderer({
         canvas: homeCanvas,
@@ -59,6 +58,7 @@ export default {
       camera.position.x = 0;
       camera.position.y = 0;
       camera.position.z = 20;
+      // camera.lookAt(0, 0, 0);
       scene.add(camera);
 
       const light = new THREE.AmbientLight(0xffffff, 1); // soft white light
@@ -67,6 +67,7 @@ export default {
       scene.add(light, pointLight);
 
       controls = new OrbitControls(camera, renderer.domElement);
+      console.log(controls.target);
     }
 
     const group = new THREE.Group();
@@ -102,25 +103,31 @@ export default {
     let selectedData = ref({});
     let selectedMesh;
     function onPointerClick(event) {
-      pointer.x = (event.clientX / width) * 2 - 1;
-      pointer.y = -(event.clientY / height) * 2 + 1;
-      raycaster.setFromCamera(pointer, camera);
-      const intersects = raycaster.intersectObjects(scene.children);
-      for (let i = 0; i < intersects.length; i++) {
-        selectedMesh = intersects[i].object;
-        break;
+      if (isClick.value == true) {
+        closeModal();
+      } else {
+        pointer.x = (event.clientX / width) * 2 - 1;
+        pointer.y = -(event.clientY / height) * 2 + 1;
+        raycaster.setFromCamera(pointer, camera);
+        const intersects = raycaster.intersectObjects(scene.children);
+        if (intersects.length !== 0) {
+          // 클릭한 것이 있을 때
+          for (let i = 0; i < intersects.length; i++) {
+            selectedMesh = intersects[i].object;
+            break;
+          }
+          selectedData.value = selectedMesh.userData;
+          openModal();
+        }
       }
-      selectedData.value = selectedMesh.userData;
-      console.log(selectedData.value);
     }
-    window.addEventListener("click", onPointerClick);
 
     // 애니메이션
     function animate() {
       requestAnimationFrame(animate);
-      if (group) group.rotation.y += 0.002;
+      if (isClick.value == false) if (group) group.rotation.y += 0.002;
       controls.update();
-
+      TWEEN.update();
       renderer.render(scene, camera);
     }
 
@@ -132,29 +139,94 @@ export default {
       amplitude: 10.0,
       intensity: 1,
     };
+    let duration = 1000;
+
+    function openModal() {
+      isClick.value = true;
+
+      // 카메라 위치
+      new TWEEN.Tween(camera.position)
+        .to(
+          {
+            x: selectedMesh.position.x + 2,
+            y: selectedMesh.position.y,
+            z: selectedMesh.position.z + 5,
+          },
+          duration
+        )
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .start();
+
+      console.log(controls.target);
+
+      // 카메라 시점
+      new TWEEN.Tween(controls.target)
+        .to(
+          {
+            x: selectedMesh.position.x,
+            y: selectedMesh.position.y,
+            z: selectedMesh.position.z,
+          },
+          duration
+        )
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .start();
+    }
 
     // 정보 닫기
-    // function closeInfo() {
-    //   isClick.value = false;
-    //   gsap.to(camera.value.camera.position, {
-    //     x: 0,
-    //     y: 0,
-    //     z: 15,
-    //     duration: 1,
-    //   });
-    // }
+    function closeModal() {
+      isClick.value = false;
+
+      // 카메라 위치
+      new TWEEN.Tween(camera.position)
+        .to(
+          {
+            x: 0,
+            y: 0,
+            z: 20,
+          },
+          duration
+        )
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .start();
+
+      // 카메라 시점
+      new TWEEN.Tween(controls.target)
+        .to(
+          {
+            x: 0,
+            y: 0,
+            z: 0,
+          },
+          duration
+        )
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .start();
+    }
 
     let 진폭 = 6;
     let 반경 = 0.2;
     let 속도 = 0.6;
 
+    // 브라우저 창 사이즈
+    function setSize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.render(scene, camera);
+    }
+    window.addEventListener("resize", setSize);
+
     onMounted(() => {
       initThreejs();
       animate();
+      homeCanvas.addEventListener("click", onPointerClick);
     });
 
     return {
-      // isClick,
+      isClick,
+      closeModal,
+      openModal,
       importEmoject,
       renderer,
       camera,
@@ -198,7 +270,7 @@ export default {
     margin-bottom: 10px;
   }
 
-  .closeInfo {
+  .closeModal {
     position: absolute;
     right: 0;
     top: 0;

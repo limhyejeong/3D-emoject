@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import EditEmotion from '../views/EditEmotion.vue';
 import CreateView from '../views/CreateView.vue';
+import InputView from '../views/InputView.vue';
 import ListView from '../views/ListView.vue';
 
 const routes = [
@@ -23,6 +24,11 @@ const routes = [
     path: '/create',
     name: 'createemotion',
     component: CreateView
+  },
+  {
+    path: '/input',
+    name: 'inputview',
+    component: InputView
   },
   {
     path: '/emotions/:emotionId',

@@ -1,8 +1,8 @@
 <template>
   <div class="createview">
     <InputView v-if="step <= 1" />
-    <LoadingAnimation v-if="step == 2" />
-    <OutputView v-if="step == 3" />
+    <LoadingAnimation v-if="step == 3" />
+    <OutputView v-if="step == 4" />
     <!-- <GltfSample /> -->
     <!-- <Anger /> -->
     <!-- <Fear /> -->

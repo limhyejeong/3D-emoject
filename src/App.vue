@@ -37,9 +37,9 @@ export default {
 }
 .slide-enter-active,
 .slide-leave-active {
-  transition: all 0.5s ease-in-out;
+  transition: all 0.5s;
 }
-.slide-enter-to,
+.slide-enter-from,
 .slide-leave-to {
   opacity: 0;
   transform: translateY(60px);
