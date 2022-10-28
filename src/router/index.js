@@ -3,7 +3,11 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import EditEmotion from '../views/EditEmotion.vue';
 import CreateView from '../views/CreateView.vue';
-import InputView from '../views/InputView.vue';
+import InputEmoji from '../views/InputEmoji.vue';
+import InputName from '../views/InputName.vue';
+import InputContents from '../views/InputContents.vue';
+import LoadingAnimation from '../views/LoadingAnimation.vue';
+import OutputView from '../views/OutputView.vue';
 import ListView from '../views/ListView.vue';
 
 const routes = [
@@ -11,6 +15,7 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView
+    // component: () => import(/* webpackChunkName: "home" */ '../views/HomeView.vue')
   },
   {
     path: '/about',
@@ -18,7 +23,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: AboutView
+    component: AboutView,
   },
   {
     path: '/create',
@@ -26,9 +31,31 @@ const routes = [
     component: CreateView
   },
   {
-    path: '/input',
-    name: 'inputview',
-    component: InputView
+    path: '/emoji',
+    name: 'inputemoji',
+    component: InputEmoji,
+  },
+  {
+    path: '/name',
+    name: 'inputname',
+    component: InputName,
+    meta: { transition: 'slide' }
+  },
+  {
+    path: '/contents',
+    name: 'inputcontents',
+    component: InputContents,
+    meta: { transition: 'slide' }
+  },
+  {
+    path: '/creating',
+    name: 'LoadingAnimation',
+    component: LoadingAnimation,
+  },
+  {
+    path: '/output',
+    name: 'OutputView',
+    component: OutputView,
   },
   {
     path: '/emotions/:emotionId',

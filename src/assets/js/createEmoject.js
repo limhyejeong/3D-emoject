@@ -1,6 +1,15 @@
 import * as THREE from "three";
+import { noise } from "@/assets/js/noise";
 let geometry, material, matcapTexture;
 const texLoader = new THREE.TextureLoader(); // 텍스쳐 로더
+let v3 = new THREE.Vector3();
+let clock = new THREE.Clock();
+
+let noiseSettings = {
+    진폭: 6,
+    반경: 0.2,
+    속도: 0.6,
+};
 
 let colorArr = [
     new THREE.Color(0xf7781a),
@@ -10,32 +19,32 @@ let colorArr = [
     new THREE.Color(0xa98e75),
 ];
 
-export const createEmoject = (mesh, category, activity) => {
+const createEmoject = (mesh, category, activity) => {
     // Geometry
     if (category == "anger") {
         geometry = new THREE.ConeGeometry(1, 2, 128, 128);
-        // noiseSettings = { 진폭: 1, 반경: 0.2, 속도: 1 };
+        noiseSettings = { 진폭: 1, 반경: 0.2, 속도: 1 };
     } else if (category == "fear") {
         geometry = new THREE.SphereGeometry(1, 64, 64);
-        // noiseSettings = { 진폭: 10, 반경: 0.5, 속도: 1 };
+        noiseSettings = { 진폭: 10, 반경: 0.5, 속도: 1 };
     } else if (category == "sadness") {
         geometry = new THREE.TorusGeometry(0.5, 0.3, 64, 64);
-        // noiseSettings = { 진폭: 3, 반경: 0.5, 속도: 1 };
+        noiseSettings = { 진폭: 3, 반경: 0.5, 속도: 1 };
     } else if (category == "disgust") {
         geometry = new THREE.ConeGeometry(1, 1.3, 128, 128);
-        // noiseSettings = { 진폭: 8, 반경: 0.1, 속도: 1 };
+        noiseSettings = { 진폭: 8, 반경: 0.1, 속도: 1 };
     } else if (category == "surprise") {
         geometry = new THREE.TetrahedronGeometry(0.7, 10);
-        // noiseSettings = { 진폭: 2, 반경: 2, 속도: 1 };
+        noiseSettings = { 진폭: 2, 반경: 2, 속도: 1 };
     } else if (category == "anticipation") {
         geometry = new THREE.SphereGeometry(1, 64, 64);
-        // noiseSettings = { 진폭: 1, 반경: 4, 속도: 1 };
+        noiseSettings = { 진폭: 1, 반경: 4, 속도: 1 };
     } else if (category == "trust") {
         geometry = new THREE.TorusKnotGeometry(0.6, 0.2, 128, 16, 2, 3);
-        // noiseSettings = { 진폭: 1, 반경: 0.2, 속도: 1 };
+        noiseSettings = { 진폭: 1, 반경: 0.2, 속도: 1 };
     } else if (category == "joy") {
         geometry = new THREE.TorusKnotGeometry(0.6, 0.1, 256, 16, 1, 5);
-        // noiseSettings = { 진폭: 1, 반경: 0.2, 속도: 1 };
+        noiseSettings = { 진폭: 1, 반경: 0.2, 속도: 1 };
     }
 
     if (activity == 2) {
@@ -66,7 +75,23 @@ export const createEmoject = (mesh, category, activity) => {
         color: colorArr[sPick],
         matcap: matcapTexture,
     });
+
+    // 노이즈 애니메이션을 위한 준비
+    geometry.positionData = [];
+    for (let i = 0; i < geometry.attributes.position.count; i++) {
+        v3.fromBufferAttribute(geometry.attributes.position, i);
+        geometry.positionData.push(v3.clone());
+    }
+
     mesh = new THREE.Mesh(geometry, material);
 
     return mesh;
 }
+
+
+const noiseAnimation = (mesh, settings) => {
+    noise(mesh, clock, settings, v3);
+}
+
+
+export { createEmoject, noiseSettings, noiseAnimation }

@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import InputView from "./InputView.vue";
+import InputView from "./InputEmoji.vue";
 import OutputView from "./OutputView.vue";
 import LoadingAnimation from "./LoadingAnimation.vue";
 import TheCanvas from "./TheCanvas.vue";

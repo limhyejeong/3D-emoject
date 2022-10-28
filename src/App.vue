@@ -1,7 +1,9 @@
 <template>
   <nav>
     <!-- <router-link class="logo" to="/">🪐 About Indescribable Emotion</router-link> -->
-    <router-link to="/" class="logo">형용할 수 없는 감정에 대하여</router-link>
+    <router-link to="/" class="logo">
+      형용할 수 없는 감정에 대하여
+    </router-link>
     <!-- <router-link to="/about">About</router-link> |
     <router-link to="/create">Create</router-link> |
     <router-link to="/list">List</router-link> -->
@@ -9,8 +11,8 @@
   </nav>
 
   <div class="page">
-    <router-view v-slot="{ Component }">
-      <Transition name="fade" mode="out-in">
+    <router-view v-slot="{ Component, route }">
+      <Transition :name="route.meta.transition || 'fade'" mode="out-in">
         <component :is="Component"></component>
       </Transition>
     </router-view>
@@ -37,12 +39,13 @@ export default {
 }
 .slide-enter-active,
 .slide-leave-active {
-  transition: all 0.5s;
+  transition: all 0.3s;
 }
-.slide-enter-from,
+.slide-enter-from {
+  transform: translateX(100vw);
+}
 .slide-leave-to {
-  opacity: 0;
-  transform: translateY(60px);
+  transform: translateX(-100vw);
 }
 </style>
 

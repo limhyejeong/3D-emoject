@@ -3,7 +3,7 @@
     <EmotionSpace />
 
     <aside class="moveCreateBtn">
-      <router-link to="/create">감정 생성</router-link>
+      <router-link to="/emoji">감정 생성</router-link>
     </aside>
 
     <aside class="moveAboutBtn">

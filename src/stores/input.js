@@ -35,8 +35,8 @@ export const useInputStore = defineStore('input', {
                 'time': new Date(),
             };
             addDoc(emoColRef, array);
-            alert("A emotion have been uploaded!");
-            router.push("/");
+            alert("감정이 등록되었습니다!");
+            router.replace("/");
         },
         clearInput() {
             this.name = '';

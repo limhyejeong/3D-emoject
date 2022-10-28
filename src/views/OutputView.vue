@@ -1,11 +1,6 @@
 <template>
   <section class="outputView">
-    <div class="render">
-      <Renderer ref="renderer" antialias orbit-ctrl resize="true">
-        <Camera :position="{ x: 0, y: 0, z: 5 }" />
-        <Scene ref="scene" background="#fff"></Scene>
-      </Renderer>
-    </div>
+    <canvas id="outputCanvas"></canvas>
 
     <div class="outputInfo">
       <br />
@@ -15,8 +10,13 @@
       <br />
       <!-- <div class="outputInfoCategory">{{ category }}</div> -->
       <!-- <div class="outputInfoActivity">{{ activity }}</div> -->
+    </div>
 
-      <button @click="clearInput" class="againBtn">다시 하기</button>
+    <div class="outputBtns">
+      <router-link to="/emoji">
+        <button @click="clearInput" class="againBtn">다시 하기</button>
+      </router-link>
+
       <button
         @click="addEmotion(name, emoji, content, category, activity)"
         class="addBtn"
@@ -31,73 +31,91 @@
 import { useInputStore } from "@/stores/input";
 import { storeToRefs } from "pinia";
 import { ref, onMounted } from "vue";
-import {
-  Renderer,
-  Camera,
-  Scene,
-  Sphere,
-  ShaderMaterial,
-  Texture,
-} from "troisjs";
 // import { makeNoise4D } from "open-simplex-noise";
 import { vertexShader, fragmentShader, twist } from "@/assets/js/twist";
 import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import {
+  createEmoject,
+  noiseSettings,
+  noiseAnimation,
+} from "@/assets/js/createEmoject";
 import { noise } from "@/assets/js/noise";
 import router from "@/router/index";
-import { createEmoject } from "@/assets/js/createEmoject";
-
-// import emoColRef from "@/firebase";
-// import { addDoc } from "firebase/firestore";
 
 export default {
   name: "OutputView",
-  components: {
-    Renderer,
-    Camera,
-    Scene,
-    Sphere,
-    ShaderMaterial,
-    Texture,
-  },
   setup() {
     const store = useInputStore();
     const { name, emoji, content, category, activity, color } =
       storeToRefs(store);
     const { addEmotion, clearInput } = store;
-    const renderer = ref(null);
-    const scene = ref(null);
-    const emojiCount = emoji.value.length / 2;
-    console.log(color.value);
 
-    let v3 = new THREE.Vector3();
-    let clock = new THREE.Clock();
-    let noiseSettings = {
-      진폭: 10,
-      반경: 0.1,
-      속도: 1,
+    // threejs 추가하기
+    let scene, renderer, camera, controls;
+    let width = window.innerWidth,
+      height = window.innerHeight;
+    let outputCanvas;
+
+    // 기본적인 Sence 제작 함수
+    function initThreejs() {
+      scene = new THREE.Scene();
+      outputCanvas = document.querySelector("#outputCanvas");
+
+      renderer = new THREE.WebGLRenderer({
+        canvas: outputCanvas,
+        antialias: true,
+        alpha: true,
+      });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
+
+      camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
+      camera.position.x = 0;
+      camera.position.y = 0;
+      camera.position.z = 10;
+      scene.add(camera);
+
+      const light = new THREE.AmbientLight(0xffffff, 1); // soft white light
+      const pointLight = new THREE.PointLight(0xff0000, 2, 100);
+      pointLight.position.set(10, 10, 10);
+      scene.add(light, pointLight);
+
+      controls = new OrbitControls(camera, renderer.domElement);
+    }
+
+    // 감정 오브젝트 만드는 함수
+    let emoject;
+    const importEmoject = () => {
+      emoject = createEmoject(emoject, category.value, activity.value);
+      emoject.userData = noiseSettings; // 이모젝트에 데이터 추가
+      // emoject.rotation.x = Math.random() * 360;
+      // emoject.rotation.y = Math.random() * 360;
+      scene.add(emoject);
     };
 
-    let mesh;
+    // 브라우저 창 사이즈
+    function setSize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.render(scene, camera);
+    }
+    window.addEventListener("resize", setSize);
 
-    function createMesh() {
-      mesh = createEmoject(mesh, category.value, activity.value);
-      scene.value.scene.add(mesh);
-      mesh.geometry.positionData = [];
-      for (let i = 0; i < mesh.geometry.attributes.position.count; i++) {
-        v3.fromBufferAttribute(mesh.geometry.attributes.position, i);
-        mesh.geometry.positionData.push(v3.clone());
-      }
+    // 애니메이션
+    function animate() {
+      requestAnimationFrame(animate);
+      emoject.rotation.y += 0.01;
+      noiseAnimation(emoject, emoject.userData);
+      controls.update();
+      renderer.render(scene, camera);
     }
 
     onMounted(() => {
-      createMesh();
-      renderer?.value?.onBeforeRender(() => {
-        if (mesh != null) {
-          noise(mesh, clock, noiseSettings, v3);
-          // twist(sphereMesh, clock, settings);
-          mesh.rotation.y += 0.005;
-        }
-      });
+      initThreejs();
+      importEmoject();
+      animate();
     });
 
     return {
@@ -106,7 +124,6 @@ export default {
       emoji,
       content,
       category,
-      mesh,
       activity,
       addEmotion,
       clearInput,
@@ -122,26 +139,22 @@ export default {
 </script>
 
 <style lang="scss">
-.creating {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  background: #1a1a23;
-  z-index: 10000;
-}
 .outputView {
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+#outputCanvas {
+  border: 1px solid red;
+  width: 60%;
+  // height: 90vh;
 }
 .outputInfo {
   position: absolute;
-  right: 0;
+  top: 15%;
   // border: 1px solid #eee;
-  width: 40%;
+  width: 100%;
   padding: 0 50px;
 
   .outputInfoName {
@@ -154,48 +167,14 @@ export default {
     font-size: 0.85rem;
     color: #aaa;
   }
+}
+
+.outputBtns {
+  position: absolute;
+  bottom: 0;
 
   button {
-    padding: 10px 0;
-    width: 100%;
-    border-radius: 20px;
-    // color: var(--text-color);
-    border: none;
-    font-weight: 500;
-
-    &:hover {
-      background: none;
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
-    }
+    padding: 20px;
   }
-
-  .againBtn {
-    background: linear-gradient(var(--article-color), var(--section-color));
-    border: 1px solid var(--inactive-color);
-    margin: 10px 0;
-
-    &:hover {
-      // background: linear-gradient(var(--section-color), var(--article-color));
-      // opacity: 0.5;
-    }
-  }
-  .addBtn {
-    background: linear-gradient(var(--main-color), var(--shadow-color));
-    // box-shadow: inset 0px 5px 5px var(--highlight-color),
-    //   inset 0px -5px 5px var(--background-color);
-    border: 1px solid var(--main-color);
-
-    &:hover {
-      // background: linear-gradient(var(--shadow-color), var(--main-color));
-      // box-shadow: inset 0px 5px 5px var(--background-color),
-      //   inset 0px -5px 5px var(--highlight-color);
-      // opacity: 0.5;
-    }
-  }
-}
-.render {
-  width: 60%;
-  height: 90vh;
 }
 </style>

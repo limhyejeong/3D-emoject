@@ -21,7 +21,11 @@ import { ref, onMounted, watch } from "vue";
 import * as TWEEN from "@tweenjs/tween.js";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { createEmoject } from "@/assets/js/createEmoject";
+import {
+  createEmoject,
+  noiseSettings,
+  noiseAnimation,
+} from "@/assets/js/createEmoject";
 import { vertexShader, fragmentShader, twist } from "@/assets/js/twist";
 import { logEvent } from "@firebase/analytics";
 
@@ -44,12 +48,12 @@ export default {
     // 기본적인 Sence 제작 함수
     function initThreejs() {
       scene = new THREE.Scene();
+      scene.background = new THREE.Color(0xffffff);
       homeCanvas = document.querySelector("#homeCanvas");
 
       renderer = new THREE.WebGLRenderer({
         canvas: homeCanvas,
         antialias: true,
-        alpha: true,
       });
       renderer.setSize(width, height);
       renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
@@ -58,7 +62,6 @@ export default {
       camera.position.x = 0;
       camera.position.y = 0;
       camera.position.z = 20;
-      // camera.lookAt(0, 0, 0);
       scene.add(camera);
 
       const light = new THREE.AmbientLight(0xffffff, 1); // soft white light
@@ -67,7 +70,6 @@ export default {
       scene.add(light, pointLight);
 
       controls = new OrbitControls(camera, renderer.domElement);
-      console.log(controls.target);
     }
 
     const group = new THREE.Group();
@@ -84,14 +86,13 @@ export default {
     let emoject;
     const importEmoject = (data) => {
       emoject = createEmoject(emoject, data.category, data.activity);
-      emoject.userData = data; // 이모젝트에 데이터 추가
+      emoject.userData = [data, noiseSettings]; // 이모젝트에 데이터 추가
       let range = 5; // 위치 범위
       emoject.position.x = Math.floor(Math.random() * (range * 2) - range);
       emoject.position.y = Math.floor(Math.random() * (range * 2) - range);
       emoject.position.z = Math.floor(Math.random() * (range * 2) - range);
       emoject.rotation.x = Math.random() * 360;
       emoject.rotation.y = Math.random() * 360;
-      // scene.add(emoject);
       group.add(emoject);
     };
 
@@ -102,6 +103,7 @@ export default {
     // 클릭하면 selectedMesh 활성화, selectedData 값 변경
     let selectedData = ref({});
     let selectedMesh;
+
     function onPointerClick(event) {
       if (isClick.value == true) {
         closeModal();
@@ -116,19 +118,13 @@ export default {
             selectedMesh = intersects[i].object;
             break;
           }
-          selectedData.value = selectedMesh.userData;
+          selectedData.value = selectedMesh.userData[0];
           openModal();
+        } else {
+          selectedMesh = null;
         }
+        // console.log(selectedMesh);
       }
-    }
-
-    // 애니메이션
-    function animate() {
-      requestAnimationFrame(animate);
-      if (isClick.value == false) if (group) group.rotation.y += 0.002;
-      controls.update();
-      TWEEN.update();
-      renderer.render(scene, camera);
     }
 
     const settings = {
@@ -140,15 +136,18 @@ export default {
       intensity: 1,
     };
     let duration = 1000;
+    let saveControls;
 
+    // 메쉬에 카메라 포커스가 맞춰지고 모달이 열리는 함수
     function openModal() {
       isClick.value = true;
+      saveControls = controls.saveState();
 
-      // 카메라 위치
+      // 카메라 위치 변경
       new TWEEN.Tween(camera.position)
         .to(
           {
-            x: selectedMesh.position.x + 2,
+            x: selectedMesh.position.x,
             y: selectedMesh.position.y,
             z: selectedMesh.position.z + 5,
           },
@@ -157,56 +156,36 @@ export default {
         .easing(TWEEN.Easing.Quadratic.InOut)
         .start();
 
-      console.log(controls.target);
-
-      // 카메라 시점
-      new TWEEN.Tween(controls.target)
-        .to(
-          {
-            x: selectedMesh.position.x,
-            y: selectedMesh.position.y,
-            z: selectedMesh.position.z,
-          },
-          duration
-        )
+      // 카메라 시점 변경
+      new TWEEN.Tween(controls)
+        .to({ target: selectedMesh.position }, duration)
         .easing(TWEEN.Easing.Quadratic.InOut)
         .start();
     }
 
-    // 정보 닫기
+    // 모달 닫기
     function closeModal() {
       isClick.value = false;
 
+      controls.reset();
+
       // 카메라 위치
-      new TWEEN.Tween(camera.position)
-        .to(
-          {
-            x: 0,
-            y: 0,
-            z: 20,
-          },
-          duration
-        )
-        .easing(TWEEN.Easing.Quadratic.InOut)
-        .start();
+      // new TWEEN.Tween(camera)
+      //   .to(
+      //     {
+      //       position: new THREE.Vector3(0, 0, 20),
+      //     },
+      //     duration
+      //   )
+      //   .easing(TWEEN.Easing.Quadratic.InOut)
+      //   .start();
 
       // 카메라 시점
-      new TWEEN.Tween(controls.target)
-        .to(
-          {
-            x: 0,
-            y: 0,
-            z: 0,
-          },
-          duration
-        )
-        .easing(TWEEN.Easing.Quadratic.InOut)
-        .start();
+      // new TWEEN.Tween(controls)
+      //   .to({ target: new THREE.Vector3(0, 0, 0) }, duration)
+      //   .easing(TWEEN.Easing.Quadratic.InOut)
+      //   .start();
     }
-
-    let 진폭 = 6;
-    let 반경 = 0.2;
-    let 속도 = 0.6;
 
     // 브라우저 창 사이즈
     function setSize() {
@@ -216,6 +195,23 @@ export default {
       renderer.render(scene, camera);
     }
     window.addEventListener("resize", setSize);
+
+    // 애니메이션
+    function animate() {
+      requestAnimationFrame(animate);
+      if (isClick.value == false) {
+        controls.autoRotate = true;
+      } else {
+        controls.autoRotate = false;
+      }
+
+      // for (let i = 0; i < group.children.length; i++) {
+      //   noiseAnimation(group.children[i], group.children[i].userData[1]);
+      // }
+      controls.update();
+      TWEEN.update();
+      renderer.render(scene, camera);
+    }
 
     onMounted(() => {
       initThreejs();
