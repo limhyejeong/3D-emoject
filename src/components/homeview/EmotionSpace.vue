@@ -1,8 +1,8 @@
 <template>
   <!-- <div class="meshInfo">{{ selectedData.emoji }}</div> -->
-  <aside v-show="isClick" class="info">
+  <aside v-show="isClick" class="infoModal">
+    <div class="infoName">{{ selectedData.name }} 님의 11번째 감정</div>
     <div class="infoNum">{{ selectedData.emoji }}</div>
-    <div class="infoName">{{ selectedData.name }}</div>
     <p class="infoContents">{{ selectedData.contents }}</p>
 
     <button @click="closeModal" class="closeModal">x</button>
@@ -28,6 +28,7 @@ import {
 } from "@/assets/js/createEmoject";
 import { vertexShader, fragmentShader, twist } from "@/assets/js/twist";
 import { logEvent } from "@firebase/analytics";
+import { PreventDragClick } from "@/assets/js/PreventDragClick";
 
 export default {
   name: "EmotionSpace",
@@ -48,12 +49,13 @@ export default {
     // 기본적인 Sence 제작 함수
     function initThreejs() {
       scene = new THREE.Scene();
-      scene.background = new THREE.Color(0xffffff);
+      // scene.background = new THREE.Color(0xffffff);
+      // scene.fog = new THREE.Fog(0xffffff, 3, 80);
       homeCanvas = document.querySelector("#homeCanvas");
-
       renderer = new THREE.WebGLRenderer({
         canvas: homeCanvas,
         antialias: true,
+        alpha: true,
       });
       renderer.setSize(width, height);
       renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
@@ -67,8 +69,8 @@ export default {
       const light = new THREE.AmbientLight(0xffffff, 1); // soft white light
       const pointLight = new THREE.PointLight(0xff0000, 2, 100);
       pointLight.position.set(10, 10, 10);
-      scene.add(light, pointLight);
 
+      scene.add(light, pointLight);
       controls = new OrbitControls(camera, renderer.domElement);
     }
 
@@ -105,6 +107,7 @@ export default {
     let selectedMesh;
 
     function onPointerClick(event) {
+      if (preventDragClick.mouseMoved) return;
       if (isClick.value == true) {
         closeModal();
       } else {
@@ -123,7 +126,6 @@ export default {
         } else {
           selectedMesh = null;
         }
-        // console.log(selectedMesh);
       }
     }
 
@@ -135,7 +137,7 @@ export default {
       amplitude: 10.0,
       intensity: 1,
     };
-    let duration = 1000;
+    let duration = 700;
     let saveControls;
 
     // 메쉬에 카메라 포커스가 맞춰지고 모달이 열리는 함수
@@ -213,10 +215,13 @@ export default {
       renderer.render(scene, camera);
     }
 
+    let preventDragClick; // 드래그 시 클릭 방지
+
     onMounted(() => {
       initThreejs();
       animate();
       homeCanvas.addEventListener("click", onPointerClick);
+      preventDragClick = new PreventDragClick(homeCanvas);
     });
 
     return {
@@ -245,21 +250,17 @@ export default {
   top: 10px;
   right: 10px;
 }
-.info {
+.infoModal {
   position: absolute;
   right: 0;
   margin: 50px 50px 0 0;
   padding: 50px;
-  // background: #27292e;
+  background: var(--background);
   color: #fff;
   border-radius: 10px;
-  border: 1px solid var(--section-color);
-  // box-shadow: inset -12px -8px 20px #000;
-  // box-shadow: inset 6px 4px 16px #888;
+  box-shadow: -3px -3px 5px var(--light), inset -2px -2px 5px var(--shadow),
+    5px 5px 20px var(--shadow);
   z-index: 100;
-  -webkit-backdrop-filter: blur(30px);
-  backdrop-filter: blur(30px);
-  box-shadow: 5px 5px 20px #000;
   max-width: 500px;
 
   div {

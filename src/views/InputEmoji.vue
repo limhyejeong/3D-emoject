@@ -1,11 +1,23 @@
 <template>
-  <div class="inputview">
-    <section class="emojiInputSection">
-      <h3 class="title">지금 제가 느끼는 감정은</h3>
+  <div class="inputDiv">
+    <section class="inputSection">
+      <h3 class="title">감정을 이모지로 표현한다면?</h3>
+      <p class="description">
+        기억에 남는 상황이나 특별한 감정, 특정한 대상을 떠올리면서 이모지를
+        선택해주세요.<br />
+        지금의 감정을 표현하는 것도 좋아요.
+      </p>
+
       <div class="emojiInputBox">
-        <input type="text" v-model="emoji" class="emojiInput" readonly />
+        <input
+          type="text"
+          v-model="emoji"
+          class="emojiInput"
+          readonly
+          placeholder="2개에서 10개까지 선택할 수 있어요"
+        />
         <button class="clearEmojiInput" @click="clearEmojiInput">
-          모두 지우기
+          <img src="@/assets/plus.svg" alt="" />
         </button>
       </div>
 
@@ -19,9 +31,13 @@
       </div>
     </section>
 
-    <router-link to="/name">
-      <button @click="getEmotionData">다음</button></router-link
-    >
+    <aside class="emojiSubmitBox">
+      <router-link to="/name">
+        <button @click="getEmotionData" class="emojiSubmitBtn">
+          선택 완료
+        </button></router-link
+      >
+    </aside>
   </div>
 </template>
 
@@ -129,9 +145,119 @@ export default {
 </script>
 
 <style lang="scss">
+.inputDiv {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 100px 0;
+}
+
 .title {
   width: 100%;
-  font-size: 1.5rem;
-  font-weight: 300;
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+p.description {
+  // font-size: 0.9rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  padding: 10px 0 20px;
+  color: var(--gray1);
+}
+
+.inputSection {
+  width: 1130px;
+}
+
+.emojiInputBox {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  .emojiInput {
+    width: 100%;
+    height: 60px;
+    text-align: center;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    font-size: 2rem;
+    box-shadow: inset -2px -2px 5px var(--shadow), 3px 3px 10px var(--shadow);
+
+    &::placeholder {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gray2);
+    }
+  }
+
+  .clearEmojiInput {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    right: 0;
+    border: none;
+    background: none;
+    margin-right: 15px;
+    opacity: 0.3;
+
+    img {
+      filter: invert(1);
+    }
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
+.emojiList {
+  width: 100%;
+  height: auto;
+  max-height: 55vh;
+  box-shadow: -3px -3px 5px var(--light), inset -2px -2px 5px var(--shadow),
+    5px 5px 20px var(--shadow);
+  overflow: scroll;
+  border-radius: 20px;
+  margin: 20px 0;
+  padding: 20px;
+
+  span {
+    padding: 20px;
+    font-size: 3rem;
+    cursor: pointer;
+    transition: 0.15s;
+
+    &:hover {
+      opacity: 0.2;
+    }
+  }
+}
+
+.emojiSubmitBox {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  // margin-bottom: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .emojiSubmitBtn {
+    width: 100vw;
+    height: 80px;
+    background: var(--black);
+    border: none;
+    color: var(--light);
+    font-weight: 700;
+    font-size: 1rem;
+    // box-shadow: inset 1px 1px 5px var(--light), inset -5px -5px 10px #000;
+    // padding: 30px 0;
+    // border-radius: 7px;
+  }
 }
 </style>

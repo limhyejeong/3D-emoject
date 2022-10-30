@@ -1,17 +1,29 @@
 <template>
-  <div>
-    <section class="nameInputSection">
-      <h3 class="title">입력한 감정을 설명해줘</h3>
-      <input
-        type="text"
+  <div class="inputDiv">
+    <section class="inputSection">
+      <h3 class="title">감정을 설명해주세요</h3>
+      <p class="description">
+        이모지를 선택하며 떠올렸던 감정을 설명해주세요.
+        <br />
+        예시)
+      </p>
+      <textarea
         v-model="content"
         class="contentsInput"
         placeholder="contents"
         autofocus
       />
+
+      <!-- <router-link to="/name">이름 다시 입력할래요</router-link> -->
     </section>
 
-    <router-link to="/creating">생성</router-link>
+    <aside class="emojiSubmitBox">
+      <router-link to="/creating">
+        <button @click="getEmotionData" class="emojiSubmitBtn">
+          감정 생성
+        </button></router-link
+      >
+    </aside>
   </div>
 </template>
 
@@ -30,4 +42,23 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.contentsInput {
+  width: 100%;
+  height: 300px;
+  border-radius: 10px;
+  padding: 20px;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: inset -2px -2px 5px var(--shadow), 3px 3px 10px var(--shadow);
+
+  &::placeholder {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gray2);
+  }
+}
+</style>

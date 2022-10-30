@@ -3,13 +3,22 @@
     <canvas id="outputCanvas"></canvas>
 
     <div class="outputInfo">
+      <div class="title">{{ name }}님의 감정을 시각화한 모습이에요.</div>
+      <div class="outputInfoEmoji">
+        <h5>분석된 이모지</h5>
+        {{ emoji }}
+      </div>
+      <div class="outputInfoContent">
+        <h5>참고한 정보</h5>
+        {{ content }}
+      </div>
       <br />
-      <div class="outputInfoEmoji">{{ emoji }}</div>
-      <div class="outputInfoName">{{ name }}</div>
-      <div class="outputInfoContent">{{ content }}</div>
-      <br />
-      <!-- <div class="outputInfoCategory">{{ category }}</div> -->
-      <!-- <div class="outputInfoActivity">{{ activity }}</div> -->
+      <div class="outputInfoCategory">
+        <h5>감정 분석 결과</h5>
+        <canvas id="outputChart" />
+        {{ category }}
+        {{ activity }}
+      </div>
     </div>
 
     <div class="outputBtns">
@@ -145,17 +154,18 @@ export default {
   align-items: center;
   justify-content: center;
 }
-#outputCanvas {
-  border: 1px solid red;
-  width: 60%;
-  // height: 90vh;
-}
+
 .outputInfo {
   position: absolute;
   top: 15%;
-  // border: 1px solid #eee;
+  border: 1px solid #eee;
   width: 100%;
   padding: 0 50px;
+
+  h5 {
+    font-size: 1rem;
+    font-weight: 800;
+  }
 
   .outputInfoName {
     font-weight: 800;

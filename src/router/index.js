@@ -9,6 +9,8 @@ import InputContents from '../views/InputContents.vue';
 import LoadingAnimation from '../views/LoadingAnimation.vue';
 import OutputView from '../views/OutputView.vue';
 import ListView from '../views/ListView.vue';
+import LogoPage from '../views/LogoPage.vue';
+
 
 const routes = [
   {
@@ -39,13 +41,13 @@ const routes = [
     path: '/name',
     name: 'inputname',
     component: InputName,
-    meta: { transition: 'slide' }
+    meta: { transition: 'slide-left' }
   },
   {
     path: '/contents',
     name: 'inputcontents',
     component: InputContents,
-    meta: { transition: 'slide' }
+    meta: { transition: 'slide-left' }
   },
   {
     path: '/creating',
@@ -66,6 +68,11 @@ const routes = [
     path: '/list',
     name: 'listview',
     component: ListView
+  },
+  {
+    path: '/logo',
+    name: 'logopage',
+    component: LogoPage
   },
 ]
 
