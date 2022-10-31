@@ -19,9 +19,7 @@
 
     <aside class="emojiSubmitBox">
       <router-link to="/creating">
-        <button @click="getEmotionData" class="emojiSubmitBtn">
-          감정 생성
-        </button></router-link
+        <button class="emojiSubmitBtn">감정 생성</button></router-link
       >
     </aside>
   </div>

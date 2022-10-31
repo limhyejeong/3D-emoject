@@ -14,6 +14,7 @@
         class="nameInput"
         ref="nameInput"
         placeholder="홍길동"
+        @keypress.enter="enterEvent"
       />
 
       <!-- <router-link to="/emoji">이모지 다시 선택할래요</router-link> -->
@@ -21,9 +22,7 @@
 
     <aside class="emojiSubmitBox">
       <router-link to="/contents">
-        <button @click="getEmotionData" class="emojiSubmitBtn">
-          입력 완료
-        </button></router-link
+        <button class="emojiSubmitBtn">입력 완료</button></router-link
       >
     </aside>
   </div>
@@ -33,6 +32,7 @@
 import { ref, onMounted } from "vue";
 import { useInputStore } from "@/stores/input";
 import { storeToRefs } from "pinia";
+import { router } from "@/router/index";
 
 export default {
   name: "InputView2",
@@ -45,11 +45,15 @@ export default {
       nameInput.value.focus();
     }
 
+    function enterEvent() {
+      router.push("/contents");
+    }
+
     onMounted(() => {
       focusInput();
     });
 
-    return { nameInput, name, focusInput };
+    return { nameInput, name, focusInput, enterEvent };
   },
 };
 </script>

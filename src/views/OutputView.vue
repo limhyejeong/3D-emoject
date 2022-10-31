@@ -1,25 +1,39 @@
 <template>
-  <section class="outputView">
-    <div class="outputInfo">
-      <div class="title">{{ name }}님의 감정을 시각화한 모습이에요.</div>
-      <div class="outputInfoEmoji">
-        <h5>분석된 이모지</h5>
-        {{ emoji }}
-      </div>
-      <div class="outputInfoContent">
-        <h5>참고한 정보</h5>
-        {{ content }}
-      </div>
-      <br />
-      <div class="outputInfoCategory">
-        <h5>감정 분석 결과</h5>
-        <div class="outputChartDiv">
-          <canvas id="outputChart" />
+  <div>
+    <section class="outputView">
+      <div class="outputInfo">
+        <div class="title">
+          <span class="outputInfoName">{{ name }}</span
+          >님의 감정 분석 결과
         </div>
-        대표적으로 드러난 감정은 {{ category }}이며, <br />
-        활동성은 {{ activity }}로 나타났습니다.
+        <div class="outputInfoEmoji">
+          <h5>분석 이모지</h5>
+          {{ emoji }}
+        </div>
+        <div class="outputInfoContent">
+          <h5>감정 설명</h5>
+          {{ content }}
+        </div>
       </div>
-    </div>
+
+      <div class="outputInfo outputCategoryDiv">
+        <h5>
+          감정 유형 <span class="outputInfoCategory">{{ category }}</span>
+        </h5>
+        <div class="outputRadarDiv">
+          <canvas id="outputRadarChart" />
+        </div>
+      </div>
+
+      <div class="outputInfo outputActivityDiv">
+        <h5>
+          감정의 활성도 <span class="outputInfoActivity">{{ activity }}</span>
+        </h5>
+        <div class="outputProgressDiv">
+          <div class="outputProgress"></div>
+        </div>
+      </div>
+    </section>
 
     <div class="outputBtns">
       <router-link to="/emoji">
@@ -34,7 +48,7 @@
       </button>
     </div>
     <canvas id="outputCanvas"></canvas>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -52,7 +66,7 @@ import {
 } from "@/assets/js/createEmoject";
 import { noise } from "@/assets/js/noise";
 import router from "@/router/index";
-import { drawChart } from "@/assets/js/chart";
+import { radarChart } from "@/assets/js/radarChart";
 
 export default {
   name: "OutputView",
@@ -108,6 +122,12 @@ export default {
       scene.add(emoject);
     };
 
+    // 프로그래스 바 함수
+    function setProgress(activity) {
+      const outputProgress = document.querySelector(".outputProgress");
+      outputProgress.style.width = activity * 10 + "%";
+    }
+
     // 브라우저 창 사이즈
     function setSize() {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -129,7 +149,8 @@ export default {
     onMounted(() => {
       initThreejs();
       // importEmoject();
-      drawChart(categoryData._object.categoryData);
+      radarChart(categoryData._object.categoryData);
+      setProgress(activity.value);
       animate();
     });
 
@@ -155,45 +176,78 @@ export default {
 
 <style lang="scss">
 .outputView {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: absolute;
+  left: 50px;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.outputInfoName {
+  font-weight: 800;
+  color: #6070e0;
+}
+.outputInfoEmoji {
+  font-size: 2rem;
+  margin: 10px 0;
+}
+.outputInfoContent {
+  font-weight: 700;
+  color: #6070e0;
+}
+.outputInfoCategory,
+.outputInfoActivity {
+  font-weight: 900;
+  padding-left: 10px;
+  color: #6070e0;
 }
 
 .outputInfo {
-  position: absolute;
-  left: 0;
-  // transform: translate(-50%, 0%);
-  // width: 1130px;
-  padding: 0 50px;
-  pointer-events: none;
+  box-shadow: -3px -3px 5px var(--light), inset -2px -2px 5px var(--shadow),
+    10px 10px 30px var(--shadow);
+  padding: 25px;
+  border-radius: 10px;
+  z-index: 10;
 
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    padding-bottom: 10px;
+  }
   h5 {
     font-size: 1rem;
     font-weight: 800;
-  }
-
-  .outputInfoName {
-    font-weight: 800;
-  }
-  .outputInfoEmoji {
-    font-size: 3rem;
-  }
-  .outputInfoContent {
-    font-size: 0.85rem;
-    color: #aaa;
+    // margin: 10px 0;
+    color: var(--black);
+    // color: var(--gray1);
   }
 }
 
-.outputChartDiv {
-  width: 400px;
-  height: 400px;
-
-  canvas {
+.outputCategoryDiv {
+  .outputRadarDiv {
     width: 100%;
     height: 100%;
-    pointer-events: auto;
+    canvas {
+      // pointer-events: auto;
+      margin-top: 15px;
+    }
+  }
+}
+.outputActivityDiv {
+  .outputProgressDiv {
+    width: 100%;
+    height: 10px;
+    background: var(--gray2);
+    border-radius: 5px;
+    margin-top: 15px;
+  }
+  .outputProgress {
+    width: 50%;
+    height: 100%;
+    border-radius: 5px;
+    background: linear-gradient(-0.25turn, #6070e0, #81a8fd);
   }
 }
 

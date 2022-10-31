@@ -1,8 +1,14 @@
 import Chart from "chart.js/auto";
 
-export function drawChart(data) {
-    const context = document.querySelector("#outputChart").getContext("2d");
-    const outputChart = new Chart(context, {
+export function radarChart(data) {
+    const context = document.querySelector("#outputRadarChart").getContext("2d");
+
+    var gradientBlue = context.createLinearGradient(0, 0, 0, 200);
+    gradientBlue.addColorStop(0, 'rgba(70, 70, 200, 1)');
+    gradientBlue.addColorStop(1, 'rgba(130, 170, 255, 1)');
+
+
+    const chart = new Chart(context, {
         type: "radar", // 차트의 형태
         data: {
             // 차트에 들어갈 데이터
@@ -32,13 +38,13 @@ export function drawChart(data) {
                         data.trust,
                         data.joy,
                     ],
-                    backgroundColor: [
-                        "rgba(255, 99, 132, 0.2)",
-                    ],
-                    borderColor: [
-                        "rgba(255, 99, 132, 1)",
-                    ],
-                    borderWidth: 1,
+                    backgroundColor: gradientBlue,
+                    borderColor: "transparent",
+                    pointBackgroundColor: "transparent",
+                    pointBorderColor: "transparent",
+                    pointHoverBackgroundColor: "transparent",
+                    pointHoverBorderColor: "transparent",
+                    pointHitRadius: 50,
                 },
             ],
         },
@@ -47,21 +53,26 @@ export function drawChart(data) {
             scale: {
                 ticks: {
                     maxTicksLimit: 4,
-                    display: false
+                    display: false,
                 }
             },
             scales: {
                 r: {
                     ticks: {
                         display: false
+                    },
+                    pointLabels: {
+                        font: {
+                            size: 14,
+                        }
                     }
-                }
+                },
             },
             plugins: {
                 legend: {
                     display: false
                 }
-            }
+            },
         }
     });
 }
