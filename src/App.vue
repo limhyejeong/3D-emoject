@@ -1,13 +1,12 @@
 <template>
   <nav>
     <router-link to="/" class="logo">
-      <img src="@/assets/logo2.png" />
       <span>형용할 수 없는 감정에 대하여</span>
     </router-link>
   </nav>
 
   <router-view v-slot="{ Component, route }">
-    <Transition :name="route.meta.transition" mode="out-in">
+    <Transition :name="route.meta.transition || 'fade'" mode="out-in">
       <component :is="Component"></component>
     </Transition>
   </router-view>

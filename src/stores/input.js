@@ -34,7 +34,6 @@ export const useInputStore = defineStore('input', {
             addDoc(emoColRef, array).then(() => {
                 alert("감정이 등록되었습니다!");
                 router.replace("/");
-                window.location.reload();
             });
         },
         clearInput() {

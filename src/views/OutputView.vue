@@ -154,8 +154,10 @@ export default {
     // 애니메이션
     function animate() {
       requestAnimationFrame(animate);
-      emoject.rotation.y += 0.01;
-      noiseAnimation(emoject, emoject.userData);
+      if (emoject) {
+        emoject.rotation.y += 0.01;
+        noiseAnimation(emoject, emoject.userData);
+      }
       controls.update();
       renderer.render(scene, camera);
     }
@@ -180,8 +182,6 @@ export default {
       renderer,
       scene,
       color,
-      vertexShader,
-      fragmentShader,
       categoryData,
       noiseSettings,
       categoryText,

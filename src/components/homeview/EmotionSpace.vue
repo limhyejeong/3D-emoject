@@ -231,10 +231,10 @@ export default {
           noiseAnimation(group.children[i], group.children[i].userData[1]);
         }
       } else {
-        // selectedMesh.rotation.y += 0.01;
-        // selectedMesh.rotation.x += 0.01;
-        // noiseAnimation(selectedMesh, selectedMesh.userData[1]);
-        // controls.autoRotate = false;
+        selectedMesh.rotation.y += 0.01;
+        selectedMesh.rotation.x += 0.01;
+        noiseAnimation(selectedMesh, selectedMesh.userData[1]);
+        controls.autoRotate = false;
       }
 
       controls.update();
