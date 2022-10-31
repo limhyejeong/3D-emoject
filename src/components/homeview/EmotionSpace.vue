@@ -7,7 +7,7 @@
 
     <button @click="closeModal" class="closeModal">x</button>
     <button @click="deleteEmotion(selectedData.id)" class="deleteInfo">
-      Delete
+      Delete{{ selectedData.id }}
     </button>
   </aside>
 
@@ -87,7 +87,13 @@ export default {
     // 감정 오브젝트 만드는 함수
     let emoject;
     const importEmoject = (data) => {
-      emoject = createEmoject(emoject, data.category, data.activity);
+      emoject = createEmoject(
+        emoject,
+        data.category,
+        data.activity,
+        data.emoji.length / 2,
+        data.color
+      );
       emoject.userData = [data, noiseSettings]; // 이모젝트에 데이터 추가
       let range = 5; // 위치 범위
       emoject.position.x = Math.floor(Math.random() * (range * 2) - range);
@@ -206,10 +212,9 @@ export default {
       } else {
         controls.autoRotate = false;
       }
-
-      // for (let i = 0; i < group.children.length; i++) {
-      //   noiseAnimation(group.children[i], group.children[i].userData[1]);
-      // }
+      for (let i = 0; i < group.children.length; i++) {
+        noiseAnimation(group.children[i], group.children[i].userData[1]);
+      }
       controls.update();
       TWEEN.update();
       renderer.render(scene, camera);

@@ -32,7 +32,6 @@
 import { ref, onMounted } from "vue";
 import { useInputStore } from "@/stores/input";
 import { storeToRefs } from "pinia";
-import { router } from "@/router/index";
 
 export default {
   name: "InputView2",
@@ -46,7 +45,7 @@ export default {
     }
 
     function enterEvent() {
-      router.push("/contents");
+      // useRouter.push("/contents");
     }
 
     onMounted(() => {

@@ -1,6 +1,6 @@
 export const emojiDoc = [
     {
-        emoji: '🙂', num: 9, color: '0xf7781a',
+        emoji: '🙂', num: 9, color: "rgb(255, 254, 226)",
         anger: 1,
         fear: 1,
         sadness: 1,
@@ -11,7 +11,7 @@ export const emojiDoc = [
         joy: 3,
         activity: 1,
     }, {
-        emoji: '😀', num: 1, color: '0xf2c925',
+        emoji: '😀', num: 1, color: "rgb(255, 254, 226)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -22,7 +22,7 @@ export const emojiDoc = [
         joy: 8,
         activity: 2,
     }, {
-        emoji: '😃', num: 2, color: '0x37c8ff',
+        emoji: '😃', num: 2, color: "rgb(255, 254, 226)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -33,7 +33,7 @@ export const emojiDoc = [
         joy: 8,
         activity: 2,
     }, {
-        emoji: '😄', num: 3,
+        emoji: '😄', num: 3, color: "rgb(255, 254, 226)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -44,7 +44,7 @@ export const emojiDoc = [
         joy: 8,
         activity: 3,
     }, {
-        emoji: '😁', num: 4,
+        emoji: '😁', num: 4, color: "rgb(255, 254, 226)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -55,7 +55,7 @@ export const emojiDoc = [
         joy: 8,
         activity: 3,
     }, {
-        emoji: '😆', num: 5,
+        emoji: '😆', num: 5, color: "rgb(255, 254, 226)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -67,7 +67,7 @@ export const emojiDoc = [
         activity: 6,
     }, {
 
-        emoji: '😉', num: 11,
+        emoji: '😉', num: 11, color: "rgb(255, 254, 226)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -78,7 +78,7 @@ export const emojiDoc = [
         joy: 1,
         activity: 3,
     }, {
-        emoji: '😊', num: 12,
+        emoji: '😊', num: 12, color: "rgb(255, 220, 200)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -89,7 +89,7 @@ export const emojiDoc = [
         joy: 5,
         activity: 4,
     }, {
-        emoji: '😇', num: 13,
+        emoji: '😇', num: 13, color: "rgb(202, 245, 255)",
         anger: 2,
         fear: 0,
         sadness: 6,
@@ -101,7 +101,7 @@ export const emojiDoc = [
         activity: 8,
     }, {
 
-        emoji: '🥰', num: 14,
+        emoji: '🥰', num: 14, color: "rgb(255, 210, 200)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -112,7 +112,7 @@ export const emojiDoc = [
         joy: 8,
         activity: 8,
     }, {
-        emoji: '😍', num: 15,
+        emoji: '😍', num: 15, color: "rgb(255, 210, 200)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -123,7 +123,7 @@ export const emojiDoc = [
         joy: 10,
         activity: 8,
     }, {
-        emoji: '🤩', num: 16,
+        emoji: '🤩', num: 16, color: "rgb(255, 250, 200)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -134,7 +134,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 9,
     }, {
-        emoji: '😘', num: 17,
+        emoji: '😘', num: 17, color: "rgb(255, 210, 200)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -145,7 +145,7 @@ export const emojiDoc = [
         joy: 3,
         activity: 5,
     }, {
-        emoji: '😗', num: 18,
+        emoji: '😗', num: 18, color: "rgb(255, 254, 226)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -156,7 +156,7 @@ export const emojiDoc = [
         joy: 5,
         activity: 2,
     }, {
-        emoji: '😚', num: 19,
+        emoji: '😚', num: 19, color: "rgb(255, 220, 200)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -167,7 +167,7 @@ export const emojiDoc = [
         joy: 5,
         activity: 2,
     }, {
-        emoji: '😙', num: 20,
+        emoji: '😙', num: 20, color: "rgb(255, 254, 226)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -178,7 +178,7 @@ export const emojiDoc = [
         joy: 8,
         activity: 2,
     }, {
-        emoji: '😋', num: 22,
+        emoji: '😋', num: 22, color: "rgb(255, 210, 240)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -189,7 +189,7 @@ export const emojiDoc = [
         joy: 6,
         activity: 5,
     }, {
-        emoji: '😛', num: 23,
+        emoji: '😛', num: 23, color: "rgb(255, 210, 240)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -200,7 +200,7 @@ export const emojiDoc = [
         joy: 10,
         activity: 6,
     }, {
-        emoji: '😜', num: 24,
+        emoji: '😜', num: 24, color: "rgb(255, 210, 240)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -211,7 +211,7 @@ export const emojiDoc = [
         joy: 10,
         activity: 7,
     }, {
-        emoji: '🤪', num: 25,
+        emoji: '🤪', num: 25, color: "rgb(255, 210, 240)",
         anger: 2,
         fear: 0,
         sadness: 0,
@@ -222,7 +222,7 @@ export const emojiDoc = [
         joy: 2,
         activity: 10,
     }, {
-        emoji: '😝', num: 26,
+        emoji: '😝', num: 26, color: "rgb(255, 210, 240)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -233,7 +233,7 @@ export const emojiDoc = [
         joy: 10,
         activity: 8,
     }, {
-        emoji: '🤑', num: 27,
+        emoji: '🤑', num: 27, color: "rgb(230, 255, 200)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -244,7 +244,7 @@ export const emojiDoc = [
         joy: 3,
         activity: 7,
     }, {
-        emoji: '🤤', num: 46,
+        emoji: '🤤', num: 46, color: "rgb(210, 255, 255)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -255,7 +255,7 @@ export const emojiDoc = [
         joy: 1,
         activity: 4,
     }, {
-        emoji: '🥴', num: 56,
+        emoji: '🥴', num: 56, color: "rgb(255, 220, 200)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -266,7 +266,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 3,
     }, {
-        emoji: '😌', num: 43,
+        emoji: '😌', num: 43, color: "rgb(255, 254, 226)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -277,7 +277,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 2,
     }, {
-        emoji: '🤗', num: 28,
+        emoji: '🤗', num: 28, color: "rgb(255, 220, 200)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -288,7 +288,7 @@ export const emojiDoc = [
         joy: 2,
         activity: 6,
     }, {
-        emoji: '🤭', num: 29,
+        emoji: '🤭', num: 29, color: "rgb(255, 220, 200)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -299,7 +299,7 @@ export const emojiDoc = [
         joy: 2,
         activity: 6,
     }, {
-        emoji: '🤠', num: 60,
+        emoji: '🤠', num: 60, color: "rgb(235, 205, 180)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -310,7 +310,7 @@ export const emojiDoc = [
         joy: 10,
         activity: 3,
     }, {
-        emoji: '🥳', num: 61,
+        emoji: '🥳', num: 61, color: "rgb(217, 180, 255)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -321,7 +321,7 @@ export const emojiDoc = [
         joy: 10,
         activity: 3,
     }, {
-        emoji: '🥸', num: 62,
+        emoji: '🥸', num: 62, color: "rgb(210, 200, 180)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -332,7 +332,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 2,
     }, {
-        emoji: '😎', num: 63,
+        emoji: '😎', num: 63, color: "rgb(210, 200, 180)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -343,7 +343,7 @@ export const emojiDoc = [
         joy: 4,
         activity: 2,
     }, {
-        emoji: '🤓', num: 64,
+        emoji: '🤓', num: 64, color: "rgb(210, 200, 180)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -354,7 +354,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 2,
     }, {
-        emoji: '🧐', num: 65,
+        emoji: '🧐', num: 65, color: "rgb(240, 235, 200)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -365,7 +365,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 2,
     }, {
-        emoji: '🤔', num: 31,
+        emoji: '🤔', num: 31, color: "rgb(255, 254, 226)",
         anger: 1,
         fear: 0,
         sadness: 0,
@@ -376,7 +376,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 2,
     }, {
-        emoji: '🤨', num: 33,
+        emoji: '🤨', num: 33, color: "rgb(255, 254, 226)",
         anger: 4,
         fear: 0,
         sadness: 0,
@@ -387,7 +387,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 2,
     }, {
-        emoji: '😐', num: 34,
+        emoji: '😐', num: 34, color: "rgb(255, 254, 226)",
         anger: 2,
         fear: 1,
         sadness: 1,
@@ -398,7 +398,7 @@ export const emojiDoc = [
         joy: 1,
         activity: 1,
     }, {
-        emoji: '😑', num: 35,
+        emoji: '😑', num: 35, color: "rgb(255, 254, 226)",
         anger: 8,
         fear: 0,
         sadness: 0,
@@ -409,7 +409,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 2,
     }, {
-        emoji: '😶', num: 36,
+        emoji: '😶', num: 36, color: "rgb(255, 254, 226)",
         anger: 1,
         fear: 1,
         sadness: 1,
@@ -420,7 +420,7 @@ export const emojiDoc = [
         joy: 1,
         activity: 1,
     }, {
-        emoji: '🙃', num: 10,
+        emoji: '🙃', num: 10, color: "rgb(255, 254, 226)",
         anger: 2,
         fear: 1,
         sadness: 1,
@@ -431,7 +431,7 @@ export const emojiDoc = [
         joy: 2,
         activity: 5,
     }, {
-        emoji: '😏', num: 37,
+        emoji: '😏', num: 37, color: "rgb(255, 254, 226)",
         anger: 3,
         fear: 0,
         sadness: 0,
@@ -442,7 +442,7 @@ export const emojiDoc = [
         joy: 3,
         activity: 3,
     }, {
-        emoji: '😒', num: 38,
+        emoji: '😒', num: 38, color: "rgb(255, 254, 226)",
         anger: 3,
         fear: 0,
         sadness: 0,
@@ -453,7 +453,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 2,
     }, {
-        emoji: '🙄', num: 39,
+        emoji: '🙄', num: 39, color: "rgb(230, 230, 230)",
         anger: 2,
         fear: 2,
         sadness: 0,
@@ -464,7 +464,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 3,
     }, {
-        emoji: '🤫', num: 30,
+        emoji: '🤫', num: 30, color: "rgb(255, 254, 226)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -475,7 +475,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 2,
     }, {
-        emoji: '🤐', num: 32,
+        emoji: '🤐', num: 32, color: "rgb(200, 200, 200)",
         anger: 4,
         fear: 4,
         sadness: 0,
@@ -486,7 +486,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 2,
     }, {
-        emoji: '🤥', num: 42,
+        emoji: '🤥', num: 42, color: "rgb(255, 240, 190)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -497,7 +497,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 3,
     }, {
-        emoji: '😮‍💨', num: 41,
+        emoji: '😮‍💨', num: 41, color: "rgb(230, 255, 250)",
         anger: 3,
         fear: 0,
         sadness: 4,
@@ -508,7 +508,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 3,
     }, {
-        emoji: '🥱', num: 88,
+        emoji: '🥱', num: 88, color: "rgb(255, 230, 200)",
         anger: 8,
         fear: 0,
         sadness: 0,
@@ -519,7 +519,7 @@ export const emojiDoc = [
         joy: 3,
         activity: 5,
     }, {
-        emoji: '😔', num: 44,
+        emoji: '😔', num: 44, color: "rgb(255, 254, 226)",
         anger: 0,
         fear: 0,
         sadness: 9,
@@ -530,7 +530,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 2,
     }, {
-        emoji: '😪', num: 45,
+        emoji: '😪', num: 45, color: "rgb(210, 255, 255)",
         anger: 0,
         fear: 0,
         sadness: 1,
@@ -541,7 +541,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 1,
     }, {
-        emoji: '😴', num: 47,
+        emoji: '😴', num: 47, color: "rgb(200, 220, 255)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -552,7 +552,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 2,
     }, {
-        emoji: '😕', num: 66,
+        emoji: '😕', num: 66, color: "rgb(255, 254, 226)",
         anger: 2,
         fear: 0,
         sadness: 4,
@@ -563,7 +563,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 1,
     }, {
-        emoji: '😟', num: 67,
+        emoji: '😟', num: 67, color: "rgb(255, 254, 226)",
         anger: 0,
         fear: 0,
         sadness: 7,
@@ -574,7 +574,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 2,
     }, {
-        emoji: '🙁', num: 68,
+        emoji: '🙁', num: 68, color: "rgb(255, 254, 226)",
         anger: 0,
         fear: 0,
         sadness: 10,
@@ -585,7 +585,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 1,
     }, {
-        emoji: '😮', num: 69,
+        emoji: '😮', num: 69, color: "rgb(255, 254, 226)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -596,7 +596,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 1,
     }, {
-        emoji: '😯', num: 70,
+        emoji: '😯', num: 70, color: "rgb(255, 254, 226)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -607,7 +607,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 3,
     }, {
-        emoji: '😲', num: 71,
+        emoji: '😲', num: 71, color: "rgb(255, 254, 226)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -618,7 +618,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 3,
     }, {
-        emoji: '😳', num: 72,
+        emoji: '😳', num: 72, color: "rgb(255, 220, 200)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -629,7 +629,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 5,
     }, {
-        emoji: '😦', num: 74,
+        emoji: '😦', num: 74, color: "rgb(255, 254, 226)",
         anger: 0,
         fear: 0,
         sadness: 2,
@@ -640,7 +640,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 2,
     }, {
-        emoji: '😧', num: 75,
+        emoji: '😧', num: 75, color: "rgb(255, 254, 226)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -651,7 +651,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 2,
     }, {
-        emoji: '😅', num: 6,
+        emoji: '😅', num: 6, color: "rgb(210, 255, 255)",
         anger: 0,
         fear: 1,
         sadness: 1,
@@ -662,7 +662,7 @@ export const emojiDoc = [
         joy: 2,
         activity: 3,
     }, {
-        emoji: '😓', num: 85,
+        emoji: '😓', num: 85, color: "rgb(210, 255, 255)",
         anger: 0,
         fear: 0,
         sadness: 3,
@@ -673,7 +673,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 3,
     }, {
-        emoji: '😥', num: 78,
+        emoji: '😥', num: 78, color: "rgb(210, 255, 255)",
         anger: 0,
         fear: 0,
         sadness: 8,
@@ -684,7 +684,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 3,
     }, {
-        emoji: '😨', num: 76,
+        emoji: '😨', num: 76, color: "rgb(180, 200, 240)",
         anger: 0,
         fear: 8,
         sadness: 0,
@@ -695,7 +695,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 3,
     }, {
-        emoji: '😰', num: 77,
+        emoji: '😰', num: 77, color: "rgb(180, 200, 240)",
         anger: 0,
         fear: 5,
         sadness: 0,
@@ -706,7 +706,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 3,
     }, {
-        emoji: '🥲', num: 21,
+        emoji: '🥲', num: 21, color: "rgb(210, 255, 255)",
         anger: 0,
         fear: 0,
         sadness: 10,
@@ -717,7 +717,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 4,
     }, {
-        emoji: '🥺', num: 73,
+        emoji: '🥺', num: 73, color: "rgb(210, 255, 255)",
         anger: 0,
         fear: 0,
         sadness: 8,
@@ -728,7 +728,7 @@ export const emojiDoc = [
         joy: 2,
         activity: 3,
     }, {
-        emoji: '😢', num: 79,
+        emoji: '😢', num: 79, color: "rgb(210, 255, 255)",
         anger: 0,
         fear: 0,
         sadness: 10,
@@ -739,7 +739,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 4,
     }, {
-        emoji: '😭', num: 80,
+        emoji: '😭', num: 80, color: "rgb(190, 230, 155)",
         anger: 0,
         fear: 0,
         sadness: 10,
@@ -750,7 +750,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 7,
     }, {
-        emoji: '🤣', num: 7,
+        emoji: '🤣', num: 7, color: "rgb(190, 230, 155)",
         anger: 0,
         fear: 0,
         sadness: 3,
@@ -761,7 +761,7 @@ export const emojiDoc = [
         joy: 5,
         activity: 7,
     }, {
-        emoji: '😂', num: 8,
+        emoji: '😂', num: 8, color: "rgb(190, 230, 155)",
         anger: 0,
         fear: 0,
         sadness: 5,
@@ -772,7 +772,7 @@ export const emojiDoc = [
         joy: 3,
         activity: 8,
     }, {
-        emoji: '😱', num: 81,
+        emoji: '😱', num: 81, color: "rgb(180, 200, 240)",
         anger: 0,
         fear: 10,
         sadness: 0,
@@ -783,7 +783,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 6,
     }, {
-        emoji: '😖', num: 82,
+        emoji: '😖', num: 82, color: "rgb(255, 254, 226)",
         anger: 0,
         fear: 0,
         sadness: 5,
@@ -794,7 +794,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 3,
     }, {
-        emoji: '😣', num: 83,
+        emoji: '😣', num: 83, color: "rgb(255, 254, 226)",
         anger: 0,
         fear: 0,
         sadness: 2,
@@ -805,7 +805,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 3,
     }, {
-        emoji: '😞', num: 84,
+        emoji: '😞', num: 84, color: "rgb(255, 254, 226)",
         anger: 0,
         fear: 0,
         sadness: 10,
@@ -816,7 +816,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 2,
     }, {
-        emoji: '😩', num: 86,
+        emoji: '😩', num: 86, color: "rgb(255, 254, 226)",
         anger: 8,
         fear: 0,
         sadness: 2,
@@ -827,7 +827,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 5,
     }, {
-        emoji: '😫', num: 87,
+        emoji: '😫', num: 87, color: "rgb(255, 254, 226)",
         anger: 10,
         fear: 0,
         sadness: 0,
@@ -838,7 +838,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 5,
     }, {
-        emoji: '😤', num: 89,
+        emoji: '😤', num: 89, color: "rgb(230, 250, 255)",
         anger: 5,
         fear: 0,
         sadness: 2,
@@ -849,7 +849,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 6,
     }, {
-        emoji: '😠', num: 91,
+        emoji: '😠', num: 91, color: "rgb(255, 254, 226)",
         anger: 10,
         fear: 0,
         sadness: 0,
@@ -860,7 +860,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 4,
     }, {
-        emoji: '😡', num: 90,
+        emoji: '😡', num: 90, color: "rgb(255, 200, 200)",
         anger: 10,
         fear: 0,
         sadness: 0,
@@ -871,7 +871,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 7,
     }, {
-        emoji: '🤬', num: 92,
+        emoji: '🤬', num: 92, color: "rgb(255, 200, 200)",
         anger: 10,
         fear: 0,
         sadness: 0,
@@ -882,7 +882,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 8,
     }, {
-        emoji: '🥵', num: 54,
+        emoji: '🥵', num: 54, color: "rgb(255, 200, 200)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -893,7 +893,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 6,
     }, {
-        emoji: '😬', num: 40,
+        emoji: '😬', num: 40, color: "rgb(230, 230, 230)",
         anger: 4,
         fear: 2,
         sadness: 0,
@@ -904,7 +904,7 @@ export const emojiDoc = [
         joy: 1,
         activity: 2,
     }, {
-        emoji: '🥶', num: 55,
+        emoji: '🥶', num: 55, color: "rgb(210, 230, 255)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -915,7 +915,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 3,
     }, {
-        emoji: '😷', num: 48,
+        emoji: '😷', num: 48, color: "rgb(230, 230, 230)",
         anger: 0,
         fear: 0,
         sadness: 7,
@@ -926,7 +926,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 1,
     }, {
-        emoji: '🤒', num: 49,
+        emoji: '🤒', num: 49, color: "rgb(255, 220, 200)",
         anger: 0,
         fear: 0,
         sadness: 8,
@@ -937,7 +937,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 2,
     }, {
-        emoji: '🤕', num: 50,
+        emoji: '🤕', num: 50, color: "rgb(220, 220, 220)",
         anger: 0,
         fear: 0,
         sadness: 10,
@@ -948,7 +948,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 2,
     }, {
-        emoji: '🤧', num: 53,
+        emoji: '🤧', num: 53, color: "rgb(220, 220, 220)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -959,7 +959,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 6,
     }, {
-        emoji: '😵', num: 57,
+        emoji: '😵', num: 57, color: "rgb(255, 254, 226)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -970,7 +970,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 3,
     }, {
-        emoji: '😵‍💫', num: 58,
+        emoji: '😵‍💫', num: 58, color: "rgb(255, 254, 226)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -981,7 +981,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 5,
     }, {
-        emoji: '🤢', num: 51,
+        emoji: '🤢', num: 51, color: "rgb(230, 250, 180)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -992,7 +992,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 3,
     }, {
-        emoji: '🤮', num: 52,
+        emoji: '🤮', num: 52, color: "rgb(230, 250, 180)",
         anger: 0,
         fear: 0,
         sadness: 0,
@@ -1003,7 +1003,7 @@ export const emojiDoc = [
         joy: 0,
         activity: 6,
     }, {
-        emoji: '🤯', num: 59,
+        emoji: '🤯', num: 59, color: "rgb(255, 200, 200)",
         anger: 10,
         fear: 0,
         sadness: 0,

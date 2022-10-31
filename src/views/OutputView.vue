@@ -41,7 +41,7 @@
       </router-link>
 
       <button
-        @click="addEmotion(name, emoji, content, category, activity)"
+        @click="addEmotion(name, emoji, content, category, activity, color)"
         class="addBtn"
       >
         감정 등록
@@ -64,8 +64,6 @@ import {
   noiseSettings,
   noiseAnimation,
 } from "@/assets/js/createEmoject";
-import { noise } from "@/assets/js/noise";
-import router from "@/router/index";
 import { radarChart } from "@/assets/js/radarChart";
 
 export default {
@@ -112,13 +110,17 @@ export default {
     // 감정 오브젝트 만드는 함수
     let emoject;
     const importEmoject = () => {
-      emoject = createEmoject(emoject, category.value, activity.value);
+      emoject = createEmoject(
+        emoject,
+        category.value,
+        activity.value,
+        emoji.value.length / 2,
+        color.value
+      );
       emoject.userData = noiseSettings; // 이모젝트에 데이터 추가
       // emoject.rotation.x = Math.random() * 360;
       // emoject.rotation.y = Math.random() * 360;
       // emoject.position.x += 1.5;
-      console.log(controls);
-
       scene.add(emoject);
     };
 
@@ -140,15 +142,15 @@ export default {
     // 애니메이션
     function animate() {
       requestAnimationFrame(animate);
-      // emoject.rotation.y += 0.01;
-      // noiseAnimation(emoject, emoject.userData);
+      emoject.rotation.y += 0.01;
+      noiseAnimation(emoject, emoject.userData);
       controls.update();
       renderer.render(scene, camera);
     }
 
     onMounted(() => {
       initThreejs();
-      // importEmoject();
+      importEmoject();
       radarChart(categoryData._object.categoryData);
       setProgress(activity.value);
       animate();
@@ -179,6 +181,7 @@ export default {
   position: absolute;
   left: 50px;
   top: 50%;
+  background: var(--background);
   transform: translate(0, -50%);
 }
 

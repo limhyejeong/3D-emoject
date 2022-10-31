@@ -93,7 +93,7 @@ export default {
       };
       let sumActivity = 0; // 활성도 합계
 
-      // let colorArr = [];
+      let colorArr = [];
 
       // 인풋된 이모지를 등록된 이모지에서 찾아서 데이터 불러오기
       inputEmoji.forEach((element) => {
@@ -113,14 +113,15 @@ export default {
             sumActivity += emojiDoc[i].activity;
 
             // Color 구하기
-            // colorArr.push(emojiDoc[i].color);
-            // let sPick = Math.floor(Math.random() * colorArr.length);
-            // color.value = colorArr[sPick];
-            // console.log(color.value);
+            colorArr.push(emojiDoc[i].color);
           }
         }
         console.log(dataObject);
       });
+
+      let sPick = Math.floor(Math.random() * colorArr.length);
+      color.value = colorArr[sPick];
+      console.log(color.value);
 
       // Category 구하기 (카테고리 합계 오브젝트에서 가장 높은 수를 중복값을 대비하여 배열로 생성)
       const getMax = (dataObject) => {

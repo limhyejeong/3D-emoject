@@ -16,16 +16,10 @@ export const useInputStore = defineStore('input', {
         color: '',
     }),
     getters: {
-        // doubleCount(state) {
-        //     return state.count * 2
-        // },
-        // create(state) {
-        //     return state.name, state.emoji
-        // }
     },
     actions: {
         // DB에 추가하기
-        addEmotion(name, emoji, content, category, activity) {
+        addEmotion(name, emoji, content, category, activity, color) {
             const array = {
                 'num': 0,
                 'name': name,
@@ -33,11 +27,14 @@ export const useInputStore = defineStore('input', {
                 'content': content,
                 'category': category,
                 'activity': activity,
+                'color': color,
                 'time': new Date(),
             };
-            addDoc(emoColRef, array);
-            alert("감정이 등록되었습니다!");
-            router.replace("/");
+            addDoc(emoColRef, array).then(() => {
+                alert("감정이 등록되었습니다!");
+                router.replace("/");
+                window.location.reload();
+            });
         },
         clearInput() {
             this.name = '';
