@@ -12,8 +12,8 @@
         type="text"
         v-model="name"
         class="nameInput"
+        ref="nameInput"
         placeholder="홍길동"
-        autofocus
       />
 
       <!-- <router-link to="/emoji">이모지 다시 선택할래요</router-link> -->
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import { ref, onMounted } from "vue";
 import { useInputStore } from "@/stores/input";
 import { storeToRefs } from "pinia";
 
@@ -38,8 +39,17 @@ export default {
   setup() {
     const store = useInputStore();
     const { name } = storeToRefs(store);
+    const nameInput = ref(null);
 
-    return { name };
+    function focusInput() {
+      nameInput.value.focus();
+    }
+
+    onMounted(() => {
+      focusInput();
+    });
+
+    return { nameInput, name, focusInput };
   },
 };
 </script>

@@ -10,6 +10,7 @@ export const useInputStore = defineStore('input', {
         emoji: '',
         content: '',
         category: 'none',
+        categoryData: {},
         activity: 0,
         step: 0,
         color: '',

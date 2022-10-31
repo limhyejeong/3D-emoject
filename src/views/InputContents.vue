@@ -10,9 +10,9 @@
       <textarea
         v-model="content"
         class="contentsInput"
+        ref="contentsInput"
         placeholder="contents"
-        autofocus
-      />
+      ></textarea>
 
       <!-- <router-link to="/name">이름 다시 입력할래요</router-link> -->
     </section>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { ref, onMounted } from "vue";
 import { useInputStore } from "@/stores/input";
 import { storeToRefs } from "pinia";
 
@@ -36,8 +37,17 @@ export default {
   setup() {
     const store = useInputStore();
     const { content } = storeToRefs(store);
+    const contentsInput = ref(null);
 
-    return { content };
+    function focusInput() {
+      contentsInput.value.focus();
+    }
+
+    onMounted(() => {
+      focusInput();
+    });
+
+    return { contentsInput, content, focusInput };
   },
 };
 </script>

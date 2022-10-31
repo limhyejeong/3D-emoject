@@ -1,7 +1,5 @@
 <template>
   <section class="outputView">
-    <canvas id="outputCanvas"></canvas>
-
     <div class="outputInfo">
       <div class="title">{{ name }}님의 감정을 시각화한 모습이에요.</div>
       <div class="outputInfoEmoji">
@@ -15,9 +13,11 @@
       <br />
       <div class="outputInfoCategory">
         <h5>감정 분석 결과</h5>
-        <canvas id="outputChart" />
-        {{ category }}
-        {{ activity }}
+        <div class="outputChartDiv">
+          <canvas id="outputChart" />
+        </div>
+        대표적으로 드러난 감정은 {{ category }}이며, <br />
+        활동성은 {{ activity }}로 나타났습니다.
       </div>
     </div>
 
@@ -33,6 +33,7 @@
         감정 등록
       </button>
     </div>
+    <canvas id="outputCanvas"></canvas>
   </section>
 </template>
 
@@ -51,12 +52,13 @@ import {
 } from "@/assets/js/createEmoject";
 import { noise } from "@/assets/js/noise";
 import router from "@/router/index";
+import { drawChart } from "@/assets/js/chart";
 
 export default {
   name: "OutputView",
   setup() {
     const store = useInputStore();
-    const { name, emoji, content, category, activity, color } =
+    const { name, emoji, content, category, categoryData, activity, color } =
       storeToRefs(store);
     const { addEmotion, clearInput } = store;
 
@@ -82,7 +84,7 @@ export default {
       camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
       camera.position.x = 0;
       camera.position.y = 0;
-      camera.position.z = 10;
+      camera.position.z = 7;
       scene.add(camera);
 
       const light = new THREE.AmbientLight(0xffffff, 1); // soft white light
@@ -100,6 +102,9 @@ export default {
       emoject.userData = noiseSettings; // 이모젝트에 데이터 추가
       // emoject.rotation.x = Math.random() * 360;
       // emoject.rotation.y = Math.random() * 360;
+      // emoject.position.x += 1.5;
+      console.log(controls);
+
       scene.add(emoject);
     };
 
@@ -115,15 +120,16 @@ export default {
     // 애니메이션
     function animate() {
       requestAnimationFrame(animate);
-      emoject.rotation.y += 0.01;
-      noiseAnimation(emoject, emoject.userData);
+      // emoject.rotation.y += 0.01;
+      // noiseAnimation(emoject, emoject.userData);
       controls.update();
       renderer.render(scene, camera);
     }
 
     onMounted(() => {
       initThreejs();
-      importEmoject();
+      // importEmoject();
+      drawChart(categoryData._object.categoryData);
       animate();
     });
 
@@ -157,10 +163,11 @@ export default {
 
 .outputInfo {
   position: absolute;
-  top: 15%;
-  border: 1px solid #eee;
-  width: 100%;
+  left: 0;
+  // transform: translate(-50%, 0%);
+  // width: 1130px;
   padding: 0 50px;
+  pointer-events: none;
 
   h5 {
     font-size: 1rem;
@@ -176,6 +183,17 @@ export default {
   .outputInfoContent {
     font-size: 0.85rem;
     color: #aaa;
+  }
+}
+
+.outputChartDiv {
+  width: 400px;
+  height: 400px;
+
+  canvas {
+    width: 100%;
+    height: 100%;
+    pointer-events: auto;
   }
 }
 

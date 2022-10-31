@@ -50,8 +50,16 @@ export default {
   name: "InputView",
   setup() {
     const store = useInputStore();
-    const { name, emoji, content, category, activity, create, color } =
-      storeToRefs(store);
+    const {
+      name,
+      emoji,
+      content,
+      category,
+      activity,
+      create,
+      categoryData,
+      color,
+    } = storeToRefs(store);
 
     // 이모지 클릭시 인풋란에 추가되는 함수
     function emojiKeyboard(event) {
@@ -122,6 +130,7 @@ export default {
           );
         });
       };
+      categoryData.value = dataObject;
       category.value = getMax(dataObject)[0]; // 최대값 구하기
       activity.value = Math.floor(sumActivity / inputEmoji.length); // Actibity 구하기 (활성도 합계 / 이모지 수)
     }
