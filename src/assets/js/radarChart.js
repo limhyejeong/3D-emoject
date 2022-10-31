@@ -1,7 +1,7 @@
 import Chart from "chart.js/auto";
 
 export function radarChart(data) {
-    const context = document.querySelector("#outputRadarChart").getContext("2d");
+    const context = document.querySelector('.radarChart').getContext("2d");
 
     var gradientBlue = context.createLinearGradient(0, 0, 0, 200);
     gradientBlue.addColorStop(0, 'rgba(70, 70, 200, 1)');

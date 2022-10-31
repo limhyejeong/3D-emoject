@@ -1,13 +1,27 @@
 <template>
   <!-- <div class="meshInfo">{{ selectedData.emoji }}</div> -->
   <aside v-show="isClick" class="infoModal">
-    <div class="infoName">{{ selectedData.name }} 님의 11번째 감정</div>
-    <div class="infoNum">{{ selectedData.emoji }}</div>
-    <p class="infoContents">{{ selectedData.contents }}</p>
+    <div class="infoName">임혜정님의 11번째 감정</div>
+    <div class="infoNum">😜😜😜😜😜</div>
+    <p class="infoContents">강아지 보고 싶을 때</p>
 
-    <button @click="closeModal" class="closeModal">x</button>
+    <!-- <canvas class="radarChart" /> -->
+
+    <div class="outputActivityDiv">
+      <h5>
+        감정의 활성도
+        <span class="outputInfoActivity">{{ selectedData.activity }}</span>
+      </h5>
+      <div class="outputProgressDiv">
+        <div class="outputProgress"></div>
+      </div>
+    </div>
+
+    <button @click="closeModal" class="closeModal">
+      <img src="@/assets/plus.svg" />
+    </button>
     <button @click="deleteEmotion(selectedData.id)" class="deleteInfo">
-      Delete{{ selectedData.id }}
+      삭제
     </button>
   </aside>
 
@@ -29,6 +43,7 @@ import {
 import { vertexShader, fragmentShader, twist } from "@/assets/js/twist";
 import { logEvent } from "@firebase/analytics";
 import { PreventDragClick } from "@/assets/js/PreventDragClick";
+import { radarChart } from "@/assets/js/radarChart";
 
 export default {
   name: "EmotionSpace",
@@ -151,6 +166,9 @@ export default {
       isClick.value = true;
       saveControls = controls.saveState();
 
+      // console.log(selectedData.value.categoryData);
+      // radarChart(selectedData.value.categoryData);
+
       // 카메라 위치 변경
       new TWEEN.Tween(camera.position)
         .to(
@@ -209,12 +227,16 @@ export default {
       requestAnimationFrame(animate);
       if (isClick.value == false) {
         controls.autoRotate = true;
+        for (let i = 0; i < group.children.length; i++) {
+          noiseAnimation(group.children[i], group.children[i].userData[1]);
+        }
       } else {
-        controls.autoRotate = false;
+        // selectedMesh.rotation.y += 0.01;
+        // selectedMesh.rotation.x += 0.01;
+        // noiseAnimation(selectedMesh, selectedMesh.userData[1]);
+        // controls.autoRotate = false;
       }
-      for (let i = 0; i < group.children.length; i++) {
-        noiseAnimation(group.children[i], group.children[i].userData[1]);
-      }
+
       controls.update();
       TWEEN.update();
       renderer.render(scene, camera);
@@ -261,7 +283,6 @@ export default {
   margin: 50px 50px 0 0;
   padding: 50px;
   background: var(--background);
-  color: #fff;
   border-radius: 10px;
   box-shadow: -3px -3px 5px var(--light), inset -2px -2px 5px var(--shadow),
     5px 5px 20px var(--shadow);
@@ -276,17 +297,25 @@ export default {
     position: absolute;
     right: 0;
     top: 0;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     right: -25px;
     top: -25px;
-    background: #111;
+    background: var(--black);
     color: #aaa;
     font-size: 1.2rem;
     margin: 5px 5px 0 0;
     border: 1px solid #555;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: 15px;
+      height: 15px;
+      transform: rotate(45deg);
+    }
   }
 
   .deleteInfo {
@@ -299,14 +328,13 @@ export default {
   }
 
   .infoNum {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     font-weight: 700;
   }
 
   .infoName {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #aaa;
+    font-size: 1.2rem;
+    font-weight: 800;
   }
 
   .infoEmoji {
@@ -314,7 +342,7 @@ export default {
   }
 
   .infoContents {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     margin-bottom: 10px;
   }
 }

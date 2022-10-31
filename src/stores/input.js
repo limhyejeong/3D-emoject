@@ -19,7 +19,7 @@ export const useInputStore = defineStore('input', {
     },
     actions: {
         // DB에 추가하기
-        addEmotion(name, emoji, content, category, activity, color) {
+        addEmotion(name, emoji, content, category, activity, color, categoryData) {
             const array = {
                 'num': 0,
                 'name': name,
@@ -29,6 +29,7 @@ export const useInputStore = defineStore('input', {
                 'activity': activity,
                 'color': color,
                 'time': new Date(),
+                'categoryData': categoryData
             };
             addDoc(emoColRef, array).then(() => {
                 alert("감정이 등록되었습니다!");
@@ -44,6 +45,7 @@ export const useInputStore = defineStore('input', {
             this.activity = 0;
             this.step = 0;
             this.color = '';
+            this.categoryData = '';
         },
         prevStep() {
             this.step--;

@@ -18,10 +18,10 @@
 
       <div class="outputInfo outputCategoryDiv">
         <h5>
-          감정 유형 <span class="outputInfoCategory">{{ category }}</span>
+          감정 유형 <span class="outputInfoCategory">{{ categoryText }}</span>
         </h5>
         <div class="outputRadarDiv">
-          <canvas id="outputRadarChart" />
+          <canvas class="radarChart" />
         </div>
       </div>
 
@@ -41,7 +41,17 @@
       </router-link>
 
       <button
-        @click="addEmotion(name, emoji, content, category, activity, color)"
+        @click="
+          addEmotion(
+            name,
+            emoji,
+            content,
+            category,
+            activity,
+            color,
+            categoryData
+          )
+        "
         class="addBtn"
       >
         감정 등록
@@ -65,6 +75,7 @@ import {
   noiseAnimation,
 } from "@/assets/js/createEmoject";
 import { radarChart } from "@/assets/js/radarChart";
+import { CategoryTrans } from "@/assets/js/CategoryTrans";
 
 export default {
   name: "OutputView",
@@ -73,6 +84,7 @@ export default {
     const { name, emoji, content, category, categoryData, activity, color } =
       storeToRefs(store);
     const { addEmotion, clearInput } = store;
+    let categoryText = CategoryTrans(category.value); // 감정 한글로 변환
 
     // threejs 추가하기
     let scene, renderer, camera, controls;
@@ -170,7 +182,9 @@ export default {
       color,
       vertexShader,
       fragmentShader,
+      categoryData,
       noiseSettings,
+      categoryText,
     };
   },
 };
