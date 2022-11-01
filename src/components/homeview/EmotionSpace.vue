@@ -1,5 +1,5 @@
 <template>
-  <section v-show="isClick" class="outputView">
+  <section v-show="isClick" class="modal" style="right: 50px">
     <div class="outputInfo">
       <div class="title">
         <span class="outputInfoName">{{ selectedData.name }}</span
@@ -81,7 +81,7 @@ export default {
     let homeCanvas;
     // const homeRadarChart = ref("");
     let chartCanvas = ref("");
-    let categoryText = ref("");
+    let categoryText = ref("하이");
 
     // 기본적인 Sence 제작 함수
     function initThreejs() {
@@ -136,7 +136,7 @@ export default {
       emoject.userData = [data, noiseSettings]; // 이모젝트에 데이터 추가
       let range = 10; // 위치 범위
       emoject.position.x = Math.floor(Math.random() * (10 * 2) - 10);
-      emoject.position.y = Math.floor(Math.random() * (6 * 2) - 6);
+      emoject.position.y = Math.floor(Math.random() * (5 * 2) - 5);
       emoject.position.z = Math.floor(Math.random() * (range * 2) - range);
       emoject.rotation.x = Math.random() * 360;
       emoject.rotation.y = Math.random() * 360;
@@ -173,8 +173,8 @@ export default {
             chartCanvas.value.getContext("2d"),
             selectedData.value.categoryData
           );
-          categoryText = CategoryTrans(selectedData.value.category); // 감정 한글로 변환
-          console.log(selectedData.value.category);
+          categoryText.value = CategoryTrans(selectedData.value.category); // 감정 한글로 변환
+          console.log(CategoryTrans(selectedData.value.category));
           openModal();
         } else {
           selectedMesh = null;
@@ -313,6 +313,14 @@ export default {
 </script>
 
 <style lang="scss">
+.modal {
+  position: absolute;
+  right: 50px;
+  top: 50%;
+  transform: translate(0, -50%);
+  transition: 0.25s;
+}
+
 .closeModal {
   position: absolute;
   width: 40px;
@@ -341,7 +349,7 @@ export default {
   width: 100%;
   border-radius: 8px;
   padding: 18px;
-  background: rgb(217, 84, 84);
+  background: linear-gradient(0deg, #e91e4b, #ff4a4a);
   color: var(--black);
   font-weight: 700;
   border: 1px solid var(--background);
@@ -350,7 +358,7 @@ export default {
   border: none;
 
   &:hover {
-    box-shadow: inset 5px 5px 10px #000, inset -2px -2px 10px var(--gray1);
+    box-shadow: inset 3px 3px 10px #000;
     color: var(--gray1);
   }
 }

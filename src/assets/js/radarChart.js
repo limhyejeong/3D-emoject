@@ -1,11 +1,11 @@
 import Chart from "chart.js/auto";
 
-export function radarChart(data) {
+export function radarChart(categoryData) {
     const context = document.querySelector('#outputRadarChart').getContext("2d");
 
-    var gradientBlue = context.createLinearGradient(0, 0, 0, 200);
-    gradientBlue.addColorStop(0, 'rgba(70, 70, 200, 1)');
-    gradientBlue.addColorStop(1, 'rgba(130, 170, 255, 1)');
+    var gradientBlue = context.createLinearGradient(0, 0, 0, 300);
+    gradientBlue.addColorStop(0, 'rgba(255, 122, 0, 0.8)');
+    gradientBlue.addColorStop(1, 'rgba(255, 208, 0, 0.8)');
 
 
     const chart = new Chart(context, {
@@ -29,14 +29,14 @@ export function radarChart(data) {
                     label: "홍길동", //차트 제목
                     fill: true, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
                     data: [
-                        data.anger,
-                        data.fear,
-                        data.sadness,
-                        data.disgust,
-                        data.surprise,
-                        data.anticipation,
-                        data.trust,
-                        data.joy,
+                        categoryData.anger,
+                        categoryData.fear,
+                        categoryData.sadness,
+                        categoryData.disgust,
+                        categoryData.surprise,
+                        categoryData.anticipation,
+                        categoryData.trust,
+                        categoryData.joy,
                     ],
                     backgroundColor: gradientBlue,
                     borderColor: "transparent",
@@ -75,6 +75,9 @@ export function radarChart(data) {
             plugins: {
                 legend: {
                     display: false
+                },
+                tooltip: {
+                    enabled: false // <-- this option disables tooltips
                 }
             },
         }

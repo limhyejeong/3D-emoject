@@ -203,7 +203,7 @@ export default {
 }
 
 .outputInfoName {
-  font-weight: 800;
+  font-weight: 700;
   color: var(--point);
 }
 .outputInfoEmoji {
@@ -212,7 +212,8 @@ export default {
 }
 .outputInfoContent {
   font-weight: 700;
-  color: var(--point) h5 {
+  color: var(--point);
+  h5 {
     margin-bottom: 5px;
   }
 }
@@ -224,13 +225,9 @@ export default {
 }
 
 .outputInfo {
-  background: var(--background);
-  // box-shadow: -3px -3px 5px var(--light), inset -2px -2px 5px var(--shadow),
-  //   10px 10px 30px var(--shadow);
-  // box-shadow: -3px -3px 5px var(--light), inset -2px -2px 5px var(--background),
-  //   10px 10px 30px var(--shadow);
-
-  box-shadow: inset 50px 0px 50px var(--light);
+  background: linear-gradient(135deg, var(--light), var(--background));
+  box-shadow: -2px -2px 5px #535353, inset -2px -2px 5px #000,
+    10px 10px 50px var(--shadow);
   padding: 25px;
   border-radius: 10px;
   z-index: 10;
@@ -241,12 +238,13 @@ export default {
 
   .title {
     font-size: 1.5rem;
+    font-weight: 500;
     padding-bottom: 10px;
   }
   h5 {
     font-size: 0.9rem;
-    font-weight: 800;
-    color: var(--black);
+    font-weight: 600;
+    color: var(--gray1);
   }
 }
 
@@ -266,7 +264,7 @@ export default {
   .outputProgressDiv {
     width: 100%;
     height: 10px;
-    background: var(--gray2);
+    background: var(--light);
     border-radius: 5px;
     margin-top: 15px;
   }
@@ -274,7 +272,7 @@ export default {
     width: 50%;
     height: 100%;
     border-radius: 5px;
-    background: linear-gradient(-0.25turn, var(--point), #81a8fd);
+    background: linear-gradient(-0.25turn, var(--point), #ffd000);
   }
 }
 
@@ -285,17 +283,20 @@ export default {
     width: 50%;
     border-radius: 8px;
     padding: 18px;
-    background: var(--black);
-    color: var(--light);
+    background: var(--light);
+    color: var(--gray2);
+    font-size: 1rem;
     font-weight: 700;
     border: 1px solid var(--background);
-    box-shadow: inset 2px 2px 4px var(--gray1), inset -3px -3px 10px #000,
-      10px 10px 20px var(--shadow);
-
+    // box-shadow: inset -10px -10px 20px var(--shadow);
     &:hover {
-      box-shadow: inset 5px 5px 10px #000, inset -2px -2px 10px var(--gray1);
-      color: var(--gray1);
+      box-shadow: inset 5px 5px 10px var(--shadow),
+        inset -1px -1px 5px var(--gray2);
     }
+  }
+  .addBtn {
+    background: var(--point);
+    color: var(--shadow);
   }
 }
 </style>

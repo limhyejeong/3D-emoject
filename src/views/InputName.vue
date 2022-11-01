@@ -67,7 +67,7 @@ export default {
   outline: none;
   font-size: 1rem;
   font-weight: 600;
-  box-shadow: inset -2px -2px 5px var(--shadow), 3px 3px 10px var(--shadow);
+  box-shadow: inset -1px -1px 5px var(--shadow);
 
   &::placeholder {
     font-size: 1rem;

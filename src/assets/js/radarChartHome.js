@@ -1,10 +1,10 @@
 import Chart from "chart.js/auto";
 let chart;
 
-function radarChart(context, data) {
-    var gradientBlue = context.createLinearGradient(0, 0, 0, 200);
-    gradientBlue.addColorStop(0, 'rgba(70, 70, 200, 1)');
-    gradientBlue.addColorStop(1, 'rgba(130, 170, 255, 1)');
+function radarChart(context, categoryData) {
+    var gradientBlue = context.createLinearGradient(0, 0, 0, 300);
+    gradientBlue.addColorStop(0, 'rgba(255, 122, 0, 0.8)');
+    gradientBlue.addColorStop(1, 'rgba(255, 208, 0, 0.8)');
 
     chart = new Chart(context, {
         type: "radar", // 차트의 형태
@@ -16,7 +16,7 @@ function radarChart(context, data) {
                 "공포",
                 "슬픔",
                 "혐오",
-                "놀람",
+                "불안",
                 "기대",
                 "신뢰",
                 "기쁨",
@@ -27,14 +27,14 @@ function radarChart(context, data) {
                     label: "홍길동", //차트 제목
                     fill: true, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
                     data: [
-                        data.anger,
-                        data.fear,
-                        data.sadness,
-                        data.disgust,
-                        data.surprise,
-                        data.anticipation,
-                        data.trust,
-                        data.joy,
+                        categoryData.anger,
+                        categoryData.fear,
+                        categoryData.sadness,
+                        categoryData.disgust,
+                        categoryData.surprise,
+                        categoryData.anticipation,
+                        categoryData.trust,
+                        categoryData.joy,
                     ],
                     backgroundColor: gradientBlue,
                     borderColor: "transparent",
@@ -58,7 +58,7 @@ function radarChart(context, data) {
                 r: {
                     ticks: {
                         // display: false,
-                        backdropColor: "#000"
+                        backdropColor: "#111"
                     },
                     pointLabels: {
                         font: {

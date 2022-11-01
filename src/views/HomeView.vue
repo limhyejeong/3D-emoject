@@ -58,7 +58,8 @@ export default {
     width: 60px;
     height: 60px;
     border-radius: 50px;
-    background: var(--point);
+    // background: var(--point);
+    background: linear-gradient(-45deg, var(--point), #ffc107);
     border: none;
     display: flex;
     justify-content: center;
@@ -71,13 +72,13 @@ export default {
     img {
       width: 15px;
       height: 15px;
-      // filter: invert(1);
+      filter: invert(1);
     }
   }
   &:hover .moveCreateBtn {
     // box-shadow: inset 5px 5px 10px #000;
     img {
-      opacity: 0.3;
+      opacity: 0.5;
     }
   }
 
@@ -91,7 +92,7 @@ export default {
     width: 70px;
     height: 60px;
     background: var(--background);
-    box-shadow: 0px 0px 30px var(--light);
+    box-shadow: 0px 0px 30px var(--gray1);
     border-radius: 60px;
     z-index: 0;
     font-weight: 700;

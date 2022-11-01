@@ -44,7 +44,7 @@ export const useInputStore = defineStore('input', {
             this.activity = 0;
             this.step = 0;
             this.color = '';
-            this.categoryData = '';
+            this.categoryData = {};
         },
         prevStep() {
             this.step--;

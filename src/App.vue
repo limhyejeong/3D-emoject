@@ -112,7 +112,7 @@ body {
   --light: #222;
   --shadow: #111;
   --black: #eee;
-  --point: #f34a74;
+  --point: #ff7a00;
 }
 a {
   text-decoration: none;

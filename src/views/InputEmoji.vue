@@ -159,7 +159,7 @@ export default {
   height: 100vh;
   display: flex;
   justify-content: center;
-  padding: 100px 0;
+  padding: 130px 0;
 }
 
 .title {
@@ -194,7 +194,7 @@ p.description {
     border: none;
     outline: none;
     font-size: 2rem;
-    box-shadow: inset -2px -2px 5px var(--shadow), 3px 3px 10px var(--shadow);
+    box-shadow: inset -1px -1px 5px var(--shadow);
 
     &::placeholder {
       font-size: 1rem;
@@ -228,8 +228,10 @@ p.description {
   width: 100%;
   height: auto;
   max-height: 55vh;
-  box-shadow: -3px -3px 5px var(--light), inset -2px -2px 5px var(--shadow),
-    5px 5px 20px var(--shadow);
+  background: linear-gradient(135deg, var(--light), var(--background));
+  box-shadow: -2px -2px 5px #535353, inset -2px -2px 5px #000,
+    10px 10px 50px var(--shadow);
+
   overflow: scroll;
   border-radius: 20px;
   margin: 20px 0;
@@ -260,11 +262,12 @@ p.description {
   .emojiSubmitBtn {
     width: 100vw;
     height: 80px;
-    background: var(--black);
+    // background: var(--black);
     border: none;
     color: var(--light);
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    background: linear-gradient(0, var(--point), #ffc107);
     // box-shadow: inset 1px 1px 5px var(--light), inset -5px -5px 10px #000;
     // padding: 30px 0;
     // border-radius: 7px;
