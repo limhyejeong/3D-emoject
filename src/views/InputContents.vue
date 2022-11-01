@@ -31,7 +31,7 @@ import { useInputStore } from "@/stores/input";
 import { storeToRefs } from "pinia";
 
 export default {
-  name: "InputView3",
+  name: "InputContents",
   setup() {
     const store = useInputStore();
     const { content } = storeToRefs(store);

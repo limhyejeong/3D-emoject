@@ -59,7 +59,7 @@ export function radarChart(canvas, data) {
             scales: {
                 r: {
                     ticks: {
-                        display: false,
+                        // display: false,
                     },
                     pointLabels: {
                         font: {

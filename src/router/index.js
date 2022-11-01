@@ -39,15 +39,15 @@ const routes = [
   },
   {
     path: '/name',
-    name: 'inputname',
+    name: 'InputName',
     component: InputName,
-    meta: { transition: 'slide-left' }
+    meta: { transition: 'slide' }
   },
   {
     path: '/contents',
-    name: 'inputcontents',
+    name: 'InputContents',
     component: InputContents,
-    meta: { transition: 'slide-left' }
+    meta: { transition: 'slide' }
   },
   {
     path: '/creating',

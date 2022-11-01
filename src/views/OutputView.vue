@@ -18,10 +18,11 @@
 
       <div class="outputInfo outputCategoryDiv">
         <h5>
-          감정 유형 <span class="outputInfoCategory">{{ categoryText }}</span>
+          대표 감정 유형
+          <span class="outputInfoCategory">{{ categoryText }}</span>
         </h5>
         <div class="outputRadarDiv">
-          <canvas class="radarChart" />
+          <canvas id="outputRadarChart" />
         </div>
       </div>
 
@@ -33,30 +34,31 @@
           <div class="outputProgress"></div>
         </div>
       </div>
+
+      <div class="outputBtns">
+        <router-link to="/emoji">
+          <button @click="clearInput" class="againBtn">다시 하기</button>
+        </router-link>
+
+        <button
+          @click="
+            addEmotion(
+              name,
+              emoji,
+              content,
+              category,
+              activity,
+              color,
+              categoryData
+            )
+          "
+          class="addBtn"
+        >
+          감정 등록
+        </button>
+      </div>
     </section>
 
-    <div class="outputBtns">
-      <router-link to="/emoji">
-        <button @click="clearInput" class="againBtn">다시 하기</button>
-      </router-link>
-
-      <button
-        @click="
-          addEmotion(
-            name,
-            emoji,
-            content,
-            category,
-            activity,
-            color,
-            categoryData
-          )
-        "
-        class="addBtn"
-      >
-        감정 등록
-      </button>
-    </div>
     <canvas id="outputCanvas"></canvas>
   </div>
 </template>
@@ -129,6 +131,7 @@ export default {
         emoji.value.length / 2,
         color.value
       );
+
       emoject.userData = noiseSettings; // 이모젝트에 데이터 추가
       // emoject.rotation.x = Math.random() * 360;
       // emoject.rotation.y = Math.random() * 360;
@@ -165,7 +168,7 @@ export default {
     onMounted(() => {
       initThreejs();
       importEmoject();
-      radarChart(categoryData._object.categoryData);
+      radarChart("#outputRadarChart", categoryData._object.categoryData);
       setProgress(activity.value);
       animate();
     });
@@ -195,7 +198,6 @@ export default {
   position: absolute;
   left: 50px;
   top: 50%;
-  background: var(--background);
   transform: translate(0, -50%);
 }
 
@@ -210,15 +212,19 @@ export default {
 .outputInfoContent {
   font-weight: 700;
   color: #6070e0;
+  h5 {
+    margin-bottom: 5px;
+  }
 }
 .outputInfoCategory,
 .outputInfoActivity {
   font-weight: 900;
-  padding-left: 10px;
+  padding-left: 7px;
   color: #6070e0;
 }
 
 .outputInfo {
+  background: var(--background);
   box-shadow: -3px -3px 5px var(--light), inset -2px -2px 5px var(--shadow),
     10px 10px 30px var(--shadow);
   padding: 25px;
@@ -234,11 +240,9 @@ export default {
     padding-bottom: 10px;
   }
   h5 {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 800;
-    // margin: 10px 0;
     color: var(--black);
-    // color: var(--gray1);
   }
 }
 
@@ -269,11 +273,23 @@ export default {
 }
 
 .outputBtns {
-  position: absolute;
-  bottom: 0;
-
+  width: 100%;
+  // display: flex;
   button {
-    padding: 20px;
+    width: 50%;
+    border-radius: 8px;
+    padding: 18px;
+    background: var(--black);
+    color: var(--light);
+    font-weight: 700;
+    border: 1px solid var(--background);
+    box-shadow: inset 2px 2px 4px var(--gray1), inset -3px -3px 10px #000,
+      10px 10px 20px var(--shadow);
+
+    &:hover {
+      box-shadow: inset 5px 5px 10px #000, inset -2px -2px 10px var(--gray1);
+      color: var(--gray1);
+    }
   }
 }
 </style>

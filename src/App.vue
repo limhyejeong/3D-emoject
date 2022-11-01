@@ -28,24 +28,24 @@ export default {
 .fade-leave-to {
   opacity: 0;
 }
-.slide-left-enter-active,
-.slide-left-leave-active,
-.slide-right-enter-active,
-.slide-right-leave-active {
-  transition: transform 0.3s;
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.5s;
 }
-.slide-left-enter-from {
-  transform: translateX(100vw);
+.slide-enter-from {
+  transform: translateX(50vw);
+  opacity: 0;
 }
-.slide-left-leave-to {
-  transform: translateX(-100vw);
+.slide-leave-to {
+  transform: translateX(-50vw);
+  opacity: 0;
 }
-.slide-right-enter-from {
-  transform: translateX(-100vw);
-}
-.slide-right-leave-to {
-  transform: translateX(100vw);
-}
+// .slide-right-enter-from {
+//   transform: translateX(-100vw);
+// }
+// .slide-right-leave-to {
+//   transform: translateX(100vw);
+// }
 </style>
 
 <style lang="scss">

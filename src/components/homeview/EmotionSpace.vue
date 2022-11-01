@@ -1,13 +1,28 @@
 <template>
-  <!-- <div class="meshInfo">{{ selectedData.emoji }}</div> -->
-  <aside v-show="isClick" class="infoModal">
-    <div class="infoName">임혜정님의 11번째 감정</div>
-    <div class="infoNum">😜😜😜😜😜</div>
-    <p class="infoContents">강아지 보고 싶을 때</p>
+  <section v-show="isClick" class="outputView">
+    <div class="outputInfo">
+      <div class="title">
+        <span class="outputInfoName">{{ selectedData.name }}</span
+        >님의 감정 분석 결과
+      </div>
+      <div class="outputInfoEmoji">
+        <h5>분석 이모지</h5>
+        {{ selectedData.emoji }}
+      </div>
+      <div class="outputInfoContent">
+        <h5>감정 설명</h5>
+        {{ selectedData.content }}
+      </div>
+    </div>
 
-    <!-- <canvas class="radarChart" /> -->
+    <div class="outputInfo outputCategoryDiv">
+      <h5>감정 유형 <span class="outputInfoCategory">ㅁㄴㄴ</span></h5>
+      <div class="outputRadarDiv">
+        <!-- <canvas id="outputRadarChart" /> -->
+      </div>
+    </div>
 
-    <div class="outputActivityDiv">
+    <div class="outputInfo outputActivityDiv">
       <h5>
         감정의 활성도
         <span class="outputInfoActivity">{{ selectedData.activity }}</span>
@@ -17,13 +32,14 @@
       </div>
     </div>
 
+    <button @click="deleteEmotion(selectedData.id)" class="deleteBtn">
+      감정 삭제
+    </button>
+
     <button @click="closeModal" class="closeModal">
       <img src="@/assets/plus.svg" />
     </button>
-    <button @click="deleteEmotion(selectedData.id)" class="deleteInfo">
-      삭제
-    </button>
-  </aside>
+  </section>
 
   <canvas id="homeCanvas" />
 </template>
@@ -44,6 +60,7 @@ import { vertexShader, fragmentShader, twist } from "@/assets/js/twist";
 import { logEvent } from "@firebase/analytics";
 import { PreventDragClick } from "@/assets/js/PreventDragClick";
 import { radarChart } from "@/assets/js/radarChart";
+import { doc } from "@firebase/firestore";
 
 export default {
   name: "EmotionSpace",
@@ -60,6 +77,8 @@ export default {
     let width = window.innerWidth,
       height = window.innerHeight;
     let homeCanvas;
+    const homeRadarChart = ref("");
+    let chartCanvas;
 
     // 기본적인 Sence 제작 함수
     function initThreejs() {
@@ -87,6 +106,8 @@ export default {
 
       scene.add(light, pointLight);
       controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.autoRotateSpeed = 1;
     }
 
     const group = new THREE.Group();
@@ -110,12 +131,13 @@ export default {
         data.color
       );
       emoject.userData = [data, noiseSettings]; // 이모젝트에 데이터 추가
-      let range = 5; // 위치 범위
-      emoject.position.x = Math.floor(Math.random() * (range * 2) - range);
-      emoject.position.y = Math.floor(Math.random() * (range * 2) - range);
+      let range = 10; // 위치 범위
+      emoject.position.x = Math.floor(Math.random() * (12 * 2) - 12);
+      emoject.position.y = Math.floor(Math.random() * (8 * 2) - 8);
       emoject.position.z = Math.floor(Math.random() * (range * 2) - range);
       emoject.rotation.x = Math.random() * 360;
       emoject.rotation.y = Math.random() * 360;
+      noiseAnimation(emoject, emoject.userData[1]);
       group.add(emoject);
     };
 
@@ -147,6 +169,8 @@ export default {
         } else {
           selectedMesh = null;
         }
+        setProgress(selectedData.value.activity);
+        // radarChart(canvas, selectedData.value.categoryData);
       }
     }
 
@@ -163,11 +187,9 @@ export default {
 
     // 메쉬에 카메라 포커스가 맞춰지고 모달이 열리는 함수
     function openModal() {
+      // setTimeout(() => (isClick.value = true), duration);
       isClick.value = true;
       saveControls = controls.saveState();
-
-      // console.log(selectedData.value.categoryData);
-      // radarChart(selectedData.value.categoryData);
 
       // 카메라 위치 변경
       new TWEEN.Tween(camera.position)
@@ -192,7 +214,6 @@ export default {
     // 모달 닫기
     function closeModal() {
       isClick.value = false;
-
       controls.reset();
 
       // 카메라 위치
@@ -213,6 +234,12 @@ export default {
       //   .start();
     }
 
+    // 프로그래스 바 함수
+    function setProgress(activity) {
+      const outputProgress = document.querySelector(".outputProgress");
+      outputProgress.style.width = activity * 10 + "%";
+    }
+
     // 브라우저 창 사이즈
     function setSize() {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -222,21 +249,25 @@ export default {
     }
     window.addEventListener("resize", setSize);
 
+    // 모든 emoject에 노이즈 애니메이션
+    function emojectsMotion() {
+      for (let i = 0; i < group.children.length; i++) {
+        noiseAnimation(group.children[i], group.children[i].userData[1]);
+      }
+    }
+
     // 애니메이션
     function animate() {
       requestAnimationFrame(animate);
       if (isClick.value == false) {
         controls.autoRotate = true;
-        for (let i = 0; i < group.children.length; i++) {
-          noiseAnimation(group.children[i], group.children[i].userData[1]);
-        }
+        // emojectsMotion();
       } else {
         selectedMesh.rotation.y += 0.01;
         selectedMesh.rotation.x += 0.01;
         noiseAnimation(selectedMesh, selectedMesh.userData[1]);
         controls.autoRotate = false;
       }
-
       controls.update();
       TWEEN.update();
       renderer.render(scene, camera);
@@ -246,6 +277,7 @@ export default {
 
     onMounted(() => {
       initThreejs();
+
       animate();
       homeCanvas.addEventListener("click", onPointerClick);
       preventDragClick = new PreventDragClick(homeCanvas);
@@ -266,84 +298,53 @@ export default {
       controls,
       deleteEmotion,
       selectedData,
+      homeRadarChart,
+      chartCanvas,
     };
   },
 };
 </script>
 
 <style lang="scss">
-.meshInfo {
+.closeModal {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  right: -25px;
+  top: -25px;
+  background: var(--black);
+  color: #aaa;
+  font-size: 1.2rem;
+  margin: 5px 5px 0 0;
+  border: 1px solid #555;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 15px;
+    height: 15px;
+    transform: rotate(45deg);
+  }
 }
-.infoModal {
-  position: absolute;
-  right: 0;
-  margin: 50px 50px 0 0;
-  padding: 50px;
-  background: var(--background);
-  border-radius: 10px;
-  box-shadow: -3px -3px 5px var(--light), inset -2px -2px 5px var(--shadow),
-    5px 5px 20px var(--shadow);
-  z-index: 100;
-  max-width: 500px;
 
-  div {
-    margin-bottom: 10px;
-  }
+.deleteBtn {
+  display: absolute;
+  width: 100%;
+  border-radius: 8px;
+  padding: 18px;
+  background: rgb(217, 84, 84);
+  color: var(--light);
+  font-weight: 700;
+  border: 1px solid var(--background);
+  // box-shadow: inset 2px 2px 4px var(--gray1), inset -3px -3px 10px #000,
+  //   10px 10px 20px var(--shadow);
 
-  .closeModal {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    right: -25px;
-    top: -25px;
-    background: var(--black);
-    color: #aaa;
-    font-size: 1.2rem;
-    margin: 5px 5px 0 0;
-    border: 1px solid #555;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    img {
-      width: 15px;
-      height: 15px;
-      transform: rotate(45deg);
-    }
-  }
-
-  .deleteInfo {
-    width: 100%;
-    background: #e91e51;
-    border: none;
-    color: #fff;
-    border-radius: 10px;
-    padding: 10px;
-  }
-
-  .infoNum {
-    font-size: 1.5rem;
-    font-weight: 700;
-  }
-
-  .infoName {
-    font-size: 1.2rem;
-    font-weight: 800;
-  }
-
-  .infoEmoji {
-    font-size: 1.3rem;
-  }
-
-  .infoContents {
-    font-size: 0.9rem;
-    margin-bottom: 10px;
+  &:hover {
+    box-shadow: inset 5px 5px 10px #000, inset -2px -2px 10px var(--gray1);
+    color: var(--gray1);
   }
 }
 </style>

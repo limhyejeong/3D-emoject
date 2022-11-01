@@ -38,36 +38,36 @@ const createEmoject = (mesh, category, activity, length, color) => {
         noiseSettings = { 진폭: 1 + activity * 0.1, 반경: 0.2 + activity * 0.05, 속도: activity * 0.1 };
     } else if (category == "joy") {
         let joyVec;
-        if (length <= 3) joyVec = 3;
-        else if (length <= 6) joyVec = 4;
+        if (activity <= 3) joyVec = 3;
+        else if (activity <= 6) joyVec = 4;
         else joyVec = 5;
         geometry = new THREE.TorusKnotGeometry(0.6, 0.15, 256, 16, 1, joyVec);
         noiseSettings = { 진폭: 1 * activity / 1, 반경: 0.07 * activity, 속도: activity * 0.1 };
     }
 
 
-    console.log(length);
     if (length == 2) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/wild.png");
+        matcapTexture = texLoader.load("./assets/textures/matcap/pink.png");
     } else if (length == 3) {
         matcapTexture = texLoader.load("./assets/textures/matcap/gold.png");
     } else if (length == 4) {
         matcapTexture = texLoader.load("./assets/textures/matcap/yellow.jpg");
     } else if (length == 5) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/magic.png");
+        matcapTexture = texLoader.load("./assets/textures/matcap/은은.png");
     } else if (length == 6) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/pink.png");
+        matcapTexture = texLoader.load("./assets/textures/matcap/wild.png");
     } else if (length == 7) {
         matcapTexture = texLoader.load("./assets/textures/matcap/rainbow.png");
     } else if (length == 8) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/glass.png");
-    } else if (length == 9) {
         matcapTexture = texLoader.load("./assets/textures/matcap/crystal.png");
-    } else if (length == 10) {
+    } else if (length == 9) {
         matcapTexture = texLoader.load("./assets/textures/matcap/galaxy.png");
+    } else if (length == 10) {
+        matcapTexture = texLoader.load("./assets/textures/matcap/magic.png");
     }
 
-
+    // matcapTexture = texLoader.load("./assets/textures/matcap/glass.png");
+    // matcapTexture = texLoader.load("./assets/textures/matcap/구슬.png");
 
     material = new THREE.MeshMatcapMaterial({
         color: new THREE.Color(color),
