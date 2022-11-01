@@ -1,7 +1,7 @@
 import Chart from "chart.js/auto";
 
-export function radarChart(canvas, data) {
-    const context = document.querySelector(canvas).getContext("2d");
+export function radarChart(data) {
+    const context = document.querySelector('#outputRadarChart').getContext("2d");
 
     var gradientBlue = context.createLinearGradient(0, 0, 0, 200);
     gradientBlue.addColorStop(0, 'rgba(70, 70, 200, 1)');
@@ -18,7 +18,7 @@ export function radarChart(canvas, data) {
                 "공포",
                 "슬픔",
                 "혐오",
-                "놀람",
+                "불안",
                 "기대",
                 "신뢰",
                 "기쁨",
@@ -49,12 +49,13 @@ export function radarChart(canvas, data) {
             ],
         },
         options: {
-            responsive: true,
+            responsive: false,
             scale: {
                 ticks: {
                     maxTicksLimit: 4,
                     display: false,
-                }
+                },
+
             },
             scales: {
                 r: {
@@ -65,7 +66,10 @@ export function radarChart(canvas, data) {
                         font: {
                             size: 14,
                         }
-                    }
+                    },
+                    grid: {
+                        color: "#777",
+                    },
                 },
             },
             plugins: {

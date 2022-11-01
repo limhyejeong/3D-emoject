@@ -3,7 +3,7 @@
     <div class="outputInfo">
       <div class="title">
         <span class="outputInfoName">{{ selectedData.name }}</span
-        >님의 감정 분석 결과
+        >님의 감정
       </div>
       <div class="outputInfoEmoji">
         <h5>분석 이모지</h5>
@@ -16,9 +16,12 @@
     </div>
 
     <div class="outputInfo outputCategoryDiv">
-      <h5>감정 유형 <span class="outputInfoCategory">ㅁㄴㄴ</span></h5>
+      <h5>
+        감정 유형
+        <span class="outputInfoCategory">{{ categoryText }}</span>
+      </h5>
       <div class="outputRadarDiv">
-        <!-- <canvas id="outputRadarChart" /> -->
+        <canvas ref="chartCanvas" width="300" height="300" />
       </div>
     </div>
 
@@ -56,11 +59,10 @@ import {
   noiseSettings,
   noiseAnimation,
 } from "@/assets/js/createEmoject";
-import { vertexShader, fragmentShader, twist } from "@/assets/js/twist";
-import { logEvent } from "@firebase/analytics";
+// import { vertexShader, fragmentShader, twist } from "@/assets/js/twist";
 import { PreventDragClick } from "@/assets/js/PreventDragClick";
-import { radarChart } from "@/assets/js/radarChart";
-import { doc } from "@firebase/firestore";
+import { chart, radarChart } from "@/assets/js/radarChartHome";
+import { CategoryTrans } from "@/assets/js/CategoryTrans";
 
 export default {
   name: "EmotionSpace",
@@ -77,8 +79,9 @@ export default {
     let width = window.innerWidth,
       height = window.innerHeight;
     let homeCanvas;
-    const homeRadarChart = ref("");
-    let chartCanvas;
+    // const homeRadarChart = ref("");
+    let chartCanvas = ref("");
+    let categoryText = ref("");
 
     // 기본적인 Sence 제작 함수
     function initThreejs() {
@@ -132,8 +135,8 @@ export default {
       );
       emoject.userData = [data, noiseSettings]; // 이모젝트에 데이터 추가
       let range = 10; // 위치 범위
-      emoject.position.x = Math.floor(Math.random() * (12 * 2) - 12);
-      emoject.position.y = Math.floor(Math.random() * (8 * 2) - 8);
+      emoject.position.x = Math.floor(Math.random() * (10 * 2) - 10);
+      emoject.position.y = Math.floor(Math.random() * (6 * 2) - 6);
       emoject.position.z = Math.floor(Math.random() * (range * 2) - range);
       emoject.rotation.x = Math.random() * 360;
       emoject.rotation.y = Math.random() * 360;
@@ -165,12 +168,17 @@ export default {
             break;
           }
           selectedData.value = selectedMesh.userData[0];
+          setProgress(selectedData.value.activity);
+          radarChart(
+            chartCanvas.value.getContext("2d"),
+            selectedData.value.categoryData
+          );
+          categoryText = CategoryTrans(selectedData.value.category); // 감정 한글로 변환
+          console.log(selectedData.value.category);
           openModal();
         } else {
           selectedMesh = null;
         }
-        setProgress(selectedData.value.activity);
-        // radarChart(canvas, selectedData.value.categoryData);
       }
     }
 
@@ -215,6 +223,7 @@ export default {
     function closeModal() {
       isClick.value = false;
       controls.reset();
+      chart.destroy();
 
       // 카메라 위치
       // new TWEEN.Tween(camera)
@@ -291,15 +300,13 @@ export default {
       renderer,
       camera,
       scene,
-      vertexShader,
-      fragmentShader,
       settings,
       emotions,
       controls,
       deleteEmotion,
       selectedData,
-      homeRadarChart,
       chartCanvas,
+      categoryText,
     };
   },
 };
@@ -311,13 +318,12 @@ export default {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  right: -25px;
-  top: -25px;
-  background: var(--black);
-  color: #aaa;
+  right: -15px;
+  top: -15px;
+  background: var(--light);
   font-size: 1.2rem;
   margin: 5px 5px 0 0;
-  border: 1px solid #555;
+  border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -327,20 +333,21 @@ export default {
     width: 15px;
     height: 15px;
     transform: rotate(45deg);
+    opacity: 0.75;
   }
 }
 
 .deleteBtn {
-  display: absolute;
   width: 100%;
   border-radius: 8px;
   padding: 18px;
   background: rgb(217, 84, 84);
-  color: var(--light);
+  color: var(--black);
   font-weight: 700;
   border: 1px solid var(--background);
   // box-shadow: inset 2px 2px 4px var(--gray1), inset -3px -3px 10px #000,
   //   10px 10px 20px var(--shadow);
+  border: none;
 
   &:hover {
     box-shadow: inset 5px 5px 10px #000, inset -2px -2px 10px var(--gray1);

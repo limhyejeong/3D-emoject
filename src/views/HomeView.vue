@@ -58,23 +58,24 @@ export default {
     width: 60px;
     height: 60px;
     border-radius: 50px;
-    background: var(--black);
-    color: var(--light);
+    background: var(--point);
     border: none;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1rem;
     font-weight: 500;
-    box-shadow: inset 2px 2px 4px var(--gray1), inset -3px -3px 10px #000,
-      10px 10px 20px var(--shadow);
+    // box-shadow: inset -3px -3px 10px #000, 10px 10px 20px var(--shadow);
+    box-shadow: 0px 0px 30px var(--light);
+
     img {
       width: 15px;
       height: 15px;
+      // filter: invert(1);
     }
   }
   &:hover .moveCreateBtn {
-    box-shadow: inset 5px 5px 10px #000, inset -2px -2px 10px var(--gray1);
+    // box-shadow: inset 5px 5px 10px #000;
     img {
       opacity: 0.3;
     }
@@ -90,7 +91,7 @@ export default {
     width: 70px;
     height: 60px;
     background: var(--background);
-    box-shadow: 5px 5px 20px var(--shadow);
+    box-shadow: 0px 0px 30px var(--light);
     border-radius: 60px;
     z-index: 0;
     font-weight: 700;
@@ -113,6 +114,7 @@ export default {
   bottom: 0;
   margin: 0 0 50px 50px;
   text-decoration: underline;
+  color: var(--black);
 }
 
 .moveSearchBtn {

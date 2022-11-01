@@ -22,7 +22,7 @@
           <span class="outputInfoCategory">{{ categoryText }}</span>
         </h5>
         <div class="outputRadarDiv">
-          <canvas id="outputRadarChart" />
+          <canvas id="outputRadarChart" width="300" height="300" />
         </div>
       </div>
 
@@ -168,7 +168,7 @@ export default {
     onMounted(() => {
       initThreejs();
       importEmoject();
-      radarChart("#outputRadarChart", categoryData._object.categoryData);
+      radarChart(categoryData._object.categoryData);
       setProgress(activity.value);
       animate();
     });
@@ -199,11 +199,12 @@ export default {
   left: 50px;
   top: 50%;
   transform: translate(0, -50%);
+  transition: 0.25s;
 }
 
 .outputInfoName {
   font-weight: 800;
-  color: #6070e0;
+  color: var(--point);
 }
 .outputInfoEmoji {
   font-size: 2rem;
@@ -211,8 +212,7 @@ export default {
 }
 .outputInfoContent {
   font-weight: 700;
-  color: #6070e0;
-  h5 {
+  color: var(--point) h5 {
     margin-bottom: 5px;
   }
 }
@@ -220,13 +220,17 @@ export default {
 .outputInfoActivity {
   font-weight: 900;
   padding-left: 7px;
-  color: #6070e0;
+  color: var(--point);
 }
 
 .outputInfo {
   background: var(--background);
-  box-shadow: -3px -3px 5px var(--light), inset -2px -2px 5px var(--shadow),
-    10px 10px 30px var(--shadow);
+  // box-shadow: -3px -3px 5px var(--light), inset -2px -2px 5px var(--shadow),
+  //   10px 10px 30px var(--shadow);
+  // box-shadow: -3px -3px 5px var(--light), inset -2px -2px 5px var(--background),
+  //   10px 10px 30px var(--shadow);
+
+  box-shadow: inset 50px 0px 50px var(--light);
   padding: 25px;
   border-radius: 10px;
   z-index: 10;
@@ -251,6 +255,8 @@ export default {
     width: 100%;
     height: 100%;
     canvas {
+      width: 300px;
+      height: 300px;
       // pointer-events: auto;
       margin-top: 15px;
     }
@@ -268,7 +274,7 @@ export default {
     width: 50%;
     height: 100%;
     border-radius: 5px;
-    background: linear-gradient(-0.25turn, #6070e0, #81a8fd);
+    background: linear-gradient(-0.25turn, var(--point), #81a8fd);
   }
 }
 

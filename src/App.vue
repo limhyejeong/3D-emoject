@@ -97,13 +97,22 @@ body {
   color: var(--black);
   overflow: hidden;
 }
+// :root {
+//   --background: #f2f3f7;
+//   --gray2: #cccccc;
+//   --gray1: #aaaaaa;
+//   --light: #ffffff;
+//   --shadow: #c6cde1;
+//   --black: #333333;
+// }
 :root {
-  --background: #f2f3f7;
+  --background: #000;
   --gray2: #cccccc;
   --gray1: #aaaaaa;
-  --light: #ffffff;
-  --shadow: #c6cde1;
-  --black: #333333;
+  --light: #222;
+  --shadow: #111;
+  --black: #eee;
+  --point: #f34a74;
 }
 a {
   text-decoration: none;

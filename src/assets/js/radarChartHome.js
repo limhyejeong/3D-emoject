@@ -1,14 +1,12 @@
 import Chart from "chart.js/auto";
+let chart;
 
-export function radarChart(canvas, data) {
-    const context = document.querySelector(canvas).getContext("2d");
-
+function radarChart(context, data) {
     var gradientBlue = context.createLinearGradient(0, 0, 0, 200);
     gradientBlue.addColorStop(0, 'rgba(70, 70, 200, 1)');
     gradientBlue.addColorStop(1, 'rgba(130, 170, 255, 1)');
 
-
-    const chart = new Chart(context, {
+    chart = new Chart(context, {
         type: "radar", // 차트의 형태
         data: {
             // 차트에 들어갈 데이터
@@ -49,30 +47,39 @@ export function radarChart(canvas, data) {
             ],
         },
         options: {
-            responsive: true,
+            responsive: false,
             scale: {
                 ticks: {
                     maxTicksLimit: 4,
                     display: false,
-                }
+                },
             },
             scales: {
                 r: {
                     ticks: {
                         // display: false,
+                        backdropColor: "#000"
                     },
                     pointLabels: {
                         font: {
                             size: 14,
                         }
-                    }
+                    },
+                    grid: {
+                        color: "#777",
+                    },
                 },
             },
             plugins: {
                 legend: {
                     display: false
+                },
+                tooltip: {
+                    enabled: false // <-- this option disables tooltips
                 }
             },
         }
     });
 }
+
+export { chart, radarChart }
