@@ -101,12 +101,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.loadingText {
-  font-size: 1.5rem;
-  // color: var(--inactive-color);
-  font-weight: 300;
-  position: absolute;
-  top: 60vh;
-}
-</style>
+<style lang="scss"></style>
