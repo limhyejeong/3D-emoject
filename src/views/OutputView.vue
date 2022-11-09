@@ -72,10 +72,10 @@ import { vertexShader, fragmentShader, twist } from "@/assets/js/twist";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import {
-  createEmoject,
+  CreateEmoject,
   noiseSettings,
   noiseAnimation,
-} from "@/assets/js/createEmoject";
+} from "@/assets/js/CreateEmoject";
 import { radarChart } from "@/assets/js/radarChart";
 import { CategoryTrans } from "@/assets/js/CategoryTrans";
 
@@ -124,7 +124,7 @@ export default {
     // 감정 오브젝트 만드는 함수
     let emoject;
     const importEmoject = () => {
-      emoject = createEmoject(
+      emoject = CreateEmoject(
         emoject,
         category.value,
         activity.value,

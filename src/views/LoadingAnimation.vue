@@ -45,7 +45,7 @@ export default {
     }
 
     function createLoadingMesh() {
-      const geometry = new THREE.TorusGeometry(2, 0.1, 16, 64, time);
+      const geometry = new THREE.TorusGeometry(1.7, 0.08, 16, 64, time);
       const material = new THREE.MeshNormalMaterial();
       loadingMesh = new THREE.Mesh(geometry, material);
       loadingMesh.position.y = 0.1;

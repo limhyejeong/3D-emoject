@@ -11,7 +11,7 @@ let noiseSettings = {
     속도: 0,
 };
 
-const createEmoject = (mesh, category, activity, length, color) => {
+const CreateEmoject = (mesh, category, activity, length, color) => {
     // Geometry
     if (category == "anger") {
         geometry = new THREE.ConeGeometry(0.7, 1.4, 64, 64);
@@ -49,25 +49,28 @@ const createEmoject = (mesh, category, activity, length, color) => {
     if (length == 2) {
         matcapTexture = texLoader.load("./assets/textures/matcap/pink.png");
     } else if (length == 3) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/gold.png");
+        matcapTexture = texLoader.load("./assets/textures/matcap/pink.png");
     } else if (length == 4) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/yellow.png");
+        matcapTexture = texLoader.load("./assets/textures/matcap/gold.png");
     } else if (length == 5) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/soft.png");
+        matcapTexture = texLoader.load("./assets/textures/matcap/yellow.png");
     } else if (length == 6) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/wild.png");
+        matcapTexture = texLoader.load("./assets/textures/matcap/soft.png");
     } else if (length == 7) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/rainbow.png");
+        matcapTexture = texLoader.load("./assets/textures/matcap/wild.png");
     } else if (length == 8) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/light.png");
+        matcapTexture = texLoader.load("./assets/textures/matcap/rainbow.png");
     } else if (length == 9) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/galaxy.png");
+        matcapTexture = texLoader.load("./assets/textures/matcap/light.png");
+        // matcapTexture = texLoader.load("./assets/textures/matcap/galaxy.png");
     } else if (length == 10) {
         matcapTexture = texLoader.load("./assets/textures/matcap/magic.png");
     }
 
     // matcapTexture = texLoader.load("./assets/textures/matcap/유리.png");
     // matcapTexture = texLoader.load("./assets/textures/matcap/구슬.png");
+
+    // matcapTexture.encoding = THREE.sRGBEncoding;
 
     material = new THREE.MeshMatcapMaterial({
         color: new THREE.Color(color),
@@ -91,4 +94,4 @@ const noiseAnimation = (mesh, settings) => {
 }
 
 
-export { createEmoject, noiseSettings, noiseAnimation }
+export { CreateEmoject, noiseSettings, noiseAnimation }

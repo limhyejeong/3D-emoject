@@ -11,10 +11,10 @@ import { onMounted } from "vue";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import {
-  createEmoject,
+  CreateEmoject,
   noiseSettings,
   noiseAnimation,
-} from "@/assets/js/createEmoject";
+} from "@/assets/js/CreateEmoject";
 import { noise } from "@/assets/js/noise";
 
 export default {

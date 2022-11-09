@@ -55,10 +55,10 @@ import * as TWEEN from "@tweenjs/tween.js";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import {
-  createEmoject,
+  CreateEmoject,
   noiseSettings,
   noiseAnimation,
-} from "@/assets/js/createEmoject";
+} from "@/assets/js/CreateEmoject";
 // import { vertexShader, fragmentShader, twist } from "@/assets/js/twist";
 import { PreventDragClick } from "@/assets/js/PreventDragClick";
 import { chart, radarChart } from "@/assets/js/radarChartHome";
@@ -87,7 +87,7 @@ export default {
     function initThreejs() {
       scene = new THREE.Scene();
       // scene.background = new THREE.Color(0xffffff);
-      // scene.fog = new THREE.Fog(0xffffff, 3, 80);
+      scene.fog = new THREE.Fog(0x000000, 20, 50);
       homeCanvas = document.querySelector("#homeCanvas");
       renderer = new THREE.WebGLRenderer({
         canvas: homeCanvas,
@@ -100,7 +100,7 @@ export default {
       camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
       camera.position.x = 0;
       camera.position.y = 0;
-      camera.position.z = 20;
+      camera.position.z = 30;
       scene.add(camera);
 
       const light = new THREE.AmbientLight(0xffffff, 1); // soft white light
@@ -126,7 +126,7 @@ export default {
     // 감정 오브젝트 만드는 함수
     let emoject;
     const importEmoject = (data) => {
-      emoject = createEmoject(
+      emoject = CreateEmoject(
         emoject,
         data.category,
         data.activity,
@@ -135,9 +135,13 @@ export default {
       );
       emoject.userData = [data, noiseSettings]; // 이모젝트에 데이터 추가
       let range = 10; // 위치 범위
-      emoject.position.x = Math.floor(Math.random() * (10 * 2) - 10);
-      emoject.position.y = Math.floor(Math.random() * (5 * 2) - 5);
-      emoject.position.z = Math.floor(Math.random() * (range * 2) - range);
+      emoject.position.x = Math.floor(
+        Math.random() * (range * 1.4 * 2) - range * 1.4
+      );
+      emoject.position.y = Math.floor(Math.random() * (range * 2) - range);
+      emoject.position.z = Math.floor(
+        Math.random() * (range * 1.4 * 2) - range * 1.4
+      );
       emoject.rotation.x = Math.random() * 360;
       emoject.rotation.y = Math.random() * 360;
       noiseAnimation(emoject, emoject.userData[1]);
@@ -212,6 +216,16 @@ export default {
         .easing(TWEEN.Easing.Quadratic.InOut)
         .start();
 
+      new TWEEN.Tween(scene)
+        .to(
+          {
+            fog: new THREE.Fog(0x000000, 5, 12),
+          },
+          duration
+        )
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .start();
+
       // 카메라 시점 변경
       new TWEEN.Tween(controls)
         .to({ target: selectedMesh.position }, duration)
@@ -224,6 +238,16 @@ export default {
       isClick.value = false;
       controls.reset();
       chart.destroy();
+
+      new TWEEN.Tween(scene)
+        .to(
+          {
+            fog: new THREE.Fog(0x000000, 35, 50),
+          },
+          500
+        )
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .start();
 
       // 카메라 위치
       // new TWEEN.Tween(camera)
