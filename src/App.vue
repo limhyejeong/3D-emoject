@@ -1,7 +1,8 @@
 <template>
   <nav>
     <router-link to="/" class="logo">
-      <span>형용할 수 없는 감정에 대하여</span>
+      <img src="@/assets/logo1.png" />
+      <!-- <span> About Indescribable Emotions</span> -->
     </router-link>
   </nav>
 
@@ -50,33 +51,53 @@ export default {
 
 <style lang="scss">
 @font-face {
-  font-family: "notosanskr";
-  src: url("@/assets/font/notosanskr/NotoSansKR-Thin.woff");
+  font-family: "gothicA1";
+  src: url("@/assets/font/Gothic_A1/GothicA1-Thin.ttf");
   font-weight: 100;
 }
 @font-face {
-  font-family: "notosanskr";
-  src: url("@/assets/font/notosanskr/NotoSansKR-Light.woff");
+  font-family: "gothicA1";
+  src: url("@/assets/font/Gothic_A1/GothicA1-ExtraLight.ttf");
   font-weight: 200;
 }
 @font-face {
-  font-family: "notosanskr";
-  src: url("@/assets/font/notosanskr/NotoSansKR-Regular.woff");
+  font-family: "gothicA1";
+  src: url("@/assets/font/Gothic_A1/GothicA1-Light.ttf");
   font-weight: 300;
 }
 @font-face {
-  font-family: "notosanskr";
-  src: url("@/assets/font/notosanskr/NotoSansKR-Medium.woff");
+  font-family: "gothicA1";
+  src: url("@/assets/font/Gothic_A1/GothicA1-Regular.ttf");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "gothicA1";
+  src: url("@/assets/font/Gothic_A1/GothicA1-Medium.ttf");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "gothicA1";
+  src: url("@/assets/font/Gothic_A1/GothicA1-SemiBold.ttf");
   font-weight: 500;
 }
 @font-face {
-  font-family: "notosanskr";
-  src: url("@/assets/font/notosanskr/NotoSansKR-Bold.woff");
+  font-family: "gothicA1";
+  src: url("@/assets/font/Gothic_A1/GothicA1-Bold.ttf");
+  font-weight: 600;
+}
+@font-face {
+  font-family: "gothicA1";
+  src: url("@/assets/font/Gothic_A1/GothicA1-ExtraBold.ttf");
   font-weight: 700;
 }
 @font-face {
-  font-family: "notosanskr";
-  src: url("@/assets/font/notosanskr/NotoSansKR-Black.woff");
+  font-family: "gothicA1";
+  src: url("@/assets/font/Gothic_A1/GothicA1-Black.ttf");
+  font-weight: 800;
+}
+@font-face {
+  font-family: "YdeStreet";
+  src: url("@/assets/font/Yde-street.ttf");
   font-weight: 800;
 }
 
@@ -84,7 +105,7 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "nanumsquareneo";
+  font-family: "gothicA1";
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -134,12 +155,13 @@ nav {
     color: var(--black);
 
     img {
-      width: 25px;
+      // width: 25px;
       height: 25px;
     }
     span {
       font-weight: 700;
       margin-left: 5px;
+      font-family: "YdeStreet";
     }
 
     &:hover {

@@ -13,7 +13,6 @@
           type="text"
           v-model="emoji"
           class="emojiInput"
-          readonly
           placeholder="2개에서 10개까지 선택할 수 있어요"
         />
         <button class="clearEmojiInput" @click="clearEmojiInput">
@@ -165,13 +164,14 @@ export default {
 .title {
   width: 100%;
   font-size: 2rem;
-  font-weight: 900;
+  font-weight: 700;
+  letter-spacing: -0.15rem;
 }
 
 p.description {
   // font-size: 0.9rem;
   line-height: 1.5rem;
-  font-weight: 600;
+  font-weight: 300;
   padding: 10px 0 20px;
   color: var(--gray1);
 }
@@ -198,7 +198,7 @@ p.description {
 
     &::placeholder {
       font-size: 1rem;
-      font-weight: 700;
+      font-weight: 500;
       color: var(--gray2);
     }
   }
@@ -265,7 +265,8 @@ p.description {
     // background: var(--black);
     border: none;
     color: var(--light);
-    font-weight: 700;
+    font-weight: 600;
+    letter-spacing: -0.1rem;
     font-size: 1.1rem;
     background: linear-gradient(0, var(--point), #ffc107);
     // box-shadow: inset 1px 1px 5px var(--light), inset -5px -5px 10px #000;

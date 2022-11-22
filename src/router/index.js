@@ -9,7 +9,7 @@ import InputContents from '../views/InputContents.vue';
 import LoadingAnimation from '../views/LoadingAnimation.vue';
 import OutputView from '../views/OutputView.vue';
 import ListView from '../views/ListView.vue';
-// import LogoPage from '../views/LogoPage.vue';
+import LogoPage from '../views/LogoPage.vue';
 
 
 const routes = [
@@ -69,11 +69,11 @@ const routes = [
     name: 'listview',
     component: ListView
   },
-  // {
-  //   path: '/logo',
-  //   name: 'logopage',
-  //   component: LogoPage
-  // },
+  {
+    path: '/logo',
+    name: 'logopage',
+    component: LogoPage
+  },
 ]
 
 const router = createRouter({

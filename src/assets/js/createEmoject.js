@@ -38,9 +38,10 @@ const CreateEmoject = (mesh, category, activity, length, color) => {
         noiseSettings = { 진폭: 1 + activity * 0.1, 반경: 0.2 + activity * 0.05, 속도: activity * 0.1 };
     } else if (category == "joy") {
         let joyVec;
-        if (activity <= 3) joyVec = 3;
-        else if (activity <= 6) joyVec = 4;
-        else joyVec = 5;
+        joyVec = 5;
+        // if (activity <= 3) joyVec = 3;
+        // else if (activity <= 6) joyVec = 4;
+        // else joyVec = 5;
         geometry = new THREE.TorusKnotGeometry(0.6, 0.15, 256, 16, 1, joyVec);
         noiseSettings = { 진폭: 1 * activity / 1, 반경: 0.07 * activity, 속도: activity * 0.1 };
     }

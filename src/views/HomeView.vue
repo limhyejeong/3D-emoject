@@ -95,7 +95,7 @@ export default {
     box-shadow: 0px 0px 30px var(--gray1);
     border-radius: 60px;
     z-index: 0;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--black);
     transition: 0.25s;
     justify-content: center;

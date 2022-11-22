@@ -87,7 +87,7 @@ export default {
     function initThreejs() {
       scene = new THREE.Scene();
       // scene.background = new THREE.Color(0xffffff);
-      scene.fog = new THREE.Fog(0x000000, 20, 60);
+      scene.fog = new THREE.Fog(0x000000, 5, 50);
       homeCanvas = document.querySelector("#homeCanvas");
       renderer = new THREE.WebGLRenderer({
         canvas: homeCanvas,
@@ -138,12 +138,14 @@ export default {
         data.color
       );
       emoject.userData = [data, noiseSettings]; // 이모젝트에 데이터 추가
-      let range = 8; // 위치 범위
+      let range = 6; // 위치 범위
       emoject.position.x = Math.floor(
-        Math.random() * (range * 1.2 * 2) - range * 1.2
+        Math.random() * (range * 2 * 2) - range * 2
       );
       emoject.position.y = Math.floor(Math.random() * (range * 2) - range);
-      emoject.position.z = Math.floor(Math.random() * (range * 2) - range);
+      emoject.position.z = Math.floor(
+        Math.random() * (range * 2 * 2) - range * 2
+      );
       emoject.rotation.x = Math.random() * 360;
       emoject.rotation.y = Math.random() * 360;
       let size = Math.random() * (1.5 - 0.5) + 0.5;
@@ -225,7 +227,7 @@ export default {
       new TWEEN.Tween(scene)
         .to(
           {
-            fog: new THREE.Fog(0x000000, 5, 12),
+            fog: new THREE.Fog(0x000000, 5, 5),
           },
           duration
         )

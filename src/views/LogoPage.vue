@@ -26,7 +26,8 @@ export default {
       height = window.innerHeight;
     let outputCanvas;
     let sphere;
-    let noiseSettings = { 진폭: 3, 반경: 1, 속도: 1 };
+    // let noiseSettings = { 진폭: 0.7, 반경: 1.3, 속도: 1 };
+    let noiseSettings = { 진폭: (1 * 6) / 1, 반경: 0.07 * 6, 속도: 6 * 0.1 };
     let v3 = new THREE.Vector3();
     const texLoader = new THREE.TextureLoader(); // 텍스쳐 로더
 
@@ -56,12 +57,12 @@ export default {
 
       controls = new OrbitControls(camera, renderer.domElement);
 
-      const geometry = new THREE.SphereGeometry(1, 128, 128);
+      // const geometry = new THREE.SphereGeometry(1, 128, 128);
+      const geometry = new THREE.TorusKnotGeometry(0.6, 0.15, 256, 16, 1, 5);
 
       const matcapTexture = texLoader.load(
-        "./assets/textures/matcap/노랑은은.jpg"
+        "./assets/textures/matcap/iron2.png"
       );
-
       const material = new THREE.MeshMatcapMaterial({
         matcap: matcapTexture,
       });
@@ -88,8 +89,8 @@ export default {
     // 애니메이션
     function animate() {
       requestAnimationFrame(animate);
-      // sphere.rotation.y += 0.01;
-      noiseAnimation(sphere, noiseSettings);
+      sphere.rotation.y += 0.01;
+      // noiseAnimation(sphere, noiseSettings);
       renderer.render(scene, camera);
     }
 
