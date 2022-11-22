@@ -87,7 +87,7 @@ export default {
     function initThreejs() {
       scene = new THREE.Scene();
       // scene.background = new THREE.Color(0xffffff);
-      scene.fog = new THREE.Fog(0x000000, 20, 50);
+      scene.fog = new THREE.Fog(0x000000, 20, 60);
       homeCanvas = document.querySelector("#homeCanvas");
       renderer = new THREE.WebGLRenderer({
         canvas: homeCanvas,
@@ -97,19 +97,21 @@ export default {
       renderer.setSize(width, height);
       renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
 
-      camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
+      camera = new THREE.PerspectiveCamera(45, width / height, 1, 100);
       camera.position.x = 0;
       camera.position.y = 0;
-      camera.position.z = 30;
+      camera.position.z = 20;
       scene.add(camera);
 
-      const light = new THREE.AmbientLight(0xffffff, 1); // soft white light
-      const pointLight = new THREE.PointLight(0xff0000, 2, 100);
-      pointLight.position.set(10, 10, 10);
+      const light = new THREE.AmbientLight(0xffffff, 2); // soft white light
+      const pointLight = new THREE.PointLight(0xff0000, 2, 1);
+      pointLight.position.set(50, 50, 50);
 
       scene.add(light, pointLight);
       controls = new OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
+      controls.maxDistance = 40;
+      controls.minDistance = 5;
       controls.autoRotateSpeed = 1;
     }
 
@@ -126,6 +128,8 @@ export default {
     // 감정 오브젝트 만드는 함수
     let emoject;
     const importEmoject = (data) => {
+      console.log(emotions._object.emotions.length);
+
       emoject = CreateEmoject(
         emoject,
         data.category,
@@ -134,16 +138,18 @@ export default {
         data.color
       );
       emoject.userData = [data, noiseSettings]; // 이모젝트에 데이터 추가
-      let range = 10; // 위치 범위
+      let range = 8; // 위치 범위
       emoject.position.x = Math.floor(
-        Math.random() * (range * 1.4 * 2) - range * 1.4
+        Math.random() * (range * 1.2 * 2) - range * 1.2
       );
       emoject.position.y = Math.floor(Math.random() * (range * 2) - range);
-      emoject.position.z = Math.floor(
-        Math.random() * (range * 1.4 * 2) - range * 1.4
-      );
+      emoject.position.z = Math.floor(Math.random() * (range * 2) - range);
       emoject.rotation.x = Math.random() * 360;
       emoject.rotation.y = Math.random() * 360;
+      let size = Math.random() * (1.5 - 0.5) + 0.5;
+      emoject.scale.x = size;
+      emoject.scale.y = size;
+      emoject.scale.z = size;
       noiseAnimation(emoject, emoject.userData[1]);
       group.add(emoject);
     };

@@ -49,20 +49,19 @@ const CreateEmoject = (mesh, category, activity, length, color) => {
     if (length == 2) {
         matcapTexture = texLoader.load("./assets/textures/matcap/pink.png");
     } else if (length == 3) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/pink.png");
+        matcapTexture = texLoader.load("./assets/textures/matcap/glass.png");
     } else if (length == 4) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/gold.png");
+        matcapTexture = texLoader.load("./assets/textures/matcap/soft.png");
     } else if (length == 5) {
         matcapTexture = texLoader.load("./assets/textures/matcap/yellow.png");
     } else if (length == 6) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/soft.png");
+        matcapTexture = texLoader.load("./assets/textures/matcap/iron.png");
     } else if (length == 7) {
         matcapTexture = texLoader.load("./assets/textures/matcap/wild.png");
     } else if (length == 8) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/rainbow.png");
-    } else if (length == 9) {
         matcapTexture = texLoader.load("./assets/textures/matcap/light.png");
-        // matcapTexture = texLoader.load("./assets/textures/matcap/galaxy.png");
+    } else if (length == 9) {
+        matcapTexture = texLoader.load("./assets/textures/matcap/rainbow.png");
     } else if (length == 10) {
         matcapTexture = texLoader.load("./assets/textures/matcap/magic.png");
     }
@@ -77,6 +76,17 @@ const CreateEmoject = (mesh, category, activity, length, color) => {
         matcap: matcapTexture,
     });
 
+    // const material = new THREE.MeshStandardMaterial()
+
+    // material.metalness = 0.45
+    // material.roughness = 0.65
+    // material.color = new THREE.Color(color)
+    // // material.map = matcapTexture
+
+    // material.aoMap = matcapTexture
+    // material.aoMapIntensity = 4
+
+
     // 노이즈 애니메이션을 위한 준비
     geometry.positionData = [];
     for (let i = 0; i < geometry.attributes.position.count; i++) {
@@ -85,6 +95,9 @@ const CreateEmoject = (mesh, category, activity, length, color) => {
     }
 
     mesh = new THREE.Mesh(geometry, material);
+
+
+    mesh.geometry.setAttribute('uv2', new THREE.BufferAttribute(mesh.geometry.attributes.uv.array, 2))
 
     return mesh;
 }
