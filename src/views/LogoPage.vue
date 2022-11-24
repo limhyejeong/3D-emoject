@@ -60,10 +60,9 @@ export default {
       // const geometry = new THREE.SphereGeometry(1, 128, 128);
       const geometry = new THREE.TorusKnotGeometry(0.6, 0.15, 256, 16, 1, 5);
 
-      const matcapTexture = texLoader.load(
-        "./assets/textures/matcap/iron2.png"
-      );
+      const matcapTexture = texLoader.load("./assets/textures/matcap/soft.png");
       const material = new THREE.MeshMatcapMaterial({
+        color: new THREE.Color(0xf2ce02),
         matcap: matcapTexture,
       });
 

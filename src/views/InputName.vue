@@ -66,12 +66,12 @@ export default {
   border: none;
   outline: none;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   box-shadow: inset -1px -1px 5px var(--shadow);
 
   &::placeholder {
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--gray2);
   }
 }

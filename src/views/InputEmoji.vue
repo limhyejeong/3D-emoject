@@ -98,9 +98,9 @@ export default {
       inputEmoji.forEach((element) => {
         for (let i = 0; i < emojiDoc.length; i++) {
           if (element == emojiDoc[i].emoji) {
-            console.log(
-              element + "는 " + emojiDoc[i].num + "번째 이모지입니다."
-            );
+            // console.log(
+            //   element + "는 " + emojiDoc[i].num + "번째 이모지입니다."
+            // );
             dataObject.anger += emojiDoc[i].anger;
             dataObject.fear += emojiDoc[i].fear;
             dataObject.sadness += emojiDoc[i].sadness;
@@ -115,7 +115,7 @@ export default {
             colorArr.push(emojiDoc[i].color);
           }
         }
-        console.log(dataObject);
+        // console.log(dataObject);
       });
 
       let sPick = Math.floor(Math.random() * colorArr.length);

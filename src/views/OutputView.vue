@@ -211,7 +211,7 @@ export default {
   margin: 10px 0;
 }
 .outputInfoContent {
-  font-weight: 700;
+  font-weight: 600;
   color: var(--point);
   h5 {
     margin-bottom: 5px;
@@ -219,7 +219,7 @@ export default {
 }
 .outputInfoCategory,
 .outputInfoActivity {
-  font-weight: 900;
+  font-weight: 700;
   padding-left: 7px;
   color: var(--point);
 }
@@ -243,7 +243,7 @@ export default {
   }
   h5 {
     font-size: 0.9rem;
-    font-weight: 600;
+    font-weight: 400;
     color: var(--gray1);
   }
 }
@@ -286,7 +286,7 @@ export default {
     background: var(--light);
     color: var(--gray2);
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: 500;
     border: 1px solid var(--background);
     // box-shadow: inset -10px -10px 20px var(--shadow);
     &:hover {

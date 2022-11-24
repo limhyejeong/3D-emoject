@@ -18,7 +18,7 @@
     </section>
 
     <aside class="emojiSubmitBox">
-      <router-link to="/creating">
+      <router-link to="/output">
         <button class="emojiSubmitBtn">감정 생성</button></router-link
       >
     </aside>
@@ -60,12 +60,12 @@ export default {
   border: none;
   outline: none;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   box-shadow: inset -2px -2px 5px var(--shadow), 3px 3px 10px var(--shadow);
 
   &::placeholder {
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--gray2);
   }
 }

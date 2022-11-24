@@ -6,9 +6,9 @@ import router from "@/router/index"
 export const useInputStore = defineStore('input', {
     state: () => ({
         num: 0,
-        name: '',
+        name: '혜정',
         emoji: '',
-        content: '',
+        content: '프로토타입용 감정입니다',
         category: 'none',
         categoryData: {},
         activity: 0,
@@ -37,9 +37,9 @@ export const useInputStore = defineStore('input', {
             });
         },
         clearInput() {
-            this.name = '';
+            this.name = '혜정';
             this.emoji = '';
-            this.content = '';
+            this.content = '프로토타입용 감정입니다';
             this.category = 'none';
             this.activity = 0;
             this.step = 0;

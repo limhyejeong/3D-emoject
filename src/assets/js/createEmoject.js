@@ -48,13 +48,13 @@ const CreateEmoject = (mesh, category, activity, length, color) => {
 
 
     if (length == 2) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/pink.png");
+        matcapTexture = texLoader.load("./assets/textures/matcap/yellow.png");
     } else if (length == 3) {
         matcapTexture = texLoader.load("./assets/textures/matcap/glass.png");
     } else if (length == 4) {
         matcapTexture = texLoader.load("./assets/textures/matcap/soft.png");
     } else if (length == 5) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/yellow.png");
+        matcapTexture = texLoader.load("./assets/textures/matcap/05.png");
     } else if (length == 6) {
         matcapTexture = texLoader.load("./assets/textures/matcap/iron.png");
     } else if (length == 7) {
@@ -63,7 +63,7 @@ const CreateEmoject = (mesh, category, activity, length, color) => {
         matcapTexture = texLoader.load("./assets/textures/matcap/light.png");
     } else if (length == 9) {
         matcapTexture = texLoader.load("./assets/textures/matcap/rainbow.png");
-    } else if (length == 10) {
+    } else {
         matcapTexture = texLoader.load("./assets/textures/matcap/magic.png");
     }
 
@@ -96,7 +96,6 @@ const CreateEmoject = (mesh, category, activity, length, color) => {
     }
 
     mesh = new THREE.Mesh(geometry, material);
-
 
     mesh.geometry.setAttribute('uv2', new THREE.BufferAttribute(mesh.geometry.attributes.uv.array, 2))
 

@@ -87,7 +87,7 @@ export default {
     function initThreejs() {
       scene = new THREE.Scene();
       // scene.background = new THREE.Color(0xffffff);
-      scene.fog = new THREE.Fog(0x000000, 5, 50);
+      scene.fog = new THREE.Fog(0x000000, 20, 50);
       homeCanvas = document.querySelector("#homeCanvas");
       renderer = new THREE.WebGLRenderer({
         canvas: homeCanvas,
@@ -100,7 +100,7 @@ export default {
       camera = new THREE.PerspectiveCamera(45, width / height, 1, 100);
       camera.position.x = 0;
       camera.position.y = 0;
-      camera.position.z = 20;
+      camera.position.z = 25;
       scene.add(camera);
 
       const light = new THREE.AmbientLight(0xffffff, 2); // soft white light
@@ -123,22 +123,21 @@ export default {
         importEmoject(emotions._object.emotions[i]);
       }
       scene.add(group);
+      console.log(emotions._object.emotions.length);
     });
 
     // 감정 오브젝트 만드는 함수
     let emoject;
     const importEmoject = (data) => {
-      console.log(emotions._object.emotions.length);
-
       emoject = CreateEmoject(
         emoject,
         data.category,
         data.activity,
-        data.emoji.length / 2,
+        Math.floor(data.emoji.length / 2),
         data.color
       );
       emoject.userData = [data, noiseSettings]; // 이모젝트에 데이터 추가
-      let range = 6; // 위치 범위
+      let range = 4; // 위치 범위
       emoject.position.x = Math.floor(
         Math.random() * (range * 2 * 2) - range * 2
       );
@@ -148,7 +147,7 @@ export default {
       );
       emoject.rotation.x = Math.random() * 360;
       emoject.rotation.y = Math.random() * 360;
-      let size = Math.random() * (1.5 - 0.5) + 0.5;
+      let size = Math.random() * (1.3 - 0.7) + 0.7;
       emoject.scale.x = size;
       emoject.scale.y = size;
       emoject.scale.z = size;
@@ -227,7 +226,7 @@ export default {
       new TWEEN.Tween(scene)
         .to(
           {
-            fog: new THREE.Fog(0x000000, 5, 5),
+            fog: new THREE.Fog(0x000000, 5, 10),
           },
           duration
         )
@@ -250,7 +249,7 @@ export default {
       new TWEEN.Tween(scene)
         .to(
           {
-            fog: new THREE.Fog(0x000000, 35, 50),
+            fog: new THREE.Fog(0x000000, 5, 50),
           },
           500
         )

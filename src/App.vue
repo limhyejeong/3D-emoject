@@ -145,6 +145,7 @@ nav {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 100000;
 
   .logo {
     display: flex;
@@ -156,7 +157,7 @@ nav {
 
     img {
       // width: 25px;
-      height: 25px;
+      height: 30px;
     }
     span {
       font-weight: 700;
@@ -178,6 +179,7 @@ nav {
 button {
   cursor: pointer;
   transition: 0.25s;
+  letter-spacing: -0.07rem;
 }
 .page {
   width: 100%;
