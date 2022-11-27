@@ -92,7 +92,7 @@ export default {
     width: 70px;
     height: 60px;
     background: var(--background);
-    box-shadow: 0px 0px 30px var(--gray1);
+    box-shadow: 0px 0px 25px #333;
     border-radius: 60px;
     z-index: 0;
     font-weight: 500;

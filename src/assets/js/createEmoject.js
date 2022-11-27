@@ -20,7 +20,7 @@ const CreateEmoject = (mesh, category, activity, length, color) => {
         noiseSettings = { 진폭: 2 + activity * 0.1, 반경: 0.5 + activity * 0.1, 속도: activity * 0.15 };
     } else if (category == "fear") {
         geometry = new THREE.SphereGeometry(0.7, 64, 64);
-        noiseSettings = { 진폭: 10, 반경: 0.5 + activity * 0.1, 속도: activity * 0.07 };
+        noiseSettings = { 진폭: 10 + activity * 0.3, 반경: 0.6 + activity * 0.2, 속도: activity * 0.1 };
     } else if (category == "sadness") {
         geometry = new THREE.TorusGeometry(0.5, 0.3, 64, 64);
         noiseSettings = { 진폭: 0.5 + activity * 0.3, 반경: 0.5 + activity * 0.1, 속도: activity * 0.1 };

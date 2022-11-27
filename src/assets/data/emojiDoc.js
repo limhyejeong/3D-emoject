@@ -123,7 +123,7 @@ export const emojiDoc = [
         joy: 10,
         activity: 10,
     }, {
-        emoji: '🤩', num: 16, color: "rgb(245, 133, 80)",
+        emoji: '🤩', num: 16, color: "rgb(255, 200, 50)",
         anger: 0,
         fear: 0,
         sadness: 0,

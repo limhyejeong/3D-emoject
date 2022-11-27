@@ -87,7 +87,7 @@ export default {
     function initThreejs() {
       scene = new THREE.Scene();
       // scene.background = new THREE.Color(0xffffff);
-      scene.fog = new THREE.Fog(0x000000, 20, 50);
+      scene.fog = new THREE.Fog(0x000000, 15, 45);
       homeCanvas = document.querySelector("#homeCanvas");
       renderer = new THREE.WebGLRenderer({
         canvas: homeCanvas,
@@ -99,8 +99,8 @@ export default {
 
       camera = new THREE.PerspectiveCamera(45, width / height, 1, 100);
       camera.position.x = 0;
-      camera.position.y = 0;
-      camera.position.z = 25;
+      camera.position.y = 20;
+      camera.position.z = 20;
       scene.add(camera);
 
       const light = new THREE.AmbientLight(0xffffff, 2); // soft white light
@@ -111,8 +111,8 @@ export default {
       controls = new OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
       controls.maxDistance = 40;
-      controls.minDistance = 5;
-      controls.autoRotateSpeed = 1;
+      controls.minDistance = -10;
+      controls.autoRotateSpeed = 0;
     }
 
     const group = new THREE.Group();
@@ -137,14 +137,13 @@ export default {
         data.color
       );
       emoject.userData = [data, noiseSettings]; // 이모젝트에 데이터 추가
-      let range = 4; // 위치 범위
-      emoject.position.x = Math.floor(
-        Math.random() * (range * 2 * 2) - range * 2
-      );
+      let range = 13; // 위치 범위
+      emoject.position.x = Math.floor(Math.random() * (range * 2) - range);
       emoject.position.y = Math.floor(Math.random() * (range * 2) - range);
-      emoject.position.z = Math.floor(
-        Math.random() * (range * 2 * 2) - range * 2
-      );
+      emoject.position.z = Math.floor(Math.random() * (range * 2) - range);
+      // emoject.position.z = Math.floor(
+      //   Math.random() * (range * 2 * 2) - range * 2
+      // );
       emoject.rotation.x = Math.random() * 360;
       emoject.rotation.y = Math.random() * 360;
       let size = Math.random() * (1.3 - 0.7) + 0.7;
@@ -249,7 +248,7 @@ export default {
       new TWEEN.Tween(scene)
         .to(
           {
-            fog: new THREE.Fog(0x000000, 5, 50),
+            fog: new THREE.Fog(0x000000, 15, 45),
           },
           500
         )

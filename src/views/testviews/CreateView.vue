@@ -16,10 +16,10 @@
 </template>
 
 <script>
-import InputView from "./InputEmoji.vue";
-import OutputView from "./OutputView.vue";
-import LoadingAnimation from "./LoadingAnimation.vue";
-import TheCanvas from "./TheCanvas.vue";
+import InputView from "../InputEmoji.vue";
+import OutputView from "../OutputView.vue";
+import LoadingAnimation from "../LoadingAnimation.vue";
+import TheCanvas from "../TheCanvas.vue";
 import Anger from "@/components/homeview/sample/Anger-Cone.vue";
 import Fear from "@/components/homeview/sample/Fear-Tetrahedron.vue";
 import Anticipation from "@/components/homeview/sample/Anticipation-Dodecahedron.vue";
