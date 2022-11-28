@@ -57,8 +57,8 @@ function radarChart(context, categoryData) {
             scales: {
                 r: {
                     ticks: {
-                        // display: false,
-                        backdropColor: "#111"
+                        display: false,
+                        // backdropColor: "#111"
                     },
                     pointLabels: {
                         font: {

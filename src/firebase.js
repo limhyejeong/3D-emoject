@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore , collection} from 'firebase/firestore'
+import { getFirestore, collection } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: "AIzaSyDcQAJ6LvD_DdGGOfShxsTmEI5D2ETRncE",
@@ -15,5 +15,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app); //eslint-disable-line no-unused-vars
 const db = getFirestore(app)
-const emoColRef = collection(db, 'emotions');
+const emoColRef = collection(db, 'emotions2');
 export default emoColRef;

@@ -1,7 +1,7 @@
 <template>
   <nav>
     <router-link to="/" class="logo">
-      <img src="@/assets/logo1.png" />
+      <img src="@/assets/img/logo1.png" />
       <!-- <span> About Indescribable Emotions</span> -->
     </router-link>
   </nav>
@@ -96,9 +96,10 @@ export default {
   font-weight: 800;
 }
 @font-face {
-  font-family: "YdeStreet";
-  src: url("@/assets/font/Yde-street.ttf");
-  font-weight: 800;
+  font-family: "YdestreetL";
+  src: url("@/assets/font/Yde-street.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
 }
 
 * {
@@ -145,7 +146,7 @@ nav {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 100000;
+  z-index: 10000;
 
   .logo {
     display: flex;
@@ -154,6 +155,7 @@ nav {
     margin: 50px 0 0 50px;
     font-size: 0.9rem;
     color: var(--black);
+    transition: 0.2s;
 
     img {
       // width: 25px;

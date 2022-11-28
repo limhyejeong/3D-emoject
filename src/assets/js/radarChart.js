@@ -61,6 +61,7 @@ export function radarChart(categoryData) {
                 r: {
                     ticks: {
                         display: false,
+                        // backdropColor: "#111"
                     },
                     pointLabels: {
                         font: {

@@ -1,16 +1,18 @@
 <template>
   <div class="homeview">
+    <aside class="dragGuide">
+      <span>드래그하거나 클릭해보세요!</span>
+    </aside>
+
     <EmotionSpace />
 
     <router-link to="/emoji" class="moveCreate">
       <button class="moveCreateBtn">
-        <img src="@/assets/plus.svg" />
+        <img src="@/assets/img/plus.svg" />
       </button>
     </router-link>
 
-    <router-link to="/about" class="moveAboutBtn"
-      >이 프로젝트에 관하여</router-link
-    >
+    <router-link to="/about" class="moveAboutBtn">About Web Site</router-link>
 
     <aside class="moveSearchBtn">
       <!-- <router-link to="/search">검색</router-link> -->
@@ -19,7 +21,7 @@
 </template>
 
 <script>
-import EmotionSpace from "../components/homeview/EmotionSpace.vue";
+import EmotionSpace from "./EmotionSpace.vue";
 import { useInputStore } from "@/stores/input";
 
 export default {
@@ -38,6 +40,20 @@ export default {
 .homeview {
   width: 100%;
   height: 100%;
+}
+
+.dragGuide {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+
+  span {
+    color: #fff;
+  }
 }
 
 .moveCreate {
@@ -109,13 +125,23 @@ export default {
 }
 
 .moveAboutBtn {
-  font-size: 0.9rem;
+  font-family: "YdestreetL";
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: -0.03rem;
   position: absolute;
   left: 0;
   bottom: 0;
+  // width: 100px;
   margin: 0 0 50px 50px;
-  text-decoration: underline;
+  // text-decoration: underline;
   color: var(--black);
+  opacity: 0.5;
+  transition: 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+  }
 }
 
 .moveSearchBtn {

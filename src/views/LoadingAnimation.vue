@@ -95,6 +95,7 @@ export default {
   justify-content: center;
 }
 .loadingText {
+  position: absolute;
   font-size: 1.5rem;
   color: var(--gray2);
   font-weight: 600;

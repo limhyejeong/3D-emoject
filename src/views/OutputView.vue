@@ -22,7 +22,7 @@
           <span class="outputInfoCategory">{{ categoryText }}</span>
         </h5>
         <div class="outputRadarDiv">
-          <canvas id="outputRadarChart" width="300" height="300" />
+          <canvas id="outputRadarChart" width="220" height="220" />
         </div>
       </div>
 
@@ -196,7 +196,7 @@ export default {
 <style lang="scss">
 .outputView {
   position: absolute;
-  left: 50px;
+  right: 50px;
   top: 50%;
   transform: translate(0, -50%);
   transition: 0.25s;
@@ -213,6 +213,8 @@ export default {
 .outputInfoContent {
   font-weight: 600;
   color: var(--point);
+  max-width: 220px;
+  font-size: 0.8rem;
   h5 {
     margin-bottom: 5px;
   }

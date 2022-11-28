@@ -14,9 +14,10 @@
           v-model="emoji"
           class="emojiInput"
           placeholder="2개에서 10개까지 선택할 수 있어요"
+          readonly
         />
         <button class="clearEmojiInput" @click="clearEmojiInput">
-          <img src="@/assets/plus.svg" alt="" />
+          <img src="@/assets/img/plus.svg" alt="" />
         </button>
       </div>
 
@@ -60,12 +61,16 @@ export default {
       color,
     } = storeToRefs(store);
 
+    let selectedEmoji = [];
+
     // 이모지 클릭시 인풋란에 추가되는 함수
     function emojiKeyboard(event) {
       const emojiInput = document.querySelector(".emojiInput");
-      let selectedEmoji = event.target.textContent;
-      emojiInput.value += selectedEmoji;
-      emoji.value += selectedEmoji;
+      selectedEmoji.push(event.target);
+      emojiInput.value += event.target.textContent;
+      emoji.value += event.target.textContent;
+      event.target.classList.add("entered");
+      console.log(selectedEmoji);
     }
 
     // 이모지 인풋 비우기 함수
@@ -73,6 +78,10 @@ export default {
       const emojiInput = document.querySelector(".emojiInput");
       emojiInput.value = "";
       emoji.value = "";
+      selectedEmoji.forEach((span) => {
+        span.classList.remove("entered");
+      });
+      selectedEmoji = [];
     }
 
     // Activity(활성도) & Category(감정 종류) 얻는 함수
@@ -199,7 +208,7 @@ p.description {
     &::placeholder {
       font-size: 1rem;
       font-weight: 500;
-      color: var(--gray2);
+      color: var(--gray1);
     }
   }
 
@@ -245,6 +254,11 @@ p.description {
 
     &:hover {
       opacity: 0.2;
+    }
+
+    &.entered {
+      opacity: 0.1;
+      pointer-events: none;
     }
   }
 }
