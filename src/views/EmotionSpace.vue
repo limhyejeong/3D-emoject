@@ -124,7 +124,7 @@ export default {
         importEmoject(emotions._object.emotions[i]);
       }
       scene.add(group);
-      console.log(emotions._object.emotions.length);
+      // console.log(emotions._object.emotions.length);
     });
 
     // 감정 오브젝트 만드는 함수
@@ -185,7 +185,6 @@ export default {
             selectedData.value.categoryData
           );
           categoryText.value = CategoryTrans(selectedData.value.category); // 감정 한글로 변환
-          console.log(CategoryTrans(selectedData.value.category));
           openModal();
         } else {
           selectedMesh = null;
@@ -206,8 +205,7 @@ export default {
 
     // 메쉬에 카메라 포커스가 맞춰지고 모달이 열리는 함수
     function openModal() {
-      // setTimeout(() => (isClick.value = true), duration);
-      isClick.value = true;
+      setTimeout(() => (isClick.value = true), duration / 2);
       saveControls = controls.saveState();
 
       // 카메라 위치 변경
@@ -256,23 +254,6 @@ export default {
         )
         .easing(TWEEN.Easing.Quadratic.InOut)
         .start();
-
-      // 카메라 위치
-      // new TWEEN.Tween(camera)
-      //   .to(
-      //     {
-      //       position: new THREE.Vector3(0, 0, 20),
-      //     },
-      //     duration
-      //   )
-      //   .easing(TWEEN.Easing.Quadratic.InOut)
-      //   .start();
-
-      // 카메라 시점
-      // new TWEEN.Tween(controls)
-      //   .to({ target: new THREE.Vector3(0, 0, 0) }, duration)
-      //   .easing(TWEEN.Easing.Quadratic.InOut)
-      //   .start();
     }
 
     // 프로그래스 바 함수
@@ -360,7 +341,7 @@ export default {
   border-radius: 50%;
   right: -15px;
   top: -15px;
-  background: var(--light);
+  background: var(--point);
   font-size: 1.2rem;
   margin: 5px 5px 0 0;
   border: none;
@@ -374,6 +355,7 @@ export default {
     height: 15px;
     transform: rotate(45deg);
     opacity: 0.75;
+    filter: invert(1);
   }
 }
 

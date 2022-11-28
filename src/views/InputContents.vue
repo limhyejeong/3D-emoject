@@ -2,12 +2,7 @@
   <div class="inputDiv">
     <section class="inputSection">
       <h3 class="title">감정을 설명해주세요</h3>
-      <p class="description">
-        이모지를 선택하며 떠올렸던 감정을 설명해주세요.
-        <br />
-        예시) 원하던 학교에 합격했을 때의 감정, 아침 일찍 반려견과 산책할 때의
-        감정 등
-      </p>
+      <p class="description">이모지를 선택하며 떠올렸던 감정을 설명해주세요.</p>
       <textarea
         v-model="content"
         class="contentsInput"

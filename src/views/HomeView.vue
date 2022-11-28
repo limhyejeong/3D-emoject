@@ -1,8 +1,8 @@
 <template>
   <div class="homeview">
-    <aside class="dragGuide">
+    <!-- <aside class="dragGuide">
       <span>드래그하거나 클릭해보세요!</span>
-    </aside>
+    </aside> -->
 
     <EmotionSpace />
 
@@ -42,19 +42,19 @@ export default {
   height: 100%;
 }
 
-.dragGuide {
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.75);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10000;
+// .dragGuide {
+//   width: 100%;
+//   height: 100vh;
+//   background-color: rgba(0, 0, 0, 0.75);
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   z-index: 10000;
 
-  span {
-    color: #fff;
-  }
-}
+//   span {
+//     color: #fff;
+//   }
+// }
 
 .moveCreate {
   position: absolute;

@@ -5,7 +5,8 @@
       <p class="description">
         기억에 남는 상황이나 특별한 감정, 특정한 대상을 떠올리면서 이모지를
         선택해주세요.<br />
-        지금의 감정을 표현하는 것도 좋아요.
+        ex) 일상 속 느낀 특별한 감정, 과거에 대한 기억, 미래에 대한 희망이나
+        불안, 가족이나 사랑하는 사람에 대한 감정 등
       </p>
 
       <div class="emojiInputBox">
@@ -70,7 +71,6 @@ export default {
       emojiInput.value += event.target.textContent;
       emoji.value += event.target.textContent;
       event.target.classList.add("entered");
-      console.log(selectedEmoji);
     }
 
     // 이모지 인풋 비우기 함수
@@ -129,7 +129,7 @@ export default {
 
       let sPick = Math.floor(Math.random() * colorArr.length);
       color.value = colorArr[sPick];
-      console.log(color.value);
+      // console.log(color.value);
 
       // Category 구하기 (카테고리 합계 오브젝트에서 가장 높은 수를 중복값을 대비하여 배열로 생성)
       const getMax = (dataObject) => {
@@ -240,7 +240,6 @@ p.description {
   background: linear-gradient(135deg, var(--light), var(--background));
   box-shadow: -2px -2px 5px #535353, inset -2px -2px 5px #000,
     10px 10px 50px var(--shadow);
-
   overflow: scroll;
   border-radius: 20px;
   margin: 20px 0;
@@ -286,6 +285,15 @@ p.description {
     // box-shadow: inset 1px 1px 5px var(--light), inset -5px -5px 10px #000;
     // padding: 30px 0;
     // border-radius: 7px;
+  }
+}
+
+@media screen and (min-width: 100px) and (max-width: 1500px) {
+  .emojiList {
+    max-height: 44vh;
+    span {
+      font-size: 2.5rem;
+    }
   }
 }
 </style>

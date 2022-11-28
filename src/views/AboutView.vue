@@ -1,15 +1,19 @@
 <template>
   <div class="about">
-    <img src="@/assets/img/1.png" alt="" />
-    <img src="@/assets/img/2.gif" alt="" />
-    <img src="@/assets/img/3.png" alt="" />
-    <img src="@/assets/img/4.gif" alt="" />
-    <img src="@/assets/img/5.gif" alt="" />
-    <img src="@/assets/img/6.png" alt="" />
-    <img src="@/assets/img/7.gif" alt="" />
-    <img src="@/assets/img/8.png" alt="" />
-    <img src="@/assets/img/9.gif" alt="" />
-    <img src="@/assets/img/10.png" alt="" />
+    <!-- <div class="loadingAbout">
+      <span>loading</span>
+    </div> -->
+
+    <img data-src="@/assets/img/1.png" src="@/assets/img/1.png" alt="" />
+    <img data-src="@/assets/img/2.gif" src="@/assets/img/2.gif" alt="" />
+    <img data-src="@/assets/img/3.png" src="@/assets/img/3.png" alt="" />
+    <img data-src="@/assets/img/4.gif" src="@/assets/img/4.gif" alt="" />
+    <img data-src="@/assets/img/5.gif" src="@/assets/img/5.gif" alt="" />
+    <img data-src="@/assets/img/6.png" src="@/assets/img/6.png" alt="" />
+    <img data-src="@/assets/img/7.gif" src="@/assets/img/7.gif" alt="" />
+    <img data-src="@/assets/img/8.png" src="@/assets/img/8.png" alt="" />
+    <img data-src="@/assets/img/9.gif" src="@/assets/img/9.gif" alt="" />
+    <img data-src="@/assets/img/10.png" src="@/assets/img/10.png" alt="" />
 
     <!-- <h3>Overview</h3>
     <p>
@@ -33,6 +37,14 @@ export default {
 </script>
 
 <style lang="scss">
+.loadingAbout {
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  span {
+    color: #fff;
+  }
+}
 .about {
   overflow: scroll;
   width: 100%;
