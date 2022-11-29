@@ -33,11 +33,9 @@
     </section>
 
     <aside class="emojiSubmitBox">
-      <router-link to="/name">
-        <button @click="getEmotionData" class="emojiSubmitBtn">
-          선택 완료
-        </button></router-link
-      >
+      <button type="submit" @click="getEmotionData" class="emojiSubmitBtn">
+        선택 완료
+      </button>
     </aside>
   </div>
 </template>
@@ -46,6 +44,7 @@
 import { useInputStore } from "@/stores/input";
 import { storeToRefs } from "pinia";
 import { emojiDoc } from "@/assets/data/emojiDoc";
+import router from "@/router/index";
 
 export default {
   name: "InputView",
@@ -63,6 +62,8 @@ export default {
     } = storeToRefs(store);
 
     let selectedEmoji = [];
+
+    // console.log(selectedEmoji);
 
     // 이모지 클릭시 인풋란에 추가되는 함수
     function emojiKeyboard(event) {
@@ -86,7 +87,10 @@ export default {
 
     // Activity(활성도) & Category(감정 종류) 얻는 함수
     function getEmotionData() {
-      // nextStep();
+      if (this.emoji == "") {
+        alert("이모지를 선택해주세요!");
+        return;
+      }
       let inputEmoji = [...this.emoji]; // 입력된 이모지를 배열화
       let dataObject = {
         // data 처리용 오브젝트
@@ -142,6 +146,8 @@ export default {
       categoryData.value = dataObject;
       category.value = getMax(dataObject)[0]; // 최대값 구하기
       activity.value = Math.floor(sumActivity / inputEmoji.length); // Actibity 구하기 (활성도 합계 / 이모지 수)
+
+      router.push("/name");
     }
 
     return {
@@ -214,14 +220,14 @@ p.description {
 
   .clearEmojiInput {
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     transform: rotate(45deg);
     right: 0;
     border: none;
     background: none;
-    margin-right: 15px;
-    opacity: 0.3;
+    margin-right: 30px;
+    opacity: 0.4;
 
     img {
       filter: invert(1);

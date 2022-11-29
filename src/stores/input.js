@@ -5,7 +5,6 @@ import router from "@/router/index"
 
 export const useInputStore = defineStore('input', {
     state: () => ({
-        num: 0,
         name: '',
         emoji: '',
         content: '',
@@ -14,14 +13,14 @@ export const useInputStore = defineStore('input', {
         activity: 0,
         step: 0,
         color: '',
+        password: '',
     }),
     getters: {
     },
     actions: {
         // DB에 추가하기
-        addEmotion(name, emoji, content, category, activity, color, categoryData) {
+        addEmotion(name, emoji, content, category, activity, color, categoryData, password) {
             const array = {
-                'num': 0,
                 'name': name,
                 'emoji': emoji,
                 'content': content,
@@ -29,7 +28,8 @@ export const useInputStore = defineStore('input', {
                 'activity': activity,
                 'color': color,
                 'time': new Date(),
-                'categoryData': categoryData
+                'categoryData': categoryData,
+                'password': password
             };
             addDoc(emoColRef, array).then(() => {
                 alert("감정이 등록되었습니다!");
@@ -45,6 +45,7 @@ export const useInputStore = defineStore('input', {
             this.step = 0;
             this.color = '';
             this.categoryData = {};
+            this.password = '';
         },
         prevStep() {
             this.step--;

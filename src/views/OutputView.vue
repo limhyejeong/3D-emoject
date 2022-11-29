@@ -40,22 +40,7 @@
           <button @click="clearInput" class="againBtn">다시 하기</button>
         </router-link>
 
-        <button
-          @click="
-            addEmotion(
-              name,
-              emoji,
-              content,
-              category,
-              activity,
-              color,
-              categoryData
-            )
-          "
-          class="addBtn"
-        >
-          감정 등록
-        </button>
+        <button @click="save" class="addBtn">감정 등록</button>
       </div>
     </section>
 
@@ -83,8 +68,16 @@ export default {
   name: "OutputView",
   setup() {
     const store = useInputStore();
-    const { name, emoji, content, category, categoryData, activity, color } =
-      storeToRefs(store);
+    const {
+      name,
+      emoji,
+      content,
+      category,
+      categoryData,
+      activity,
+      color,
+      password,
+    } = storeToRefs(store);
     const { addEmotion, clearInput } = store;
     let categoryText = CategoryTrans(category.value); // 감정 한글로 변환
 
@@ -93,6 +86,22 @@ export default {
     let width = window.innerWidth,
       height = window.innerHeight;
     let outputCanvas;
+
+    function save() {
+      password.value = prompt("추후 삭제를 위한 암호를 입력해주세요.");
+      console.log(password.value);
+
+      addEmotion(
+        name.value,
+        emoji.value,
+        content.value,
+        category.value,
+        activity.value,
+        color.value,
+        categoryData.value,
+        password.value
+      );
+    }
 
     // 기본적인 Sence 제작 함수
     function initThreejs() {
@@ -180,6 +189,7 @@ export default {
       content,
       category,
       activity,
+      password,
       addEmotion,
       clearInput,
       renderer,
@@ -188,6 +198,7 @@ export default {
       categoryData,
       noiseSettings,
       categoryText,
+      save,
     };
   },
 };

@@ -37,13 +37,16 @@ export const useHomeStore = defineStore('home', {
         },
 
         // 데이터 삭제
-        deleteEmotion(emotionId) {
-            if (confirm("감정을 삭제하시겠습니까?")) {
+        deleteEmotion(emotionPassword, emotionId) {
+            let pass = prompt('삭제를 위해 등록 시 입력한 암호를 입력해주세요.');
+            if (emotionPassword == pass) {
                 let emoRef = doc(emoColRef, emotionId);
                 deleteDoc(emoRef).then(() => {
                     alert("감정이 삭제되었습니다");
                     window.location.reload();
                 });
+            } else {
+                alert("암호가 맞지 않습니다.");
             }
         },
     },

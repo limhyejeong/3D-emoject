@@ -35,7 +35,10 @@
       </div>
     </div>
 
-    <button @click="deleteEmotion(selectedData.id)" class="deleteBtn">
+    <button
+      @click="deleteEmotion(selectedData.password, selectedData.id)"
+      class="deleteBtn"
+    >
       감정 삭제
     </button>
 

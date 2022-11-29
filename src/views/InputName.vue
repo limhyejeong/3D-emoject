@@ -1,5 +1,5 @@
 <template>
-  <div class="inputDiv">
+  <form class="inputDiv">
     <section class="inputSection">
       <h3 class="title">이름을 알려주세요</h3>
       <p class="description">
@@ -15,6 +15,7 @@
         ref="nameInput"
         placeholder="홍길동"
         @keypress.enter="enterEvent"
+        required
       />
 
       <!-- <router-link to="/emoji">이모지 다시 선택할래요</router-link> -->
@@ -22,10 +23,12 @@
 
     <aside class="emojiSubmitBox">
       <router-link to="/contents">
-        <button class="emojiSubmitBtn">입력 완료</button></router-link
+        <button type="submit" class="emojiSubmitBtn">
+          입력 완료
+        </button></router-link
       >
     </aside>
-  </div>
+  </form>
 </template>
 
 <script>

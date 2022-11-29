@@ -1,24 +1,28 @@
 <template>
-  <div class="inputDiv">
+  <form class="inputDiv">
     <section class="inputSection">
       <h3 class="title">감정을 설명해주세요</h3>
       <p class="description">이모지를 선택하며 떠올렸던 감정을 설명해주세요.</p>
-      <textarea
+      <input
+        type="text"
         v-model="content"
         class="contentsInput"
         ref="contentsInput"
         placeholder="기억나는 순간의 감정"
-      ></textarea>
+        required
+      />
 
       <!-- <router-link to="/name">이름 다시 입력할래요</router-link> -->
     </section>
 
     <aside class="emojiSubmitBox">
       <router-link to="/creating">
-        <button class="emojiSubmitBtn">감정 생성</button></router-link
+        <button type="submit" class="emojiSubmitBtn">
+          감정 생성
+        </button></router-link
       >
     </aside>
-  </div>
+  </form>
 </template>
 
 <script>

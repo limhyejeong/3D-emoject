@@ -48,27 +48,24 @@ const CreateEmoject = (mesh, category, activity, length, color) => {
 
 
     if (length == 2) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/yellow.png");
+        matcapTexture = texLoader.load("./assets/textures/matcap/02.png");
     } else if (length == 3) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/glass.png");
+        matcapTexture = texLoader.load("./assets/textures/matcap/03.png");
     } else if (length == 4) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/soft.png");
+        matcapTexture = texLoader.load("./assets/textures/matcap/04.png");
     } else if (length == 5) {
         matcapTexture = texLoader.load("./assets/textures/matcap/05.png");
     } else if (length == 6) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/iron.png");
+        matcapTexture = texLoader.load("./assets/textures/matcap/06.png");
     } else if (length == 7) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/wild.png");
+        matcapTexture = texLoader.load("./assets/textures/matcap/07.png");
     } else if (length == 8) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/light.png");
+        matcapTexture = texLoader.load("./assets/textures/matcap/08.png");
     } else if (length == 9) {
-        matcapTexture = texLoader.load("./assets/textures/matcap/rainbow.png");
+        matcapTexture = texLoader.load("./assets/textures/matcap/09.png");
     } else {
-        matcapTexture = texLoader.load("./assets/textures/matcap/magic.png");
+        matcapTexture = texLoader.load("./assets/textures/matcap/10.png");
     }
-
-    // matcapTexture = texLoader.load("./assets/textures/matcap/유리.png");
-    // matcapTexture = texLoader.load("./assets/textures/matcap/구슬.png");
 
     // matcapTexture.encoding = THREE.sRGBEncoding;
 
