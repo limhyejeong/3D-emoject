@@ -190,4 +190,11 @@ button {
   justify-content: center;
   align-items: center;
 }
+
+// 반응형 (mobile)
+@media screen and (min-width: 100px) and (max-width: 1000px) {
+  nav .logo {
+    margin: 20px 0 0 20px;
+  }
+}
 </style>

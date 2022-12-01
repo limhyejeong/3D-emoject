@@ -136,11 +136,10 @@ export default {
   margin: 0 0 50px 50px;
   // text-decoration: underline;
   color: var(--black);
-  opacity: 0.5;
   transition: 0.2s;
 
   &:hover {
-    opacity: 0.9;
+    opacity: 0.5;
   }
 }
 
@@ -151,5 +150,15 @@ export default {
   top: 0;
   margin: 30px 50px 0 0;
   text-decoration: underline;
+}
+
+// 반응형
+@media screen and (min-width: 100px) and (max-width: 1500px) {
+  // .emojiList {
+  //   max-height: 44vh;
+  //   span {
+  //     font-size: 2.5rem;
+  //   }
+  // }
 }
 </style>

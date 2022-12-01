@@ -90,17 +90,18 @@ export default {
     function save() {
       password.value = prompt("추후 삭제를 위한 암호를 입력해주세요.");
       console.log(password.value);
-
-      addEmotion(
-        name.value,
-        emoji.value,
-        content.value,
-        category.value,
-        activity.value,
-        color.value,
-        categoryData.value,
-        password.value
-      );
+      if (password.value != null && password.value != "") {
+        addEmotion(
+          name.value,
+          emoji.value,
+          content.value,
+          category.value,
+          activity.value,
+          color.value,
+          categoryData.value,
+          password.value
+        );
+      }
     }
 
     // 기본적인 Sence 제작 함수

@@ -4,6 +4,7 @@
       <span>loading</span>
     </div> -->
 
+    <img data-src="@/assets/img/0.png" src="@/assets/img/0.png" alt="" />
     <img data-src="@/assets/img/1.png" src="@/assets/img/1.png" alt="" />
     <img data-src="@/assets/img/2.gif" src="@/assets/img/2.gif" alt="" />
     <img data-src="@/assets/img/3.png" src="@/assets/img/3.png" alt="" />
@@ -49,7 +50,7 @@ export default {
   overflow: scroll;
   width: 100%;
   height: 100vh;
-  padding-top: 100px;
+  // padding-top: 100px;
 }
 img {
   width: 100%;

@@ -192,7 +192,8 @@ p.description {
 }
 
 .inputSection {
-  width: 1130px;
+  // width: 1130px;
+  width: 1000px;
 }
 
 .emojiInputBox {
@@ -294,12 +295,38 @@ p.description {
   }
 }
 
-@media screen and (min-width: 100px) and (max-width: 1500px) {
-  .emojiList {
-    max-height: 44vh;
-    span {
-      font-size: 2.5rem;
+@media screen and (min-width: 100px) and (max-width: 1000px) {
+  .inputDiv {
+    padding: 70px 0;
+    .inputSection {
+      padding: 0 20px;
     }
   }
+  .title {
+    font-size: 1.2rem;
+  }
+  p.description {
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+  .emojiInputBox .emojiInput {
+    font-size: 1.5rem;
+    &::placeholder {
+      font-size: 0.8rem;
+    }
+  }
+  .emojiList span {
+    font-size: 2.3rem;
+  }
+
+  // .emojiList {
+  //   max-height: 44vh;
+  //   span {
+  //     font-size: 2.5rem;
+  //   }
+  // }
+}
+
+@media screen and (min-width: 100px) and (max-width: 860px) {
 }
 </style>
