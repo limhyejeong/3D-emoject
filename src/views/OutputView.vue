@@ -81,6 +81,10 @@ export default {
     const { addEmotion, clearInput } = store;
     let categoryText = CategoryTrans(category.value); // 감정 한글로 변환
 
+    // 이름 / 설명을 입력하지 않았을 때를 대비하여 예비 값 설정
+    if (name.value == "") name.value = "손님";
+    if (content.value == "") content.value = "비밀 감정";
+
     // threejs 추가하기
     let scene, renderer, camera, controls;
     let width = window.innerWidth,

@@ -30,19 +30,23 @@
           >{{ emoji.emoji }}</span
         >
       </div>
+      <aside class="emojiSubmitBox">
+        <button
+          type="submit"
+          @click="getEmotionData"
+          class="emojiSubmitBtn btnLock"
+        >
+          선택 완료
+        </button>
+      </aside>
     </section>
-
-    <aside class="emojiSubmitBox">
-      <button type="submit" @click="getEmotionData" class="emojiSubmitBtn">
-        선택 완료
-      </button>
-    </aside>
   </div>
 </template>
 
 <script>
 import { useInputStore } from "@/stores/input";
 import { storeToRefs } from "pinia";
+import { watch } from "vue";
 import { emojiDoc } from "@/assets/data/emojiDoc";
 import router from "@/router/index";
 
@@ -63,7 +67,14 @@ export default {
 
     let selectedEmoji = [];
 
-    // console.log(selectedEmoji);
+    // emoji 값이 있고 없음에 따라 버튼 색 변경
+    watch(emoji, () => {
+      if (emoji.value !== "") {
+        document.querySelector(".emojiSubmitBtn").classList.remove("btnLock");
+      } else {
+        document.querySelector(".emojiSubmitBtn").classList.add("btnLock");
+      }
+    });
 
     // 이모지 클릭시 인풋란에 추가되는 함수
     function emojiKeyboard(event) {
@@ -87,10 +98,6 @@ export default {
 
     // Activity(활성도) & Category(감정 종류) 얻는 함수
     function getEmotionData() {
-      if (this.emoji == "") {
-        alert("이모지를 선택해주세요!");
-        return;
-      }
       let inputEmoji = [...this.emoji]; // 입력된 이모지를 배열화
       let dataObject = {
         // data 처리용 오브젝트
@@ -241,6 +248,10 @@ p.description {
 }
 
 .emojiList {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 20px;
+  grid-gap: 20px;
   width: 100%;
   height: auto;
   max-height: 55vh;
@@ -253,10 +264,10 @@ p.description {
   padding: 20px;
 
   span {
-    padding: 20px;
+    // padding: 20px;
     font-size: 3rem;
     cursor: pointer;
-    transition: 0.15s;
+    text-align: center;
 
     &:hover {
       opacity: 0.2;
@@ -289,9 +300,11 @@ p.description {
     letter-spacing: -0.1rem;
     font-size: 1.1rem;
     background: linear-gradient(0, var(--point), #ffc107);
-    // box-shadow: inset 1px 1px 5px var(--light), inset -5px -5px 10px #000;
-    // padding: 30px 0;
-    // border-radius: 7px;
+
+    &.btnLock {
+      background: #555;
+      pointer-events: none;
+    }
   }
 }
 
@@ -299,6 +312,7 @@ p.description {
   .inputDiv {
     padding: 70px 0;
     .inputSection {
+      width: 100%;
       padding: 0 20px;
     }
   }
@@ -306,27 +320,30 @@ p.description {
     font-size: 1.2rem;
   }
   p.description {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 500;
   }
-  .emojiInputBox .emojiInput {
-    font-size: 1.5rem;
-    &::placeholder {
-      font-size: 0.8rem;
+  .emojiInputBox {
+    .emojiInput {
+      font-size: 1.5rem;
+      height: 45px;
+      &::placeholder {
+        font-size: 0.8rem;
+      }
+    }
+    .clearEmojiInput {
+      width: 20px;
+      height: 20px;
     }
   }
-  .emojiList span {
-    font-size: 2.3rem;
+  .emojiList {
+    // max-height: 40vh;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 10px;
+    span {
+      // padding: 15px;
+      font-size: 2.3rem;
+    }
   }
-
-  // .emojiList {
-  //   max-height: 44vh;
-  //   span {
-  //     font-size: 2.5rem;
-  //   }
-  // }
-}
-
-@media screen and (min-width: 100px) and (max-width: 860px) {
 }
 </style>

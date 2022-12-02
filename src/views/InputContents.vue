@@ -2,7 +2,11 @@
   <form class="inputDiv">
     <section class="inputSection">
       <h3 class="title">감정을 설명해주세요</h3>
-      <p class="description">이모지를 선택하며 떠올렸던 감정을 설명해주세요.</p>
+      <p class="description">
+        이모지를 선택하며 떠올렸던 감정을 설명해주세요.
+        <br />
+        입력하지 않으면 비밀로 처리돼요.
+      </p>
       <input
         type="text"
         v-model="content"
@@ -53,7 +57,7 @@ export default {
 <style lang="scss">
 .contentsInput {
   width: 100%;
-  height: 300px;
+  height: 60px;
   border-radius: 10px;
   padding: 20px;
   font-size: 1rem;
@@ -67,6 +71,12 @@ export default {
     font-size: 1rem;
     font-weight: 500;
     color: var(--gray1);
+  }
+}
+
+@media screen and (min-width: 100px) and (max-width: 1000px) {
+  .contentsInput {
+    height: 120px;
   }
 }
 </style>
