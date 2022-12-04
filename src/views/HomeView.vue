@@ -125,7 +125,7 @@ export default {
 }
 
 .moveAboutBtn {
-  font-family: "YdestreetL";
+  font-family: "YdestreetL", "gothicA1";
   font-size: 0.75rem;
   font-weight: bold;
   letter-spacing: -0.03rem;
@@ -153,12 +153,9 @@ export default {
 }
 
 // 반응형
-@media screen and (min-width: 100px) and (max-width: 1500px) {
-  // .emojiList {
-  //   max-height: 44vh;
-  //   span {
-  //     font-size: 2.5rem;
-  //   }
-  // }
+@media screen and (min-width: 100px) and (max-width: 860px) {
+  .moveAboutBtn {
+    margin: 0 0 50px 20px;
+  }
 }
 </style>

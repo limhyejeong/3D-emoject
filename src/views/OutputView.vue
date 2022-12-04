@@ -270,6 +270,9 @@ export default {
   .outputRadarDiv {
     width: 100%;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     canvas {
       width: 300px;
       height: 300px;
@@ -315,6 +318,27 @@ export default {
   .addBtn {
     background: var(--point);
     color: var(--shadow);
+  }
+}
+
+@media screen and (min-width: 100px) and (max-width: 860px) {
+  .outputInfo {
+    &:not(:last-child) {
+      margin-bottom: 5px;
+    }
+  }
+
+  .outputView {
+    margin-top: 500px;
+    right: 0;
+    z-index: 100;
+    width: 100%;
+    padding: 20px;
+
+    .closeModal {
+      right: 0px;
+      top: -5px;
+    }
   }
 }
 </style>

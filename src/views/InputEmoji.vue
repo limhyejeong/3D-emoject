@@ -308,7 +308,7 @@ p.description {
   }
 }
 
-@media screen and (min-width: 100px) and (max-width: 1000px) {
+@media screen and (min-width: 100px) and (max-width: 860px) {
   .inputDiv {
     padding: 70px 0;
     .inputSection {
@@ -344,6 +344,12 @@ p.description {
       // padding: 15px;
       font-size: 2.3rem;
     }
+  }
+}
+
+@media screen and (min-height: 100px) and (max-height: 700px) {
+  .emojiList {
+    max-height: 40vh;
   }
 }
 </style>

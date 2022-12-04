@@ -117,7 +117,7 @@ body {
   background: var(--background);
   letter-spacing: -0.07rem;
   color: var(--black);
-  overflow: hidden;
+  // overflow: hidden;
 }
 // :root {
 //   --background: #f2f3f7;
@@ -158,7 +158,7 @@ nav {
     transition: 0.2s;
 
     img {
-      // width: 25px;
+      width: auto;
       height: 30px;
     }
     span {

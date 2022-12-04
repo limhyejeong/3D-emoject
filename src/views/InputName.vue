@@ -3,9 +3,9 @@
     <section class="inputSection">
       <h3 class="title">이름을 알려주세요</h3>
       <p class="description">
-        닉네임도 상관 없어요!
+        닉네임도 상관 없어요! 등록할 때 필요해요.
         <br />
-        등록할 때 필요해요.
+        입력하지 않으면 익명으로 처리돼요.
       </p>
 
       <input

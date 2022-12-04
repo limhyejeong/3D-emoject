@@ -1,5 +1,5 @@
 <template>
-  <section v-show="isClick" class="modal" style="right: 50px">
+  <section v-show="isClick" class="modal">
     <div class="outputInfo">
       <div class="title">
         <span class="outputInfoName">{{ selectedData.name }}</span
@@ -377,6 +377,21 @@ export default {
   &:hover {
     box-shadow: inset 3px 3px 10px #000;
     color: var(--gray1);
+  }
+}
+
+@media screen and (min-width: 100px) and (max-width: 860px) {
+  .modal {
+    margin-top: 500px;
+    right: 0;
+    z-index: 100;
+    width: 100%;
+    padding: 20px;
+
+    .closeModal {
+      right: 0px;
+      top: -5px;
+    }
   }
 }
 </style>
