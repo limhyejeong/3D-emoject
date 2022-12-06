@@ -27,10 +27,11 @@ export default {
     let outputCanvas;
     let sphere;
     // let noiseSettings = { 진폭: 0.7, 반경: 1.3, 속도: 1 };
+    let activity = 6;
     let noiseSettings = {
-      진폭: 10 + 7 * 0.3,
-      반경: 0.6 + 3 * 0.2,
-      속도: 7 * 0.1,
+      진폭: 0.4 + 0.2 * activity,
+      반경: 0.2 + activity * 0.2,
+      속도: 9 * 0.2,
     };
     let v3 = new THREE.Vector3();
     const texLoader = new THREE.TextureLoader(); // 텍스쳐 로더
@@ -51,7 +52,7 @@ export default {
       camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
       camera.position.x = 0;
       camera.position.y = 0;
-      camera.position.z = 10;
+      camera.position.z = 5;
       scene.add(camera);
 
       const light = new THREE.AmbientLight(0xffffff, 1); // soft white light
@@ -60,13 +61,22 @@ export default {
       scene.add(light, pointLight);
 
       controls = new OrbitControls(camera, renderer.domElement);
+      let joyVec = 5;
 
-      // const geometry = new THREE.SphereGeometry(1, 128, 128);
-      const geometry = new THREE.SphereGeometry(0.7, 64, 64);
+      // const geometry = new THREE.ConeGeometry(0.7, 1.4, 128, 128);
+      // const geometry = new THREE.TorusKnotGeometry(
+      //   0.6,
+      //   0.1,
+      //   256,
+      //   256,
+      //   1,
+      //   joyVec
+      // );
+      const geometry = new THREE.SphereGeometry(0.8, 64, 64);
 
-      const matcapTexture = texLoader.load("./assets/textures/matcap/wild.png");
+      const matcapTexture = texLoader.load("./assets/textures/matcap/06.png");
       const material = new THREE.MeshMatcapMaterial({
-        color: new THREE.Color(0xe6eaff),
+        // color: new THREE.Color(0xeb8264),
         matcap: matcapTexture,
       });
 

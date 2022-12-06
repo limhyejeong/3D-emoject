@@ -29,7 +29,11 @@ const CreateEmoject = (mesh, category, activity, length, color) => {
         noiseSettings = { 진폭: 8 + activity * 0.5, 반경: 0.1 + activity * 0.05, 속도: activity * 0.1 };
     } else if (category == "surprise") {
         geometry = new THREE.SphereGeometry(0.8, 64, 64);
-        noiseSettings = { 진폭: 1.2 + 0.2 * activity, 반경: 0.1 + activity * 0.2, 속도: 9 * 0.2 };
+        noiseSettings = {
+            진폭: 0.5 + 0.2 * activity,
+            반경: 0.3 + activity * 0.2,
+            속도: 9 * 0.2,
+        };
     } else if (category == "anticipation") {
         geometry = new THREE.TorusKnotGeometry(0.3, 0.4, 128, 128, 1, 4);
         noiseSettings = { 진폭: 0.1 + activity * 0.2, 반경: activity * 0.2, 속도: activity * 0.1 };

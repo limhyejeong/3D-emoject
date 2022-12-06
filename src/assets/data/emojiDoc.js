@@ -1,4 +1,4 @@
-export const emojiDoc = [
+export const EmojiDoc = [
     {
         emoji: '🙂', num: 9, color: "rgb(245, 230, 100)",
         anger: 1,
@@ -12,37 +12,19 @@ export const emojiDoc = [
         activity: 1,
     }, {
         emoji: '😀', num: 1, color: "rgb(245, 225, 120)",
-        anger: 0,
-        fear: 0,
-        sadness: 0,
-        disgust: 0,
-        surprise: 0,
-        anticipation: 0,
-        trust: 2,
-        joy: 8,
-        activity: 3,
+        anger: 0, fear: 0, sadness: 0,
+        disgust: 0, surprise: 0, anticipation: 0,
+        trust: 2, joy: 8, activity: 3
     }, {
         emoji: '😃', num: 2, color: "rgb(255, 245, 150)",
-        anger: 0,
-        fear: 0,
-        sadness: 0,
-        disgust: 0,
-        surprise: 0,
-        anticipation: 0,
-        trust: 2,
-        joy: 8,
-        activity: 4,
+        anger: 0, fear: 0, sadness: 0,
+        disgust: 0, surprise: 0, anticipation: 0,
+        trust: 2, joy: 8, activity: 4,
     }, {
         emoji: '😄', num: 3, color: "rgb(232, 174, 2)",
-        anger: 0,
-        fear: 0,
-        sadness: 0,
-        disgust: 0,
-        surprise: 0,
-        anticipation: 0,
-        trust: 2,
-        joy: 8,
-        activity: 5,
+        anger: 0, fear: 0, sadness: 0,
+        disgust: 0, surprise: 0, anticipation: 0,
+        trust: 2, joy: 8, activity: 5,
     }, {
         emoji: '😁', num: 4, color: "rgb(245, 194, 1)",
         anger: 0,

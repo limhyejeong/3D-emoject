@@ -24,7 +24,7 @@
 
       <div class="emojiList">
         <span
-          v-for="emoji in emojiDoc"
+          v-for="emoji in EmojiDoc"
           :key="emoji.num"
           @click="emojiKeyboard"
           >{{ emoji.emoji }}</span
@@ -47,7 +47,7 @@
 import { useInputStore } from "@/stores/input";
 import { storeToRefs } from "pinia";
 import { watch } from "vue";
-import { emojiDoc } from "@/assets/data/emojiDoc";
+import { EmojiDoc } from "@/assets/data/EmojiDoc";
 import router from "@/router/index";
 
 export default {
@@ -69,7 +69,7 @@ export default {
 
     // emoji 값이 있고 없음에 따라 버튼 색 변경
     watch(emoji, () => {
-      if (emoji.value !== "") {
+      if (emoji.value.length > 2) {
         document.querySelector(".emojiSubmitBtn").classList.remove("btnLock");
       } else {
         document.querySelector(".emojiSubmitBtn").classList.add("btnLock");
@@ -78,6 +78,7 @@ export default {
 
     // 이모지 클릭시 인풋란에 추가되는 함수
     function emojiKeyboard(event) {
+      if (emoji.value.length >= 20) return;
       const emojiInput = document.querySelector(".emojiInput");
       selectedEmoji.push(event.target);
       emojiInput.value += event.target.textContent;
@@ -116,23 +117,23 @@ export default {
 
       // 인풋된 이모지를 등록된 이모지에서 찾아서 데이터 불러오기
       inputEmoji.forEach((element) => {
-        for (let i = 0; i < emojiDoc.length; i++) {
-          if (element == emojiDoc[i].emoji) {
+        for (let i = 0; i < EmojiDoc.length; i++) {
+          if (element == EmojiDoc[i].emoji) {
             // console.log(
-            //   element + "는 " + emojiDoc[i].num + "번째 이모지입니다."
+            //   element + "는 " + EmojiDoc[i].num + "번째 이모지입니다."
             // );
-            dataObject.anger += emojiDoc[i].anger;
-            dataObject.fear += emojiDoc[i].fear;
-            dataObject.sadness += emojiDoc[i].sadness;
-            dataObject.disgust += emojiDoc[i].disgust;
-            dataObject.surprise += emojiDoc[i].surprise;
-            dataObject.anticipation += emojiDoc[i].anticipation;
-            dataObject.trust += emojiDoc[i].trust;
-            dataObject.joy += emojiDoc[i].joy;
-            sumActivity += emojiDoc[i].activity;
+            dataObject.anger += EmojiDoc[i].anger;
+            dataObject.fear += EmojiDoc[i].fear;
+            dataObject.sadness += EmojiDoc[i].sadness;
+            dataObject.disgust += EmojiDoc[i].disgust;
+            dataObject.surprise += EmojiDoc[i].surprise;
+            dataObject.anticipation += EmojiDoc[i].anticipation;
+            dataObject.trust += EmojiDoc[i].trust;
+            dataObject.joy += EmojiDoc[i].joy;
+            sumActivity += EmojiDoc[i].activity;
 
             // Color 구하기
-            colorArr.push(emojiDoc[i].color);
+            colorArr.push(EmojiDoc[i].color);
           }
         }
         // console.log(dataObject);
@@ -165,7 +166,7 @@ export default {
       category,
       activity,
       create,
-      emojiDoc,
+      EmojiDoc,
       color,
       getEmotionData,
       emojiKeyboard,
