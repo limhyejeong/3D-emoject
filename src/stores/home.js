@@ -6,16 +6,7 @@ import { getDocs, doc, deleteDoc } from "firebase/firestore";
 export const useHomeStore = defineStore('home', {
     state: () => ({
         emotions: [],
-        // cate: {
-        //     joy: [],
-        //     trust: [],
-        //     anticipation: [],
-        //     sadness: [],
-        //     surprise: [],
-        //     anger: [],
-        //     fear: [],
-        //     disgust: [],
-        // }
+        isDelete: false,
     }),
     getters: {
 
@@ -37,19 +28,15 @@ export const useHomeStore = defineStore('home', {
         },
 
         // 데이터 삭제
-        deleteEmotion(emotionPassword, emotionId) {
-            let pass = prompt('삭제를 위해 등록 시 입력한 암호를 입력해주세요.');
-            console.log(pass);
-            if (pass !== null) {
-                if (emotionPassword == pass) {
-                    let emoRef = doc(emoColRef, emotionId);
-                    deleteDoc(emoRef).then(() => {
-                        alert("감정이 삭제되었습니다");
-                        window.location.reload();
-                    });
-                } else {
-                    alert("암호가 맞지 않습니다.");
-                }
+        deleteEmotion(checkPassword, emotionPassword, emotionId) {
+            if (emotionPassword == checkPassword.value) {
+                let emoRef = doc(emoColRef, emotionId);
+                deleteDoc(emoRef).then(() => {
+                    alert("감정이 삭제되었습니다");
+                    window.location.reload();
+                });
+            } else {
+                alert("암호가 맞지 않습니다.");
             }
         },
     },

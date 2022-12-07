@@ -1,4 +1,5 @@
 <template>
+  <CheckPassword v-show="isDelete" v-bind:selectedData="selectedData" />
   <section v-show="isClick" class="modal">
     <div class="outputInfo">
       <div class="title">
@@ -35,12 +36,7 @@
       </div>
     </div>
 
-    <button
-      @click="deleteEmotion(selectedData.password, selectedData.id)"
-      class="deleteBtn"
-    >
-      감정 삭제
-    </button>
+    <button @click="isDelete = true" class="deleteBtn">감정 삭제</button>
 
     <button @click="closeModal" class="closeModal">
       <img src="@/assets/img/plus.svg" />
@@ -66,12 +62,16 @@ import {
 import { PreventDragClick } from "@/assets/js/PreventDragClick";
 import { chart, radarChart } from "@/assets/js/radarChartHome";
 import { CategoryTrans } from "@/assets/js/CategoryTrans";
+import CheckPassword from "@/components/CheckPassword.vue";
 
 export default {
   name: "EmotionSpace",
+  components: {
+    CheckPassword,
+  },
   setup() {
     const store = useHomeStore();
-    const { emotions } = storeToRefs(store);
+    const { emotions, isDelete } = storeToRefs(store);
     const { fetchEmotions, deleteEmotion } = store;
     let isClick = ref(false);
 
@@ -309,6 +309,7 @@ export default {
     });
 
     return {
+      isDelete,
       isClick,
       closeModal,
       openModal,
