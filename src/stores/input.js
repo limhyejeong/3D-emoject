@@ -14,25 +14,27 @@ export const useInputStore = defineStore('input', {
         step: 0,
         color: '',
         password: '',
+        isSave: false,
     }),
     getters: {
     },
     actions: {
         // DB에 추가하기
-        addEmotion(name, emoji, content, category, activity, color, categoryData, password) {
+        addEmotion(password) {
             const array = {
-                'name': name,
-                'emoji': emoji,
-                'content': content,
-                'category': category,
-                'activity': activity,
-                'color': color,
+                'name': this.name,
+                'emoji': this.emoji,
+                'content': this.content,
+                'category': this.category,
+                'activity': this.activity,
+                'color': this.color,
                 'time': new Date(),
-                'categoryData': categoryData,
+                'categoryData': this.categoryData,
                 'password': password
             };
             addDoc(emoColRef, array).then(() => {
                 alert("감정이 등록되었습니다!");
+                this.isSave = false;
                 router.replace("/");
             });
         },

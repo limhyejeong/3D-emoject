@@ -29,11 +29,13 @@ export const useHomeStore = defineStore('home', {
 
         // 데이터 삭제
         deleteEmotion(checkPassword, emotionPassword, emotionId) {
-            if (emotionPassword == checkPassword.value) {
+            if (checkPassword == emotionPassword) {
                 let emoRef = doc(emoColRef, emotionId);
                 deleteDoc(emoRef).then(() => {
                     alert("감정이 삭제되었습니다");
                     window.location.reload();
+                    this.isDelete = false;
+
                 });
             } else {
                 alert("암호가 맞지 않습니다.");

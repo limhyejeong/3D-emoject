@@ -72,7 +72,7 @@ export default {
   setup() {
     const store = useHomeStore();
     const { emotions, isDelete } = storeToRefs(store);
-    const { fetchEmotions, deleteEmotion } = store;
+    const { fetchEmotions } = store;
     let isClick = ref(false);
 
     fetchEmotions(); // home.js pinia에서 데이터 불러오기
@@ -320,7 +320,6 @@ export default {
       settings,
       emotions,
       controls,
-      deleteEmotion,
       selectedData,
       chartCanvas,
       categoryText,

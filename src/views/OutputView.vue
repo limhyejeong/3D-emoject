@@ -1,5 +1,7 @@
 <template>
   <div>
+    <CheckPassword v-show="isSave" />
+
     <section class="outputView">
       <div class="outputInfo">
         <div class="title">
@@ -40,7 +42,7 @@
           <button @click="clearInput" class="againBtn">다시 하기</button>
         </router-link>
 
-        <button @click="save" class="addBtn">감정 등록</button>
+        <button @click="isSave = true" class="addBtn">감정 등록</button>
       </div>
     </section>
 
@@ -63,9 +65,13 @@ import {
 } from "@/assets/js/CreateEmoject";
 import { radarChart } from "@/assets/js/radarChart";
 import { CategoryTrans } from "@/assets/js/CategoryTrans";
+import CheckPassword from "@/components/CheckPassword.vue";
 
 export default {
   name: "OutputView",
+  components: {
+    CheckPassword,
+  },
   setup() {
     const store = useInputStore();
     const {
@@ -77,6 +83,7 @@ export default {
       activity,
       color,
       password,
+      isSave,
     } = storeToRefs(store);
     const { addEmotion, clearInput } = store;
     let categoryText = CategoryTrans(category.value); // 감정 한글로 변환
@@ -92,20 +99,18 @@ export default {
     let outputCanvas;
 
     function save() {
-      password.value = prompt("추후 삭제를 위한 암호를 입력해주세요.");
-      console.log(password.value);
-      if (password.value != null && password.value != "") {
-        addEmotion(
-          name.value,
-          emoji.value,
-          content.value,
-          category.value,
-          activity.value,
-          color.value,
-          categoryData.value,
-          password.value
-        );
-      }
+      // if (password.value != null && password.value != "") {
+      //   addEmotion(
+      //     name.value,
+      //     emoji.value,
+      //     content.value,
+      //     category.value,
+      //     activity.value,
+      //     color.value,
+      //     categoryData.value,
+      //     password.value
+      //   );
+      // }
     }
 
     // 기본적인 Sence 제작 함수
@@ -204,6 +209,7 @@ export default {
       noiseSettings,
       categoryText,
       save,
+      isSave,
     };
   },
 };
@@ -316,8 +322,11 @@ export default {
     }
   }
   .addBtn {
-    background: var(--point);
+    background: linear-gradient(0, var(--point), #ffc107);
     color: var(--shadow);
+  }
+  .againBtn {
+    background: linear-gradient(0deg, #262626, #3a3a3a);
   }
 }
 
