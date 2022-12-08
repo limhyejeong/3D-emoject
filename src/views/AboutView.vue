@@ -8,12 +8,11 @@
     <img src="@/assets/img/1.png" alt="" />
     <img src="@/assets/img/2.gif" alt="" />
     <img src="@/assets/img/3.png" alt="" />
-    <img src="@/assets/img/4.gif" alt="" />
-    <img src="@/assets/img/5.gif" alt="" />
-    <img src="@/assets/img/6.png" alt="" />
-    <img src="@/assets/img/7-min.gif" alt="" />
+    <img loading="lazy" src="@/assets/img/4.gif" alt="" />
+    <img src="@/assets/img/5.png" alt="" />
+    <img loading="lazy" src="@/assets/img/7.gif" alt="" />
     <img src="@/assets/img/8.png" alt="" />
-    <img src="@/assets/img/9-min.gif" alt="" />
+    <img loading="lazy" src="@/assets/img/9.gif" style="" alt="" />
     <img src="@/assets/img/10.png" alt="" />
 
     <!-- <h3>Overview</h3>
