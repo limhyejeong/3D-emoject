@@ -76,7 +76,7 @@ export default {
 
 @media screen and (min-width: 100px) and (max-width: 860px) {
   .contentsInput {
-    height: 120px;
+    height: 60px;
   }
 }
 </style>

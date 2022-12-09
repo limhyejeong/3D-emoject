@@ -105,7 +105,7 @@ export default {
 
 <style lang="scss">
 .checkPassBack {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100vh;
   display: flex;
