@@ -74,9 +74,9 @@ export default {
       // );
       const geometry = new THREE.SphereGeometry(0.8, 64, 64);
 
-      const matcapTexture = texLoader.load("./assets/textures/matcap/06.png");
+      const matcapTexture = texLoader.load("./assets/textures/matcap/03.png");
       const material = new THREE.MeshMatcapMaterial({
-        // color: new THREE.Color(0xeb8264),
+        color: new THREE.Color(0xeb8264),
         matcap: matcapTexture,
       });
 

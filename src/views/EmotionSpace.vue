@@ -384,7 +384,7 @@ export default {
   .modal {
     margin-top: 500px;
     right: 0;
-    z-index: 100;
+    z-index: 1;
     width: 100%;
     padding: 20px;
 
