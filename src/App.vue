@@ -117,7 +117,7 @@ body {
   background: var(--background);
   letter-spacing: -0.07rem;
   color: var(--black);
-  // overflow: hidden;
+  overflow: hidden;
 }
 // :root {
 //   --background: #f2f3f7;
@@ -193,6 +193,9 @@ button {
 
 // 반응형 (mobile)
 @media screen and (min-width: 100px) and (max-width: 1000px) {
+  body {
+    overflow: auto;
+  }
   nav .logo {
     margin: 20px 0 0 20px;
   }
