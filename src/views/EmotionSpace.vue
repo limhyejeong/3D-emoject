@@ -141,7 +141,7 @@ export default {
         data.color
       );
       emoject.userData = [data, noiseSettings]; // 이모젝트에 데이터 추가
-      let range = 10; // 위치 범위
+      let range = 13; // 위치 범위
       emoject.position.x = Math.floor(Math.random() * (range * 2) - range);
       emoject.position.y = Math.floor(Math.random() * (range * 2) - range);
       emoject.position.z = Math.floor(Math.random() * (range * 2) - range);
