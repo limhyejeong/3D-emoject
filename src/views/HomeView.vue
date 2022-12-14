@@ -12,7 +12,9 @@
       </button>
     </router-link>
 
-    <router-link to="/about" class="moveAboutBtn">About Web Site</router-link>
+    <router-link to="/about" class="moveAboutBtn"
+      >이 프로젝트에 대하여</router-link
+    >
 
     <aside class="moveSearchBtn">
       <!-- <router-link to="/search">검색</router-link> -->
@@ -125,10 +127,10 @@ export default {
 }
 
 .moveAboutBtn {
-  font-family: "YdestreetL", "gothicA1";
+  // font-family: "gothicA1";
   font-size: 0.75rem;
-  font-weight: bold;
-  letter-spacing: -0.03rem;
+  font-weight: 600;
+  // letter-spacing: -0.03rem;
   position: absolute;
   left: 0;
   bottom: 0;
