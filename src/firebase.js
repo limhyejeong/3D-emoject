@@ -15,5 +15,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app); //eslint-disable-line no-unused-vars
 const db = getFirestore(app)
-const emoColRef = collection(db, 'emotions2');
+const emoColRef = collection(db, 'emotions');
 export default emoColRef;

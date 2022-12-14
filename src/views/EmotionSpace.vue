@@ -123,8 +123,9 @@ export default {
 
     // emotions에 데이터가 들어오면 감정 오브젝트를 뿌려줌
     watch(emotions, () => {
-      for (let i = 0; i < emotions._object.emotions.length; i++) {
-        importEmoject(emotions._object.emotions[i]);
+      importEmoject(emotions._object.emotions[0], 0);
+      for (let i = 1; i < emotions._object.emotions.length; i++) {
+        importEmoject(emotions._object.emotions[i], 13);
       }
       scene.add(group);
       // console.log(emotions._object.emotions.length);
@@ -132,7 +133,7 @@ export default {
 
     // 감정 오브젝트 만드는 함수
     let emoject;
-    const importEmoject = (data) => {
+    const importEmoject = (data, range) => {
       emoject = CreateEmoject(
         emoject,
         data.category,
@@ -141,7 +142,6 @@ export default {
         data.color
       );
       emoject.userData = [data, noiseSettings]; // 이모젝트에 데이터 추가
-      let range = 13; // 위치 범위
       emoject.position.x = Math.floor(Math.random() * (range * 2) - range);
       emoject.position.y = Math.floor(Math.random() * (range * 2) - range);
       emoject.position.z = Math.floor(Math.random() * (range * 2) - range);

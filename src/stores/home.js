@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import emoColRef from "@/firebase";
-import { getDocs, doc, deleteDoc } from "firebase/firestore";
+import { getDocs, doc, deleteDoc, orderBy, query } from "firebase/firestore";
 
 
 export const useHomeStore = defineStore('home', {
@@ -14,7 +14,8 @@ export const useHomeStore = defineStore('home', {
     actions: {
         // 데이터 불러오기
         fetchEmotions() {
-            let emotionsSnapshot = getDocs(emoColRef);
+            // let emotionsSnapshot = getDocs(emoColRef);
+            let emotionsSnapshot = getDocs(query(emoColRef, orderBy("time", "desc")));
             let emotions = [];
 
             emotionsSnapshot.then((emotionsSnap) => {
