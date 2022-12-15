@@ -333,6 +333,7 @@ export default {
   position: absolute;
   right: 50px;
   top: 50%;
+  z-index: 1;
   transform: translate(0, -50%);
   transition: 0.25s;
 }

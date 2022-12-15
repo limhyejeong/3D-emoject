@@ -16,6 +16,10 @@
       >이 프로젝트에 대하여</router-link
     >
 
+    <a href="mailto:limteractive@gmail.com" class="mailBtn">
+      <img src="@/assets/img/mail.png" alt="" />
+    </a>
+
     <aside class="moveSearchBtn">
       <!-- <router-link to="/search">검색</router-link> -->
     </aside>
@@ -145,19 +149,36 @@ export default {
   }
 }
 
-.moveSearchBtn {
-  font-size: 0.9rem;
+// .moveSearchBtn {
+//   font-size: 0.9rem;
+//   position: absolute;
+//   right: 0;
+//   top: 0;
+//   margin: 30px 50px 0 0;
+//   text-decoration: underline;
+// }
+
+.mailBtn {
+  font-size: 0.75rem;
+  font-weight: 600;
   position: absolute;
   right: 0;
-  top: 0;
-  margin: 30px 50px 0 0;
-  text-decoration: underline;
+  bottom: 0;
+  margin: 0px 50px 40px 0;
+  color: var(--gray1);
+  img {
+    filter: invert(1);
+    width: 23px;
+  }
 }
 
 // 반응형
 @media screen and (min-width: 100px) and (max-width: 860px) {
   .moveAboutBtn {
     margin: 0 0 50px 20px;
+  }
+  .mailBtn {
+    display: none;
   }
 }
 </style>
