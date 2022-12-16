@@ -35,7 +35,8 @@ export const useInputStore = defineStore('input', {
             addDoc(emoColRef, array).then(() => {
                 alert("감정이 등록되었어요!\n메인 화면 한 가운데에 띄워질 거예요.");
                 this.isSave = false;
-                router.replace("/");
+                // router.replace("/");
+                window.location.href = "/";
             });
         },
         clearInput() {
