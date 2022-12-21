@@ -125,7 +125,7 @@ export default {
     watch(emotions, () => {
       importEmoject(emotions._object.emotions[0], 0);
       for (let i = 1; i < emotions._object.emotions.length; i++) {
-        importEmoject(emotions._object.emotions[i], 13);
+        importEmoject(emotions._object.emotions[i], 22);
       }
       scene.add(group);
       // console.log(emotions._object.emotions.length);
