@@ -26,12 +26,12 @@ export default {
       height = window.innerHeight;
     let outputCanvas;
     let sphere;
-    // let noiseSettings = { 진폭: 0.7, 반경: 1.3, 속도: 1 };
+    // let noiseSettings = { amplitude: 0.7, scope: 1.3, speed: 1 };
     let activity = 6;
     let noiseSettings = {
-      진폭: 0.4 + 0.2 * activity,
-      반경: 0.2 + activity * 0.2,
-      속도: 9 * 0.2,
+      amplitude: 0.4 + 0.2 * activity,
+      scope: 0.2 + activity * 0.2,
+      speed: 9 * 0.2,
     };
     let v3 = new THREE.Vector3();
     const texLoader = new THREE.TextureLoader(); // 텍스쳐 로더

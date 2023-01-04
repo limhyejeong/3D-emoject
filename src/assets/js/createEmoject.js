@@ -6,9 +6,9 @@ let v3 = new THREE.Vector3();
 let clock = new THREE.Clock();
 
 let noiseSettings = {
-    진폭: 0,
-    반경: 0,
-    속도: 0,
+    amplitude: 0,
+    scope: 0,
+    speed: 0,
 };
 
 const CreateEmoject = (mesh, category, activity, length, color) => {
@@ -17,29 +17,29 @@ const CreateEmoject = (mesh, category, activity, length, color) => {
         geometry = new THREE.ConeGeometry(0.7, 1.4, 64, 64);
         // geometry = new THREE.DodecahedronGeometry(1, 10);
         // geometry = new THREE.CylinderGeometry(0.5, 1, 1, 64, 64);
-        noiseSettings = { 진폭: 2 + activity * 0.1, 반경: 0.5 + activity * 0.1, 속도: activity * 0.15 };
+        noiseSettings = { amplitude: 2 + activity * 0.1, scope: 0.5 + activity * 0.1, speed: activity * 0.15 };
     } else if (category == "fear") {
         geometry = new THREE.SphereGeometry(0.7, 64, 64);
-        noiseSettings = { 진폭: 10 + activity * 0.3, 반경: 0.6 + activity * 0.2, 속도: activity * 0.1 };
+        noiseSettings = { amplitude: 10 + activity * 0.3, scope: 0.6 + activity * 0.2, speed: activity * 0.1 };
     } else if (category == "sadness") {
         geometry = new THREE.TorusGeometry(0.5, 0.3, 64, 64);
-        noiseSettings = { 진폭: 0.5 + activity * 0.3, 반경: 0.5 + activity * 0.1, 속도: activity * 0.1 };
+        noiseSettings = { amplitude: 0.5 + activity * 0.3, scope: 0.5 + activity * 0.1, speed: activity * 0.1 };
     } else if (category == "disgust") {
         geometry = new THREE.ConeGeometry(1, 1.3, 128, 128);
-        noiseSettings = { 진폭: 8 + activity * 0.5, 반경: 0.1 + activity * 0.05, 속도: activity * 0.1 };
+        noiseSettings = { amplitude: 8 + activity * 0.5, scope: 0.1 + activity * 0.05, speed: activity * 0.1 };
     } else if (category == "surprise") {
         geometry = new THREE.SphereGeometry(0.8, 64, 64);
         noiseSettings = {
-            진폭: 0.5 + 0.2 * activity,
-            반경: 0.3 + activity * 0.2,
-            속도: 9 * 0.2,
+            amplitude: 0.5 + 0.2 * activity,
+            scope: 0.3 + activity * 0.2,
+            speed: 9 * 0.2,
         };
     } else if (category == "anticipation") {
         geometry = new THREE.TorusKnotGeometry(0.3, 0.4, 128, 128, 1, 4);
-        noiseSettings = { 진폭: 0.1 + activity * 0.2, 반경: activity * 0.2, 속도: activity * 0.1 };
+        noiseSettings = { amplitude: 0.1 + activity * 0.2, scope: activity * 0.2, speed: activity * 0.1 };
     } else if (category == "trust") {
         geometry = new THREE.TorusKnotGeometry(0.6, 0.2, 128, 16, 2, 3);
-        noiseSettings = { 진폭: 1 + activity * 0.1, 반경: 0.2 + activity * 0.05, 속도: activity * 0.1 };
+        noiseSettings = { amplitude: 1 + activity * 0.1, scope: 0.2 + activity * 0.05, speed: activity * 0.1 };
     } else if (category == "joy") {
         let joyVec;
         joyVec = 5;
@@ -47,7 +47,7 @@ const CreateEmoject = (mesh, category, activity, length, color) => {
         // else if (activity <= 6) joyVec = 4;
         // else joyVec = 5;
         geometry = new THREE.TorusKnotGeometry(0.6, 0.15, 256, 16, 1, joyVec);
-        noiseSettings = { 진폭: 1 * activity / 1, 반경: 0.07 * activity, 속도: activity * 0.1 };
+        noiseSettings = { amplitude: 1 * activity / 1, scope: 0.07 * activity, speed: activity * 0.1 };
     }
 
 
