@@ -204,7 +204,7 @@ export default {
       intensity: 1,
     };
     let duration = 700;
-    // let saveControls;
+    let saveControls;
 
     // 메쉬에 카메라 포커스가 맞춰지고 모달이 열리는 함수
     function openModal() {
