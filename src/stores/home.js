@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import emoColRef from "@/firebase";
-import { getDocs, doc, deleteDoc, orderBy, query } from "firebase/firestore";
+import { getDocs, doc, deleteDoc, orderBy, query, where, limit } from "firebase/firestore";
 
 
 export const useHomeStore = defineStore('home', {
@@ -15,7 +15,8 @@ export const useHomeStore = defineStore('home', {
         // 데이터 불러오기
         fetchEmotions() {
             // let emotionsSnapshot = getDocs(emoColRef);
-            let emotionsSnapshot = getDocs(query(emoColRef, orderBy("time", "desc")));
+            let q = query(emoColRef, orderBy("time", "desc"), limit(300));
+            let emotionsSnapshot = getDocs(q);
             let emotions = [];
 
             emotionsSnapshot.then((emotionsSnap) => {
@@ -24,6 +25,7 @@ export const useHomeStore = defineStore('home', {
                     emotionData.id = emotion.id;
                     emotions.push(emotionData);
                 });
+
                 this.emotions = emotions;
             });
         },

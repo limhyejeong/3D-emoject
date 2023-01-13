@@ -16,9 +16,7 @@
       >이 프로젝트에 대하여</router-link
     >
 
-    <a href="mailto:limteractive@gmail.com" class="mailBtn">
-      <img src="@/assets/img/mail.png" alt="" />
-    </a>
+    <a href="https://limteract.com/" class="mailBtn"> ©2022 HYEJEONG LIM </a>
 
     <aside class="moveSearchBtn">
       <!-- <router-link to="/search">검색</router-link> -->
@@ -132,7 +130,7 @@ export default {
 
 .moveAboutBtn {
   // font-family: "gothicA1";
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   font-weight: 600;
   // letter-spacing: -0.03rem;
   position: absolute;
@@ -159,17 +157,22 @@ export default {
 // }
 
 .mailBtn {
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   font-weight: 600;
   position: absolute;
   right: 0;
   bottom: 0;
   margin: 0px 50px 40px 0;
-  color: var(--gray1);
-  img {
-    filter: invert(1);
-    width: 23px;
+  color: #fff;
+  transition: 0.2s;
+
+  &:hover {
+    color: var(--gray1);
   }
+  // img {
+  //   filter: invert(1);
+  //   width: 23px;
+  // }
 }
 
 // 반응형

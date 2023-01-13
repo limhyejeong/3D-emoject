@@ -78,7 +78,7 @@ export default {
       animate();
     });
 
-    setTimeout(() => router.replace("/output"), 1200);
+    // setTimeout(() => router.replace("/output"), 1200);
 
     return {};
   },

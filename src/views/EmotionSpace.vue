@@ -90,7 +90,7 @@ export default {
     function initThreejs() {
       scene = new THREE.Scene();
       // scene.background = new THREE.Color(0xffffff);
-      scene.fog = new THREE.Fog(0x000000, 30, 45);
+      scene.fog = new THREE.Fog(0x000000, 0, 80);
       // scene.fog = new THREE.Fog(0x000000, 15, 45);
       homeCanvas = document.querySelector("#homeCanvas");
       renderer = new THREE.WebGLRenderer({
@@ -104,7 +104,7 @@ export default {
       camera = new THREE.PerspectiveCamera(45, width / height, 1, 100);
       camera.position.x = 0;
       camera.position.y = 20;
-      camera.position.z = 20;
+      camera.position.z = 25;
       scene.add(camera);
 
       const light = new THREE.AmbientLight(0xffffff, 2); // soft white light
@@ -115,7 +115,7 @@ export default {
       controls = new OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
       controls.maxDistance = 40;
-      controls.minDistance = -10;
+      controls.minDistance = 5;
       controls.autoRotateSpeed = 1;
     }
 
@@ -125,7 +125,7 @@ export default {
     watch(emotions, () => {
       importEmoject(emotions._object.emotions[0], 0);
       for (let i = 1; i < emotions._object.emotions.length; i++) {
-        importEmoject(emotions._object.emotions[i], 22);
+        importEmoject(emotions._object.emotions[i], 20);
       }
       scene.add(group);
       // console.log(emotions._object.emotions.length);
@@ -251,7 +251,7 @@ export default {
         .to(
           {
             // fog: new THREE.Fog(0x000000, 15, 45),
-            fog: new THREE.Fog(0x000000, 30, 45),
+            fog: new THREE.Fog(0x000000, 10, 80),
           },
           500
         )
