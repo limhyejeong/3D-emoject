@@ -254,8 +254,9 @@ p.description {
   gap: 20px;
   grid-gap: 20px;
   width: 100%;
-  height: auto;
-  max-height: 55vh;
+  // height: auto;
+  // max-height: 55vh;
+  height: calc(100vh - 400px);
   background: linear-gradient(135deg, var(--light), var(--background));
   box-shadow: -2px -2px 5px #535353, inset -2px -2px 5px #000,
     10px 10px 50px var(--shadow);

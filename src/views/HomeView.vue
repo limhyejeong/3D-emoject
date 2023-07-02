@@ -16,7 +16,7 @@
       >이 프로젝트에 대하여</router-link
     >
 
-    <a href="https://limteract.com/" class="mailBtn"> ©2022 HYEJEONG LIM </a>
+    <span class="mailBtn"> ©2022 HYEJEONG LIM </span>
 
     <aside class="moveSearchBtn">
       <!-- <router-link to="/search">검색</router-link> -->
@@ -166,9 +166,9 @@ export default {
   color: #fff;
   transition: 0.2s;
 
-  &:hover {
-    color: var(--gray1);
-  }
+  // &:hover {
+  //   color: var(--gray1);
+  // }
   // img {
   //   filter: invert(1);
   //   width: 23px;
