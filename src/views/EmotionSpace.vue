@@ -1,5 +1,13 @@
 <template>
+
+  <div class="loadingView" v-show="!isLoad">
+    Loading Emotions...
+    <!-- <div class="progress"><div class="bar"></div></div> -->
+  </div>
+  
   <CheckPassword v-show="isDelete" v-bind:selectedData="selectedData" />
+
+
   <section v-show="isClick" class="modal">
     <div class="outputInfo">
       <div class="title">
@@ -70,10 +78,17 @@ export default {
     CheckPassword,
   },
   setup() {
+    let isLoad = ref(false);
     const store = useHomeStore();
     const { emotions, isDelete } = storeToRefs(store);
     const { fetchEmotions } = store;
     let isClick = ref(false);
+
+    THREE.DefaultLoadingManager.onProgress = function (url, itemsLoaded, itemsTotal) {
+      if (itemsLoaded === itemsTotal) {
+        isLoad.value = true;
+      }
+    };
 
     fetchEmotions(); // home.js pinia에서 데이터 불러오기
 
@@ -309,6 +324,7 @@ export default {
     });
 
     return {
+      isLoad,
       isDelete,
       isClick,
       closeModal,
@@ -329,6 +345,22 @@ export default {
 </script>
 
 <style lang="scss">
+.loadingView {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  // font-weight: bold;
+  // text-transform: uppercase;
+  color: var(--point);
+  // font-family: "Ydestreet";
+  z-index: 1;
+}
+
 .modal {
   position: absolute;
   right: 50px;

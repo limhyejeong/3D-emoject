@@ -12,9 +12,9 @@
       </button>
     </router-link>
 
-    <router-link to="/about" class="moveAboutBtn"
-      >이 프로젝트에 대하여</router-link
-    >
+    <router-link to="/about" class="moveAboutBtn">
+      이 프로젝트에 대하여
+    </router-link>
 
     <span class="mailBtn"> ©2022 HYEJEONG LIM </span>
 

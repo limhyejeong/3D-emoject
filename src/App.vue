@@ -96,10 +96,10 @@ export default {
   font-weight: 800;
 }
 @font-face {
-  font-family: "YdestreetL";
-  src: url("@/assets/font/Yde-street.ttf") format("ttf");
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'YdestreetB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/YdestreetB.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
 }
 
 * {
@@ -164,7 +164,7 @@ nav {
     span {
       font-weight: 700;
       margin-left: 5px;
-      font-family: "YdeStreet";
+      font-family: "YdestreetB";
     }
 
     &:hover {
@@ -190,6 +190,43 @@ button {
   justify-content: center;
   align-items: center;
 }
+
+
+.pc-only {
+  display: block;
+}
+.tab-only {
+  display: none;
+}
+.mo-only {
+  display: none;
+}
+
+@media screen and (max-width: 1023px) {
+  .pc-only {
+    display: none;
+  }
+  .tab-only {
+    display: block;
+  }
+  .mo-only {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .pc-only {
+    display: none;
+  }
+  .tab-only {
+    display: none;
+  }
+  .mo-only {
+    display: block;
+  }
+}
+
+
 
 // 반응형 (mobile)
 @media screen and (min-width: 100px) and (max-width: 1000px) {
