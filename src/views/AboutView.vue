@@ -262,6 +262,11 @@
           </table>
         </div>
 
+        <p class="content">
+          선택된 이모지들의 데이터가 분석되여 메쉬를 이루는 구성 요소에 영향을 미칩니다.<br>
+대표적으로 드러나는 감정은 3D 오브젝트의  구조,  감정의 복합성은 재질,  감정의 세기는 움직임으로  표현됩니다.
+        </p>
+
       </div>
     </div>
 
@@ -350,6 +355,7 @@ img {
       color: var(--gray1);
       font-size: 20px;
       line-height: 1.8;
+      letter-spacing: -0.1rem;
 
       strong {
         color: var(--point);
@@ -533,7 +539,7 @@ img {
 }
 
 .s04 {
-  
+
   .inner {
     display: flex;
     flex-direction: column;
@@ -577,10 +583,9 @@ img {
     .emo-table {
       position: relative;
       width: 100%;
-      margin-top: 80px;
+      margin: 80px 0 80px;
       display: flex;
       overflow-x: scroll;
-
 
       .emo-count {
         display: flex;
