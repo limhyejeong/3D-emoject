@@ -68,7 +68,7 @@
           <span class="en-title">🤔</span>
           <span class="small-title">표현할 수 없는 감정을 어떻게 추출하고,<br class="mo-only"> 어떤 원리로 분석할 수 있을까요?</span>
           <p class="content">온라인으로 커뮤니케이션에서 사용되는 부가적인 표현 방법이자,<br>
-더욱 효과적으로 의미 전달이 가능한 <strong>이모지</strong>를 통해 감정 데이터를 얻습니다.</p>
+더욱 효과적으로 의미 전달이 가능한 <br class="mo-only"><strong>이모지</strong>를 통해 감정 데이터를 얻습니다.</p>
 
           <img src="@/assets/img/about/2_img.png" alt="이모지 리스트">
 
@@ -263,24 +263,47 @@
         </div>
 
         <p class="content">
-          선택된 이모지들의 데이터가 분석되여 메쉬를 이루는 구성 요소에 영향을 미칩니다.<br>
-대표적으로 드러나는 감정은 3D 오브젝트의  구조,  감정의 복합성은 재질,  감정의 세기는 움직임으로  표현됩니다.
+          선택된 이모지들의 데이터가 분석되어<br class="mo-only"> 메쉬를 이루는 구성 요소에 영향을 미칩니다.<br>
+대표적으로 드러나는 감정은 3D 오브젝트의 구조,<br class="mo-only"> 감정의 복합성은 재질, 감정의 세기는 움직임으로  표현됩니다.
         </p>
 
       </div>
     </div>
 
 
+    <div class="section s05">
+      <div class="inner">
+        <figure><img src="@/assets/img/about/5_mesh.png" alt="Mesh"></figure>
+        <figure><img src="@/assets/img/about/5_info.png" alt="Component of Mesh"></figure>
+      </div>
+    </div>
 
-    <!-- <img src="@/assets/img/1.png" loading="lazy" /> -->
-    <!-- <img
-      src="https://user-images.githubusercontent.com/84780174/207597143-4c101da9-770a-4db8-8447-a070e1469fdd.gif"
-    /> -->
-    <img src="@/assets/img/2.png" loading="lazy" />
-    <img src="@/assets/img/3.png" loading="lazy" />
-    <!-- <img loading="lazy" src="@/assets/img/4.gif" alt="" /> -->
+
+    <div class="section s06">
+      <div class="inner">
+        <span class="en-title">Visualization</span>
+        <img src="@/assets/img/about/6_visualization.png" loading="lazy" class="visualization pc-only" alt="visualization" />
+        <img src="@/assets/img/about/6_visualization.png" loading="lazy" class="visualization tab-only" alt="visualization" />
+        <img src="@/assets/img/about/6_visualization_mo.png" loading="lazy" class="visualization mo-only" alt="visualization" />
+
+        <p class="content">
+          8개의 감정 카테고리에 따른<br class="mo-only"> 기본 지오메트리를 만들어 지정해주었습니다.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="section s07">
+
+    </div>
+
+
+
     <img src="https://user-images.githubusercontent.com/84780174/207597419-6d754b65-3896-4840-8b17-fb07e8f1d07d.gif"
       loading="lazy" />
+
+
+
     <img src="@/assets/img/5.png" style="margin-bottom: 100px" loading="lazy" />
     <img src="https://user-images.githubusercontent.com/84780174/207597164-7aeb252f-04b0-4649-841d-fbba036ed40e.gif"
       loading="lazy" />
@@ -314,6 +337,7 @@ export default {
 
 .about {
   overflow-y: scroll;
+  overflow-x: hidden;
   width: 100%;
   height: 100vh;
   // padding-top: 100px;
@@ -594,7 +618,7 @@ img {
         height: 100%;
         align-items: center;
         font-size: 12px;
-        width: 5%;
+        width: 50px;
         min-width: 50px;
 
         span {
@@ -612,8 +636,7 @@ img {
       table {
         width: 100%;
         border-collapse: collapse;
-        width: 95%;
-        min-width: 1100px;
+        min-width: 1000px;
 
         thead {
           background-color: #0E0E0E;
@@ -626,6 +649,10 @@ img {
             border: none;
             border-collapse: collapse;
             letter-spacing: -0.5px;
+
+            &:first-child {
+              width: 70px;
+            }
 
             &:last-child {
               width: 70px;
@@ -685,7 +712,7 @@ img {
           bottom: 0;
           left: 50px;
           width: 100%;
-          min-width: 1100px;
+          max-width: calc(1156px - 50px);
           height: 250px;
           background: linear-gradient(0deg, black, transparent);
         }
@@ -693,6 +720,38 @@ img {
 
     }
 
+  }
+}
+
+.s05 {
+  .inner {
+    display: flex;
+    align-items: center;
+    padding: 0 32px 100px;
+    column-gap: 50px;
+
+    figure {
+      &:nth-child(1) {
+          width: 55%;
+        }
+        &:nth-child(2) {
+          width: 45%;
+        }
+
+      img {
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+.s06 {
+  text-align: center;
+
+  .visualization {
+    box-shadow: -2px -2px 10px 0px rgba(255,255,255,0.1),
+    10px 10px 30px 0px rgba(16,16, 16, 1);
+    margin: 40px 0;
   }
 }
 
@@ -850,6 +909,130 @@ img {
     }
   }
 
+  .s04 {
+
+    .inner {
+      padding: 70px 0px; 
+
+      .icon {
+        width: 120px;
+        margin: 20px 0;
+      }
+
+      .emo-list {
+        grid-template-columns: repeat(4, 1fr);
+        margin-top: 50px;
+        row-gap: 40px;
+        max-width: 768px;
+
+        .emo-item {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+
+          .emo {
+            font-size: 45px;
+          }
+
+          .en {
+            font-size: 14px;
+          }
+
+          .ko {
+            font-size: 13px;
+          }
+        }
+      }
+
+      .emo-table {
+        margin: 60px 0 60px;
+        display: flex;
+        overflow-x: scroll;
+        padding: 0 32px 32px 0;
+
+        .emo-count {
+          width: calc(5% + 32px);
+          min-width: 82px;
+
+          span {
+            padding: 10px 0;
+          }
+
+          .line {
+            width: 1px;
+            height: 100%;
+          }
+        }
+
+        table {
+          min-width: 920px;
+
+          thead {
+            height: 30px;
+
+            th {
+              font-size: 11px;
+
+              &:not(:last-child) {
+                width: 105px;
+              }
+
+              &:first-child {
+                width: 70px;
+              }
+
+              &:last-child {
+                width: 70px;
+              }
+
+            }
+          }
+
+          tbody {
+
+            tr {
+              height: 60px;
+
+              td {
+                font-size: 12px;
+                font-family: 'YdestreetB';
+                border: none;
+                border-collapse: collapse;
+
+                &:nth-child(2) {
+                  font-size: 20px;
+                }
+
+                strong {
+                  font-weight: 700;
+                }
+              }
+            }
+          }
+
+          &::after {
+            left: 82px;
+            height: 250px;
+            min-width: 920px;
+          }
+        }
+
+      }
+
+    }
+  }
+
+  .s05 {
+    .inner {
+      padding: 0 32px 50px;
+    }
+  }
+
+  .s06 {
+    .visualization {
+      margin: 30px 0;
+    }
+  }
 }
 
 
@@ -1012,6 +1195,131 @@ img {
     }
   }
 
+  .s04 {
+
+    .inner {
+      padding: 50px 0px; 
+
+      .icon {
+        width: 80px;
+        margin: 15px 0;
+      }
+
+      .emo-list {
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: 30px;
+        row-gap: 30px;
+        max-width: none;
+
+        .emo-item {
+          gap: 5px;
+
+          .emo {
+            font-size: 40px;
+          }
+          .en {
+            font-size: 13px;
+          }
+          .ko {
+            font-size: 11px;
+          }
+        }
+      }
+
+      .emo-table {
+        margin: 40px 0 40px;
+        padding: 0 24px 24px 0;
+
+        .emo-count {
+          width: calc(5% + 24px);
+          min-width: 60px;
+        }
+
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          width: 95%;
+          min-width: 800px;
+
+          thead {
+            height: 30px;
+
+            th {
+              font-size: 10px;
+              letter-spacing: -0.5px;
+
+              &:not(:last-child) {
+                width: 105px;
+              }
+
+              &:first-child {
+                width: 70px;
+              }
+
+              &:last-child {
+                width: 70px;
+              }
+
+            }
+          }
+
+          tbody {
+
+            tr {
+              height: 50px;
+
+              td {
+                font-size: 10px;
+                font-family: 'YdestreetB';
+                border: none;
+                border-collapse: collapse;
+
+                &:nth-child(2) {
+                  font-size: 17px;
+                }
+              }
+            }
+          }
+
+          &::after {
+            left: 60px;
+            height: 250px;
+            min-width: 800px;
+          }
+        }
+
+      }
+
+      .content {
+        padding: 0 24px;
+      }
+    }
+  }
+
+  .s05 {
+    .inner {
+      display: flex;
+      flex-direction: column;
+      padding: 0 24px 0px;
+      row-gap: 20px;
+
+      figure {
+        &:nth-child(1), &:nth-child(2) {
+            width: 95%;
+            max-width: 400px;
+          }
+        img {
+          object-fit: cover;
+        }
+      }
+    }
+  }
+
+  .s06 {
+    .visualization {
+      margin: 20px 0;
+    }
+  }
 
 }
 
