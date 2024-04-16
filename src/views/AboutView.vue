@@ -294,7 +294,52 @@
 
 
     <div class="section s07">
+      <div class="inner">
 
+        <div class="table-desc">
+          <span class="sub-title">01</span>
+          <span class="en-title">Geometry</span>
+          <p class="content">
+            가장 높은 점수의 감정 에 해당하는 지오메트리가 메쉬의 베이스가 됩니다.
+          </p>
+        </div>
+
+        <div class="emo-table geo-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Emotion</th>
+                <th>anger</th>
+                <th>fear</th>
+                <th>sadness</th>
+                <th>disgust</th>
+                <th>surprise</th>
+                <th>anticipation</th>
+                <th>trust</th>
+                <th>JOY</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Geometry</td>
+                <td>anger</td>
+                <td>fear</td>
+                <td>sadness</td>
+                <td>disgust</td>
+                <td>surprise</td>
+                <td>anticipation</td>
+                <td>trust</td>
+                <td>JOY</td>
+              </tr>
+            </tbody>
+            
+          </table>
+        </div>
+
+
+
+      </div>
     </div>
 
 
@@ -752,6 +797,41 @@ img {
     box-shadow: -2px -2px 10px 0px rgba(255,255,255,0.1),
     10px 10px 30px 0px rgba(16,16, 16, 1);
     margin: 40px 0;
+  }
+}
+
+
+
+
+.s07, .s08, .s09 {
+
+  .table-desc {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 70px;
+
+    .sub-title {
+      font-size: 20px;
+    }
+
+    .en-title {
+      color: var(--point);
+    }
+  }
+
+  .emo-table {
+    position: relative;
+    width: 100%;
+    display: flex;
+
+    table {
+      border: 1px solid gold;
+
+      thead {
+
+
+      }
+    }
   }
 }
 
