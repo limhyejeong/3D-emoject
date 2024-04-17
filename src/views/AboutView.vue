@@ -4,15 +4,16 @@
       <span>loading</span>
     </div> -->
 
-
     <img src="@/assets/img/0.png" class="head-img" />
 
     <div class="section s01">
       <div class="inner">
-
         <div class="main-title">
           <div class="main-text">
-            <div class="row"><span>About</span> <span class="main-emoji">😡😨😭🤢😳🤔😌😄</span></div>
+            <div class="row">
+              <span>About</span>
+              <span class="main-emoji">😡😨😭🤢😳🤔😌😄</span>
+            </div>
             <div class="row"><span>Indescribable</span></div>
             <div class="row"><span>Emotions</span></div>
           </div>
@@ -33,59 +34,74 @@
             <span>Prof. Younghui Kim</span>
           </div>
         </div>
-
       </div>
     </div>
 
-
     <div class="section s02">
       <div class="inner">
-
         <div class="over-desc">
           <span class="en-title">Overview</span>
           <span class="small-title">말로 표현할 수 없는 감정이 있나요?</span>
           <p class="content">
             사람은 누구나 표현할 수 없는 감정이 있습니다.
-            <br>
-            특별한 기억이나 특정한 상황, 대상에 대한 감정, 미래에 대한 기대와 과거의 회상으로도 느낄 수 있습니다.
-            <br>
-            이 프로젝트는 언어로 표현할 수 없는 복합적인 감정을 3D 오브젝트 형태로 표현하고,<br class="pc-only"><br class="tab-only">
-            웹 사이트상에 아카이브하여 많은 사람의 감정을 보관하고 감상할 수 있도록 하고자 합니다.
+            <br />
+            특별한 기억이나 특정한 상황, 대상에 대한 감정, 미래에 대한 기대와
+            과거의 회상으로도 느낄 수 있습니다.
+            <br />
+            이 프로젝트는 언어로 표현할 수 없는 복합적인 감정을 3D 오브젝트
+            형태로 표현하고,<br class="pc-only" /><br class="tab-only" />
+            웹 사이트상에 아카이브하여 많은 사람의 감정을 보관하고 감상할 수
+            있도록 하고자 합니다.
           </p>
         </div>
 
-
         <div class="back_bg">
-          <img src="@/assets/img/about/1_bg.png" alt="어두운 밤하늘 속 별을 보고 있는 사람">
+          <img
+            src="@/assets/img/about/1_bg.png"
+            alt="어두운 밤하늘 속 별을 보고 있는 사람"
+          />
         </div>
-
       </div>
     </div>
-
 
     <div class="section s03">
       <div class="inner">
-          <span class="en-title">🤔</span>
-          <span class="small-title">표현할 수 없는 감정을 어떻게 추출하고,<br class="mo-only"> 어떤 원리로 분석할 수 있을까요?</span>
-          <p class="content">온라인으로 커뮤니케이션에서 사용되는 부가적인 표현 방법이자,<br>
-더욱 효과적으로 의미 전달이 가능한 <br class="mo-only"><strong>이모지</strong>를 통해 감정 데이터를 얻습니다.</p>
+        <span class="en-title">🤔</span>
+        <span class="small-title"
+          >표현할 수 없는 감정을 어떻게 추출하고,<br class="mo-only" />
+          어떤 원리로 분석할 수 있을까요?</span
+        >
+        <p class="content">
+          온라인으로 커뮤니케이션에서 사용되는 부가적인 표현 방법이자,<br />
+          더욱 효과적으로 의미 전달이 가능한 <br class="mo-only" /><strong
+            >이모지</strong
+          >를 통해 감정 데이터를 얻습니다.
+        </p>
 
-          <img src="@/assets/img/about/2_img.png" alt="이모지 리스트">
+        <img src="@/assets/img/about/2_img.png" alt="이모지 리스트" />
 
-          <p class="content">
-            사용자가 느끼는 감정과 관련된 이모지의 조합을 입력받아<br class="mo-only"> 어떠한 감정인지 파악합니다.
-          </p>
+        <p class="content">
+          사용자가 느끼는 감정과 관련된 이모지의 조합을 입력받아<br
+            class="mo-only"
+          />
+          어떠한 감정인지 파악합니다.
+        </p>
       </div>
     </div>
-
 
     <div class="section s04">
       <div class="inner">
         <span class="en-title">Solution</span>
-        <img src="@/assets/img/about/3_icon.png" alt="감정의 바퀴 아이콘" class="icon">
+        <img
+          src="@/assets/img/about/3_icon.png"
+          alt="감정의 바퀴 아이콘"
+          class="icon"
+        />
 
         <p class="content">
-          로버트 플루칙의 &lt;감정의 바퀴&gt;에 따라 총 100개의 이모지에<br> 8개의 감정 카테고리에 대한 점수와 활동성을 띄는 숫자(1~10)를 부여했습니다.
+          로버트 플루칙의 &lt;감정의 바퀴&gt;에 따라 총 100개의 이모지에<br />
+          8개의 감정 카테고리에 대한 점수와 활동성을 띄는 숫자(1~10)를
+          부여했습니다.
         </p>
 
         <ul class="emo-list">
@@ -136,18 +152,15 @@
             <span class="en">joy</span>
             <span class="ko">기쁨</span>
           </li>
-
         </ul>
 
-
         <div class="emo-table">
-
           <div class="emo-count">
             <span>1</span>
             <span class="line"></span>
             <span>100</span>
           </div>
-        
+
           <table>
             <thead>
               <tr>
@@ -258,49 +271,64 @@
                 <td><strong>8</strong></td>
               </tr>
             </tbody>
-            
           </table>
         </div>
 
         <p class="content">
-          선택된 이모지들의 데이터가 분석되어<br class="mo-only"> 메쉬를 이루는 구성 요소에 영향을 미칩니다.<br>
-대표적으로 드러나는 감정은 3D 오브젝트의 구조,<br class="mo-only"> 감정의 복합성은 재질, 감정의 세기는 움직임으로  표현됩니다.
+          선택된 이모지들의 데이터가 분석되어<br class="mo-only" />
+          메쉬를 이루는 구성 요소에 영향을 미칩니다.<br />
+          대표적으로 드러나는 감정은 3D 오브젝트의 구조,<br class="mo-only" />
+          감정의 복합성은 재질, 감정의 세기는 움직임으로 표현됩니다.
         </p>
-
       </div>
     </div>
-
 
     <div class="section s05">
       <div class="inner">
-        <figure><img src="@/assets/img/about/5_mesh.png" alt="Mesh"></figure>
-        <figure><img src="@/assets/img/about/5_info.png" alt="Component of Mesh"></figure>
+        <figure><img src="@/assets/img/about/5_mesh.png" alt="Mesh" /></figure>
+        <figure>
+          <img src="@/assets/img/about/5_info.png" alt="Component of Mesh" />
+        </figure>
       </div>
     </div>
-
 
     <div class="section s06">
       <div class="inner">
         <span class="en-title">Visualization</span>
-        <img src="@/assets/img/about/6_visualization.png" loading="lazy" class="visualization pc-only" alt="visualization" />
-        <img src="@/assets/img/about/6_visualization.png" loading="lazy" class="visualization tab-only" alt="visualization" />
-        <img src="@/assets/img/about/6_visualization_mo.png" loading="lazy" class="visualization mo-only" alt="visualization" />
+        <img
+          src="@/assets/img/about/6_visualization.png"
+          loading="lazy"
+          class="visualization pc-only"
+          alt="visualization"
+        />
+        <img
+          src="@/assets/img/about/6_visualization.png"
+          loading="lazy"
+          class="visualization tab-only"
+          alt="visualization"
+        />
+        <img
+          src="@/assets/img/about/6_visualization_mo.png"
+          loading="lazy"
+          class="visualization mo-only"
+          alt="visualization"
+        />
 
         <p class="content">
-          8개의 감정 카테고리에 따른<br class="mo-only"> 기본 지오메트리를 만들어 지정해주었습니다.
+          8개의 감정 카테고리에 따른<br class="mo-only" />
+          기본 지오메트리를 만들어 지정해주었습니다.
         </p>
       </div>
     </div>
 
-
     <div class="section s07">
       <div class="inner">
-
         <div class="table-desc">
           <span class="sub-title">01</span>
           <span class="en-title">Geometry</span>
           <p class="content">
-            가장 높은 점수의 감정 에 해당하는 지오메트리가 메쉬의 베이스가 됩니다.
+            가장 높은 점수의 감정 에 해당하는 지오메트리가 메쉬의 베이스가
+            됩니다.
           </p>
         </div>
 
@@ -308,54 +336,146 @@
           <table>
             <thead>
               <tr>
-                <th>Emotion</th>
-                <th>anger</th>
-                <th>fear</th>
-                <th>sadness</th>
-                <th>disgust</th>
-                <th>surprise</th>
-                <th>anticipation</th>
-                <th>trust</th>
-                <th>JOY</th>
+                <th>
+                  <span class="en_tit">Emotion</span>
+                  <span class="ko_tit">대표 감정</span>
+                </th>
+                <th>
+                  <span class="emo">😡</span>
+                  <span class="en">anger</span>
+                  <span class="ko">분노</span>
+                </th>
+                <th>
+                  <span class="emo">😨</span>
+                  <span class="en">fear</span>
+                  <span class="ko">공포</span>
+                </th>
+                <th>
+                  <span class="emo">😭</span>
+                  <span class="en">sadness</span>
+                  <span class="ko">슬픔</span>
+                </th>
+                <th>
+                  <span class="emo">🤢</span>
+                  <span class="en">disgust</span>
+                  <span class="ko">혐오</span>
+                </th>
+                <th>
+                  <span class="emo">😳</span>
+                  <span class="en">surprise</span>
+                  <span class="ko">불안</span>
+                </th>
+                <th>
+                  <span class="emo">🤔</span>
+                  <span class="en">anticipation</span>
+                  <span class="ko">기대</span>
+                </th>
+                <th>
+                  <span class="emo">😌</span>
+                  <span class="en">trust</span>
+                  <span class="ko">신뢰</span>
+                </th>
+                <th>
+                  <span class="emo">😄</span>
+                  <span class="en">joy</span>
+                  <span class="ko">기쁨</span>
+                </th>
               </tr>
             </thead>
 
             <tbody>
               <tr>
-                <td>Geometry</td>
-                <td>anger</td>
-                <td>fear</td>
-                <td>sadness</td>
-                <td>disgust</td>
-                <td>surprise</td>
-                <td>anticipation</td>
-                <td>trust</td>
-                <td>JOY</td>
+                <td>
+                  <span class="en_tit">Geometry</span>
+                  <span class="ko_tit">대표 감정</span>
+                </td>
+                <td>
+                  <figure>
+                    <img
+                      src="@/assets/img/about/7_geometry_anger.png"
+                      alt="anger geometry"
+                    />
+                  </figure>
+                </td>
+                <td>
+                  <figure>
+                    <img
+                      src="@/assets/img/about/7_geometry_fear.png"
+                      alt="fear geometry"
+                    />
+                  </figure>
+                </td>
+                <td>
+                  <figure>
+                    <img
+                      src="@/assets/img/about/7_geometry_sadness.png"
+                      alt="sadness geometry"
+                    />
+                  </figure>
+                </td>
+                <td>
+                  <figure>
+                    <img
+                      src="@/assets/img/about/7_geometry_disgust.png"
+                      alt="disgust geometry"
+                    />
+                  </figure>
+                </td>
+                <td>
+                  <figure>
+                    <img
+                      src="@/assets/img/about/7_geometry_surprise.png"
+                      alt="surprise geometry"
+                    />
+                  </figure>
+                </td>
+                <td>
+                  <figure>
+                    <img
+                      src="@/assets/img/about/7_geometry_anticipation.png"
+                      alt="anticipation geometry"
+                    />
+                  </figure>
+                </td>
+                <td>
+                  <figure>
+                    <img
+                      src="@/assets/img/about/7_geometry_trust.png"
+                      alt="trust geometry"
+                    />
+                  </figure>
+                </td>
+                <td>
+                  <figure>
+                    <img
+                      src="@/assets/img/about/7_geometry_joy.png"
+                      alt="joy geometry"
+                    />
+                  </figure>
+                </td>
               </tr>
             </tbody>
-            
           </table>
         </div>
-
-
-
       </div>
     </div>
 
-
-
-    <img src="https://user-images.githubusercontent.com/84780174/207597419-6d754b65-3896-4840-8b17-fb07e8f1d07d.gif"
-      loading="lazy" />
-
-
+    <img
+      src="https://user-images.githubusercontent.com/84780174/207597419-6d754b65-3896-4840-8b17-fb07e8f1d07d.gif"
+      loading="lazy"
+    />
 
     <img src="@/assets/img/5.png" style="margin-bottom: 100px" loading="lazy" />
-    <img src="https://user-images.githubusercontent.com/84780174/207597164-7aeb252f-04b0-4649-841d-fbba036ed40e.gif"
-      loading="lazy" />
+    <img
+      src="https://user-images.githubusercontent.com/84780174/207597164-7aeb252f-04b0-4649-841d-fbba036ed40e.gif"
+      loading="lazy"
+    />
     <!-- <img loading="lazy" src="@/assets/img/7.gif" alt="" /> -->
     <img src="@/assets/img/8.png" loading="lazy" />
-    <img src="https://user-images.githubusercontent.com/84780174/207597631-7aa23f1f-41d1-4fd4-bbd1-85ae1ff8b75f.gif"
-      loading="lazy" />
+    <img
+      src="https://user-images.githubusercontent.com/84780174/207597631-7aa23f1f-41d1-4fd4-bbd1-85ae1ff8b75f.gif"
+      loading="lazy"
+    />
     <!-- <img loading="lazy" src="@/assets/img/9.gif" style="" alt="" /> -->
     <img src="@/assets/img/10.png" loading="lazy" />
   </div>
@@ -365,7 +485,7 @@
 export default {
   name: "AboutView",
   components: {},
-  setup() { },
+  setup() {},
 };
 </script>
 
@@ -392,9 +512,6 @@ img {
   width: 100%;
 }
 
-
-
-
 .section {
   background-color: #000;
   color: var(--black);
@@ -408,7 +525,7 @@ img {
 
     .en-title {
       font-size: 35px;
-      font-family: 'YdestreetB';
+      font-family: "YdestreetB";
       color: var(--point);
     }
 
@@ -432,23 +549,20 @@ img {
       }
     }
   }
-
 }
 
 .s01 {
-
   .main-title {
     position: relative;
 
     .main-text {
-
       .row {
         display: flex;
         align-items: center;
         justify-content: space-between;
 
         span {
-          font-family: 'YdestreetB';
+          font-family: "YdestreetB";
           font-size: 110px;
           color: var(--point);
           z-index: 1;
@@ -498,7 +612,6 @@ img {
         z-index: 2;
       }
     }
-
   }
 
   .main-sub {
@@ -520,7 +633,7 @@ img {
         color: var(--gray1);
         font-size: 1rem;
         font-weight: 400;
-        font-family: 'YdestreetB';
+        font-family: "YdestreetB";
 
         &.url {
           color: var(--point);
@@ -530,14 +643,12 @@ img {
 
         &.title {
           font-weight: 500;
-          font-family: 'gothicA1';
+          font-family: "gothicA1";
           margin-bottom: 10px;
         }
       }
-
     }
   }
-
 }
 
 .s02 {
@@ -559,7 +670,6 @@ img {
       }
     }
 
-
     .back_bg {
       position: absolute;
       height: 100%;
@@ -572,7 +682,7 @@ img {
       }
 
       &:after {
-        content: '';
+        content: "";
         position: absolute;
         transform: translateX(-50%);
         left: 15%;
@@ -608,13 +718,12 @@ img {
 }
 
 .s04 {
-
   .inner {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 100px 0px; 
+    padding: 100px 0px;
 
     .icon {
       width: 150px;
@@ -668,7 +777,7 @@ img {
 
         span {
           padding: 10px 0;
-          font-family: 'YdestreetB';
+          font-family: "YdestreetB";
         }
 
         .line {
@@ -684,13 +793,13 @@ img {
         min-width: 1000px;
 
         thead {
-          background-color: #0E0E0E;
+          background-color: #0e0e0e;
           height: 30px;
 
           th {
             font-size: 11px;
             color: #a1a1a1;
-            font-family: 'YdestreetB';
+            font-family: "YdestreetB";
             border: none;
             border-collapse: collapse;
             letter-spacing: -0.5px;
@@ -721,13 +830,13 @@ img {
             background-color: #222222;
             height: 60px;
 
-            &:nth-child(-2n+8) {
-              background-color: #0E0E0E;
+            &:nth-child(-2n + 8) {
+              background-color: #0e0e0e;
             }
 
             td {
               font-size: 12px;
-              font-family: 'YdestreetB';
+              font-family: "YdestreetB";
               border: none;
               border-collapse: collapse;
 
@@ -743,7 +852,7 @@ img {
               }
 
               strong {
-                font-family: 'YdestreetB';
+                font-family: "YdestreetB";
                 font-weight: 700;
                 color: var(--black);
               }
@@ -752,7 +861,7 @@ img {
         }
 
         &::after {
-          content: '';
+          content: "";
           position: absolute;
           bottom: 0;
           left: 50px;
@@ -762,9 +871,7 @@ img {
           background: linear-gradient(0deg, black, transparent);
         }
       }
-
     }
-
   }
 }
 
@@ -777,11 +884,11 @@ img {
 
     figure {
       &:nth-child(1) {
-          width: 55%;
-        }
-        &:nth-child(2) {
-          width: 45%;
-        }
+        width: 55%;
+      }
+      &:nth-child(2) {
+        width: 45%;
+      }
 
       img {
         object-fit: cover;
@@ -794,17 +901,15 @@ img {
   text-align: center;
 
   .visualization {
-    box-shadow: -2px -2px 10px 0px rgba(255,255,255,0.1),
-    10px 10px 30px 0px rgba(16,16, 16, 1);
+    box-shadow: -2px -2px 10px 0px rgba(255, 255, 255, 0.1),
+      10px 10px 30px 0px rgba(16, 16, 16, 1);
     margin: 40px 0;
   }
 }
 
-
-
-
-.s07, .s08, .s09 {
-
+.s07,
+.s08,
+.s09 {
   .table-desc {
     display: flex;
     flex-direction: column;
@@ -827,14 +932,51 @@ img {
     table {
       border: 1px solid gold;
 
-      thead {
+      span {
+        display: block;
+        text-align: center;
+      }
 
+      th,
+      td {
+        border: 1px solid red;
+      }
 
+      thead > tr,
+      tbody > tr {
+        display: grid;
+        grid-template-columns: repeat(9, 1fr);
+        width: 100%;
+
+        th:nth-child(1),
+        td:nth-child(1) {
+          width: 150px;
+        }
+      }
+
+      .en_tit {
+        font-family: "YdestreetB";
+        font-size: 18px;
+        color: var(--point);
+      }
+      .ko_tit {
+        font-size: 12px;
+        color: var(--gray1);
+      }
+      .emo {
+        font-size: 35px;
+      }
+      .en {
+        font-family: "YdestreetB";
+        font-size: 15px;
+      }
+      .ko {
+        font-size: 12px;
+        color: var(--gray1);
       }
     }
   }
 }
-
 
 @media screen and (max-width: 1023px) {
   .section {
@@ -843,7 +985,7 @@ img {
 
       .en-title {
         font-size: 30px;
-        font-family: 'YdestreetB';
+        font-family: "YdestreetB";
         color: var(--point);
       }
 
@@ -862,12 +1004,10 @@ img {
   }
 
   .s01 {
-
     .main-title {
       width: 100%;
 
       .main-text {
-
         .row {
           span {
             font-size: 8vw;
@@ -910,7 +1050,6 @@ img {
           z-index: 2;
         }
       }
-
     }
 
     .main-sub {
@@ -931,7 +1070,7 @@ img {
         span {
           font-size: 14px;
           font-weight: 400;
-          font-family: 'YdestreetB';
+          font-family: "YdestreetB";
 
           &.url {
             color: var(--point);
@@ -941,14 +1080,12 @@ img {
 
           &.title {
             font-weight: 500;
-            font-family: 'gothicA1';
+            font-family: "gothicA1";
             margin-bottom: 10px;
           }
         }
-
       }
     }
-
   }
 
   .s02 {
@@ -960,7 +1097,6 @@ img {
       .over-desc {
         gap: 30px;
       }
-
 
       .back_bg {
         &:after {
@@ -990,9 +1126,8 @@ img {
   }
 
   .s04 {
-
     .inner {
-      padding: 70px 0px; 
+      padding: 70px 0px;
 
       .icon {
         width: 120px;
@@ -1064,18 +1199,16 @@ img {
               &:last-child {
                 width: 70px;
               }
-
             }
           }
 
           tbody {
-
             tr {
               height: 60px;
 
               td {
                 font-size: 12px;
-                font-family: 'YdestreetB';
+                font-family: "YdestreetB";
                 border: none;
                 border-collapse: collapse;
 
@@ -1096,9 +1229,7 @@ img {
             min-width: 920px;
           }
         }
-
       }
-
     }
   }
 
@@ -1114,8 +1245,6 @@ img {
     }
   }
 }
-
-
 
 @media screen and (max-width: 767px) {
   .section {
@@ -1142,7 +1271,7 @@ img {
   }
 
   .head-img {
-    min-width: 530px;    
+    min-width: 530px;
   }
 
   .s01 {
@@ -1153,7 +1282,6 @@ img {
         width: 100%;
 
         .main-text {
-
           .row {
             flex-direction: column-reverse;
 
@@ -1201,7 +1329,6 @@ img {
             z-index: 2;
           }
         }
-
       }
 
       .main-sub {
@@ -1217,7 +1344,7 @@ img {
           span {
             font-size: 10px;
             font-weight: 400;
-            font-family: 'YdestreetB';
+            font-family: "YdestreetB";
             letter-spacing: -1px;
 
             &.url {
@@ -1228,15 +1355,13 @@ img {
 
             &.title {
               font-weight: 500;
-              font-family: 'gothicA1';
+              font-family: "gothicA1";
               margin-bottom: 5px;
             }
           }
-
         }
       }
     }
-
   }
 
   .s02 {
@@ -1276,9 +1401,8 @@ img {
   }
 
   .s04 {
-
     .inner {
-      padding: 50px 0px; 
+      padding: 50px 0px;
 
       .icon {
         width: 80px;
@@ -1339,18 +1463,16 @@ img {
               &:last-child {
                 width: 70px;
               }
-
             }
           }
 
           tbody {
-
             tr {
               height: 50px;
 
               td {
                 font-size: 10px;
-                font-family: 'YdestreetB';
+                font-family: "YdestreetB";
                 border: none;
                 border-collapse: collapse;
 
@@ -1367,7 +1489,6 @@ img {
             min-width: 800px;
           }
         }
-
       }
 
       .content {
@@ -1384,10 +1505,11 @@ img {
       row-gap: 20px;
 
       figure {
-        &:nth-child(1), &:nth-child(2) {
-            width: 95%;
-            max-width: 400px;
-          }
+        &:nth-child(1),
+        &:nth-child(2) {
+          width: 95%;
+          max-width: 400px;
+        }
         img {
           object-fit: cover;
         }
@@ -1400,8 +1522,5 @@ img {
       margin: 20px 0;
     }
   }
-
 }
-
-
 </style>
