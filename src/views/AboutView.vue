@@ -928,18 +928,15 @@ img {
     position: relative;
     width: 100%;
     display: flex;
+    border: 1px solid #555555;
+    border-radius: 10px;
 
     table {
-      border: 1px solid gold;
+      box-sizing: border-box;
 
       span {
         display: block;
         text-align: center;
-      }
-
-      th,
-      td {
-        border: 1px solid red;
       }
 
       thead > tr,
@@ -951,6 +948,14 @@ img {
         th:nth-child(1),
         td:nth-child(1) {
           width: 150px;
+          background-color: #282828;
+        }
+
+        th, td {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
         }
       }
 
@@ -968,7 +973,7 @@ img {
       }
       .en {
         font-family: "YdestreetB";
-        font-size: 15px;
+        font-size: 14px;
       }
       .ko {
         font-size: 12px;
