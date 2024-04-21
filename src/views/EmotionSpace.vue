@@ -291,10 +291,11 @@ export default {
 
     // 브라우저 창 사이즈
     function setSize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.render(scene, camera);
+
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
     }
     window.addEventListener("resize", setSize);
 

@@ -332,7 +332,9 @@
           </p>
         </div>
 
-        <div class="emo-table geo-table">
+        <img src="@/assets/img/about/7_geometry.png" loading="lazy" />
+
+        <!-- <div class="emo-table geo-table">
           <table>
             <thead>
               <tr>
@@ -456,16 +458,80 @@
               </tr>
             </tbody>
           </table>
-        </div>
+        </div> -->
       </div>
     </div>
 
-    <img
-      src="https://user-images.githubusercontent.com/84780174/207597419-6d754b65-3896-4840-8b17-fb07e8f1d07d.gif"
-      loading="lazy"
-    />
+    <div class="section s08">
+      <div class="inner">
+        <div class="table-desc">
+          <span class="sub-title">02</span>
+          <span class="en-title">Material</span>
+          <p class="content">
+            이모지의 조합은 최소 2개부터 10개로 이루어집니다. 이모지의 수의
+            해당되는 감정의 복합성에 따라 다른 머태리얼이 입혀집니다.
+          </p>
+        </div>
 
-    <img src="@/assets/img/5.png" style="margin-bottom: 100px" loading="lazy" />
+        <img src="@/assets/img/about/8_material.png" loading="lazy" />
+      </div>
+    </div>
+
+    <div class="section s09">
+      <div class="inner">
+        <div class="table-desc">
+          <span class="sub-title">03</span>
+          <span class="en-title">Motion</span>
+          <p class="content">
+            선택된 이모지의 활동성을 계산하여 평균 활동성이 높을 수록 활발한
+            모션이 이루어집니다.
+          </p>
+        </div>
+
+        <img src="@/assets/img/about/9_motion.png" loading="lazy" />
+      </div>
+    </div>
+
+    <div class="section s10">
+      <div class="inner">
+        <span class="sub-title">04</span>
+        <span class="en-title">Color</span>
+        <p class="content">
+          이모지들의 추출 컬러 중 랜덤으로 선택된 컬러가 메쉬의 컬러로
+          지정됩니다.
+        </p>
+
+        <ul class="color-list">
+          <li class="color-item">
+            <span class="emoji">😡</span>
+            <div class="color-box"></div>
+            <p class="hex">#F7781A</p>
+          </li>
+          <li class="color-item">
+            <span class="emoji">🤩</span>
+            <div class="color-box"></div>
+            <p class="hex">#F2C925</p>
+          </li>
+          <li class="color-item">
+            <span class="emoji">😰</span>
+            <div class="color-box"></div>
+            <p class="hex">#37C8FF</p>
+          </li>
+          <li class="color-item">
+            <span class="emoji">🤢</span>
+            <div class="color-box"></div>
+            <p class="hex">#91AF00</p>
+          </li>
+          <li class="color-item">
+            <span class="emoji">🤠</span>
+            <div class="color-box"></div>
+            <p class="hex">#A98E75</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- <img src="@/assets/img/5.png" style="margin-bottom: 100px" loading="lazy" /> -->
     <img
       src="https://user-images.githubusercontent.com/84780174/207597164-7aeb252f-04b0-4649-841d-fbba036ed40e.gif"
       loading="lazy"
@@ -913,7 +979,7 @@ img {
   .table-desc {
     display: flex;
     flex-direction: column;
-    margin-bottom: 70px;
+    margin-bottom: 20px;
 
     .sub-title {
       font-size: 20px;
@@ -924,60 +990,136 @@ img {
     }
   }
 
-  .emo-table {
-    position: relative;
-    width: 100%;
+  // .emo-table {
+  //   position: relative;
+  //   width: 100%;
+  //   display: flex;
+  //   border: 1px solid #333;
+
+  //   table {
+  //     box-sizing: border-box;
+
+  //     span {
+  //       display: block;
+  //       text-align: center;
+  //     }
+
+  //     thead {
+  //     }
+
+  //     thead > tr,
+  //     tbody > tr {
+  //       display: grid;
+  //       grid-template-columns: repeat(9, 1fr);
+  //       width: 100%;
+
+  //       th {
+  //         display: flex;
+  //         flex-direction: column;
+  //         align-items: center;
+  //         justify-content: center;
+
+  //         &:nth-child(1) {
+  //           border-top-left-radius: 10px;
+  //           width: 150px;
+  //           background-color: #282828;
+  //         }
+  //         &:last-child {
+  //           border-top-right-radius: 10px;
+  //         }
+  //       }
+
+  //       td {
+  //         display: flex;
+  //         flex-direction: column;
+  //         align-items: center;
+  //         justify-content: center;
+
+  //         &:nth-child(1) {
+  //           border-bottom-left-radius: 10px;
+  //           width: 150px;
+  //           background-color: #282828;
+  //         }
+
+  //         &:last-child {
+  //           border-bottom-right-radius: 10px;
+  //         }
+  //       }
+  //     }
+
+  //     .en_tit {
+  //       font-family: "YdestreetB";
+  //       font-size: 18px;
+  //       color: var(--point);
+  //     }
+  //     .ko_tit {
+  //       font-size: 12px;
+  //       color: var(--gray1);
+  //     }
+  //     .emo {
+  //       font-size: 35px;
+  //     }
+  //     .en {
+  //       font-family: "YdestreetB";
+  //       font-size: 14px;
+  //     }
+  //     .ko {
+  //       font-size: 12px;
+  //       color: var(--gray1);
+  //     }
+  //   }
+  // }
+}
+
+.s10 {
+  .inner {
     display: flex;
-    border: 1px solid #555555;
-    border-radius: 10px;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 100px;
 
-    table {
-      box-sizing: border-box;
+    .sub-title {
+      font-size: 20px;
+    }
 
-      span {
-        display: block;
-        text-align: center;
-      }
+    .color-list {
+      width: 100%;
+      display: flex;
+      column-gap: 20px;
+      margin-top: 50px;
 
-      thead > tr,
-      tbody > tr {
-        display: grid;
-        grid-template-columns: repeat(9, 1fr);
+      .color-item {
         width: 100%;
+        list-style: none;
 
-        th:nth-child(1),
-        td:nth-child(1) {
-          width: 150px;
-          background-color: #282828;
+        .emoji {
+          font-size: 40px;
+        }
+        .color-box {
+          height: 100px;
+          border-radius: 10px;
+          margin: 10px 0 20px;
+        }
+        .hex {
+          font-family: "YdestreetB";
         }
 
-        th, td {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
+        &:nth-child(1) .color-box {
+          background-color: #f7781a;
         }
-      }
-
-      .en_tit {
-        font-family: "YdestreetB";
-        font-size: 18px;
-        color: var(--point);
-      }
-      .ko_tit {
-        font-size: 12px;
-        color: var(--gray1);
-      }
-      .emo {
-        font-size: 35px;
-      }
-      .en {
-        font-family: "YdestreetB";
-        font-size: 14px;
-      }
-      .ko {
-        font-size: 12px;
-        color: var(--gray1);
+        &:nth-child(2) .color-box {
+          background-color: #f2c925;
+        }
+        &:nth-child(3) .color-box {
+          background-color: #37c8ff;
+        }
+        &:nth-child(4) .color-box {
+          background-color: #91af00;
+        }
+        &:nth-child(5) .color-box {
+          background-color: #a98e75;
+        }
       }
     }
   }
@@ -1525,6 +1667,37 @@ img {
   .s06 {
     .visualization {
       margin: 20px 0;
+    }
+  }
+  .s07 .table-desc .sub-title,
+  .s08 .table-desc .sub-title,
+  .s09 .table-desc .sub-title,
+  .s10 .inner .sub-title {
+    font-size: 12px;
+  }
+
+  .s10 {
+    .inner {
+      margin-top: 0px;
+      margin-bottom: 0px;
+
+      .color-list {
+        flex-direction: column;
+        column-gap: 20px;
+        margin-top: 40px;
+        row-gap: 30px;
+
+        .color-item {
+          .emoji {
+            font-size: 30px;
+          }
+          .color-box {
+            height: 50px;
+            border-radius: 5px;
+            margin: 5px 0 5px;
+          }
+        }
+      }
     }
   }
 }
