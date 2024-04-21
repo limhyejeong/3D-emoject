@@ -96,10 +96,11 @@ export default {
   font-weight: 800;
 }
 @font-face {
-    font-family: 'YdestreetB';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/YdestreetB.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "YdestreetB";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/YdestreetB.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
 }
 
 * {
@@ -191,7 +192,6 @@ button {
   align-items: center;
 }
 
-
 .pc-only {
   display: block;
 }
@@ -225,8 +225,6 @@ button {
     display: block;
   }
 }
-
-
 
 // 반응형 (mobile)
 @media screen and (min-width: 100px) and (max-width: 1000px) {

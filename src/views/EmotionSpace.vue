@@ -1,12 +1,10 @@
 <template>
-
   <div class="loadingView" v-show="!isLoad">
-    Loading Emotions...
+    Loading emotions...
     <!-- <div class="progress"><div class="bar"></div></div> -->
   </div>
-  
-  <CheckPassword v-show="isDelete" v-bind:selectedData="selectedData" />
 
+  <CheckPassword v-show="isDelete" v-bind:selectedData="selectedData" />
 
   <section v-show="isClick" class="modal">
     <div class="outputInfo">
@@ -84,7 +82,11 @@ export default {
     const { fetchEmotions } = store;
     let isClick = ref(false);
 
-    THREE.DefaultLoadingManager.onProgress = function (url, itemsLoaded, itemsTotal) {
+    THREE.DefaultLoadingManager.onProgress = function (
+      url,
+      itemsLoaded,
+      itemsTotal
+    ) {
       if (itemsLoaded === itemsTotal) {
         isLoad.value = true;
       }
@@ -180,9 +182,12 @@ export default {
     // 클릭하면 selectedMesh 활성화, selectedData 값 변경
     let selectedData = ref({});
     let selectedMesh;
+    let clicked = false;
 
     function onPointerClick(event) {
-      if (preventDragClick.mouseMoved) return;
+      if (preventDragClick.mouseMoved || clicked) return;
+      clicked = true;
+
       if (isClick.value == true) {
         closeModal();
       } else {
@@ -208,6 +213,10 @@ export default {
           selectedMesh = null;
         }
       }
+
+      setTimeout(() => {
+        clicked = false;
+      }, 1000);
     }
 
     const settings = {
@@ -353,12 +362,13 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.4rem;
-  // font-weight: bold;
+  font-size: 1rem;
+  font-weight: bold;
   // text-transform: uppercase;
   color: var(--point);
   // font-family: "Ydestreet";
-  z-index: 1;
+  z-index: 100;
+  letter-spacing: 0rem;
 }
 
 .modal {

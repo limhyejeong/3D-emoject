@@ -141,16 +141,21 @@ export default {
 
     let noise4D = makeNoise4D(Date.now());
     let clock = new THREE.Clock();
-    let 진폭 = 5;
-    let 반경 = 0.3;
-    let 속도 = 1;
+    let amplitude = 5; // 진폭
+    let radius = 0.3; // 반경
+    let mesh_speed = 1; // 속도
 
     function animation() {
       let t = clock.getElapsedTime();
 
       geometry.positionData.forEach((p, idx) => {
-        let setNoise = noise4D(p.x * 진폭, p.y * 진폭, p.z * 진폭, t * 속도);
-        v3.copy(p).addScaledVector(p, setNoise * 반경);
+        let setNoise = noise4D(
+          p.x * amplitude,
+          p.y * amplitude,
+          p.z * amplitude,
+          t * mesh_speed
+        );
+        v3.copy(p).addScaledVector(p, setNoise * radius);
         geometry.attributes.position.setXYZ(idx, v3.x, v3.y, v3.z);
       });
 
